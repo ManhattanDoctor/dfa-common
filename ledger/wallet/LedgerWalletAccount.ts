@@ -1,4 +1,4 @@
-import { IsEnum, IsNumberString, IsString } from 'class-validator';
+import { IsNumberString, IsString } from 'class-validator';
 import { LedgerCoinId } from '../coin';
 import { IUIDable } from '@ts-core/common';
 
@@ -20,7 +20,7 @@ export class LedgerWalletAccount implements IUIDable {
     @IsString()
     uid: string
 
-    @IsEnum(LedgerCoinId)
+    @IsString()
     coinId: LedgerCoinId;
 
     @IsNumberString()

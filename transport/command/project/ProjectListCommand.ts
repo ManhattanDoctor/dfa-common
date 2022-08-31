@@ -1,17 +1,17 @@
 import { ITraceable } from '@ts-core/common';
 import { IPaginationBookmark, PaginableBookmark } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerProject } from '../../../ledger/project';
 
-export class ProjectListCommand extends KarmaTransportCommandAsync<IProjectListDto, IProjectListDtoResponse> {
+export class ProjectListCommand extends ChaincodeTransportCommandAsync<IProjectListDto, IProjectListDtoResponse> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.PROJECT_LIST;
+    public static readonly NAME = LedgerCommand.PROJECT_LIST;
 
     // --------------------------------------------------------------------------
     //

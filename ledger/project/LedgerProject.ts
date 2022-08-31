@@ -20,7 +20,7 @@ export class LedgerProject implements ILedgerObject {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'project';
-    public static UID_REGXP = new RegExp(`${LedgerProject.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}$`, 'i');
+    public static UID_REG_EXP = new RegExp(`^${LedgerProject.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}$`, 'i');
 
     private static MAX_CREATED_DATE = new Date(2500, 0);
 
@@ -48,33 +48,22 @@ export class LedgerProject implements ILedgerObject {
     //
     // --------------------------------------------------------------------------
 
-    @Matches(LedgerProject.UID_REGXP)
-    uid: string;
+    @Matches(LedgerProject.UID_REG_EXP)
+    public uid: string;
 
-    @Matches(LedgerCompany.UID_REGXP)
-    companyUid: string;
+    @Matches(LedgerCompany.UID_REG_EXP)
+    public companyUid: string;
 
     @IsEnum(LedgerProjectStatus)
-    status: LedgerProjectStatus;
+    public status: LedgerProjectStatus;
 
     @Type(() => Date)
     @IsDate()
-    createdDate: Date;
+    public createdDate: Date;
 
     @IsOptional()
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
-    description: string;
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
+    public description: string;
 
-    @IsOptional()
-    @IsArray()
-    @ArrayMinSize(ValidateUtil.PROJECT_PURPOSES_MIN_LENGTH)
-    @ArrayMaxSize(ValidateUtil.PROJECT_PURPOSES_MAX_LENGTH)
-    @Type(() => LedgerProjectPurpose)
-    @ValidateNested({ each: true })
-    purposes: Array<LedgerProjectPurpose>;
-
-    @Type(() => LedgerWallet)
-    wallet: LedgerWallet;
 }
 

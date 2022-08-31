@@ -1,0 +1,59 @@
+import { TransportCommandAsync, TransportCommand } from '@ts-core/common';
+import * as _ from 'lodash';
+
+export enum LedgerCommand {
+    USER_GET = 'DAO:UserGet',
+    USER_ADD = 'DAO:UserAdd',
+    USER_LIST = 'DAO:UserList',
+    USER_EDIT = 'DAO:UserEdit',
+    USER_REMOVE = 'DAO:UserRemove',
+    USER_COMPANY_LIST = 'DAO:UserCompanyList',
+    USER_PROJECT_LIST = 'DAO:UserProjectList',
+    USER_CRYPTO_KEY_CHANGE = 'DAO:UserCryptoKeyChange',
+
+    COMPANY_GET = 'DAO:CompanyGet',
+    COMPANY_ADD = 'DAO:CompanyAdd',
+    COMPANY_LIST = 'DAO:CompanyList',
+    COMPANY_EDIT = 'DAO:CompanyEdit',
+    COMPANY_REMOVE = 'DAO:CompanyRemove',
+    COMPANY_PROJECT_LIST = 'DAO:CompanyProjectList',
+    COMPANY_USER_ADD = 'DAO:CompanyUserAdd',
+    COMPANY_USER_LIST = 'DAO:CompanyUserList',
+    COMPANY_USER_EDIT = 'DAO:CompanyUserEdit',
+    COMPANY_USER_IS_IN = 'DAO:CompanyUserIsIn',
+    COMPANY_USER_REMOVE = 'DAO:CompanyUserRemove',
+    COMPANY_USER_ROLE_LIST = 'DAO:CompanyUserRoleList',
+
+    COIN_ADD = 'DAO:CoinAdd',
+    COIN_EMIT = 'DAO:CoinEmit',
+    COIN_BURN = 'DAO:CoinBurn',
+    COIN_TRANSFER = 'DAO:CoinTransfer',
+
+    PROJECT_GET = 'DAO:ProjectGet',
+    PROJECT_ADD = 'DAO:ProjectAdd',
+    PROJECT_LIST = 'DAO:ProjectList',
+    PROJECT_EDIT = 'DAO:ProjectEdit',
+    PROJECT_REMOVE = 'DAO:ProjectRemove',
+    PROJECT_USER_ADD = 'DAO:ProjectUserAdd',
+    PROJECT_USER_LIST = 'DAO:ProjectUserList',
+    PROJECT_USER_EDIT = 'DAO:ProjectUserEdit',
+    PROJECT_USER_IS_IN = 'DAO:ProjectUserIsIn',
+    PROJECT_USER_REMOVE = 'DAO:ProjectUserRemove',
+    PROJECT_USER_ROLE_LIST = 'DAO:ProjectUserRoleList',
+
+    GENESIS_GET = 'DAO:GenesisGet'
+}
+
+export class ChaincodeTransportCommand<T> extends TransportCommand<T> {
+    constructor(name: LedgerCommand, request?: T, id?: string, public isReadonly?: boolean) {
+        super(name, request, id);
+        this.isReadonly = isReadonly;
+    }
+}
+
+export class ChaincodeTransportCommandAsync<U, V> extends TransportCommandAsync<U, V> {
+    constructor(name: LedgerCommand, request?: U, id?: string, public isReadonly?: boolean) {
+        super(name, request, id);
+        this.isReadonly = isReadonly;
+    }
+}

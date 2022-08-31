@@ -1,13 +1,13 @@
 import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
 
-export class CoinEmittedEvent extends LedgerEventDefault {
+export class CoinAddedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerEvent.COIN_EMITTED;
+    public static readonly NAME = LedgerEvent.COIN_ADDED;
 
     // --------------------------------------------------------------------------
     //
@@ -16,6 +16,6 @@ export class CoinEmittedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------
 
     constructor(data: ILedgerEventDto) {
-        super(CoinEmittedEvent.NAME, data);
+        super(CoinAddedEvent.NAME, data);
     }
 }

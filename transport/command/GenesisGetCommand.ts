@@ -1,4 +1,4 @@
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from './KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from './LedgerCommand';
 import { IGenesis } from '../../ledger';
 import { LedgerUser } from '../../ledger/user';
 import { TransformUtil } from '@ts-core/common';
@@ -6,14 +6,14 @@ import { Matches, IsDate } from 'class-validator';
 import { Type } from 'class-transformer';
 import { LedgerCompany } from '../../ledger/company';
 
-export class GenesisGetCommand extends KarmaTransportCommandAsync<void, IGenesis> {
+export class GenesisGetCommand extends ChaincodeTransportCommandAsync<void, IGenesis> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.GENESIS_GET;
+    public static readonly NAME = LedgerCommand.GENESIS_GET;
 
     // --------------------------------------------------------------------------
     //
@@ -37,11 +37,8 @@ export class GenesisGetCommand extends KarmaTransportCommandAsync<void, IGenesis
 }
 
 export class Genesis implements IGenesis {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     rootUserUid: string;
-
-    @Matches(LedgerCompany.UID_REGXP)
-    rootCompanyUid: string;
 
     @Type(() => Date)
     @IsDate()

@@ -2,16 +2,16 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { LedgerCompany } from '../../../ledger/company';
 import { Matches } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 
-export class CompanyRemoveCommand extends KarmaTransportCommandAsync<ICompanyRemoveDto, void> {
+export class CompanyRemoveCommand extends ChaincodeTransportCommandAsync<ICompanyRemoveDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.COMPANY_REMOVE;
+    public static readonly NAME = LedgerCommand.COMPANY_REMOVE;
 
     // --------------------------------------------------------------------------
     //
@@ -29,6 +29,6 @@ export interface ICompanyRemoveDto extends ITraceable {
 }
 
 class CompanyRemoveDto implements ICompanyRemoveDto {
-    @Matches(LedgerCompany.UID_REGXP)
+    @Matches(LedgerCompany.UID_REG_EXP)
     uid: string;
 }

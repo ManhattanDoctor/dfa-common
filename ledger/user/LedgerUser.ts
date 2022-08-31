@@ -5,6 +5,7 @@ import { RegExpUtil, ValidateUtil } from '../../util';
 import * as _ from 'lodash';
 import { LedgerRole } from '../role';
 import { ILedgerObject } from '../ILedgerObject';
+import { LedgerWallet } from '@project/common/ledger/wallet';
 
 export enum LedgerUserStatus {
     ACTIVE = 'ACTIVE',
@@ -19,7 +20,7 @@ export class LedgerUser implements ILedgerObject {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'user';
-    public static UID_REGXP = new RegExp(`${LedgerUser.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}$`, 'i');
+    public static UID_REG_EXP = new RegExp(`^${LedgerUser.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}$`, 'i');
 
     private static MAX_CREATED_DATE = new Date(2500, 0);
 
@@ -51,7 +52,7 @@ export class LedgerUser implements ILedgerObject {
     //
     // --------------------------------------------------------------------------
 
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     uid: string;
 
     @IsEnum(LedgerUserStatus)
@@ -62,13 +63,16 @@ export class LedgerUser implements ILedgerObject {
     createdDate: Date;
 
     @IsOptional()
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description?: string;
 
     @IsOptional()
     @Type(() => LedgerCryptoKey)
     cryptoKey?: LedgerCryptoKey;
+
+    @IsOptional()
+    @Type(() => LedgerWallet)
+    wallet?: LedgerWallet;
 
     @IsOptional()
     @IsEnum(LedgerRole, { each: true })

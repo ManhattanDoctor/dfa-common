@@ -2,16 +2,16 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { LedgerUser } from '../../../ledger/user';
 import { IsOptional, Matches, IsArray } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 
-export class UserGetCommand extends KarmaTransportCommandAsync<IUserGetDto, LedgerUser> {
+export class UserGetCommand extends ChaincodeTransportCommandAsync<IUserGetDto, LedgerUser> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.USER_GET;
+    public static readonly NAME = LedgerCommand.USER_GET;
 
     // --------------------------------------------------------------------------
     //
@@ -40,7 +40,7 @@ export interface IUserGetDto extends ITraceable {
 }
 
 class UserGetDto implements IUserGetDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     uid: string;
 
     @IsArray()

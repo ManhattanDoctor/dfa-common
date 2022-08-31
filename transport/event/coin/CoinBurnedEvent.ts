@@ -1,13 +1,13 @@
-import { KarmaLedgerEvent, IKarmaLedgerEventDto, KarmaLedgerEventDefault } from '../KarmaLedgerEvent';
+import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
 
-export class CoinBurnedEvent extends KarmaLedgerEventDefault {
+export class CoinBurnedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerEvent.COIN_BURNED;
+    public static readonly NAME = LedgerEvent.COIN_BURNED;
 
     // --------------------------------------------------------------------------
     //
@@ -15,7 +15,7 @@ export class CoinBurnedEvent extends KarmaLedgerEventDefault {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: IKarmaLedgerEventDto) {
+    constructor(data: ILedgerEventDto) {
         super(CoinBurnedEvent.NAME, data);
     }
 }

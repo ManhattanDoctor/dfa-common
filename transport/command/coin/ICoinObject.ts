@@ -6,8 +6,9 @@ export interface ICoinObject {
 }
 
 export enum CoinObjectType {
+    USER = 'USER',
     COMPANY = 'COMPANY',
-    PROJECT = 'PROJECT'
+    PROJECT = 'PROJECT',
 }
 
 export class CoinObject implements ICoinObject {

@@ -1,3 +1,3 @@
-# karma-common
+# dao-common
 
-Common classes and utils for Karma
+Common classes and utils for DAO

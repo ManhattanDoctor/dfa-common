@@ -2,19 +2,19 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { LedgerUser } from '../../../ledger/user';
 import { IsString, IsDate, IsEnum, Length, ValidateNested, Matches, IsOptional, IsDefined } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { RegExpUtil, ValidateUtil } from '../../../util';
 import { Type } from 'class-transformer';
 import { LedgerRole } from '../../../ledger/role';
 
-export class UserAddCommand extends KarmaTransportCommandAsync<IUserAddDto, LedgerUser> {
+export class UserAddCommand extends ChaincodeTransportCommandAsync<IUserAddDto, LedgerUser> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.USER_ADD;
+    public static readonly NAME = LedgerCommand.USER_ADD;
 
     // --------------------------------------------------------------------------
     //
@@ -69,7 +69,6 @@ export class UserAddDto implements IUserAddDto {
     roles?: Array<LedgerRole>;
 
     @IsOptional()
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description?: string;
 }

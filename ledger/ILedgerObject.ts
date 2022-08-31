@@ -3,7 +3,9 @@ import { LedgerProject } from './project';
 import { LedgerCompany } from './company';
 import { UID, IUIDable, getUid } from '@ts-core/common';
 
-export interface ILedgerObject extends IUIDable { }
+export interface ILedgerObject extends IUIDable {
+
+}
 
 export enum LedgerObjectType {
     USER = 'USER',
@@ -12,15 +14,15 @@ export enum LedgerObjectType {
 }
 
 export function IsUser(uid: UID): boolean {
-    return LedgerUser.UID_REGXP.test(getUid(uid));
+    return LedgerUser.UID_REG_EXP.test(getUid(uid));
 }
 
 export function IsCompany(uid: UID): boolean {
-    return LedgerCompany.UID_REGXP.test(getUid(uid));
+    return LedgerCompany.UID_REG_EXP.test(getUid(uid));
 }
 
 export function IsProject(uid: UID): boolean {
-    return LedgerProject.UID_REGXP.test(getUid(uid));
+    return LedgerProject.UID_REG_EXP.test(getUid(uid));
 }
 
 export function getType(uid: UID): LedgerObjectType {

@@ -13,4 +13,7 @@ export class ValidateUtil {
 
     public static PROJECT_PURPOSES_NAME_MIN_LENGTH = 3;
     public static PROJECT_PURPOSES_NAME_MAX_LENGTH = 256;
+
+    public static COIN_ID_MIN_LENGTH = 3;
+    public static COIN_ID_MAX_LENGTH = 12;
 }

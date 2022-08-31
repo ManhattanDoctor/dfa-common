@@ -2,18 +2,18 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { LedgerUser } from '../../../ledger/user';
 import { IsDefined, ValidateNested, Matches } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { IUserCryptoKey, UserCryptoKey } from './UserAddCommand';
 import { Type } from 'class-transformer';
 
-export class UserCryptoKeyChangeCommand extends KarmaTransportCommandAsync<IUserCryptoKeyChangeDto, void> {
+export class UserCryptoKeyChangeCommand extends ChaincodeTransportCommandAsync<IUserCryptoKeyChangeDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.USER_CRYPTO_KEY_CHANGE;
+    public static readonly NAME = LedgerCommand.USER_CRYPTO_KEY_CHANGE;
 
     // --------------------------------------------------------------------------
     //
@@ -32,7 +32,7 @@ export interface IUserCryptoKeyChangeDto extends ITraceable {
 }
 
 class UserCryptoKeyChangeDto implements IUserCryptoKeyChangeDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     uid: string;
 
     @Type(() => UserCryptoKey)

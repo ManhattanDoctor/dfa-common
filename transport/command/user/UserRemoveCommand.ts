@@ -3,16 +3,16 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { LedgerUser } from '../../../ledger/user';
 import { Matches } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 
-export class UserRemoveCommand extends KarmaTransportCommandAsync<IUserRemoveDto, void> {
+export class UserRemoveCommand extends ChaincodeTransportCommandAsync<IUserRemoveDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.USER_REMOVE;
+    public static readonly NAME = LedgerCommand.USER_REMOVE;
 
     // --------------------------------------------------------------------------
     //
@@ -30,6 +30,6 @@ export interface IUserRemoveDto extends ITraceable {
 }
 
 class UserRemoveDto implements IUserRemoveDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     uid: string;
 }

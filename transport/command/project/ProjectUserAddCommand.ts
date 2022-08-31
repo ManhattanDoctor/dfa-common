@@ -1,20 +1,19 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { Matches, IsOptional, IsEnum } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerProject } from '../../../ledger/project';
 import { LedgerUser } from '../../../ledger/user';
 import { LedgerProjectRole } from '../../../ledger/role';
-import { IProjectUserIsInDto } from './ProjectUserIsInCommand';
 
-export class ProjectUserAddCommand extends KarmaTransportCommandAsync<IProjectUserAddDto, void> {
+export class ProjectUserAddCommand extends ChaincodeTransportCommandAsync<IProjectUserAddDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.PROJECT_USER_ADD;
+    public static readonly NAME = LedgerCommand.PROJECT_USER_ADD;
 
     // --------------------------------------------------------------------------
     //
@@ -27,19 +26,21 @@ export class ProjectUserAddCommand extends KarmaTransportCommandAsync<IProjectUs
     }
 }
 
-export interface IProjectUserAddDto extends IProjectUserIsInDto {
-    roles?: Array<LedgerProjectRole>;
+export interface IProjectUserAddDto {
+    roles: Array<LedgerProjectRole>;
+    userUid: string;
+    projectUid: string;
 }
 
 // export needs because another command use it
 export class ProjectUserAddDto implements IProjectUserAddDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     userUid: string;
 
-    @Matches(LedgerProject.UID_REGXP)
+    @Matches(LedgerProject.UID_REG_EXP)
     projectUid: string;
 
     @IsOptional()
     @IsEnum(LedgerProjectRole, { each: true })
-    roles?: Array<LedgerProjectRole>;
+    roles: Array<LedgerProjectRole>;
 }

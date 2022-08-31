@@ -1,4 +1,4 @@
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerProject } from '../../../ledger/project';
 import { Length, Matches, ValidateNested, IsArray, ArrayMinSize, ArrayMaxSize } from 'class-validator';
 import { ITraceable } from '@ts-core/common';
@@ -9,14 +9,14 @@ import { LedgerUser } from '../../../ledger/user';
 import { Type } from 'class-transformer';
 import { ILedgerProjectPurpose, LedgerProjectPurpose } from '../../../ledger/project';
 
-export class ProjectAddCommand extends KarmaTransportCommandAsync<IProjectAddDto, LedgerProject> {
+export class ProjectAddCommand extends ChaincodeTransportCommandAsync<IProjectAddDto, LedgerProject> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.PROJECT_ADD;
+    public static readonly NAME = LedgerCommand.PROJECT_ADD;
 
     // --------------------------------------------------------------------------
     //
@@ -47,14 +47,13 @@ export interface IProjectAddDto extends ITraceable {
 }
 
 export class ProjectAddDto implements IProjectAddDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     ownerUid: string;
 
-    @Matches(LedgerCompany.UID_REGXP)
+    @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
 
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;
 
     @IsArray()

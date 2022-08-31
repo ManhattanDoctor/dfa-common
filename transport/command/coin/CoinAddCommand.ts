@@ -1,17 +1,18 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { IsOptional, Matches, IsArray } from 'class-validator';
+import { Matches, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany } from '../../../ledger/company';
+import { LedgerCoin } from '../../../ledger/coin';
 
-export class CompanyGetCommand extends ChaincodeTransportCommandAsync<ICompanyGetDto, LedgerCompany> {
+export class CoinAddCommand extends ChaincodeTransportCommandAsync<ICoinAddDto, LedgerCoin> {
     // --------------------------------------------------------------------------
     //
-    //  Static Properties
+    //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerCommand.COMPANY_GET;
+    public static readonly NAME = LedgerCommand.COIN_ADD;
 
     // --------------------------------------------------------------------------
     //
@@ -19,8 +20,8 @@ export class CompanyGetCommand extends ChaincodeTransportCommandAsync<ICompanyGe
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: ICompanyGetDto) {
-        super(CompanyGetCommand.NAME, TransformUtil.toClass(CompanyGetDto, request), null, true);
+    constructor(request: ICoinAddDto) {
+        super(CoinAddCommand.NAME, TransformUtil.toClass(CoinAddDto, request));
     }
 
     // --------------------------------------------------------------------------
@@ -29,21 +30,25 @@ export class CompanyGetCommand extends ChaincodeTransportCommandAsync<ICompanyGe
     //
     // --------------------------------------------------------------------------
 
-    protected checkResponse(item: LedgerCompany): LedgerCompany {
-        return TransformUtil.toClass(LedgerCompany, item);
+    protected checkResponse(item: LedgerCoin): LedgerCoin {
+        return TransformUtil.toClass(LedgerCoin, item);
     }
+
 }
 
-export interface ICompanyGetDto extends ITraceable {
-    uid: string;
-    details?: Array<keyof LedgerCompany>;
+export interface ICoinAddDto extends ITraceable {
+    coinId: string;
+    decimals: number;
+    companyUid: string;
 }
 
-class CompanyGetDto implements ICompanyGetDto {
+export class CoinAddDto implements ICoinAddDto {
+    @IsString()
+    coinId: string;
+
+    @IsString()
+    decimals: number;
+
     @Matches(LedgerCompany.UID_REG_EXP)
-    uid: string;
-
-    @IsArray()
-    @IsOptional()
-    details?: Array<keyof LedgerCompany>;
+    companyUid: string;
 }

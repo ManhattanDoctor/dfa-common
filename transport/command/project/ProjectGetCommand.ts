@@ -1,17 +1,17 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { IsOptional, Matches, IsArray } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerProject } from '../../../ledger/project';
 
-export class ProjectGetCommand extends KarmaTransportCommandAsync<IProjectGetDto, LedgerProject> {
+export class ProjectGetCommand extends ChaincodeTransportCommandAsync<IProjectGetDto, LedgerProject> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.PROJECT_GET;
+    public static readonly NAME = LedgerCommand.PROJECT_GET;
 
     // --------------------------------------------------------------------------
     //
@@ -40,7 +40,7 @@ export interface IProjectGetDto extends ITraceable {
 }
 
 class ProjectGetDto implements IProjectGetDto {
-    @Matches(LedgerProject.UID_REGXP)
+    @Matches(LedgerProject.UID_REG_EXP)
     uid: string;
 
     @IsArray()

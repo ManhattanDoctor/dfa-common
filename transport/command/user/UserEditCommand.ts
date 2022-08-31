@@ -2,18 +2,18 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { LedgerUser } from '../../../ledger/user';
 import { Length, IsOptional, IsEnum, Matches } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { RegExpUtil, ValidateUtil } from '../../../util';
 import { LedgerRole } from '../../../ledger/role';
 
-export class UserEditCommand extends KarmaTransportCommandAsync<IUserEditDto, void> {
+export class UserEditCommand extends ChaincodeTransportCommandAsync<IUserEditDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.USER_EDIT;
+    public static readonly NAME = LedgerCommand.USER_EDIT;
 
     // --------------------------------------------------------------------------
     //
@@ -33,7 +33,7 @@ export interface IUserEditDto extends ITraceable {
 }
 
 class UserEditDto implements IUserEditDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     uid: string;
 
     @IsOptional()
@@ -41,7 +41,6 @@ class UserEditDto implements IUserEditDto {
     roles?: Array<LedgerRole>;
 
     @IsOptional()
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description?: string;
 }

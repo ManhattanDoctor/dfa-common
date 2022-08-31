@@ -1,2 +1,2 @@
-export * from './KarmaLedgerCommand';
+export * from './LedgerCommand';
 export * from './GenesisGetCommand';

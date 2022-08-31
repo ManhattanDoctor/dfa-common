@@ -1,19 +1,19 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { Matches, Length } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
-import { LedgerCompany } from '../../../ledger/company';
-import { RegExpUtil, ValidateUtil } from '../../../util';
+import { Matches, Validate } from 'class-validator';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
+import { LedgerCompany, LedgerCompanyRegulation, LedgerCompanyRegulationValidator } from '../../../ledger/company';
+import { RegExpUtil } from '../../../util';
 import { LedgerUser } from '../../../ledger/user';
 
-export class CompanyAddCommand extends KarmaTransportCommandAsync<ICompanyAddDto, LedgerCompany> {
+export class CompanyAddCommand extends ChaincodeTransportCommandAsync<ICompanyAddDto, LedgerCompany> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.COMPANY_ADD;
+    public static readonly NAME = LedgerCommand.COMPANY_ADD;
 
     // --------------------------------------------------------------------------
     //
@@ -39,14 +39,17 @@ export class CompanyAddCommand extends KarmaTransportCommandAsync<ICompanyAddDto
 
 export interface ICompanyAddDto extends ITraceable {
     ownerUid: string;
+    regulation: LedgerCompanyRegulation;
     description: string;
 }
 
 export class CompanyAddDto implements ICompanyAddDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     ownerUid: string;
 
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;
+
+    @Validate(LedgerCompanyRegulationValidator)
+    regulation: LedgerCompanyRegulation;
 }

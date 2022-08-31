@@ -1,7 +1,7 @@
 {
-    "name": "@karma/common",
-    "version": "2.0.0",
-    "description": "Common classes for Karma",
+    "name": "@dao/common",
+    "version": "1.0.0",
+    "description": "Common classes for DAO",
     "author": "Renat Gubaev",
     "license": "ISC",
     "scripts": {

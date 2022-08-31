@@ -1,1 +1,1 @@
-export * from './KarmaLedgerEvent';
+export * from './LedgerEvent';

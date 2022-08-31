@@ -4,7 +4,6 @@ export * from './ProjectListCommand';
 export * from './ProjectEditCommand';
 export * from './ProjectRemoveCommand';
 export * from './ProjectUserListCommand';
-export * from './ProjectUserIsInCommand';
 export * from './ProjectUserAddCommand';
 export * from './ProjectUserListCommand';
 export * from './ProjectUserEditCommand';

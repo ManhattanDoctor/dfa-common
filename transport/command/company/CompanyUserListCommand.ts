@@ -1,16 +1,16 @@
 import { TransformUtil } from '@ts-core/common';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerUser } from '../../../ledger/user';
 import { IUserListDtoResponse, IUserListDto } from '../user';
 
-export class CompanyUserListCommand extends KarmaTransportCommandAsync<ICompanyUserListDto, IUserListDtoResponse> {
+export class CompanyUserListCommand extends ChaincodeTransportCommandAsync<ICompanyUserListDto, IUserListDtoResponse> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.COMPANY_USER_LIST;
+    public static readonly NAME = LedgerCommand.COMPANY_USER_LIST;
 
     // --------------------------------------------------------------------------
     //

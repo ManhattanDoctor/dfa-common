@@ -2,7 +2,7 @@ import { IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { IUIDable } from '@ts-core/common';
 import { LedgerWalletAccount } from './LedgerWalletAccount';
-import { LedgerCoinId } from '../coin';
+import { LedgerCoinId } from '../coin/LedgerCoinId';
 import * as _ from 'lodash';
 import { Validate, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
 
@@ -48,6 +48,18 @@ export class LedgerWallet implements IUIDable {
     @Validate(WalletAccountValidator)
     @Type(() => LedgerWalletAccount)
     public accounts: Array<LedgerWalletAccount>;
+
+    // --------------------------------------------------------------------------
+    //
+    //  Constructor
+    //
+    // --------------------------------------------------------------------------
+
+    constructor(uid?: string) {
+        if (!_.isNil(uid)) {
+            this.uid = uid;
+        }
+    }
 
     // --------------------------------------------------------------------------
     //

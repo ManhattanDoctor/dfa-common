@@ -1,9 +1,9 @@
-import { IsEnum, Length, IsDate, Matches, IsOptional } from 'class-validator';
+import { IsEnum,  IsDate, Validate, Matches, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
-import { RegExpUtil, ValidateUtil } from '../../util';
-import { LedgerWallet } from '../wallet';
+import { RegExpUtil } from '../../util';
 import * as _ from 'lodash';
 import { ILedgerObject } from '../ILedgerObject';
+import { LedgerCompanyRegulation, LedgerCompanyRegulationValidator } from './LedgerCompanyRegulation';
 
 export enum LedgerCompanyStatus {
     ACTIVE = 'ACTIVE',
@@ -18,19 +18,16 @@ export class LedgerCompany implements ILedgerObject {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'company';
-    public static UID_REGXP = new RegExp(`${LedgerCompany.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}$`, 'i');
+    public static UID_PATTERN = `${LedgerCompany.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}`;
 
     private static MAX_CREATED_DATE = new Date(2500, 0);
+    public static UID_REG_EXP = new RegExp(`^${LedgerCompany.UID_PATTERN}$`, 'i');
 
     // --------------------------------------------------------------------------
     //
     //  Static Methods
     //
     // --------------------------------------------------------------------------
-
-    public static createRoot(): LedgerCompany {
-        return LedgerCompany.create(new Date(2000, 0), _.padStart('0', 64, '0'));
-    }
 
     public static create(createdDate: Date, transactionHash: string): LedgerCompany {
         let item = new LedgerCompany();
@@ -50,22 +47,21 @@ export class LedgerCompany implements ILedgerObject {
     //
     // --------------------------------------------------------------------------
 
-    @Matches(LedgerCompany.UID_REGXP)
-    uid: string;
+    @Matches(LedgerCompany.UID_REG_EXP)
+    public uid: string;
 
     @IsEnum(LedgerCompanyStatus)
-    status: LedgerCompanyStatus;
+    public status: LedgerCompanyStatus;
 
     @Type(() => Date)
     @IsDate()
-    createdDate: Date;
+    public createdDate: Date;
 
     @IsOptional()
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
-    description?: string;
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
+    public description?: string;
 
     @IsOptional()
-    @Type(() => LedgerWallet)
-    wallet: LedgerWallet;
+    @Validate(LedgerCompanyRegulationValidator)
+    public regulation?: LedgerCompanyRegulation;
 }

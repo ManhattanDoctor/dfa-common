@@ -1,19 +1,19 @@
 import { TransformUtil } from '@ts-core/common';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerUser } from '../../../ledger/user';
 import { ITraceable } from '@ts-core/common';
 import { Matches } from 'class-validator';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerCompanyRole } from '../../../ledger/role';
 
-export class CompanyUserRoleListCommand extends KarmaTransportCommandAsync<ICompanyUserRoleListDto, ICompanyUserRoleListDtoResponse> {
+export class CompanyUserRoleListCommand extends ChaincodeTransportCommandAsync<ICompanyUserRoleListDto, ICompanyUserRoleListDtoResponse> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.COMPANY_USER_ROLE_LIST;
+    public static readonly NAME = LedgerCommand.COMPANY_USER_ROLE_LIST;
 
     // --------------------------------------------------------------------------
     //
@@ -34,9 +34,9 @@ export interface ICompanyUserRoleListDto extends ITraceable {
 export type ICompanyUserRoleListDtoResponse = Array<LedgerCompanyRole>;
 
 class CompanyUserRoleListDto implements ICompanyUserRoleListDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     userUid: string;
 
-    @Matches(LedgerCompany.UID_REGXP)
+    @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
 }

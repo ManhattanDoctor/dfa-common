@@ -2,19 +2,19 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { Type } from 'class-transformer';
 import { IsDefined, ValidateNested } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { ICoinObject, CoinObject } from './ICoinObject';
 import { ICoinAmount, CoinAmount } from './ICoinAmount';
 import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
 
-export class CoinTransferCommand extends KarmaTransportCommandAsync<ICoinTransferDto, void> {
+export class CoinTransferCommand extends ChaincodeTransportCommandAsync<ICoinTransferDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.COIN_TRANSFER;
+    public static readonly NAME = LedgerCommand.COIN_TRANSFER;
 
     // --------------------------------------------------------------------------
     //

@@ -2,17 +2,17 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { LedgerCompany } from '../../../ledger/company';
 import { Length, IsOptional, Matches } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { RegExpUtil, ValidateUtil } from '../../../util';
 
-export class CompanyEditCommand extends KarmaTransportCommandAsync<ICompanyEditDto, void> {
+export class CompanyEditCommand extends ChaincodeTransportCommandAsync<ICompanyEditDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.COMPANY_EDIT;
+    public static readonly NAME = LedgerCommand.COMPANY_EDIT;
 
     // --------------------------------------------------------------------------
     //
@@ -31,11 +31,10 @@ export interface ICompanyEditDto extends ITraceable {
 }
 
 class CompanyEditDto implements ICompanyEditDto {
-    @Matches(LedgerCompany.UID_REGXP)
+    @Matches(LedgerCompany.UID_REG_EXP)
     uid: string;
 
     @IsOptional()
-    @Length(ValidateUtil.DESCRIPTION_MIN_LENGTH, ValidateUtil.DESCRIPTION_MAX_LENGTH)
-    @Matches(RegExpUtil.DESCRIPTION)
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description?: string;
 }

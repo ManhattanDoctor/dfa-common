@@ -1,18 +1,18 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { Matches } from 'class-validator';
-import { KarmaLedgerCommand, KarmaTransportCommandAsync } from '../KarmaLedgerCommand';
+import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerUser } from '../../../ledger/user';
 
-export class CompanyUserRemoveCommand extends KarmaTransportCommandAsync<ICompanyUserRemoveDto, void> {
+export class CompanyUserRemoveCommand extends ChaincodeTransportCommandAsync<ICompanyUserRemoveDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = KarmaLedgerCommand.COMPANY_USER_REMOVE;
+    public static readonly NAME = LedgerCommand.COMPANY_USER_REMOVE;
 
     // --------------------------------------------------------------------------
     //
@@ -31,9 +31,9 @@ export interface ICompanyUserRemoveDto extends ITraceable {
 }
 
 class CompanyUserRemoveDto implements ICompanyUserRemoveDto {
-    @Matches(LedgerUser.UID_REGXP)
+    @Matches(LedgerUser.UID_REG_EXP)
     userUid: string;
 
-    @Matches(LedgerCompany.UID_REGXP)
+    @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
 }

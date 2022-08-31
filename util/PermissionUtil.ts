@@ -1,7 +1,6 @@
-import { LedgerCompanyRole, LedgerProjectRole } from "../ledger/role";
+import { LedgerProjectRole } from "../ledger/role";
 import * as _ from 'lodash';
-import { UserCompany, UserRole, UserRoleName, UserType } from "../platform/user";
-import { CompanyStatus } from "../platform/company";
+import { UserRoleName } from "../platform/user";
 
 export class PermissionUtil {
     // --------------------------------------------------------------------------
