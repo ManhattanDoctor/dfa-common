@@ -1,8 +1,8 @@
 import { ITraceable, TransformUtil } from '@ts-core/common';
-import { Matches, IsDefined, ValidateNested } from 'class-validator';
+import { Matches, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { LedgerCompany, LedgerCompanyRegulation } from '../../../ledger/company';
+import { ILedgerCompanyRegulation, LedgerCompany, LedgerCompanyRegulation } from '../../../ledger/company';
 import { RegExpUtil } from '../../../util';
 import { LedgerUser } from '../../../ledger/user';
 
@@ -39,7 +39,7 @@ export class CompanyAddCommand extends ChaincodeTransportCommandAsync<ICompanyAd
 
 export interface ICompanyAddDto extends ITraceable {
     ownerUid: string;
-    regulation: LedgerCompanyRegulation;
+    regulations: Array<ILedgerCompanyRegulation>;
     description: string;
 }
 
@@ -50,8 +50,8 @@ export class CompanyAddDto implements ICompanyAddDto {
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;
 
+    @IsArray()
     @Type(() => LedgerCompanyRegulation)
-    @IsDefined()
-    @ValidateNested()
-    regulation: LedgerCompanyRegulation;
+    @ValidateNested({ each: true })
+    regulations: Array<LedgerCompanyRegulation>;
 }

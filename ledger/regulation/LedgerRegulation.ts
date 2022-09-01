@@ -1,5 +1,5 @@
 
-import { IsNumber } from 'class-validator';
+import { IsNumber, Min, Max } from 'class-validator';
 import * as _ from 'lodash';
 
 export interface ILedgerRegulation<T> {
@@ -13,6 +13,8 @@ export interface ILedgerRegulationCondition {
 }
 
 export class LedgerRegulationCondition implements ILedgerRegulationCondition {
+    @Min(1)
+    @Max(100)
     @IsNumber()
     percent: number;
 
