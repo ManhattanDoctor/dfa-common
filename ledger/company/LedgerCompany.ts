@@ -1,9 +1,9 @@
-import { IsEnum,  IsDate, Validate, Matches, IsOptional } from 'class-validator';
+import { IsEnum, IsDate, IsArray, ValidateNested, Matches, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 import { RegExpUtil } from '../../util';
 import * as _ from 'lodash';
 import { ILedgerObject } from '../ILedgerObject';
-import { LedgerCompanyRegulation, LedgerCompanyRegulationValidator } from './LedgerCompanyRegulation';
+import { LedgerCompanyRegulation } from './LedgerCompanyRegulation';
 
 export enum LedgerCompanyStatus {
     ACTIVE = 'ACTIVE',
@@ -62,6 +62,8 @@ export class LedgerCompany implements ILedgerObject {
     public description?: string;
 
     @IsOptional()
-    @Validate(LedgerCompanyRegulationValidator)
-    public regulation?: LedgerCompanyRegulation;
+    @IsArray()
+    @Type(() => LedgerCompanyRegulation)
+    @ValidateNested({ each: true })
+    public regulations?: Array<LedgerCompanyRegulation>;
 }

@@ -3,9 +3,7 @@ import { LedgerProject } from './project';
 import { LedgerCompany } from './company';
 import { UID, IUIDable, getUid } from '@ts-core/common';
 
-export interface ILedgerObject extends IUIDable {
-
-}
+export interface ILedgerObject extends IUIDable {}
 
 export enum LedgerObjectType {
     USER = 'USER',

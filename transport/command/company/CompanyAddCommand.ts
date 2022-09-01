@@ -1,8 +1,8 @@
-import { ITraceable } from '@ts-core/common';
-import { TransformUtil } from '@ts-core/common';
-import { Matches, Validate } from 'class-validator';
+import { ITraceable, TransformUtil } from '@ts-core/common';
+import { Matches, IsDefined, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { LedgerCompany, LedgerCompanyRegulation, LedgerCompanyRegulationValidator } from '../../../ledger/company';
+import { LedgerCompany, LedgerCompanyRegulation } from '../../../ledger/company';
 import { RegExpUtil } from '../../../util';
 import { LedgerUser } from '../../../ledger/user';
 
@@ -50,6 +50,8 @@ export class CompanyAddDto implements ICompanyAddDto {
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;
 
-    @Validate(LedgerCompanyRegulationValidator)
+    @Type(() => LedgerCompanyRegulation)
+    @IsDefined()
+    @ValidateNested()
     regulation: LedgerCompanyRegulation;
 }

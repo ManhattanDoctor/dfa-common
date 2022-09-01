@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
-import { LedgerRegulation } from '../regulation';
-import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments, isEnum, min, max } from 'class-validator';
+import { ILedgerRegulation, ILedgerRegulationCondition, LedgerRegulationCondition } from '../regulation';
+import { IsEnum, IsDefined, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export enum LedgerCompanyRegulationType {
     COIN_ADD = 'COIN_ADD',
@@ -20,41 +21,14 @@ export enum LedgerCompanyRegulationType {
     REGULATION_CHANGE = 'REGULATION_CHANGE',
 }
 
-export type LedgerCompanyRegulation = LedgerRegulation<LedgerCompanyRegulationType>;
+export interface ILedgerCompanyRegulation extends ILedgerRegulation<LedgerCompanyRegulationType> { }
 
-@ValidatorConstraint({ name: 'LedgerCompanyRegulation', async: false })
-export class LedgerCompanyRegulationValidator implements ValidatorConstraintInterface {
-    // --------------------------------------------------------------------------
-    //
-    //  Properties
-    //
-    // --------------------------------------------------------------------------
+export class LedgerCompanyRegulation implements ILedgerCompanyRegulation {
+    @IsEnum(LedgerCompanyRegulationType)
+    name: LedgerCompanyRegulationType;;
 
-    public validate(item: LedgerCompanyRegulation, args: ValidationArguments): Promise<boolean> | boolean {
-        if (_.isEmpty(item)) {
-            return false;
-        }
-
-        let keys = Object.keys(item);
-        if (_.isEmpty(keys)) {
-            return false;
-        }
-        if (!keys.includes(LedgerCompanyRegulationType.REGULATION_CHANGE)) {
-            return false;
-        }
-
-        for (let key of keys) {
-            if (!isEnum(key, LedgerCompanyRegulationType)) {
-                return false;
-            }
-            let value = item[key];
-            if (min(value, 0) || max(value, 100)) {
-                return false;
-            }
-        }
-    }
-
-    public defaultMessage(args: ValidationArguments): string {
-        return 'Ledger company regulation must have correct keys and values';
-    }
+    @Type(() => LedgerRegulationCondition)
+    @IsDefined()
+    @ValidateNested()
+    condition: LedgerRegulationCondition;
 }

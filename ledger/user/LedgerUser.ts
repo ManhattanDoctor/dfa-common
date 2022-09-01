@@ -5,7 +5,6 @@ import { RegExpUtil, ValidateUtil } from '../../util';
 import * as _ from 'lodash';
 import { LedgerRole } from '../role';
 import { ILedgerObject } from '../ILedgerObject';
-import { LedgerWallet } from '@project/common/ledger/wallet';
 
 export enum LedgerUserStatus {
     ACTIVE = 'ACTIVE',
@@ -69,10 +68,6 @@ export class LedgerUser implements ILedgerObject {
     @IsOptional()
     @Type(() => LedgerCryptoKey)
     cryptoKey?: LedgerCryptoKey;
-
-    @IsOptional()
-    @Type(() => LedgerWallet)
-    wallet?: LedgerWallet;
 
     @IsOptional()
     @IsEnum(LedgerRole, { each: true })
