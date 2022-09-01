@@ -1,6 +1,6 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { Matches, IsString } from 'class-validator';
+import { Matches, IsNumber, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerCoin } from '../../../ledger/coin';
@@ -46,7 +46,7 @@ export class CoinAddDto implements ICoinAddDto {
     @IsString()
     coinId: string;
 
-    @IsString()
+    @IsNumber()
     decimals: number;
 
     @Matches(LedgerCompany.UID_REG_EXP)

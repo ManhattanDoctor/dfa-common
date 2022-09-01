@@ -3,6 +3,7 @@ import { TransformUtil } from '@ts-core/common';
 import { IsOptional, Matches, IsArray } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany } from '../../../ledger/company';
+import * as _ from 'lodash';
 
 export class CompanyGetCommand extends ChaincodeTransportCommandAsync<ICompanyGetDto, LedgerCompany> {
     // --------------------------------------------------------------------------
