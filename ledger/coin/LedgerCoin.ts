@@ -29,7 +29,7 @@ export class LedgerCoin implements IUIDable {
         return item;
     }
 
-    private static createUid(company: UID, coinId: string): string {
+    public static createUid(company: UID, coinId: string): string {
         return `${LedgerCoin.PREFIX}/${getUid(company)}/${coinId}`;
     }
 
