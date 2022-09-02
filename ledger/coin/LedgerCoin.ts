@@ -13,7 +13,11 @@ export class LedgerCoin implements IUIDable {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'coin';
-    public static UID_REG_EXP = new RegExp(`^${LedgerCoin.PREFIX}/${LedgerCompany.UID_PATTERN}/[A-Z]{1,35}`);
+
+    public static COIN_ID_PATTERN = `[A-Z]{1,35}`;
+
+    public static UID_REG_EXP = new RegExp(`^${LedgerCoin.PREFIX}/${LedgerCompany.UID_PATTERN}/${LedgerCoin.COIN_ID_PATTERN}$`);
+    public static COIN_ID_REG_EXP = new RegExp(`^${LedgerCoin.COIN_ID_PATTERN}$`);
 
     // --------------------------------------------------------------------------
     //
@@ -43,7 +47,7 @@ export class LedgerCoin implements IUIDable {
     @Matches(LedgerCoin.UID_REG_EXP)
     public uid: string;
 
-    @IsString()
+    @Matches(LedgerCoin.COIN_ID_REG_EXP)
     public coinId: LedgerCoinId;
 
     @IsInt()

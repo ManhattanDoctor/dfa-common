@@ -19,7 +19,7 @@ export class LedgerUser implements ILedgerObject {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'user';
-    public static UID_REG_EXP = new RegExp(`^${LedgerUser.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}$`, 'i');
+    public static UID_REG_EXP = new RegExp(`^${LedgerUser.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}$`);
 
     private static MAX_CREATED_DATE = new Date(2500, 0);
 

@@ -21,7 +21,7 @@ export class LedgerCompany implements ILedgerObject {
     public static UID_PATTERN = `${LedgerCompany.PREFIX}/${RegExpUtil.DATE_TIME}/${RegExpUtil.TRANSACTION_HASH}`;
 
     private static MAX_CREATED_DATE = new Date(2500, 0);
-    public static UID_REG_EXP = new RegExp(`^${LedgerCompany.UID_PATTERN}$`, 'i');
+    public static UID_REG_EXP = new RegExp(`^${LedgerCompany.UID_PATTERN}$`);
 
     // --------------------------------------------------------------------------
     //
