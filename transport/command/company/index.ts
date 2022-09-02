@@ -3,6 +3,7 @@ export * from './CompanyAddCommand';
 export * from './CompanyListCommand';
 export * from './CompanyEditCommand';
 export * from './CompanyRemoveCommand';
+export * from './CompanyCoinListCommand';
 export * from './CompanyProjectListCommand';
 export * from './CompanyUserAddCommand';
 export * from './CompanyUserListCommand';
