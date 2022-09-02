@@ -27,6 +27,7 @@ export enum LedgerCommand {
     COIN_ADD = 'DAO:CoinAdd',
     COIN_EMIT = 'DAO:CoinEmit',
     COIN_BURN = 'DAO:CoinBurn',
+    COIN_REMOVE = 'DAO:CoinRemove',
     COIN_TRANSFER = 'DAO:CoinTransfer',
 
     PROJECT_GET = 'DAO:ProjectGet',

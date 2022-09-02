@@ -1,5 +1,5 @@
 import { getUid, IUIDable, UID } from "@ts-core/common";
-import { IsString, IsInt, IsPositive, IsNumberString, Matches, Length, IsOptional } from 'class-validator';
+import { IsString, IsInt, Min, IsNumberString, Matches, Length, IsOptional } from 'class-validator';
 import * as _ from 'lodash';
 import { RegExpUtil } from "../../util";
 import { LedgerCompany } from "../company";
@@ -13,7 +13,7 @@ export class LedgerCoin implements IUIDable {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'coin';
-    public static UID_REG_EXP = new RegExp(`^${LedgerCompany.PREFIX}/${LedgerCompany.UID_PATTERN}$/[A-Z]{1,35}/`);
+    public static UID_REG_EXP = new RegExp(`^${LedgerCoin.PREFIX}/${LedgerCompany.UID_PATTERN}/[A-Z]{1,35}`);
 
     // --------------------------------------------------------------------------
     //
@@ -24,6 +24,7 @@ export class LedgerCoin implements IUIDable {
     public static create(company: UID, coinId: string, decimals: number): LedgerCoin {
         let item = new LedgerCoin();
         item.uid = LedgerCoin.createUid(company, coinId);
+        item.coinId = coinId;
         item.decimals = decimals;
         item.companyUid = getUid(company);
         return item;
@@ -46,7 +47,7 @@ export class LedgerCoin implements IUIDable {
     public coinId: LedgerCoinId;
 
     @IsInt()
-    @IsPositive()
+    @Min(0)
     public decimals: number;
 
     @Matches(LedgerCompany.UID_REG_EXP)
