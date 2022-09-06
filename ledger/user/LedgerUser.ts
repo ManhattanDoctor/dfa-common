@@ -52,24 +52,24 @@ export class LedgerUser implements ILedgerObject {
     // --------------------------------------------------------------------------
 
     @Matches(LedgerUser.UID_REG_EXP)
-    uid: string;
+    public uid: string;
 
     @IsEnum(LedgerUserStatus)
-    status: LedgerUserStatus;
+    public status: LedgerUserStatus;
 
     @Type(() => Date)
     @IsDate()
-    createdDate: Date;
+    public createdDate: Date;
 
     @IsOptional()
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
-    description?: string;
+    public description?: string;
 
     @IsOptional()
     @Type(() => LedgerCryptoKey)
-    cryptoKey?: LedgerCryptoKey;
+    public cryptoKey?: LedgerCryptoKey;
 
     @IsOptional()
     @IsEnum(LedgerRole, { each: true })
-    roles?: Array<LedgerRole>;
+    public roles?: Array<LedgerRole>;
 }

@@ -1,9 +1,10 @@
 import { getUid, IUIDable, UID } from "@ts-core/common";
-import { IsString, IsInt, Min, IsNumberString, Matches, Length, IsOptional } from 'class-validator';
-import * as _ from 'lodash';
-import { RegExpUtil } from "../../util";
-import { LedgerCompany } from "../company";
+import { IsInt, Min, Matches, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
 import { LedgerCoinId } from "./LedgerCoinId";
+import { LedgerCompany } from "../company/LedgerCompany";
+import { LedgerCoinBalance } from "./LedgerCoinBalance";
+import * as _ from 'lodash';
 
 export class LedgerCoin implements IUIDable {
     // --------------------------------------------------------------------------
@@ -13,7 +14,6 @@ export class LedgerCoin implements IUIDable {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'coin';
-
     public static COIN_ID_PATTERN = `[A-Z]{1,35}`;
 
     public static UID_REG_EXP = new RegExp(`^${LedgerCoin.PREFIX}/${LedgerCompany.UID_PATTERN}/${LedgerCoin.COIN_ID_PATTERN}$`);
@@ -58,14 +58,6 @@ export class LedgerCoin implements IUIDable {
     public companyUid: string;
 
     @IsOptional()
-    @IsNumberString()
-    public total?: string;
-
-    @IsOptional()
-    @IsNumberString()
-    public emitted?: string;
-
-    @IsOptional()
-    @IsNumberString()
-    public burned?: string;
+    @Type(() => LedgerCoinBalance)
+    public balance?: LedgerCoinBalance;
 }

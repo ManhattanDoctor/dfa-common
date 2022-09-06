@@ -1,12 +1,11 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { LedgerUser } from '../../../ledger/user';
 import { Type } from 'class-transformer';
-import { Matches, IsEnum, IsOptional, IsDefined, ValidateNested } from 'class-validator';
+import { Matches, IsString, IsNumberString, IsOptional, IsDefined, ValidateNested } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
+import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment/LedgerPaymentDetails';
 import { ICoinObject, CoinObject } from './ICoinObject';
-import { ICoinAmount, CoinAmount } from './ICoinAmount';
+import { LedgerCoin } from '@project/common/ledger/coin';
 
 export class CoinEmitCommand extends ChaincodeTransportCommandAsync<ICoinEmitDto, void> {
     // --------------------------------------------------------------------------
@@ -35,25 +34,21 @@ export enum CoinEmitType {
 }
 
 export interface ICoinEmitDto extends ITraceable {
-    to: ICoinObject;
-    type: CoinEmitType,
-    amount: ICoinAmount;
+    to: string;
+    amount: string;
+    coinUid: string;
     details: ILedgerPaymentDetails;
 }
 
 class CoinEmitDto implements ICoinEmitDto {
-    @Type(() => CoinObject)
-    @IsDefined()
-    @ValidateNested()
-    to: CoinObject;
+    @IsString()
+    amount: string;
 
-    @IsEnum(CoinEmitType)
-    type: CoinEmitType;
+    @IsNumberString()
+    amount: string;
 
-    @Type(() => CoinAmount)
-    @IsDefined()
-    @ValidateNested()
-    amount: CoinAmount;
+    @Matches(LedgerCoin.UID_REG_EXP)
+    coinUid: string;
 
     @Type(() => LedgerPaymentDetails)
     @IsDefined()

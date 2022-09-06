@@ -1,7 +1,7 @@
 import { IsEnum, IsString } from 'class-validator';
 import { IUIDable } from '@ts-core/common';
 
-export class LedgerCryptoKey implements IUIDable {
+export class LedgerCryptoKey {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
@@ -15,9 +15,6 @@ export class LedgerCryptoKey implements IUIDable {
     //  Properties
     //
     // --------------------------------------------------------------------------
-
-    @IsString()
-    uid: string;
 
     @IsString()
     value: string;
