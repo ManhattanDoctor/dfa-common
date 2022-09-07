@@ -22,6 +22,23 @@ export class LedgerCoinAccount {
     //
     // --------------------------------------------------------------------------
 
+    public emit(amount: string): void {
+        if (MathUtil.lessThanOrEqualTo(amount, '0')) {
+            throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `Emitting amount must be granter than zero`);
+        }
+        this.inUse = MathUtil.add(this.inUse, amount);
+    }
+
+    public burn(amount: string): void {
+        if (MathUtil.lessThanOrEqualTo(amount, '0')) {
+            throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `Burning amount must be granter than zero`);
+        }
+        if (MathUtil.greaterThan(amount, this.inUse)) {
+            throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `Burning amount must be less than "isUse" balance`);
+        }
+        this.inUse = MathUtil.subtract(this.inUse, amount);
+    }
+
     public hold(amount: string): void {
         if (MathUtil.lessThanOrEqualTo(amount, '0')) {
             throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `Holding amount must be granter than zero`);
@@ -51,7 +68,11 @@ export class LedgerCoinAccount {
     //
     // --------------------------------------------------------------------------
 
-    public get total(): string {
+    public getTotal(): string {
         return MathUtil.add(this.held, this.inUse);
+    }
+
+    public isEmpty(): boolean {
+        return (_.isNil(this.inUse) || this.inUse === '0') && (_.isNil(this.held) || this.held === '0');
     }
 }

@@ -42,7 +42,7 @@ export interface ICoinEmitDto extends ITraceable {
 
 class CoinEmitDto implements ICoinEmitDto {
     @IsString()
-    amount: string;
+    to: string;
 
     @IsNumberString()
     amount: string;
