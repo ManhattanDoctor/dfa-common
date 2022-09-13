@@ -3,9 +3,8 @@ import { TransformUtil } from '@ts-core/common';
 import { Type } from 'class-transformer';
 import { Matches, IsString, IsNumberString, IsOptional, IsDefined, ValidateNested } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment/LedgerPaymentDetails';
-import { ICoinObject, CoinObject } from './ICoinObject';
-import { LedgerCoin } from '@project/common/ledger/coin';
+import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
+import { LedgerCoin } from '../../../ledger/coin';
 
 export class CoinEmitCommand extends ChaincodeTransportCommandAsync<ICoinEmitDto, void> {
     // --------------------------------------------------------------------------
