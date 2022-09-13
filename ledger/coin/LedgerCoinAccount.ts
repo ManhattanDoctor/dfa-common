@@ -1,14 +1,47 @@
-import { MathUtil } from '@ts-core/common';
-import { IsNumberString } from 'class-validator';
+import { getUid, MathUtil, UID } from '@ts-core/common';
+import { IsString, IsOptional, IsNumberString } from 'class-validator';
 import * as _ from 'lodash';
 import { LedgerError, LedgerErrorCode } from '../error/LedgerError';
+import { LedgerCoin } from './LedgerCoin';
 
 export class LedgerCoinAccount {
+    // --------------------------------------------------------------------------
+    //
+    //  Static Properties
+    //
+    // --------------------------------------------------------------------------
+
+    public static PREFIX = `→coin~account`;
+
+    // --------------------------------------------------------------------------
+    //
+    //  Static Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public static create(coin: UID, object: UID): LedgerCoinAccount {
+        let item = new LedgerCoinAccount();
+        item.uid = LedgerCoinAccount.createUid(coin, object);
+        item.held = item.inUse = '0';
+        return item;
+    }
+
+    public static createUid(coin: UID, object?: UID): string {
+        let item = `${LedgerCoinAccount.PREFIX}:${getUid(coin)}`;
+        return !_.isNil(object) ? `${item}~${getUid(object)}` : item;
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Properties
     //
     // --------------------------------------------------------------------------
+
+    @IsString()
+    public uid: string;
+
+    @IsString()
+    public objectUid: string;
 
     @IsNumberString()
     public held: string;

@@ -7,3 +7,4 @@ export * from './CoinListCommand';
 export * from './CoinEmitCommand';
 export * from './CoinRemoveCommand';
 export * from './CoinTransferCommand';
+export * from './CoinAccountListCommand';
