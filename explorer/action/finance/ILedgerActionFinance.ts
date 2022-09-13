@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 import { LedgerActionType } from '../ILedgerAction';
-import { LedgerCoinId } from '../../../ledger/coin';
 
 export class ILedgerActionFinance {
     uid: string;
@@ -14,6 +13,5 @@ export class ILedgerActionFinance {
     initiatorUid?: string;
 
     amount: string;
-    coinId: LedgerCoinId;
     isSucceed: boolean;
 }
