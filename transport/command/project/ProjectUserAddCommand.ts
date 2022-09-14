@@ -1,4 +1,3 @@
-import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { Matches, IsOptional, IsEnum } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
