@@ -1,6 +1,6 @@
 import { IPaginationBookmark, ITraceable, PaginableBookmark, TransformUtil } from '@ts-core/common';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { LedgerCoinAccount } from '../../../ledger/coin/LedgerCoinAccount';
+import { LedgerCoinAccount } from '../../../ledger/coin';
 
 export class CoinAccountListCommand extends ChaincodeTransportCommandAsync<ICoinAccountListDto, ICoinAccountListDtoResponse> {
     // --------------------------------------------------------------------------

@@ -5,7 +5,6 @@ import { getUid, MathUtil, UID } from '@ts-core/common';
 import { LedgerCoin } from './LedgerCoin';
 
 export class LedgerCoinBalance extends LedgerCoinAccount {
-
     // --------------------------------------------------------------------------
     //
     //  Public Static Methods
@@ -16,6 +15,7 @@ export class LedgerCoinBalance extends LedgerCoinAccount {
         let item = new LedgerCoinBalance();
         item.uid = LedgerCoinBalance.createUid(coin);
         item.emitted = item.burned = item.held = item.inUse = '0';
+        item.objectUid = getUid(coin);
         return item;
     }
 

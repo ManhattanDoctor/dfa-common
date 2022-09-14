@@ -40,6 +40,9 @@ export class Genesis implements IGenesis {
     @Matches(LedgerUser.UID_REG_EXP)
     rootUserUid: string;
 
+    @Matches(LedgerCompany.UID_REG_EXP)
+    rootCompanyUid: string;
+
     @Type(() => Date)
     @IsDate()
     createdDate: Date;

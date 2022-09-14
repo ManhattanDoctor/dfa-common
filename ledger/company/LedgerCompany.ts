@@ -29,6 +29,10 @@ export class LedgerCompany implements ILedgerObject {
     //
     // --------------------------------------------------------------------------
 
+    public static createRoot(): LedgerCompany {
+        return LedgerCompany.create(new Date(2000, 0), _.padStart('0', 64, '0'));
+    }
+    
     public static create(createdDate: Date, transactionHash: string): LedgerCompany {
         let item = new LedgerCompany();
         item.uid = LedgerCompany.createUid(createdDate, transactionHash);

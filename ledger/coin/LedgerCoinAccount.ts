@@ -23,6 +23,7 @@ export class LedgerCoinAccount {
         let item = new LedgerCoinAccount();
         item.uid = LedgerCoinAccount.createUid(coin, object);
         item.held = item.inUse = '0';
+        item.objectUid = getUid(object);
         return item;
     }
 
