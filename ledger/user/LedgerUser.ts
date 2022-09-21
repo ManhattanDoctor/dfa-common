@@ -1,7 +1,7 @@
 import { IsEnum, IsOptional, IsDate, Length, Matches } from 'class-validator';
 import { Type } from 'class-transformer';
 import { LedgerCryptoKey } from '../cryptoKey';
-import { RegExpUtil, ValidateUtil } from '../../util';
+import { RegExpUtil } from '../../util';
 import * as _ from 'lodash';
 import { LedgerRole } from '../role';
 import { ILedgerObject } from '../ILedgerObject';

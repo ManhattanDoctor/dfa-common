@@ -33,13 +33,16 @@ export class CoinAddCommand extends ChaincodeTransportCommandAsync<ICoinAddDto, 
     protected checkResponse(item: LedgerCoin): LedgerCoin {
         return TransformUtil.toClass(LedgerCoin, item);
     }
-
 }
 
 export interface ICoinAddDto extends ITraceable {
     coinId: string;
     decimals: number;
     companyUid: string;
+    emit?: {
+        to: string;
+        amount: string;
+    }
 }
 
 export class CoinAddDto implements ICoinAddDto {
