@@ -8,3 +8,4 @@ export * from './CoinEmitCommand';
 export * from './CoinRemoveCommand';
 export * from './CoinTransferCommand';
 export * from './CoinAccountListCommand';
+export * from './CoinObjectBalanceGetCommand';

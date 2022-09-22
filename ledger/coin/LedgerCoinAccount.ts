@@ -2,7 +2,6 @@ import { getUid, MathUtil, UID } from '@ts-core/common';
 import { IsString, IsOptional, IsNumberString } from 'class-validator';
 import * as _ from 'lodash';
 import { LedgerError, LedgerErrorCode } from '../error/LedgerError';
-import { LedgerCoin } from './LedgerCoin';
 
 export class LedgerCoinAccount {
     // --------------------------------------------------------------------------
@@ -107,6 +106,7 @@ export class LedgerCoinAccount {
     }
 
     public isEmpty(): boolean {
-        return (_.isNil(this.inUse) || this.inUse === '0') && (_.isNil(this.held) || this.held === '0');
+        let item = this.getTotal();
+        return _.isNil(item) || item === '0';
     }
 }
