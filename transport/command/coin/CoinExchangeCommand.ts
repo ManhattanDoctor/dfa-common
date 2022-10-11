@@ -1,10 +1,8 @@
-import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { Type } from 'class-transformer';
-import { Matches, IsString, IsNumberString, IsOptional, IsDefined, ValidateNested } from 'class-validator';
+import { Matches, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
 import { LedgerCoin } from '../../../ledger/coin';
+import { CoinRateGetDto, ICoinRateGetDto } from './CoinRateGetCommand';
 
 export class CoinExchangeCommand extends ChaincodeTransportCommandAsync<ICoinExchangeDto, void> {
     // --------------------------------------------------------------------------
@@ -32,14 +30,15 @@ export enum CoinExchangeType {
     FEE_AGGREGATOR_DEDUCTED = 'FEE_AGGREGATOR_DEDUCTED'
 }
 
-export interface ICoinExchangeDto extends ITraceable {
-    to: string;
-    from: string;
+export interface ICoinExchangeDto extends ICoinRateGetDto {
+    rate: string;
+    amount: string;
 }
 
-class CoinExchangeDto implements ICoinExchangeDto {
-    @Matches(LedgerCoin.UID_REG_EXP)
-    to: string;
-    @Matches(LedgerCoin.UID_REG_EXP)
-    from: string;
+class CoinExchangeDto extends CoinRateGetDto implements ICoinExchangeDto {
+    @IsString()
+    rate: string;
+
+    @IsString()
+    amount: string;
 }
