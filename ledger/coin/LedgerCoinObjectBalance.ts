@@ -20,8 +20,8 @@ export class LedgerCoinObjectBalance {
     @IsNumberString()
     public total: string;
 
-    @IsNumber()
-    public share: number;
+    @IsNumberString()
+    public share: string;
 
     @Matches(LedgerCoin.COIN_ID_REG_EXP)
     public coinId: LedgerCoinId;
