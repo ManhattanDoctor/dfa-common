@@ -1,6 +1,6 @@
 import { IsEnum, IsDate, IsArray, ValidateNested, Matches, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
-import { RegExpUtil } from '../../util';
+import { RegExpUtil } from '../../util/RegExpUtil';
 import * as _ from 'lodash';
 import { ILedgerObject } from '../ILedgerObject';
 import { LedgerCompanyRegulation } from './LedgerCompanyRegulation';

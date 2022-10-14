@@ -1,15 +1,15 @@
 
 import * as _ from 'lodash';
 import { IsEnum, IsOptional, IsNumber, Min, IsDate, IsDefined, ValidateNested, Matches } from 'class-validator';
-import { Type } from 'class-transformer';
-import { RegExpUtil } from '../../util';
+import { Type, Transform } from 'class-transformer';
+import { RegExpUtil } from '../../util/RegExpUtil';
 import { ILedgerObject } from '../ILedgerObject';
-import { LedgerVotingStep, LedgerVotingStepCoin, LedgerVotingStepRole } from './step';
-import { LedgerVotingStepType } from './LedgerVotingStepType';
+import { LedgerVotingStep } from './step/LedgerVotingStep';
+import { LedgerVotingFactory } from './LedgerVotingFactory';
 
 export enum LedgerVotingStatus {
     IN_PROGRESS = 'IN_PROGRESS',
-    RESOLVED = 'RESOLVED',
+    APPROVED = 'APPROVED',
     REJECTED = 'REJECTED',
 }
 
@@ -61,16 +61,8 @@ export abstract class LedgerVoting<U, V> implements ILedgerObject {
     @IsNumber()
     public stepIndex: number;
 
-    @Type(() => LedgerVotingStep, {
-        discriminator: {
-            property: 'type',
-            subTypes: [
-                { name: LedgerVotingStepType.ROLE, value: LedgerVotingStepRole },
-                { name: LedgerVotingStepType.COIN, value: LedgerVotingStepCoin },
-            ]
-        },
-        keepDiscriminatorProperty: true,
-    })
+    @Type(() => LedgerVotingStep)
+    @Transform(item => item.value.map(LedgerVotingFactory.transformStep), { toClassOnly: true })
     @IsDefined()
     @ValidateNested()
     public steps: Array<LedgerVotingStep>;
@@ -83,6 +75,10 @@ export abstract class LedgerVoting<U, V> implements ILedgerObject {
     //  Public Properties
     //
     // --------------------------------------------------------------------------
+
+    public get step(): LedgerVotingStep {
+        return this.steps[this.stepIndex];
+    }
 
     public get isCompleted(): boolean {
         return !this.isInProgress;

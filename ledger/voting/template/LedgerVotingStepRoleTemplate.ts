@@ -1,6 +1,6 @@
 import { IsOneOfEnums } from "@ts-core/common";
-import { ArrayNotEmpty, IsEnum } from "class-validator";
-import { LedgerRolesArray, LedgerRoles, LedgerRole } from "../../role";
+import { ArrayNotEmpty } from "class-validator";
+import { LedgerRolesArray, LedgerRoles } from "../../role/LedgerRoles";
 import { LedgerVotingStepType } from "../LedgerVotingStepType";
 import { LedgerVotingStepTemplate } from "./LedgerVotingStepTemplate";
 

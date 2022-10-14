@@ -1,4 +1,4 @@
-import { IsString, Min, IsNumberString } from 'class-validator';
+import { IsString, IsNumberString } from 'class-validator';
 import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 
 export class LedgerCompanyVotingProposalCoinEmit extends LedgerCompanyVotingProposal {

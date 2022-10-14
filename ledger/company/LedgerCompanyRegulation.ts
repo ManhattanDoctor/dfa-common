@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
+import { Type, Transform } from 'class-transformer';
 import { IsEnum, IsDefined, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
-import { ILedgerVotingTemplate, LedgerVotingStepCoinTemplate, LedgerVotingStepRoleTemplate, LedgerVotingStepTemplate } from '../voting/template';
-import { LedgerVotingStepType } from '../voting';
+import { ILedgerVotingTemplate } from '../voting/template/ILedgerVotingTemplate';
+import { LedgerVotingStepTemplate } from '../voting/template/LedgerVotingStepTemplate';
+import { LedgerVotingFactory } from '../voting/LedgerVotingFactory';
 
 export enum LedgerCompanyRegulationType {
     // COIN_ADD = 'COIN_ADD',
@@ -30,16 +31,8 @@ export class LedgerCompanyRegulation implements ILedgerCompanyRegulation {
     @IsEnum(LedgerCompanyRegulationType)
     public type: LedgerCompanyRegulationType;
 
-    @Type(() => LedgerVotingStepTemplate, {
-        discriminator: {
-            property: 'type',
-            subTypes: [
-                { name: LedgerVotingStepType.ROLE, value: LedgerVotingStepRoleTemplate },
-                { name: LedgerVotingStepType.COIN, value: LedgerVotingStepCoinTemplate },
-            ]
-        },
-        keepDiscriminatorProperty: true,
-    })
+    @Type(() => LedgerVotingStepTemplate)
+    @Transform(item => item.value.map(LedgerVotingFactory.transformStepTemplate), { toClassOnly: true })
     @IsDefined()
     @ValidateNested()
     public steps: Array<LedgerVotingStepTemplate>;

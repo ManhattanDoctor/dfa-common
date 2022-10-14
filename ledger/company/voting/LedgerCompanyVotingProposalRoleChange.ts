@@ -1,7 +1,7 @@
 import { Matches, ArrayNotEmpty, IsEnum } from 'class-validator';
-import { LedgerCompanyRole } from '../../role';
-import { LedgerUser } from '../../user';
-import { LedgerVotingStepRoleAction } from '../../voting/step';
+import { LedgerCompanyRole } from '../../role/LedgerCompanyRole';
+import { LedgerUser } from '../../user/LedgerUser';
+import { LedgerVotingStepRoleAction } from '../../voting/step/LedgerVotingStepRole';
 import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 
 export class LedgerCompanyVotingProposalRoleChange extends LedgerCompanyVotingProposal {

@@ -1,6 +1,5 @@
-import { IsEnum, IsDate } from 'class-validator';
+import { IsOptional, IsEnum, IsDate } from 'class-validator';
 import { Type } from 'class-transformer';
-import { LedgerVotingList } from '../LedgerVotingList';
 import { LedgerVotingStepType } from "../LedgerVotingStepType";
 
 export abstract class LedgerVotingStep {
@@ -13,11 +12,10 @@ export abstract class LedgerVotingStep {
     @IsEnum(LedgerVotingStepType)
     public type: LedgerVotingStepType;
 
+    @IsOptional()
+    @Type(() => Date)
     @IsDate()
     public expiredDate: Date;
-
-    @Type(() => LedgerVotingList)
-    public list: LedgerVotingList;
 
     // --------------------------------------------------------------------------
     //
