@@ -37,9 +37,11 @@ export class LedgerCoinAccount {
     //
     // --------------------------------------------------------------------------
 
+    @IsOptional()
     @IsString()
     public uid: string;
 
+    @IsOptional()
     @IsString()
     public objectUid: string;
 
