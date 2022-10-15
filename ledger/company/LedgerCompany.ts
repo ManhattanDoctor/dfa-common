@@ -61,9 +61,8 @@ export class LedgerCompany implements ILedgerObject {
     @IsDate()
     public createdDate: Date;
 
-    @IsOptional()
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
-    public description?: string;
+    public description: string;
 
     @IsOptional()
     @IsArray()

@@ -1,6 +1,6 @@
 import { ObjectUtil } from "@ts-core/common";
 import { Type } from "class-transformer";
-import { Min, Max, IsNumber, IsString } from "class-validator";
+import { Min, Max, IsNumber, IsNumberString, IsString } from "class-validator";
 import { LedgerVotingStepCoinTemplate } from "../template/LedgerVotingStepCoinTemplate";
 import { LedgerVotingListCoin } from "./LedgerVotingListCoin";
 import { LedgerVotingStep } from "./LedgerVotingStep";
@@ -27,6 +27,9 @@ export class LedgerVotingStepCoin extends LedgerVotingStep {
 
     @IsString()
     public coinId: string;
+
+    @IsNumberString()
+    public total: string;
 
     @Min(0)
     @Max(100)

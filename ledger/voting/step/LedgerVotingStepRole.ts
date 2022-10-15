@@ -1,5 +1,5 @@
 import { IsOneOfEnums, ObjectUtil } from "@ts-core/common";
-import { ArrayNotEmpty } from "class-validator";
+import { ArrayNotEmpty, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 import { LedgerRolesArray, LedgerRoles } from "../../role/LedgerRoles";
 import { LedgerVotingStepRoleTemplate } from "../template/LedgerVotingStepRoleTemplate";
@@ -32,6 +32,9 @@ export class LedgerVotingStepRole extends LedgerVotingStep {
 
     @Type(() => LedgerVotingListRole)
     public list: LedgerVotingListRole;
+
+    @IsInt()
+    public total: number;
 }
 
 export enum LedgerVotingStepRoleAction {

@@ -39,8 +39,8 @@ export class CompanyAddCommand extends ChaincodeTransportCommandAsync<ICompanyAd
 
 export interface ICompanyAddDto extends ITraceable {
     ownerUid: string;
-    regulations: Array<ILedgerCompanyRegulation>;
     description: string;
+    regulations: Array<ILedgerCompanyRegulation>;
 }
 
 export class CompanyAddDto implements ICompanyAddDto {

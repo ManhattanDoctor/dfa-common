@@ -1,11 +1,9 @@
-import { IsEnum, Length, IsArray, IsDate, Matches, ArrayMinSize, ValidateNested, ArrayMaxSize, IsOptional } from 'class-validator';
+import { IsEnum, IsDate, Matches } from 'class-validator';
 import { Type } from 'class-transformer';
-import { RegExpUtil, ValidateUtil } from '../../util';
-import { LedgerWallet } from '../wallet';
+import { RegExpUtil } from '../../util';
 import * as _ from 'lodash';
 import { LedgerCompany } from '../company';
 import { ILedgerObject } from '../ILedgerObject';
-import { LedgerProjectPurpose } from './LedgerProjectPurpose';
 
 export enum LedgerProjectStatus {
     ACTIVE = 'ACTIVE',
@@ -57,13 +55,11 @@ export class LedgerProject implements ILedgerObject {
     @IsEnum(LedgerProjectStatus)
     public status: LedgerProjectStatus;
 
-    @Type(() => Date)
-    @IsDate()
-    public createdDate: Date;
-
-    @IsOptional()
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     public description: string;
 
+    @Type(() => Date)
+    @IsDate()
+    public createdDate: Date;
 }
 

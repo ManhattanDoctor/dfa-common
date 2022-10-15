@@ -1,5 +1,5 @@
 import { getUid, IUIDable, UID } from "@ts-core/common";
-import { IsInt, Min, Matches, IsOptional } from 'class-validator';
+import { IsInt, Min, Matches } from 'class-validator';
 import { Type } from 'class-transformer';
 import { LedgerCoinId } from "./LedgerCoinId";
 import { LedgerCompany } from "../company/LedgerCompany";
@@ -57,7 +57,6 @@ export class LedgerCoin implements IUIDable {
     @Matches(LedgerCompany.UID_REG_EXP)
     public companyUid: string;
 
-    @IsOptional()
     @Type(() => LedgerCoinBalance)
-    public balance?: LedgerCoinBalance;
+    public balance: LedgerCoinBalance;
 }
