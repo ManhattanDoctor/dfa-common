@@ -45,7 +45,7 @@ export interface IUserCryptoKey {
 export interface IUserAddDto extends ITraceable {
     cryptoKey: IUserCryptoKey;
     description: string;
-    roles?: Array<LedgerRole>;
+    roles: Array<LedgerRole>;
 }
 
 export class UserCryptoKey implements IUserCryptoKey {
@@ -64,9 +64,8 @@ export class UserAddDto implements IUserAddDto {
 
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;
-    
-    @IsOptional()
+
     @IsEnum(LedgerRole, { each: true })
-    roles?: Array<LedgerRole>;
+    roles: Array<LedgerRole>;
 
 }

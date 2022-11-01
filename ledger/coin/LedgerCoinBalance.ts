@@ -1,20 +1,9 @@
 import { IsNumberString } from 'class-validator';
 import { LedgerCoinAccount } from './LedgerCoinAccount';
 import * as _ from 'lodash';
-import { MathUtil, UID } from '@ts-core/common';
+import { MathUtil } from '@ts-core/common';
 
 export class LedgerCoinBalance extends LedgerCoinAccount {
-    // --------------------------------------------------------------------------
-    //
-    //  Public Static Methods
-    //
-    // --------------------------------------------------------------------------
-
-    public static create(coin: UID): LedgerCoinBalance {
-        let item = new LedgerCoinBalance();
-        item.emitted = item.burned = item.held = item.inUse = '0';
-        return item;
-    }
 
     // --------------------------------------------------------------------------
     //

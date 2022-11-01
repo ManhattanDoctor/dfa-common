@@ -68,7 +68,6 @@ export class LedgerUser implements ILedgerObject {
     @Type(() => LedgerCryptoKey)
     public cryptoKey?: LedgerCryptoKey;
 
-    @IsOptional()
     @IsEnum(LedgerRole, { each: true })
-    public roles?: Array<LedgerRole>;
+    public roles: Array<LedgerRole>;
 }
