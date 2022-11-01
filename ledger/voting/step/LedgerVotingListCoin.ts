@@ -1,6 +1,6 @@
-import { MathUtil } from '@ts-core/common';
+import { MathUtil, UnreachableStatementError } from '@ts-core/common';
 import * as _ from 'lodash';
-import { LedgerVotingList } from '../LedgerVotingList';
+import { ILedgerVote, LedgerVote, LedgerVoteType, LedgerVotingList } from '../LedgerVotingList';
 
 export class LedgerVotingListCoin extends LedgerVotingList<string> {
     // --------------------------------------------------------------------------
@@ -18,19 +18,21 @@ export class LedgerVotingListCoin extends LedgerVotingList<string> {
     //
     // --------------------------------------------------------------------------
 
-    public for(uid: string, value: string): string {
-        super.for(uid, value);
-        this[uid] = `${value}`;
-        this._votesFor = MathUtil.add(this.votesFor, value);
+    public vote(uid: string, value: ILedgerVote<string>): LedgerVote<string> {
+        super.vote(uid, value);
+        switch (value.type) {
+            case LedgerVoteType.FOR:
+                this._votesFor = MathUtil.add(this.votesFor, value.value);
+                break;
+            case LedgerVoteType.AGAINST:
+                this._votesAgainst = MathUtil.add(this.votesAgainst, value.value);
+                break;
+            default:
+                throw new UnreachableStatementError(value.type);
+        }
         return value;
     }
 
-    public against(uid: string, value: string): string {
-        super.against(uid, value);
-        this[uid] = `-${value}`;
-        this._votesAgainst = MathUtil.add(this.votesAgainst, value);
-        return value;
-    }
 
     // --------------------------------------------------------------------------
     //

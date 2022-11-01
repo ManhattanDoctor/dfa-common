@@ -10,5 +10,6 @@ export * from './CompanyUserListCommand';
 export * from './CompanyUserEditCommand';
 export * from './CompanyUserRemoveCommand';
 export * from './CompanyUserRoleListCommand';
+export * from './CompanyVotingAddCommand';
 
 
