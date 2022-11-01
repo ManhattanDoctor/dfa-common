@@ -67,5 +67,4 @@ export class UserAddDto implements IUserAddDto {
 
     @IsEnum(LedgerRole, { each: true })
     roles: Array<LedgerRole>;
-
 }
