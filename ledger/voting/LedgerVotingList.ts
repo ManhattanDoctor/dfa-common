@@ -1,7 +1,9 @@
 import * as _ from 'lodash';
-import { LedgerError, LedgerErrorCode } from '../error/LedgerError';
+import { IsEnum, IsDefined } from 'class-validator';
+import { LedgerError, LedgerErrorCode } from '../error';
+import { LedgerCompanyRole } from '../role';
 
-export abstract class LedgerVotingList<T> extends Object {
+export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> extends Object {
     // --------------------------------------------------------------------------
     //
     //  Private Methods
@@ -21,17 +23,35 @@ export abstract class LedgerVotingList<T> extends Object {
     //
     // --------------------------------------------------------------------------
 
-    public for(uid: string, value: T): T {
+    public vote(uid: string, value: ILedgerVote<T>): ILedgerVote<T> {
         this.checkAlready(uid);
+        this[uid] = value;
         return value;
     }
 
-    public against(uid: string, value: T): T {
-        this.checkAlready(uid);
-        return value;
-    }
-
-    public get(uid: string): T {
+    public get(uid: string): ILedgerVote<T> {
         return this.hasOwnProperty(uid) ? this[uid] : null;
     }
+}
+
+export enum LedgerVoteType {
+    FOR = 'FOR',
+    AGAINST = 'AGAINST'
+}
+
+export type LedgerVotingRole = LedgerCompanyRole;
+
+export type LedgerVoteValue = string | LedgerVotingRole;
+
+export interface ILedgerVote<T extends LedgerVoteValue = LedgerVoteValue> {
+    type: LedgerVoteType;
+    value: T;
+}
+
+export class LedgerVote<T extends LedgerVoteValue = LedgerVoteValue> {
+    @IsEnum(LedgerVoteType)
+    type: LedgerVoteType;
+
+    @IsDefined()
+    value: T;
 }

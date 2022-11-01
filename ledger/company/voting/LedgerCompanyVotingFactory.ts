@@ -10,7 +10,6 @@ import { LedgerError, LedgerErrorCode } from "@project/common/ledger/error";
 import { LedgerVotingStatus } from "../../voting/LedgerVoting";
 import { LedgerVotingFactory } from "../../voting/LedgerVotingFactory";
 import { LedgerVotingStep } from "@project/common/ledger/voting/step";
-import { LedgerVotingStepType } from "@project/common/ledger/voting";
 
 export class LedgerCompanyVotingFactory {
     // --------------------------------------------------------------------------
@@ -19,8 +18,8 @@ export class LedgerCompanyVotingFactory {
     //
     // --------------------------------------------------------------------------
 
-    public static create(date: Date, transactionHash: string, company: LedgerCompany, params: ILedgerCompanyVotingDto): LedgerCompanyVoting {
-        let item = LedgerCompanyVoting.create(date, transactionHash);
+    public static create(company: LedgerCompany, params: ILedgerCompanyVotingAddDto): LedgerCompanyVoting {
+        let item = LedgerCompanyVoting.create(params.date, params.transactionHash);
         item.type = params.type;
         item.status = LedgerVotingStatus.IN_PROGRESS;
         item.proposal = TransformUtil.toClass(LedgerCompanyVotingFactory.getProposalClass(params.type), params.proposal);
@@ -65,7 +64,9 @@ export class LedgerCompanyVotingFactory {
     }
 }
 
-export interface ILedgerCompanyVotingDto {
+export interface ILedgerCompanyVotingAddDto {
+    date: Date;
     type: LedgerCompanyRegulationType;
-    proposal: ILedgerCompanyVotingProposal;
+    proposal: LedgerCompanyVotingProposal;
+    transactionHash: string;
 }

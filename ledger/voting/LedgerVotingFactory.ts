@@ -3,7 +3,6 @@ import { LedgerVotingStep } from "./step/LedgerVotingStep";
 import { LedgerVotingStepType } from "./LedgerVotingStepType";
 import { LedgerVotingStepCoin } from "./step/LedgerVotingStepCoin";
 import { LedgerVotingStepRole } from "./step/LedgerVotingStepRole";
-import { LedgerCompanyRegulationType } from "../company/LedgerCompanyRegulation";
 import { LedgerVotingStepCoinTemplate } from "./template/LedgerVotingStepCoinTemplate";
 import { LedgerVotingStepRoleTemplate } from "./template/LedgerVotingStepRoleTemplate";
 import { LedgerVotingStepTemplate } from "./template/LedgerVotingStepTemplate";
@@ -45,25 +44,6 @@ export class LedgerVotingFactory {
         }
         return TransformUtil.toClass(classType, item);
     }
-    /*
-        switch (type) {
-            case LedgerCompanyRegulationType.PROJECT_ADD:
-                return null;
-
-            case LedgerCompanyRegulationType.COIN_EMIT:
-                return LedgerVotingStepCoinTemplate;
-
-            case LedgerCompanyRegulationType.EXPERT_ADD:
-            case LedgerCompanyRegulationType.PROTECTOR_ADD:
-            case LedgerCompanyRegulationType.EXPERT_REMOVE:
-            case LedgerCompanyRegulationType.PROTECTOR_REMOVE:
-                return LedgerVotingStepRoleTemplate;
-
-            default:
-                throw new UnreachableStatementError(type);
-        }
-    }
-    */
 
     public static createStep(item: LedgerVotingStepTemplate): LedgerVotingStep {
         if (item instanceof LedgerVotingStepCoinTemplate) {
