@@ -1,17 +1,13 @@
-import { ClassType, DateUtil, TransformUtil, UnreachableStatementError } from "@ts-core/common";
+import { ClassType, DateUtil, UnreachableStatementError } from "@ts-core/common";
 import { LedgerCompanyVotingProposalCoinEmit } from "./LedgerCompanyVotingProposalCoinEmit";
 import { LedgerCompanyVotingProposalRoleChange } from "./LedgerCompanyVotingProposalRoleChange";
-import { LedgerCompany } from "../LedgerCompany";
 import { LedgerCompanyRegulation, LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
-import { LedgerCompanyVoting } from "./LedgerCompanyVoting";
 import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 import * as _ from 'lodash';
-import { LedgerBadRequestError, LedgerError, LedgerErrorCode } from "@project/common/ledger/error";
-import { LedgerVotingStatus } from "../../voting/LedgerVoting";
-import { LedgerVotingFactory } from "../../voting/LedgerVotingFactory";
-import { LedgerVotingStep } from "@project/common/ledger/voting/step";
-import { LedgerVotingStepTemplate } from "@project/common/ledger/voting/template";
-import { LedgerVotingStepType } from "@project/common/ledger/voting";
+import { LedgerBadRequestError } from "../../error/LedgerError";
+import { LedgerVotingStep } from "../../voting/step/LedgerVotingStep";
+import { LedgerVotingStepType } from "../../voting/LedgerVotingStepType";
+import { LedgerVotingStepTemplate } from "../../voting/template/LedgerVotingStepTemplate";
 
 export class LedgerCompanyVotingFactory {
     // --------------------------------------------------------------------------

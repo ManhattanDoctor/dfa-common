@@ -1,8 +1,8 @@
-import { LedgerBadRequestError } from '@project/common/ledger/error';
+
 import { getUid, MathUtil, UID } from '@ts-core/common';
 import { IsString, IsOptional, IsNumberString } from 'class-validator';
 import * as _ from 'lodash';
-import { LedgerError, LedgerErrorCode } from '../error/LedgerError';
+import { LedgerBadRequestError } from '../error';
 
 export class LedgerCoinAccount {
     // --------------------------------------------------------------------------

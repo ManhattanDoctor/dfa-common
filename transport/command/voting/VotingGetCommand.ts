@@ -3,9 +3,11 @@ import { TransformUtil } from '@ts-core/common';
 import { IsOptional, Matches, IsArray } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import * as _ from 'lodash';
-import { LedgerVoting, LedgerVotingFactory, LedgerVotingType } from '../../../ledger/voting';
+import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
+import { LedgerCompanyVoting } from '../../../ledger/company/voting';
+import { ledgerVotingTransform } from '../../../ledger/voting';
 
-export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGetDto, LedgerVotingType> {
+export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGetDto, LedgerVoting> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
@@ -30,14 +32,14 @@ export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGetD
     //
     // --------------------------------------------------------------------------
 
-    protected checkResponse(item: LedgerVotingType): LedgerVotingType {
-        return LedgerVotingFactory.transform(item);
+    protected checkResponse(item: LedgerVoting): LedgerVoting {
+        return ledgerVotingTransform(item);
     }
 }
 
 export interface IVotingGetDto extends ITraceable {
     uid: string;
-    details?: Array<keyof LedgerVotingType>;
+    details?: Array<keyof LedgerVoting>;
 }
 
 class VotingGetDto implements IVotingGetDto {
@@ -46,6 +48,6 @@ class VotingGetDto implements IVotingGetDto {
 
     @IsArray()
     @IsOptional()
-    details?: Array<keyof LedgerVotingType>;
+    details?: Array<keyof LedgerVoting>;
 }
 

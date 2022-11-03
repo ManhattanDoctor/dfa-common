@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { IsEnum, IsDefined } from 'class-validator';
-import { LedgerBadRequestError, LedgerError, LedgerErrorCode } from '../error';
-import { LedgerCompanyRole } from '../role';
+import { LedgerBadRequestError } from '../error/LedgerError';
+import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 
 export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> extends Object {
     // --------------------------------------------------------------------------

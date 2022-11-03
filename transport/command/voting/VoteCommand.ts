@@ -2,7 +2,8 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { IsOptional, ValidateNested, Matches } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { ILedgerVote, LedgerVote, LedgerVoting } from '../../../ledger/voting';
+import { ILedgerVote, LedgerVote } from '../../../ledger/voting/LedgerVotingList';
+import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
 
 export class VoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, void> {
     // --------------------------------------------------------------------------

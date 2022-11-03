@@ -1,5 +1,7 @@
-import { LedgerCompanyVoting } from '@project/common/ledger/company/voting';
-import { LedgerVotingFactory } from '@project/common/ledger/voting';
+
+import { TransformUtil } from '@ts-core/common';
+import { LedgerCompanyVoting } from '../../../ledger/company/voting/LedgerCompanyVoting';
+import { ledgerVotingTransform } from '../../../ledger/voting';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { IVotingListDto, IVotingListDtoResponse } from '../voting/VotingListCommand';
 
@@ -29,7 +31,7 @@ export class CompanyVotingListCommand extends ChaincodeTransportCommandAsync<ICo
     // --------------------------------------------------------------------------
 
     protected checkResponse(response: IVotingListDtoResponse): IVotingListDtoResponse {
-        response.items = response.items.map(LedgerVotingFactory.transform);
+        response.items = response.items.map(ledgerVotingTransform);
         return response;
     }
 }

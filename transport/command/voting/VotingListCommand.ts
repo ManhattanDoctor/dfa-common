@@ -1,7 +1,8 @@
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { IPaginationBookmark, PaginableBookmark } from '@ts-core/common';
 import { ITraceable } from '@ts-core/common';
-import { LedgerVotingFactory, LedgerVotingType } from '../../../ledger/voting';
+import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
+import { ledgerVotingTransform } from '../../../ledger/voting';
 
 export class VotingListCommand extends ChaincodeTransportCommandAsync<IVotingListDto, IVotingListDtoResponse> {
     // --------------------------------------------------------------------------
@@ -29,10 +30,10 @@ export class VotingListCommand extends ChaincodeTransportCommandAsync<IVotingLis
     // --------------------------------------------------------------------------
 
     protected checkResponse(response: IVotingListDtoResponse): IVotingListDtoResponse {
-        response.items = response.items.map(LedgerVotingFactory.transform)
+        response.items = response.items.map(ledgerVotingTransform);
         return response;
     }
 }
 
-export interface IVotingListDto<T extends LedgerVotingType = LedgerVotingType> extends PaginableBookmark<T>, ITraceable { }
-export interface IVotingListDtoResponse<T extends LedgerVotingType = LedgerVotingType> extends IPaginationBookmark<T> { }
+export interface IVotingListDto<T extends LedgerVoting = LedgerVoting> extends PaginableBookmark<T>, ITraceable { }
+export interface IVotingListDtoResponse<T extends LedgerVoting = LedgerVoting> extends IPaginationBookmark<T> { }

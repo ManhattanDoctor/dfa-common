@@ -3,7 +3,7 @@ import { TransformUtil } from '@ts-core/common';
 import { IsString, Matches } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import * as _ from 'lodash';
-import { LedgerCoin } from '@project/common/ledger/coin';
+import { LedgerCoin } from '../../../ledger/coin';
 
 export class CoinRateGetCommand extends ChaincodeTransportCommandAsync<ICoinRateGetDto, ICoinRateGetDtoResponse> {
     // --------------------------------------------------------------------------

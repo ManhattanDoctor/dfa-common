@@ -14,7 +14,7 @@ export enum LedgerVotingStatus {
     REJECTED = 'REJECTED',
 }
 
-export abstract class LedgerVoting<U, V> implements ILedgerObject {
+export abstract class LedgerVoting<U = string, V = object> implements ILedgerObject {
     // --------------------------------------------------------------------------
     //
     //  Static Properties

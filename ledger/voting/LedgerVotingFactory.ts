@@ -8,21 +8,9 @@ import { LedgerVotingStepRoleTemplate } from "./template/LedgerVotingStepRoleTem
 import { LedgerVotingStepTemplate } from "./template/LedgerVotingStepTemplate";
 import { LedgerBadRequestError } from "../error";
 import { LedgerCompanyVoting } from "../company/voting/LedgerCompanyVoting";
+import { LedgerVoting } from "./LedgerVoting";
 
 export class LedgerVotingFactory {
-    // --------------------------------------------------------------------------
-    //
-    //  Voting Methods
-    //
-    // --------------------------------------------------------------------------
-
-    public static transform(item: LedgerVotingType): LedgerVotingType {
-        let classType: ClassType<LedgerVotingType> = null;
-        if (item.hasOwnProperty('companyUid')) {
-            classType = LedgerCompanyVoting;
-        }
-        return TransformUtil.toClass(classType, item);
-    }
 
     // --------------------------------------------------------------------------
     //
@@ -70,5 +58,3 @@ export class LedgerVotingFactory {
         throw new LedgerBadRequestError(`No implementation for "${item.type}" voting step`);
     }
 }
-
-export type LedgerVotingType = LedgerCompanyVoting;
