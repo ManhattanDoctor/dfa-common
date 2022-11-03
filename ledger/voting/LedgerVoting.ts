@@ -88,7 +88,4 @@ export abstract class LedgerVoting<U, V> implements ILedgerObject {
     public get isInProgress(): boolean {
         return this.status === LedgerVotingStatus.IN_PROGRESS;
     }
-
 }
-
-

@@ -1,16 +1,16 @@
+import { LedgerCompanyVoting } from '@project/common/ledger/company/voting';
+import { LedgerVotingFactory } from '@project/common/ledger/voting';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { IPaginationBookmark, PaginableBookmark } from '@ts-core/common';
-import { ITraceable } from '@ts-core/common';
-import { LedgerVotingFactory, LedgerVotingType } from '../../../ledger/voting';
+import { IVotingListDto, IVotingListDtoResponse } from '../voting/VotingListCommand';
 
-export class VotingListCommand extends ChaincodeTransportCommandAsync<IVotingListDto, IVotingListDtoResponse> {
+export class CompanyVotingListCommand extends ChaincodeTransportCommandAsync<ICompanyVotingListDto, IVotingListDtoResponse> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerCommand.VOTING_LIST;
+    public static readonly NAME = LedgerCommand.COMPANY_VOTING_LIST;
 
     // --------------------------------------------------------------------------
     //
@@ -18,8 +18,8 @@ export class VotingListCommand extends ChaincodeTransportCommandAsync<IVotingLis
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: IVotingListDto) {
-        super(VotingListCommand.NAME, request, null, true);
+    constructor(request: ICompanyVotingListDto) {
+        super(CompanyVotingListCommand.NAME, request, null, true);
     }
 
     // --------------------------------------------------------------------------
@@ -29,10 +29,11 @@ export class VotingListCommand extends ChaincodeTransportCommandAsync<IVotingLis
     // --------------------------------------------------------------------------
 
     protected checkResponse(response: IVotingListDtoResponse): IVotingListDtoResponse {
-        response.items = response.items.map(LedgerVotingFactory.transform)
+        response.items = response.items.map(LedgerVotingFactory.transform);
         return response;
     }
 }
 
-export interface IVotingListDto<T extends LedgerVotingType = LedgerVotingType> extends PaginableBookmark<T>, ITraceable { }
-export interface IVotingListDtoResponse<T extends LedgerVotingType = LedgerVotingType> extends IPaginationBookmark<T> { }
+export interface ICompanyVotingListDto extends IVotingListDto<LedgerCompanyVoting> {
+    companyUid: string;
+}

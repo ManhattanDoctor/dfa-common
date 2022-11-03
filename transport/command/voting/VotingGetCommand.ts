@@ -4,9 +4,8 @@ import { IsOptional, Matches, IsArray } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import * as _ from 'lodash';
 import { LedgerVoting, LedgerVotingFactory, LedgerVotingType } from '../../../ledger/voting';
-import { LedgerCompanyVoting } from '../../../ledger/company/voting';
 
-export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGet, LedgerVotingType> {
+export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGetDto, LedgerVotingType> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
@@ -21,7 +20,7 @@ export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGet,
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: IVotingGet) {
+    constructor(request: IVotingGetDto) {
         super(VotingGetCommand.NAME, TransformUtil.toClass(VotingGetDto, request), null, true);
     }
 
@@ -36,12 +35,12 @@ export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGet,
     }
 }
 
-export interface IVotingGet extends ITraceable {
+export interface IVotingGetDto extends ITraceable {
     uid: string;
     details?: Array<keyof LedgerVotingType>;
 }
 
-class VotingGetDto implements IVotingGet {
+class VotingGetDto implements IVotingGetDto {
     @Matches(LedgerVoting.UID_REG_EXP)
     uid: string;
 

@@ -16,6 +16,7 @@ export enum LedgerCommand {
     COMPANY_LIST = 'DAO:CompanyList',
     COMPANY_EDIT = 'DAO:CompanyEdit',
     COMPANY_REMOVE = 'DAO:CompanyRemove',
+    COMPANY_VOTING_LIST = 'DAO:CompanyVotingList',
     COMPANY_PROJECT_LIST = 'DAO:CompanyProjectList',
     COMPANY_USER_ADD = 'DAO:CompanyUserAdd',
     COMPANY_USER_LIST = 'DAO:CompanyUserList',
