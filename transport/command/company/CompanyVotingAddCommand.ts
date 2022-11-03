@@ -30,7 +30,7 @@ export interface ICompanyVotingAddDto {
     proposal: ILedgerCompanyVotingProposal;
 }
 
-class CompanyVotingAddDto implements ICompanyVotingAddDto {
+export class CompanyVotingAddDto implements ICompanyVotingAddDto {
     @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
 

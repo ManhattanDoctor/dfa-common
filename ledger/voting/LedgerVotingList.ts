@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { IsEnum, IsDefined } from 'class-validator';
-import { LedgerError, LedgerErrorCode } from '../error';
+import { LedgerBadRequestError, LedgerError, LedgerErrorCode } from '../error';
 import { LedgerCompanyRole } from '../role';
 
 export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> extends Object {
@@ -13,7 +13,7 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
     protected checkAlready(uid: string): void {
         let exists = this.get(uid);
         if (!_.isNil(exists)) {
-            throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `"${uid}" already voted`)
+            throw new LedgerBadRequestError(`"${uid}" already voted`)
         }
     }
 

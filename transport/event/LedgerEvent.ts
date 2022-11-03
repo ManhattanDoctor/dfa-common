@@ -18,6 +18,9 @@ export enum LedgerEvent {
     COIN_ADDED = 'DAO:CoinAdded',
     COIN_REMOVED = 'DAO:CoinRemoved',
 
+    VOTING_ADDED = 'DAO:VotingAdded',
+    VOTING_CHANGED = 'DAO:VotingChanged',
+
     COIN_BURNED = 'DAO:CoinBurned',
     COIN_EMITTED = 'DAO:CoinEmitted',
     COIN_EXCHANGED = 'DAO:CoinExchanged',

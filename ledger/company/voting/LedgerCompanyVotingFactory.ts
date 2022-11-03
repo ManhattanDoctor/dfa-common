@@ -4,12 +4,14 @@ import { LedgerCompanyVotingProposalRoleChange } from "./LedgerCompanyVotingProp
 import { LedgerCompany } from "../LedgerCompany";
 import { LedgerCompanyRegulation, LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
 import { LedgerCompanyVoting } from "./LedgerCompanyVoting";
-import { ILedgerCompanyVotingProposal, LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
+import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 import * as _ from 'lodash';
-import { LedgerError, LedgerErrorCode } from "@project/common/ledger/error";
+import { LedgerBadRequestError, LedgerError, LedgerErrorCode } from "@project/common/ledger/error";
 import { LedgerVotingStatus } from "../../voting/LedgerVoting";
 import { LedgerVotingFactory } from "../../voting/LedgerVotingFactory";
 import { LedgerVotingStep } from "@project/common/ledger/voting/step";
+import { LedgerVotingStepTemplate } from "@project/common/ledger/voting/template";
+import { LedgerVotingStepType } from "@project/common/ledger/voting";
 
 export class LedgerCompanyVotingFactory {
     // --------------------------------------------------------------------------
@@ -18,30 +20,20 @@ export class LedgerCompanyVotingFactory {
     //
     // --------------------------------------------------------------------------
 
-    public static create(company: LedgerCompany, params: ILedgerCompanyVotingAddDto): LedgerCompanyVoting {
-        let item = LedgerCompanyVoting.create(params.date, params.transactionHash);
-        item.type = params.type;
-        item.status = LedgerVotingStatus.IN_PROGRESS;
-        item.proposal = TransformUtil.toClass(LedgerCompanyVotingFactory.getProposalClass(params.type), params.proposal);
-        item.companyUid = company.uid;
-
-        let regulation = _.find(company.regulations, { type: params.type });
-        if (_.isNil(regulation)) {
-            throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `Unable find "${params.type}" in company regulations`);
+    public static getStepTemplate(regulation: LedgerCompanyRegulation, type: LedgerVotingStepType | LedgerVotingStep): LedgerVotingStepTemplate {
+        if (type instanceof LedgerVotingStep) {
+            type = type.type;
         }
-
-        item.steps = regulation.steps.map(LedgerVotingFactory.createStep);
-        item.stepIndex = 0;
-        item.step.expiredDate = LedgerCompanyVotingFactory.getStepExpiredDate(regulation, item.step);
+        let item = _.find(regulation.steps, { type });
+        if (_.isNil(item)) {
+            throw new LedgerBadRequestError(`Unable find "${type}" in regulation steps`);
+        }
         return item;
     }
 
-    public static getStepExpiredDate(regulation: LedgerCompanyRegulation, step: LedgerVotingStep): Date {
-        let template = _.find(regulation.steps, { type: step.type });
-        if (_.isNil(template)) {
-            throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `Unable find "${step.type}" in regulation steps`);
-        }
-        return DateUtil.getDate(Date.now() + template.duration);
+    public static getStepExpiredDate(regulation: LedgerCompanyRegulation, type: LedgerVotingStep | LedgerVotingStepType): Date {
+        let item = LedgerCompanyVotingFactory.getStepTemplate(regulation, type);
+        return DateUtil.getDate(Date.now() + item.duration);
     }
 
     public static getProposalClass(type: LedgerCompanyRegulationType): ClassType<LedgerCompanyVotingProposal> {

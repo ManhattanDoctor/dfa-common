@@ -6,7 +6,8 @@ import { LedgerVotingStepRole } from "./step/LedgerVotingStepRole";
 import { LedgerVotingStepCoinTemplate } from "./template/LedgerVotingStepCoinTemplate";
 import { LedgerVotingStepRoleTemplate } from "./template/LedgerVotingStepRoleTemplate";
 import { LedgerVotingStepTemplate } from "./template/LedgerVotingStepTemplate";
-import { LedgerError, LedgerErrorCode } from "../error/LedgerError";
+import { LedgerBadRequestError } from "../error";
+
 
 export class LedgerVotingFactory {
     // --------------------------------------------------------------------------
@@ -52,6 +53,6 @@ export class LedgerVotingFactory {
         if (item instanceof LedgerVotingStepRoleTemplate) {
             return LedgerVotingStepRole.create(item);
         }
-        throw new LedgerError(LedgerErrorCode.BAD_REQUEST, `No implementation for "${item.type}" voting step`);
+        throw new LedgerBadRequestError(`No implementation for "${item.type}" voting step`);
     }
 }

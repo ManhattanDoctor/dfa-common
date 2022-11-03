@@ -8,6 +8,7 @@ import { LedgerVotingStep } from './step/LedgerVotingStep';
 import { LedgerVotingFactory } from './LedgerVotingFactory';
 
 export enum LedgerVotingStatus {
+    CREATED = 'CREATED',
     IN_PROGRESS = 'IN_PROGRESS',
     APPROVED = 'APPROVED',
     REJECTED = 'REJECTED',
@@ -81,7 +82,7 @@ export abstract class LedgerVoting<U, V> implements ILedgerObject {
     }
 
     public get isCompleted(): boolean {
-        return !this.isInProgress;
+        return this.status === LedgerVotingStatus.APPROVED || this.status === LedgerVotingStatus.REJECTED;
     }
 
     public get isInProgress(): boolean {

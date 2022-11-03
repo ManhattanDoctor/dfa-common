@@ -1,4 +1,4 @@
-import { ExtendedError } from '@ts-core/common';
+import { ExtendedError, getUid, UID } from '@ts-core/common';
 
 export class LedgerError<T = any> extends ExtendedError<T> {
     // --------------------------------------------------------------------------
@@ -9,6 +9,22 @@ export class LedgerError<T = any> extends ExtendedError<T> {
 
     constructor(code: LedgerErrorCode, message: string = '', details?: T, isFatal?: boolean) {
         super(message, code, details, isFatal);
+    }
+}
+
+export class LedgerObjectNotFoundError extends LedgerError {
+    constructor(item: UID) {
+        super(LedgerErrorCode.NOT_FOUND, `Unable to find ledger object by uid "${getUid(item)}"`)
+    }
+}
+export class LedgerForbiddenError extends LedgerError {
+    constructor(message: string) {
+        super(LedgerErrorCode.FORBIDDEN, message)
+    }
+}
+export class LedgerBadRequestError extends LedgerError {
+    constructor(message: string, details?: any) {
+        super(LedgerErrorCode.BAD_REQUEST, message, details)
     }
 }
 
