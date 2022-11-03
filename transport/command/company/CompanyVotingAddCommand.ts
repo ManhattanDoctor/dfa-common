@@ -22,6 +22,16 @@ export class CompanyVotingAddCommand extends ChaincodeTransportCommandAsync<ICom
     constructor(request: ICompanyVotingAddDto) {
         super(CompanyVotingAddCommand.NAME, TransformUtil.toClass(CompanyVotingAddDto, request));
     }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Protected Methods
+    //
+    // --------------------------------------------------------------------------
+
+    protected checkResponse(item: LedgerCompanyVoting): LedgerCompanyVoting {
+        return TransformUtil.toClass(LedgerCompanyVoting, item);
+    }
 }
 
 export interface ICompanyVotingAddDto {

@@ -4,7 +4,7 @@ import { IsOptional, ValidateNested, Matches } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { ILedgerVote, LedgerVote, LedgerVoting } from '../../../ledger/voting';
 
-export class LedgerVoteCommand extends ChaincodeTransportCommandAsync<ILedgerVoteDto, void> {
+export class VoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -19,17 +19,17 @@ export class LedgerVoteCommand extends ChaincodeTransportCommandAsync<ILedgerVot
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: ILedgerVoteDto) {
-        super(LedgerVoteCommand.NAME, TransformUtil.toClass(LedgerVoteDto, request));
+    constructor(request: IVoteDto) {
+        super(VoteCommand.NAME, TransformUtil.toClass(VoteDto, request));
     }
 }
 
-export interface ILedgerVoteDto extends ITraceable {
+export interface IVoteDto extends ITraceable {
     uid: string;
     value: ILedgerVote;
 }
 
-class LedgerVoteDto implements ILedgerVoteDto {
+class VoteDto implements IVoteDto {
     @Matches(LedgerVoting.UID_REG_EXP)
     uid: string;
 
