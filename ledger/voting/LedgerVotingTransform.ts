@@ -5,7 +5,7 @@ import { LedgerVoting } from "./LedgerVoting";
 
 export function ledgerVotingTransform(item: LedgerVoting): LedgerCompanyVoting {
     if (item.hasOwnProperty('companyUid')) {
-        TransformUtil.toClass(LedgerCompanyVoting, item);
+        return TransformUtil.toClass(LedgerCompanyVoting, item);
     }
     throw new LedgerBadRequestError('Unable to transform LedgerVoting')
 }
