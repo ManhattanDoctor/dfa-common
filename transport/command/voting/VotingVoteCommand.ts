@@ -12,7 +12,7 @@ export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, 
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerCommand.VOTE;
+    public static readonly NAME = LedgerCommand.VOTING_VOTE;
 
     // --------------------------------------------------------------------------
     //
