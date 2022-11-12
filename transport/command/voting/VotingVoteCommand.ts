@@ -5,7 +5,7 @@ import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand'
 import { ILedgerVote, LedgerVote } from '../../../ledger/voting/LedgerVotingList';
 import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
 
-export class VoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, void> {
+export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -21,7 +21,7 @@ export class VoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, void> 
     // --------------------------------------------------------------------------
 
     constructor(request: IVoteDto) {
-        super(VoteCommand.NAME, TransformUtil.toClass(VoteDto, request));
+        super(VotingVoteCommand.NAME, TransformUtil.toClass(VoteDto, request));
     }
 }
 
