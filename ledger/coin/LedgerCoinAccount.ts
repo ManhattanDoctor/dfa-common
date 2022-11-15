@@ -79,7 +79,7 @@ export class LedgerCoinAccount {
         if (MathUtil.lessThanOrEqualTo(amount, '0')) {
             throw new LedgerBadRequestError(`Holding amount must be granter than zero`);
         }
-        if (MathUtil.lessThan(amount, this.inUse)) {
+        if (MathUtil.greaterThan(amount, this.inUse)) {
             throw new LedgerBadRequestError(`Coin account "inUse" balance less than holding amount`);
         }
 
@@ -91,7 +91,7 @@ export class LedgerCoinAccount {
         if (MathUtil.lessThanOrEqualTo(amount, '0')) {
             throw new LedgerBadRequestError(`Unholding amount must be granter than zero`);
         }
-        if (MathUtil.lessThan(amount, this.held)) {
+        if (MathUtil.greaterThan(amount, this.held)) {
             throw new LedgerBadRequestError(`Coin account "held" balance less than unholding amount`);
         }
         this.inUse = MathUtil.add(this.inUse, amount);

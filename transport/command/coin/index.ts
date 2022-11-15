@@ -5,6 +5,8 @@ export * from './CoinGetCommand';
 export * from './CoinBurnCommand';
 export * from './CoinListCommand';
 export * from './CoinEmitCommand';
+export * from './CoinHoldCommand';
+export * from './CoinUnholdCommand';
 export * from './CoinRemoveCommand';
 export * from './CoinRateGetCommand';
 export * from './CoinExchangeCommand';

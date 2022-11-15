@@ -7,5 +7,5 @@ export function ledgerVotingTransform(item: LedgerVoting): LedgerCompanyVoting {
     if (item.hasOwnProperty('companyUid')) {
         return TransformUtil.toClass(LedgerCompanyVoting, item);
     }
-    throw new LedgerBadRequestError('Unable to transform LedgerVoting')
+    throw new LedgerBadRequestError('LedgerVoting is nil')
 }

@@ -1,9 +1,17 @@
 import * as _ from 'lodash';
 import { IsEnum, IsDefined } from 'class-validator';
-import { LedgerBadRequestError } from '../error/LedgerError';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
+import { LedgerBadRequestError } from '../error/LedgerError';
 
-export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> extends Object {
+export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue>  {
+    // --------------------------------------------------------------------------
+    //
+    //  Properties
+    //
+    // --------------------------------------------------------------------------
+
+    private _storage: Object;
+
     // --------------------------------------------------------------------------
     //
     //  Private Methods
@@ -23,15 +31,37 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
     //
     // --------------------------------------------------------------------------
 
-    public vote(uid: string, value: ILedgerVote<T>): ILedgerVote<T> {
+    public vote(uid: string, value: ILedgerVote<T>): void {
         this.checkAlready(uid);
-        this[uid] = value;
-        return value;
+        this.storage[uid] = value;
     }
 
     public get(uid: string): ILedgerVote<T> {
-        return this.hasOwnProperty(uid) ? this[uid] : null;
+        return this.storage.hasOwnProperty(uid) ? this.storage[uid] : null;
     }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Public Properties
+    //
+    // --------------------------------------------------------------------------
+
+    public get voters(): Array<IVote<T>> {
+        return Object.entries(this.storage).map(item => {
+            return { uid: item[0], value: item[1] };
+        })
+    }
+
+    public get storage(): Object {
+        if (_.isNil(this._storage)) {
+            this._storage = new Object();
+        }
+        return this._storage;
+    }
+}
+export interface IVote<T> {
+    uid: string;
+    value: T;
 }
 
 export enum LedgerVoteType {

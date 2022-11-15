@@ -14,7 +14,7 @@ export class LedgerError<T = any> extends ExtendedError<T> {
 
 export class LedgerObjectNotFoundError extends LedgerError {
     constructor(item: UID) {
-        super(LedgerErrorCode.NOT_FOUND, `Unable to find ledger object by uid "${getUid(item)}"`)
+        super(LedgerErrorCode.NOT_FOUND, `Ledger object "${getUid(item)}" is nil`)
     }
 }
 export class LedgerForbiddenError extends LedgerError {

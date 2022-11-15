@@ -1,6 +1,6 @@
 import { MathUtil, UnreachableStatementError } from '@ts-core/common';
 import * as _ from 'lodash';
-import { ILedgerVote, LedgerVote, LedgerVoteType, LedgerVotingList } from '../LedgerVotingList';
+import { ILedgerVote, LedgerVoteType, LedgerVotingList } from '../LedgerVotingList';
 
 export class LedgerVotingListCoin extends LedgerVotingList<string> {
     // --------------------------------------------------------------------------
@@ -18,7 +18,7 @@ export class LedgerVotingListCoin extends LedgerVotingList<string> {
     //
     // --------------------------------------------------------------------------
 
-    public vote(uid: string, value: ILedgerVote<string>): LedgerVote<string> {
+    public vote(uid: string, value: ILedgerVote<string>): void {
         super.vote(uid, value);
         switch (value.type) {
             case LedgerVoteType.FOR:
@@ -30,9 +30,7 @@ export class LedgerVotingListCoin extends LedgerVotingList<string> {
             default:
                 throw new UnreachableStatementError(value.type);
         }
-        return value;
     }
-
 
     // --------------------------------------------------------------------------
     //
@@ -40,12 +38,12 @@ export class LedgerVotingListCoin extends LedgerVotingList<string> {
     //
     // --------------------------------------------------------------------------
 
-    public get result(): string {
+    public get votesResult(): string {
         return MathUtil.subtract(this.votesFor, this.votesAgainst);
     }
 
-    public get total(): string {
-        return MathUtil.add(this.votesAgainst, this.votesFor);
+    public get votesTotal(): string {
+        return MathUtil.add(this._votesAgainst, this.votesFor);
     }
 
     public get votesFor(): string {
