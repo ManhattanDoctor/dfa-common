@@ -5,6 +5,18 @@ import { ILedgerVote, LedgerVoteType, LedgerVotingList } from '../LedgerVotingLi
 export class LedgerVotingListCoin extends LedgerVotingList<string> {
     // --------------------------------------------------------------------------
     //
+    //  Static Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public static create(): LedgerVotingListCoin {
+        let item = new LedgerVotingListCoin();
+        item.storage = new Object();
+        return item;
+    }
+
+    // --------------------------------------------------------------------------
+    //
     //  Properties
     //
     // --------------------------------------------------------------------------

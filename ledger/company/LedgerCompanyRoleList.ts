@@ -5,11 +5,23 @@ import { LedgerBadRequestError } from '../error/LedgerError';
 export class LedgerCompanyRoleList {
     // --------------------------------------------------------------------------
     //
+    //  Static Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public static create(): LedgerCompanyRoleList {
+        let item = new LedgerCompanyRoleList();
+        item.storage = new Object();
+        return item;
+    }
+
+    // --------------------------------------------------------------------------
+    //
     //  Properties
     //
     // --------------------------------------------------------------------------
 
-    private _storage: Object;
+    public storage: Object;
 
     // --------------------------------------------------------------------------
     //
@@ -42,18 +54,5 @@ export class LedgerCompanyRoleList {
         if (this.storage[name] < 0) {
             throw new LedgerBadRequestError(`Roles amount must be granter than zero`);
         }
-    }
-
-    // --------------------------------------------------------------------------
-    //
-    //  Public Properties
-    //
-    // --------------------------------------------------------------------------
-
-    public get storage(): Object {
-        if (_.isNil(this._storage)) {
-            this._storage = new Object();
-        }
-        return this._storage;
     }
 }

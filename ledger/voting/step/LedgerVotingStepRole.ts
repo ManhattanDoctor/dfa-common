@@ -15,7 +15,7 @@ export class LedgerVotingStepRole extends LedgerVotingStep {
 
     public static create(template: LedgerVotingStepRoleTemplate): LedgerVotingStepRole {
         let item = new LedgerVotingStepRole();
-        item.list = new LedgerVotingListRole();
+        item.list = LedgerVotingListRole.create();
         ObjectUtil.copyPartial(template, item, ['roles']);
         return item;
     }

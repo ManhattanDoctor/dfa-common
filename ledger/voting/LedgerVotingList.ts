@@ -10,7 +10,7 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
     //
     // --------------------------------------------------------------------------
 
-    private _storage: Object;
+    public storage: Object;
 
     // --------------------------------------------------------------------------
     //
@@ -50,13 +50,6 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
         return Object.entries(this.storage).map(item => {
             return { uid: item[0], value: item[1] };
         })
-    }
-
-    public get storage(): Object {
-        if (_.isNil(this._storage)) {
-            this._storage = new Object();
-        }
-        return this._storage;
     }
 }
 export interface IVote {

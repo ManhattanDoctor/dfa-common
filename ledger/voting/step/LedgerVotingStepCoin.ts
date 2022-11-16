@@ -14,7 +14,7 @@ export class LedgerVotingStepCoin extends LedgerVotingStep {
 
     public static create(template: LedgerVotingStepCoinTemplate): LedgerVotingStepCoin {
         let item = new LedgerVotingStepCoin();
-        item.list = new LedgerVotingListCoin();
+        item.list = LedgerVotingListCoin.create();
         ObjectUtil.copyPartial(template, item, ['coinId', 'percent', 'type']);
         return item;
     }

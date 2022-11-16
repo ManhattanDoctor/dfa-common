@@ -31,7 +31,6 @@ export interface ICompanyUserSetDto {
     companyUid: string;
 }
 
-// export needs because another command use it
 class CompanyUserSetDto implements ICompanyUserSetDto {
     @Matches(LedgerUser.UID_REG_EXP)
     userUid: string;

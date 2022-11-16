@@ -37,7 +37,7 @@ export class LedgerCompany implements ILedgerObject {
     public static create(createdDate: Date, transactionHash: string): LedgerCompany {
         let item = new LedgerCompany();
         item.uid = LedgerCompany.createUid(createdDate, transactionHash);
-        item.roles = new LedgerCompanyRoleList();
+        item.roles = LedgerCompanyRoleList.create();
         item.createdDate = createdDate;
         return item;
     }
