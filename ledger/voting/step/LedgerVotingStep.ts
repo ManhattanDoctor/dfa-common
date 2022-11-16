@@ -27,16 +27,8 @@ export abstract class LedgerVotingStep {
     //
     // --------------------------------------------------------------------------
 
-    public abstract check(): LedgerVotingStepStatus;
-
     public isExpired(): boolean {
         return this.expiredDate.getTime() < Date.now();
     }
 
-}
-
-export enum LedgerVotingStepStatus {
-    APPROVED = 'APPROVED',
-    REJECTED = 'REJECTED',
-    IN_PROGRESS = 'IN_PROGRESS',
 }

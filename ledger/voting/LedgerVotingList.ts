@@ -46,7 +46,7 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
     //
     // --------------------------------------------------------------------------
 
-    public get voters(): Array<IVote<T>> {
+    public get voters(): Array<IVote> {
         return Object.entries(this.storage).map(item => {
             return { uid: item[0], value: item[1] };
         })
@@ -59,9 +59,9 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
         return this._storage;
     }
 }
-export interface IVote<T> {
+export interface IVote {
     uid: string;
-    value: T;
+    value: ILedgerVote;
 }
 
 export enum LedgerVoteType {

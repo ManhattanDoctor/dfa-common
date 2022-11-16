@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import { RegExpUtil } from '../../util/RegExpUtil';
 import * as _ from 'lodash';
 import { ILedgerObject } from '../ILedgerObject';
+import { LedgerCompanyRoleList } from './LedgerCompanyRoleList';
 import { LedgerCompanyRegulation } from './LedgerCompanyRegulation';
 
 export enum LedgerCompanyStatus {
@@ -32,10 +33,11 @@ export class LedgerCompany implements ILedgerObject {
     public static createRoot(): LedgerCompany {
         return LedgerCompany.create(new Date(2000, 0), _.padStart('0', 64, '0'));
     }
-    
+
     public static create(createdDate: Date, transactionHash: string): LedgerCompany {
         let item = new LedgerCompany();
         item.uid = LedgerCompany.createUid(createdDate, transactionHash);
+        item.roles = new LedgerCompanyRoleList();
         item.createdDate = createdDate;
         return item;
     }
@@ -63,6 +65,11 @@ export class LedgerCompany implements ILedgerObject {
 
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     public description: string;
+
+    @IsOptional()
+    @Type(() => LedgerCompanyRoleList)
+    @ValidateNested()
+    public roles?: LedgerCompanyRoleList;
 
     @IsOptional()
     @IsArray()

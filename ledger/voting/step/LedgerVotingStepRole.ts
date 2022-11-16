@@ -4,7 +4,7 @@ import { Type } from "class-transformer";
 import { LedgerRolesArray, LedgerRoles } from "../../role/LedgerRoles";
 import { LedgerVotingStepRoleTemplate } from "../template/LedgerVotingStepRoleTemplate";
 import { LedgerVotingListRole } from "./LedgerVotingListRole";
-import { LedgerVotingStep, LedgerVotingStepStatus } from "./LedgerVotingStep";
+import { LedgerVotingStep } from "./LedgerVotingStep";
 
 export class LedgerVotingStepRole extends LedgerVotingStep {
     // --------------------------------------------------------------------------
@@ -16,7 +16,6 @@ export class LedgerVotingStepRole extends LedgerVotingStep {
     public static create(template: LedgerVotingStepRoleTemplate): LedgerVotingStepRole {
         let item = new LedgerVotingStepRole();
         item.list = new LedgerVotingListRole();
-        item.list.storage = new Object();
         ObjectUtil.copyPartial(template, item, ['roles']);
         return item;
     }
@@ -37,16 +36,6 @@ export class LedgerVotingStepRole extends LedgerVotingStep {
     @IsOptional()
     @IsInt()
     public total: number;
-
-    // --------------------------------------------------------------------------
-    //
-    //  Public Methods
-    //
-    // --------------------------------------------------------------------------
-
-    public check(): LedgerVotingStepStatus {
-        return LedgerVotingStepStatus.IN_PROGRESS;
-    }
 }
 
 export enum LedgerVotingStepRoleAction {

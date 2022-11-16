@@ -1,19 +1,18 @@
-import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { Matches, IsOptional, IsEnum } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerUser } from '../../../ledger/user';
-import { LedgerRole, LedgerCompanyRole } from '../../../ledger/role';
+import { LedgerCompanyRole } from '../../../ledger/role';
 
-export class CompanyUserAddCommand extends ChaincodeTransportCommandAsync<ICompanyUserAddDto, void> {
+export class CompanyUserSetCommand extends ChaincodeTransportCommandAsync<ICompanyUserSetDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerCommand.COMPANY_USER_ADD;
+    public static readonly NAME = LedgerCommand.COMPANY_USER_SET;
 
     // --------------------------------------------------------------------------
     //
@@ -21,19 +20,19 @@ export class CompanyUserAddCommand extends ChaincodeTransportCommandAsync<ICompa
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: ICompanyUserAddDto) {
-        super(CompanyUserAddCommand.NAME, TransformUtil.toClass(CompanyUserAddDto, request));
+    constructor(request: ICompanyUserSetDto) {
+        super(CompanyUserSetCommand.NAME, TransformUtil.toClass(CompanyUserSetDto, request));
     }
 }
 
-export interface ICompanyUserAddDto {
+export interface ICompanyUserSetDto {
     roles: Array<LedgerCompanyRole>;
     userUid: string;
     companyUid: string;
 }
 
 // export needs because another command use it
-export class CompanyUserAddDto implements ICompanyUserAddDto {
+class CompanyUserSetDto implements ICompanyUserSetDto {
     @Matches(LedgerUser.UID_REG_EXP)
     userUid: string;
 

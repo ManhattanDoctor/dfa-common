@@ -1,14 +1,14 @@
-import { LedgerVotingStatus } from '../../../ledger/voting';
+
 import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
 
-export class VotingChangedEvent extends LedgerEventDefault {
+export class VotingEditedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerEvent.VOTING_CHANGED;
+    public static readonly NAME = LedgerEvent.VOTING_EDITED;
 
     // --------------------------------------------------------------------------
     //
@@ -16,12 +16,12 @@ export class VotingChangedEvent extends LedgerEventDefault {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: IVotingChangedEventDto) {
-        super(VotingChangedEvent.NAME, data);
+    constructor(data: IVotingEditedEventDto) {
+        super(VotingEditedEvent.NAME, data);
     }
 }
 
-export interface IVotingChangedEventDto extends ILedgerEventDto {
+export interface IVotingEditedEventDto extends ILedgerEventDto {
     oldStep: number;
     newStep: number;
 }

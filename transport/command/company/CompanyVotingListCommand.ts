@@ -1,7 +1,5 @@
-
-import { TransformUtil } from '@ts-core/common';
 import { LedgerCompanyVoting } from '../../../ledger/company/voting/LedgerCompanyVoting';
-import { ledgerVotingTransform } from '../../../ledger/voting';
+import { ledgerVotingTransform } from '../../../ledger/voting/ledgerVotingTransform';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { IVotingListDto, IVotingListDtoResponse } from '../voting/VotingListCommand';
 

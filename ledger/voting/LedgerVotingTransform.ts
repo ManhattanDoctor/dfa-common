@@ -1,6 +1,6 @@
 import { TransformUtil } from "@ts-core/common";
-import { LedgerCompanyVoting } from "../company/voting";
-import { LedgerBadRequestError } from "../error";
+import { LedgerCompanyVoting } from "../company/voting/LedgerCompanyVoting";
+import { LedgerBadRequestError } from "../error/LedgerError";
 import { LedgerVoting } from "./LedgerVoting";
 
 export function ledgerVotingTransform(item: LedgerVoting): LedgerCompanyVoting {

@@ -8,6 +8,7 @@ import { LedgerBadRequestError } from "../../error/LedgerError";
 import { LedgerVotingStep } from "../../voting/step/LedgerVotingStep";
 import { LedgerVotingStepType } from "../../voting/LedgerVotingStepType";
 import { LedgerVotingStepTemplate } from "../../voting/template/LedgerVotingStepTemplate";
+import { LedgerCompanyVotingProposalCoinBurn } from "./LedgerCompanyVotingProposalCoinBurn";
 
 export class LedgerCompanyVotingFactory {
     // --------------------------------------------------------------------------
@@ -39,6 +40,8 @@ export class LedgerCompanyVotingFactory {
 
             case LedgerCompanyRegulationType.COIN_EMIT:
                 return LedgerCompanyVotingProposalCoinEmit;
+            case LedgerCompanyRegulationType.COIN_BURN:
+                return LedgerCompanyVotingProposalCoinBurn;
 
             case LedgerCompanyRegulationType.EXPERT_ADD:
             case LedgerCompanyRegulationType.PROTECTOR_ADD:

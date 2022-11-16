@@ -4,9 +4,8 @@ import { IsEnum, IsOptional, IsNumber, Min, IsDate, IsDefined, ValidateNested, M
 import { Type, Transform } from 'class-transformer';
 import { RegExpUtil } from '../../util/RegExpUtil';
 import { ILedgerObject } from '../ILedgerObject';
-import { LedgerVotingStep, LedgerVotingStepStatus } from './step/LedgerVotingStep';
+import { LedgerVotingStep } from './step/LedgerVotingStep';
 import { LedgerVotingFactory } from './LedgerVotingFactory';
-import { UnreachableStatementError } from '@ts-core/common';
 
 export enum LedgerVotingStatus {
     CREATED = 'CREATED',

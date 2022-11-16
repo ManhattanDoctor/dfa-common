@@ -8,7 +8,7 @@ import { LedgerVotingFactory } from '../voting/LedgerVotingFactory';
 export enum LedgerCompanyRegulationType {
     // COIN_ADD = 'COIN_ADD',
     COIN_EMIT = 'COMPANY_COIN_EMIT',
-    // COIN_BURN = 'COIN_BURN',
+    COIN_BURN = 'COMPANY_COIN_BURN',
 
     PROJECT_ADD = 'COMPANY_PROJECT_ADD',
     // PROJECT_EDIT = 'PROJECT_EDIT',
