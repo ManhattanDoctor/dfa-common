@@ -1,5 +1,5 @@
 import { TransformUtil } from '@ts-core/common';
-import { Matches, IsString } from 'class-validator';
+import { IsNumberString, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCoin } from '../../../ledger/coin';
 import { CoinRateGetDto, ICoinRateGetDto } from './CoinRateGetCommand';
@@ -39,6 +39,6 @@ class CoinExchangeDto extends CoinRateGetDto implements ICoinExchangeDto {
     @IsString()
     rate: string;
 
-    @IsString()
+    @IsNumberString()
     amount: string;
 }

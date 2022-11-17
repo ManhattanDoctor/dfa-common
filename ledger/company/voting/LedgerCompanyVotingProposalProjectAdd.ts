@@ -1,4 +1,4 @@
-import { IsString, Matches, IsDefined, IsArray, ValidateNested, ArrayMaxSize, ArrayMinSize } from 'class-validator';
+import { IsString, Matches, IsNumberString, IsArray, ValidateNested, ArrayMaxSize, ArrayMinSize } from 'class-validator';
 import { Type } from 'class-transformer';
 import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 import { RegExpUtil } from '@project/common/util';
@@ -26,17 +26,10 @@ export class LedgerCompanyVotingProposalProjectAdd extends LedgerCompanyVotingPr
     @ValidateNested({ each: true })
     public purposes: Array<LedgerProjectPurpose>;
 
-    @Type(() => ProjectBudget)
-    @IsDefined()
-    @ValidateNested()
-    public budget: ProjectBudget;
-}
-
-export class ProjectBudget {
     @IsString()
-    coinId: string;
+    public coinId: string;
 
-    @IsString()
-    amount: string;
+    @IsNumberString()
+    public amount: string;
+
 }
-
