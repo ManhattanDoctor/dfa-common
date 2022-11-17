@@ -33,15 +33,15 @@ export enum CoinEmitType {
 }
 
 export interface ICoinEmitDto extends ITraceable {
-    to: string;
     amount: string;
     coinUid: string;
     details: ILedgerPaymentDetails;
+    objectUid: string;
 }
 
 class CoinEmitDto implements ICoinEmitDto {
     @IsString()
-    to: string;
+    objectUid: string;
 
     @IsNumberString()
     amount: string;

@@ -37,8 +37,3 @@ export class LedgerVotingStepRole extends LedgerVotingStep {
     @IsInt()
     public total: number;
 }
-
-export enum LedgerVotingStepRoleAction {
-    ADD = 'ADD',
-    REMOVE = 'REMOVE'
-}

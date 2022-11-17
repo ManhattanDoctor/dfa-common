@@ -39,19 +39,17 @@ export class LedgerCompanyRoleList {
     }
 
     public get(role: LedgerCompanyRole): number {
-        let name = role.toString();
-        let value = this.storage[name];
+        let value = this.storage[role];
         return !_.isNil(value) ? value : 0;
     }
 
     public remove(role: LedgerCompanyRole): void {
-        let name = role.toString();
-        let value = this.storage[name];
+        let value = this.storage[role];
         if (_.isNil(value)) {
             throw new LedgerBadRequestError(`Roles amount is nil`);
         }
-        this.storage[name]--;
-        if (this.storage[name] < 0) {
+        this.storage[role]--;
+        if (this.storage[role] < 0) {
             throw new LedgerBadRequestError(`Roles amount must be granter than zero`);
         }
     }

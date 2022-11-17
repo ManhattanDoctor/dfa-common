@@ -27,15 +27,15 @@ export class CoinBurnCommand extends ChaincodeTransportCommandAsync<ICoinBurnDto
 }
 
 export interface ICoinBurnDto extends ITraceable {
-    from: string;
     amount: string;
     coinUid: string;
     details: ILedgerPaymentDetails;
+    objectUid: string;
 }
 
 export class CoinBurnDto implements ICoinBurnDto {
     @IsString()
-    from: string;
+    objectUid: string;
 
     @IsNumberString()
     amount: string;

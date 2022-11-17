@@ -1,6 +1,6 @@
 import { ClassType, DateUtil, UnreachableStatementError } from "@ts-core/common";
-import { LedgerCompanyVotingProposalCoinEmit } from "./LedgerCompanyVotingProposalCoinEmit";
-import { LedgerCompanyVotingProposalRoleChange } from "./LedgerCompanyVotingProposalRoleChange";
+import { LedgerCompanyVotingProposalCoinEdit } from "./LedgerCompanyVotingProposalCoinEdit";
+import { LedgerCompanyVotingProposalRoleEdit } from "./LedgerCompanyVotingProposalRoleEdit";
 import { LedgerCompanyRegulation, LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
 import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 import * as _ from 'lodash';
@@ -8,7 +8,7 @@ import { LedgerBadRequestError } from "../../error/LedgerError";
 import { LedgerVotingStep } from "../../voting/step/LedgerVotingStep";
 import { LedgerVotingStepType } from "../../voting/LedgerVotingStepType";
 import { LedgerVotingStepTemplate } from "../../voting/template/LedgerVotingStepTemplate";
-import { LedgerCompanyVotingProposalCoinBurn } from "./LedgerCompanyVotingProposalCoinBurn";
+import { LedgerCompanyVotingProposalProjectAdd } from "./LedgerCompanyVotingProposalProjectAdd";
 
 export class LedgerCompanyVotingFactory {
     // --------------------------------------------------------------------------
@@ -36,18 +36,17 @@ export class LedgerCompanyVotingFactory {
     public static getProposalClass(type: LedgerCompanyRegulationType): ClassType<LedgerCompanyVotingProposal> {
         switch (type) {
             case LedgerCompanyRegulationType.PROJECT_ADD:
-                return null;
+                return LedgerCompanyVotingProposalProjectAdd;
 
             case LedgerCompanyRegulationType.COIN_EMIT:
-                return LedgerCompanyVotingProposalCoinEmit;
             case LedgerCompanyRegulationType.COIN_BURN:
-                return LedgerCompanyVotingProposalCoinBurn;
+                return LedgerCompanyVotingProposalCoinEdit;
 
             case LedgerCompanyRegulationType.EXPERT_ADD:
             case LedgerCompanyRegulationType.PROTECTOR_ADD:
             case LedgerCompanyRegulationType.EXPERT_REMOVE:
             case LedgerCompanyRegulationType.PROTECTOR_REMOVE:
-                return LedgerCompanyVotingProposalRoleChange;
+                return LedgerCompanyVotingProposalRoleEdit;
 
             default:
                 throw new UnreachableStatementError(type);
