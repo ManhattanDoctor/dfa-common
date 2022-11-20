@@ -5,6 +5,7 @@ import { ITraceable } from '@ts-core/common';
 import { Type } from 'class-transformer';
 import { IsString, Matches, IsNumberString, IsDefined, ValidateNested } from 'class-validator';
 import { LedgerCoin } from '../../../ledger/coin';
+import { LedgerVoting } from '@project/common/ledger/voting';
 
 export class CoinBurnCommand extends ChaincodeTransportCommandAsync<ICoinBurnDto, void> {
     // --------------------------------------------------------------------------
@@ -29,8 +30,8 @@ export class CoinBurnCommand extends ChaincodeTransportCommandAsync<ICoinBurnDto
 export interface ICoinBurnDto extends ITraceable {
     amount: string;
     coinUid: string;
-    details: ILedgerPaymentDetails;
     objectUid: string;
+    votingUid: string;
 }
 
 export class CoinBurnDto implements ICoinBurnDto {
@@ -43,8 +44,6 @@ export class CoinBurnDto implements ICoinBurnDto {
     @Matches(LedgerCoin.UID_REG_EXP)
     coinUid: string;
 
-    @Type(() => LedgerPaymentDetails)
-    @IsDefined()
-    @ValidateNested()
-    details: LedgerPaymentDetails;
+    @Matches(LedgerVoting.UID_REG_EXP)
+    votingUid: string;
 }

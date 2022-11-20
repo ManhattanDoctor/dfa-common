@@ -5,6 +5,7 @@ import { Matches, IsString, IsNumberString, IsOptional, IsDefined, ValidateNeste
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
 import { LedgerCoin } from '../../../ledger/coin';
+import { LedgerVoting } from '@project/common/ledger/voting';
 
 export class CoinEmitCommand extends ChaincodeTransportCommandAsync<ICoinEmitDto, void> {
     // --------------------------------------------------------------------------
@@ -35,8 +36,8 @@ export enum CoinEmitType {
 export interface ICoinEmitDto extends ITraceable {
     amount: string;
     coinUid: string;
-    details: ILedgerPaymentDetails;
     objectUid: string;
+    votingUid: string;
 }
 
 class CoinEmitDto implements ICoinEmitDto {
@@ -49,8 +50,6 @@ class CoinEmitDto implements ICoinEmitDto {
     @Matches(LedgerCoin.UID_REG_EXP)
     coinUid: string;
 
-    @Type(() => LedgerPaymentDetails)
-    @IsDefined()
-    @ValidateNested()
-    details: LedgerPaymentDetails;
+    @Matches(LedgerVoting.UID_REG_EXP)
+    votingUid: string;
 }

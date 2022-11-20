@@ -1,7 +1,7 @@
+import { LedgerEvent } from '../LedgerEvent';
+import { LedgerVotingEvent, ILedgerVotingEventDto } from '../LedgerVotingEvent';
 
-import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
-
-export class VotingEditedEvent extends LedgerEventDefault {
+export class VotingEditedEvent extends LedgerVotingEvent {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -21,7 +21,7 @@ export class VotingEditedEvent extends LedgerEventDefault {
     }
 }
 
-export interface IVotingEditedEventDto extends ILedgerEventDto {
+export interface IVotingEditedEventDto extends ILedgerVotingEventDto {
     oldStep: number;
     newStep: number;
 }

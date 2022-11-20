@@ -40,12 +40,12 @@ export enum LedgerEvent {
 }
 
 export interface ILedgerEventDto {
-    transactionHash: string;
+    requestId: string;
 }
 
 export class LedgerEventDto implements ILedgerEventDto {
     @IsString()
-    transactionHash: string;
+    requestId: string;
 }
 
 export class LedgerEventDefault extends TransportEvent<ILedgerEventDto> {

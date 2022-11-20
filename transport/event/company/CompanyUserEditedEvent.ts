@@ -1,6 +1,7 @@
-import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
+import { LedgerEvent } from '../LedgerEvent';
+import { LedgerVotingEvent, ILedgerVotingEventDto } from '../LedgerVotingEvent';
 
-export class CompanyUserEditedEvent extends LedgerEventDefault {
+export class CompanyUserEditedEvent extends LedgerVotingEvent {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -15,7 +16,7 @@ export class CompanyUserEditedEvent extends LedgerEventDefault {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ILedgerEventDto) {
+    constructor(data: ILedgerVotingEventDto) {
         super(CompanyUserEditedEvent.NAME, data);
     }
 }
