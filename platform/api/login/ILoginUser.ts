@@ -1,8 +1,6 @@
 import { UserPreferences } from "../../user";
-
-import * as _ from "lodash";
-import { OAuthUser } from "@ts-core/oauth";
 import { ObjectUtil } from "@ts-core/common";
+import * as _ from "lodash";
 
 export class LoginUser {
     //--------------------------------------------------------------------------
@@ -20,7 +18,7 @@ export class LoginUser {
     //
     //--------------------------------------------------------------------------
 
-    constructor(item?: OAuthUser) {
+    constructor(item?: any) {
         if (!_.isNil(item)) {
             this.parse(item);
         }
@@ -32,7 +30,7 @@ export class LoginUser {
     //
     //--------------------------------------------------------------------------
 
-    protected parse(item: OAuthUser): void {
+    protected parse(item: any): void {
         this.id = item.id.toString();
         this.preferences = {};
         ObjectUtil.copyProperties(item, this.preferences, ['name', 'email', 'phone', 'locale', 'isMale', 'picture', 'city', 'country', 'location', 'birthday', 'description'])
