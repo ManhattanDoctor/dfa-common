@@ -1,10 +1,41 @@
 import { UserPreferences } from "../../user";
 
-export class LoginUser {
-    id: string;
-    preferences: Partial<UserPreferences>;
-}
+import * as _ from "lodash";
+import { OAuthUser } from "@ts-core/oauth";
+import { ObjectUtil } from "@ts-core/common";
 
-export class VkLoginUser extends LoginUser {
-    params: string;
+export class LoginUser {
+    //--------------------------------------------------------------------------
+    //
+    // 	Properties
+    //
+    //--------------------------------------------------------------------------
+
+    public id: number | string;
+    public preferences: Partial<UserPreferences>;
+
+    //--------------------------------------------------------------------------
+    //
+    // 	Constructor
+    //
+    //--------------------------------------------------------------------------
+
+    constructor(item?: OAuthUser) {
+        if (!_.isNil(item)) {
+            this.parse(item);
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    //
+    // 	Static Methods
+    //
+    //--------------------------------------------------------------------------
+
+    protected parse(item: OAuthUser): void {
+        this.id = item.id.toString();
+        this.preferences = {};
+        ObjectUtil.copyProperties(item, this.preferences, ['name', 'email', 'phone', 'locale', 'isMale', 'picture', 'city', 'country', 'location', 'birthday', 'description'])
+    }
+
 }

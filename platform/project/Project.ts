@@ -4,21 +4,12 @@ import { ProjectPreferences } from './ProjectPreferences';
 import { User } from '../user';
 import { Company } from '../company';
 import { Accounts } from '../account';
-import { ProjectPurpose } from './ProjectPurpose';
 
 export class Project {
     id: number;
     status: ProjectStatus;
-    balance: IProjectBalance;
-
-    @Type(() => ProjectPurpose)
-    purposes: Array<ProjectPurpose>;
-
-    ledgerUid?: string;
-    paymentsAmount?: number;
-
-    userId: number;
     companyId: number;
+    ledgerUid?: string;
 
     @Type(() => Date)
     createdDate: Date;

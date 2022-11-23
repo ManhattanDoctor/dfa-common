@@ -11,6 +11,7 @@ export class Account {
 
     @Type(() => Date)
     createdDate: Date;
+
     @Type(() => Date)
     updatedDate: Date;
 }
@@ -20,6 +21,5 @@ export type Accounts = {
 }
 
 export enum AccountType {
-    REQUIRED = 'REQUIRED',
     COLLECTED = 'COLLECTED',
 }

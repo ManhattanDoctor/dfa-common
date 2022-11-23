@@ -1,8 +1,4 @@
 export enum CompanyStatus {
-    DRAFT = 'DRAFT',
-    VERIFICATION_PROCESS = "VERIFICATION_PROCESS",
-    VERIFIED = "VERIFIED",
-    REJECTED = "REJECTED",
     ACTIVE = 'ACTIVE',
     NON_ACTIVE = 'NON_ACTIVE'
 }

@@ -1,13 +1,11 @@
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerProject } from '../../../ledger/project';
-import { Length, Matches, ValidateNested, IsArray, ArrayMinSize, ArrayMaxSize } from 'class-validator';
+import { Matches, } from 'class-validator';
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { RegExpUtil, ValidateUtil } from '../../../util';
+import { RegExpUtil } from '../../../util';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerUser } from '../../../ledger/user';
-import { Type } from 'class-transformer';
-import { ILedgerProjectPurpose, LedgerProjectPurpose } from '../../../ledger/project';
 
 export class ProjectAddCommand extends ChaincodeTransportCommandAsync<IProjectAddDto, LedgerProject> {
     // --------------------------------------------------------------------------
@@ -43,7 +41,6 @@ export interface IProjectAddDto extends ITraceable {
     ownerUid: string;
     companyUid: string;
     description: string;
-    purposes: Array<ILedgerProjectPurpose>;
 }
 
 export class ProjectAddDto implements IProjectAddDto {
@@ -55,11 +52,4 @@ export class ProjectAddDto implements IProjectAddDto {
 
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;
-
-    @IsArray()
-    @ArrayMinSize(ValidateUtil.PROJECT_PURPOSES_MIN_LENGTH)
-    @ArrayMaxSize(ValidateUtil.PROJECT_PURPOSES_MAX_LENGTH)
-    @Type(() => LedgerProjectPurpose)
-    @ValidateNested({ each: true })
-    purposes: Array<LedgerProjectPurpose>;
 }
