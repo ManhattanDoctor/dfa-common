@@ -3,7 +3,7 @@ import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand'
 import { ITraceable } from '@ts-core/common';
 import { IsString, Matches, IsNumberString } from 'class-validator';
 import { LedgerCoin } from '../../../ledger/coin';
-import { LedgerVoting } from '@project/common/ledger/voting';
+import { LedgerVoting } from '../../../ledger/voting';
 
 export class CoinHoldCommand extends ChaincodeTransportCommandAsync<ICoinHoldDto, void> {
     // --------------------------------------------------------------------------

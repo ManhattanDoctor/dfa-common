@@ -1,9 +1,9 @@
-import { IsEnum, IsOptional, IsDate, Length, Matches } from 'class-validator';
+import { IsEnum, IsOptional, IsDate, Matches } from 'class-validator';
 import { Type } from 'class-transformer';
-import { LedgerCryptoKey } from '../cryptoKey';
-import { RegExpUtil } from '../../util';
+import { LedgerCryptoKey } from '../cryptoKey/LedgerCryptoKey';
+import { RegExpUtil } from '../../util/RegExpUtil';
 import * as _ from 'lodash';
-import { LedgerRole } from '../role';
+import { LedgerRole } from '../role/LedgerRole';
 import { ILedgerObject } from '../ILedgerObject';
 
 export enum LedgerUserStatus {

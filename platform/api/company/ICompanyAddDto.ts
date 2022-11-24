@@ -1,7 +1,7 @@
 
 import { ITraceable } from '@ts-core/common';
-import { CompanyPreferences } from '../../company';
-import { UserCompany } from '../../user';
+import { CompanyPreferences } from '../../company/CompanyPreferences';
+import { UserCompany } from '../../user/UserCompany';
 
 export interface ICompanyAddDto extends ITraceable {
     preferences: Partial<CompanyPreferences>;

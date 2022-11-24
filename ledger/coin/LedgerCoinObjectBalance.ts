@@ -1,5 +1,4 @@
-import { Min, Matches, IsInt, IsNumber, IsNumberString } from 'class-validator';
-import { Exclude } from 'class-transformer';
+import { Min, Matches, IsInt, IsNumberString } from 'class-validator';
 import * as _ from 'lodash';
 import { LedgerCoin } from './LedgerCoin';
 import { LedgerCoinId } from './LedgerCoinId';

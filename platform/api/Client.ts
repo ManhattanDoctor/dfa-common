@@ -10,6 +10,7 @@ import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
+import { ICompanyGetDtoResponse } from './company';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -57,6 +58,17 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async userEdit(data: IUserEditDto): Promise<IUserEditDtoResponse> {
         let item = await this.call<IUserEditDtoResponse, IUserEditDto>(`${USER_URL}/${data.id}`, { method: 'put', data });
         return TransformUtil.toClass(User, item);
+    }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Company Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public async companyGet(id: number): Promise<ICompanyGetDtoResponse> {
+        let item = await this.call<UserCompany>(`${COMPANY_URL}/${id}`);
+        return TransformUtil.toClass(UserCompany, item);
     }
 
     // --------------------------------------------------------------------------

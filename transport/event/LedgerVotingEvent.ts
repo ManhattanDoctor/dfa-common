@@ -1,7 +1,7 @@
 import { Matches } from 'class-validator';
 import { TransformUtil } from '@ts-core/common';
 import { TransportEvent } from '@ts-core/common';
-import { LedgerVoting } from '../../ledger/voting';
+import { LedgerVoting } from '../../ledger/voting/LedgerVoting';
 import { ILedgerEventDto, LedgerEventDto } from './LedgerEvent';
 
 export interface ILedgerVotingEventDto extends ILedgerEventDto {

@@ -5,7 +5,7 @@ import { ITraceable } from '@ts-core/common';
 import { Type } from 'class-transformer';
 import { IsString, Matches, IsNumberString, IsDefined, ValidateNested } from 'class-validator';
 import { LedgerCoin } from '../../../ledger/coin';
-import { LedgerVoting } from '@project/common/ledger/voting';
+import { LedgerVoting } from '../../../ledger/voting';
 
 export class CoinBurnCommand extends ChaincodeTransportCommandAsync<ICoinBurnDto, void> {
     // --------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 import { IsEnum, IsDate, Matches } from 'class-validator';
 import { Type } from 'class-transformer';
-import { RegExpUtil } from '../../util';
+import { RegExpUtil } from '../../util/RegExpUtil';
 import * as _ from 'lodash';
-import { LedgerCompany } from '../company';
+import { LedgerCompany } from '../company/LedgerCompany';
 import { ILedgerObject } from '../ILedgerObject';
 
 export enum LedgerProjectStatus {

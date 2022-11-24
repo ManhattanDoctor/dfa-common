@@ -5,7 +5,7 @@ import { Matches, IsString, IsNumberString, IsOptional, IsDefined, ValidateNeste
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
 import { LedgerCoin } from '../../../ledger/coin';
-import { LedgerVoting } from '@project/common/ledger/voting';
+import { LedgerVoting } from '../../../ledger/voting';
 
 export class CoinEmitCommand extends ChaincodeTransportCommandAsync<ICoinEmitDto, void> {
     // --------------------------------------------------------------------------

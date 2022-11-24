@@ -1,9 +1,7 @@
-import { IsString, Matches, IsNumberString, IsArray, ValidateNested, ArrayMaxSize, ArrayMinSize } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsString, Matches, IsNumberString } from 'class-validator';
 import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
-import { RegExpUtil } from '@project/common/util';
 import { LedgerUser } from '../../user/LedgerUser';
-import { ValidateUtil } from '../../../util';
+import { RegExpUtil } from '../../../util/RegExpUtil';
 
 export class LedgerCompanyVotingProposalProjectAdd extends LedgerCompanyVotingProposal {
     // --------------------------------------------------------------------------

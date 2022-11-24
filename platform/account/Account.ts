@@ -1,4 +1,4 @@
-import { LedgerCoinId } from '../../ledger/coin';
+import { LedgerCoinId } from '../../ledger/coin/LedgerCoinId';
 import { Type } from 'class-transformer';
 
 export class Account {

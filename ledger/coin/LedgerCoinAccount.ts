@@ -2,7 +2,7 @@
 import { getUid, MathUtil, UID } from '@ts-core/common';
 import { IsString, IsOptional, IsNumberString } from 'class-validator';
 import * as _ from 'lodash';
-import { LedgerBadRequestError } from '../error';
+import { LedgerBadRequestError } from '../error/LedgerError';
 
 export class LedgerCoinAccount {
     // --------------------------------------------------------------------------
