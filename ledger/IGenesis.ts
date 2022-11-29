@@ -3,12 +3,17 @@ import { LedgerCompanyRegulationType } from "./company/LedgerCompanyRegulation";
 import { LedgerVotingStepType } from "./voting/LedgerVotingStepType";
 import { LedgerCompanyRole } from "./role/LedgerCompanyRole";
 import { LedgerCoinIdPreset } from "./coin/LedgerCoinId";
+import { LedgerVoting } from './voting/LedgerVoting';
+import * as _ from 'lodash';
 
 // --------------------------------------------------------------------------
 //
 //  Constants
 //
 // --------------------------------------------------------------------------
+
+export const ROOT_VOTING_UID = LedgerVoting.createUid(new Date(2000, 0), _.padStart('0', 64, '0'));
+export const ROOT_REQUEST_ID = _.padStart('0', 64, '0');
 
 export const ROOT_USER_DESCRIPTION = 'ROOT_USER';
 export const ROOT_USER_CRYPTO_ALGORITHM = TransportCryptoManagerEd25519.ALGORITHM;

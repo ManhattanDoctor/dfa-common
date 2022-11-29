@@ -4,6 +4,7 @@ import { Matches, IsNumber, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerCoin } from '../../../ledger/coin';
+import { LedgerVoting } from '@project/common/ledger/voting';
 
 export class CoinAddCommand extends ChaincodeTransportCommandAsync<ICoinAddDto, LedgerCoin> {
     // --------------------------------------------------------------------------
@@ -38,6 +39,7 @@ export class CoinAddCommand extends ChaincodeTransportCommandAsync<ICoinAddDto, 
 export interface ICoinAddDto extends ITraceable {
     coinId: string;
     decimals: number;
+    votingUid: string;
     companyUid: string;
     emit?: {
         to: string;
@@ -54,4 +56,7 @@ export class CoinAddDto implements ICoinAddDto {
 
     @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
+
+    @Matches(LedgerVoting.UID_REG_EXP)
+    votingUid: string;
 }

@@ -1,5 +1,5 @@
 import { LedgerCompanyVoting } from '../../../ledger/company/voting/LedgerCompanyVoting';
-import { ledgerVotingTransform } from '../../../ledger/voting/ledgerVotingTransform';
+import { ledgerVotingTransform } from '../../../ledger/voting/LedgerVotingTransform';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { IVotingListDto, IVotingListDtoResponse } from '../voting/VotingListCommand';
 

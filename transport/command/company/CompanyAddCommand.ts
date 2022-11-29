@@ -5,6 +5,7 @@ import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand'
 import { ILedgerCompanyRegulation, LedgerCompany, LedgerCompanyRegulation } from '../../../ledger/company';
 import { RegExpUtil } from '../../../util';
 import { LedgerUser } from '../../../ledger/user';
+import { LedgerVoting } from '../../../ledger/voting';
 
 export class CompanyAddCommand extends ChaincodeTransportCommandAsync<ICompanyAddDto, LedgerCompany> {
     // --------------------------------------------------------------------------
@@ -34,11 +35,11 @@ export class CompanyAddCommand extends ChaincodeTransportCommandAsync<ICompanyAd
     protected checkResponse(item: LedgerCompany): LedgerCompany {
         return TransformUtil.toClass(LedgerCompany, item);
     }
-
 }
 
 export interface ICompanyAddDto extends ITraceable {
     ownerUid: string;
+    votingUid: string;
     description: string;
     regulations: Array<ILedgerCompanyRegulation>;
 }
@@ -54,4 +55,7 @@ export class CompanyAddDto implements ICompanyAddDto {
     @Type(() => LedgerCompanyRegulation)
     @ValidateNested({ each: true })
     regulations: Array<LedgerCompanyRegulation>;
+
+    @Matches(LedgerVoting.UID_REG_EXP)
+    votingUid: string;
 }

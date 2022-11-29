@@ -4,7 +4,7 @@ import { IsOptional, Matches, IsArray } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import * as _ from 'lodash';
 import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
-import { ledgerVotingTransform } from '../../../ledger/voting/ledgerVotingTransform';
+import { ledgerVotingTransform } from '../../../ledger/voting/LedgerVotingTransform';
 
 export class VotingGetCommand extends ChaincodeTransportCommandAsync<IVotingGetDto, LedgerVoting> {
     // --------------------------------------------------------------------------

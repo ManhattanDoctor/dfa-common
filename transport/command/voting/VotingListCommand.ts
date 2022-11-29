@@ -2,7 +2,7 @@ import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand'
 import { IPaginationBookmark, PaginableBookmark } from '@ts-core/common';
 import { ITraceable } from '@ts-core/common';
 import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
-import { ledgerVotingTransform } from '../../../ledger/voting/ledgerVotingTransform';
+import { ledgerVotingTransform } from '../../../ledger/voting/LedgerVotingTransform';
 
 export class VotingListCommand extends ChaincodeTransportCommandAsync<IVotingListDto, IVotingListDtoResponse> {
     // --------------------------------------------------------------------------
