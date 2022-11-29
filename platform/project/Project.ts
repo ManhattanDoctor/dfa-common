@@ -1,15 +1,14 @@
 import { Type } from 'class-transformer';
 import { ProjectStatus } from './ProjectStatus';
 import { ProjectPreferences } from './ProjectPreferences';
-import { User } from '../user';
-import { Company } from '../company';
-import { Accounts } from '../account';
+import { CoinBalance } from '../coin/CoinBalance';
 
 export class Project {
     id: number;
     status: ProjectStatus;
+    userId: number;
     companyId: number;
-    ledgerUid?: string;
+    ledgerUid: string;
 
     @Type(() => Date)
     createdDate: Date;
@@ -20,12 +19,5 @@ export class Project {
     @Type(() => ProjectPreferences)
     preferences: ProjectPreferences;
 
-    user?: User;
-    company?: Company;
+    balances?: Array<CoinBalance>;
 }
-
-export interface IProjectBalance {
-    required: Accounts,
-    collected: Accounts,
-}
-

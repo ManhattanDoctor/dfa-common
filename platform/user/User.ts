@@ -2,6 +2,7 @@ import { Type } from 'class-transformer';
 import { UserType } from './UserType';
 import { UserPreferences } from './UserPreferences';
 import { UserStatus } from './UserStatus';
+import { CoinBalance } from '../coin/CoinBalance';
 
 export class User {
     id: number;
@@ -10,7 +11,8 @@ export class User {
     login: string;
     status: UserStatus;
     resource: UserResource;
-    ledgerUid?: string;
+    companyId: number;
+    ledgerUid: string;
 
     @Type(() => Date)
     createdDate: Date;
@@ -20,6 +22,8 @@ export class User {
 
     @Type(() => UserPreferences)
     preferences: UserPreferences;
+
+    balances?: Array<CoinBalance>;
 }
 
 export enum UserResource {

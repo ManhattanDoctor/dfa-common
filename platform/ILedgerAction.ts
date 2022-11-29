@@ -1,18 +1,19 @@
 import * as _ from 'lodash';
-import { LedgerCoinId } from './coin';
+import { LedgerCoinId } from '../ledger/coin/LedgerCoinId';
 
 export class ILedgerAction {
-    // uid: string;
+    id: number;
     date: Date;
     type: LedgerActionType;
-    objectUid?: string;
-    requestUid: string;
+    requestId: string;
+    objectUid: string;
+    initiatorUid: string;
 
     isSucceed: boolean;
-    initiatorUid?: string;
 
     userUid?: string;
     coinUid?: string;
+    votingUid?: string;
     projectUid?: string;
     companyUid?: string;
 
@@ -39,7 +40,6 @@ export enum LedgerActionType {
     // Based on COIN_EXCHANGED
     COIN_EXCHANGE_SENT = 'COIN_EXCHANGE_SENT',
     COIN_EXCHANGE_RECEIVE = 'COIN_EXCHANGE_RECEIVE',
-
 
     PROJECT_ADDED = 'PROJECT_ADDED',
     PROJECT_EDITED = 'PROJECT_EDITED',
