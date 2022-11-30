@@ -39,17 +39,10 @@ export enum LedgerEvent {
     PROJECT_USER_REMOVED = 'DAO:ProjectUserRemoved'
 }
 
-export interface ILedgerEventDto {
-    requestId: string;
-}
-
-export class LedgerEventDto implements ILedgerEventDto {
-    @IsString()
-    requestId: string;
-}
+export interface ILedgerEventDto {}
 
 export class LedgerEventDefault extends TransportEvent<ILedgerEventDto> {
-    constructor(name: string, data: ILedgerEventDto) {
-        super(name, TransformUtil.toClass(LedgerEventDto, data));
+    constructor(name: string, data?: ILedgerEventDto) {
+        super(name, data);
     }
 }

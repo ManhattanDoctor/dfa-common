@@ -15,7 +15,7 @@ export class UserCryptoKeyChangedEvent extends LedgerEventDefault {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ILedgerEventDto) {
-        super(UserCryptoKeyChangedEvent.NAME, data);
+    constructor() {
+        super(UserCryptoKeyChangedEvent.NAME);
     }
 }

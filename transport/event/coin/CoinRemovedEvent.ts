@@ -15,7 +15,7 @@ export class CoinRemovedEvent extends LedgerEventDefault {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ILedgerEventDto) {
-        super(CoinRemovedEvent.NAME, data);
+    constructor() {
+        super(CoinRemovedEvent.NAME);
     }
 }

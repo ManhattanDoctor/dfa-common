@@ -15,7 +15,7 @@ export class ProjectAddedEvent extends LedgerEventDefault{
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ILedgerEventDto) {
-        super(ProjectAddedEvent.NAME, data);
+    constructor() {
+        super(ProjectAddedEvent.NAME);
     }
 }

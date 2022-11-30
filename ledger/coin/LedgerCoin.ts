@@ -38,6 +38,11 @@ export class LedgerCoin implements IUIDable {
         return `${LedgerCoin.PREFIX}/${getUid(company)}/${coinId}`;
     }
 
+    public static getCoinId(coin: UID): LedgerCoinId {
+        let uid = getUid(coin);
+        return !_.isNil(uid) ? uid.split('/')[2] : null;
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Properties

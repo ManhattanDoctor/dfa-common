@@ -15,7 +15,7 @@ export class UserEditedEvent extends LedgerEventDefault {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ILedgerEventDto) {
-        super(UserEditedEvent.NAME, data);
+    constructor() {
+        super(UserEditedEvent.NAME);
     }
 }
