@@ -21,8 +21,7 @@ export enum LedgerEvent {
     VOTING_ADDED = 'DAO:VotingAdded',
     VOTING_VOTED = 'DAO:VotingVoted',
     VOTING_EDITED = 'DAO:VotingEdited',
-    VOTING_APPROVED = 'DAO:VotingApproved',
-    VOTING_REJECTED = 'DAO:VotingRejected',
+    VOTING_FINISHED = 'DAO:VotingFinished',
 
     COIN_HOLDED = 'DAO:CoinHolded',
     COIN_BURNED = 'DAO:CoinBurned',

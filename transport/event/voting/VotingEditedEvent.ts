@@ -22,6 +22,6 @@ export class VotingEditedEvent extends LedgerVotingEvent {
 }
 
 export interface IVotingEditedEventDto extends ILedgerVotingEventDto {
-    oldStep: number;
-    newStep: number;
+    stepOld: number;
+    stepNew: number;
 }

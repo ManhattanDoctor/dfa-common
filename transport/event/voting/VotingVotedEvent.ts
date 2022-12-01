@@ -16,7 +16,11 @@ export class VotingVotedEvent extends LedgerVotingEvent {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ILedgerVotingEventDto) {
+    constructor(data: IVotingVotedEventDto) {
         super(VotingVotedEvent.NAME, data);
     }
+}
+
+export interface IVotingVotedEventDto extends ILedgerVotingEventDto {
+    step: number;
 }
