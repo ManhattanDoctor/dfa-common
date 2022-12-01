@@ -1,6 +1,6 @@
 
 import * as _ from 'lodash';
-import { IsEnum, IsOptional, IsNumber, Min, IsDate, IsDefined, ValidateNested, Matches } from 'class-validator';
+import { IsEnum, IsOptional, IsInt, Min, IsDate, IsDefined, ValidateNested, Matches } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
 import { RegExpUtil } from '../../util/RegExpUtil';
 import { ILedgerObject } from '../ILedgerObject';
@@ -59,7 +59,7 @@ export abstract class LedgerVoting<U = string, V = object> implements ILedgerObj
     public completedDate: Date;
 
     @Min(0)
-    @IsNumber()
+    @IsInt()
     public stepIndex: number;
 
     @Type(() => LedgerVotingStep)

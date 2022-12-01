@@ -1,4 +1,4 @@
-import { IsOptional, IsDefined, IsEnum, IsDate } from 'class-validator';
+import { IsOptional, IsNumberString, IsDefined, IsEnum, IsDate } from 'class-validator';
 import { Type } from 'class-transformer';
 import { LedgerVotingStepType } from "../LedgerVotingStepType";
 import { LedgerVotingList } from '../LedgerVotingList';
@@ -20,6 +20,10 @@ export abstract class LedgerVotingStep {
 
     @IsDefined()
     public list: LedgerVotingList;
+
+    @IsOptional()
+    @IsNumberString()
+    public total: string;
 
     // --------------------------------------------------------------------------
     //

@@ -29,6 +29,7 @@ export enum LedgerCommand {
     VOTING_GET = 'DAO:VotingGet',
     VOTING_LIST = 'DAO:VotingList',
     VOTING_VOTE = 'DAO:VotingVote',
+    VOTING_STATE_GET = 'DAO:VotingStateGet',
 
     COIN_GET = 'DAO:CoinGet',
     COIN_ADD = 'DAO:CoinAdd',

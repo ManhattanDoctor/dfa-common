@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
+import { MathUtil } from '@ts-core/common';
 
 export class LedgerCompanyRoleList {
     // --------------------------------------------------------------------------
@@ -30,17 +31,16 @@ export class LedgerCompanyRoleList {
     // --------------------------------------------------------------------------
 
     public add(role: LedgerCompanyRole): void {
-        let name = role.toString();
-        let value = this.storage[name];
+        let value = this.storage[role];
         if (_.isNil(value)) {
-            this.storage[name] = 0;
+            value = '0';
         }
-        this.storage[name]++;
+        this.storage[role] = MathUtil.add(value, '1');
     }
 
-    public get(role: LedgerCompanyRole): number {
+    public get(role: LedgerCompanyRole): string {
         let value = this.storage[role];
-        return !_.isNil(value) ? value : 0;
+        return !_.isNil(value) ? value : '0';
     }
 
     public remove(role: LedgerCompanyRole): void {
@@ -48,8 +48,8 @@ export class LedgerCompanyRoleList {
         if (_.isNil(value)) {
             throw new LedgerBadRequestError(`Roles amount is nil`);
         }
-        this.storage[role]--;
-        if (this.storage[role] < 0) {
+        this.storage[role] = MathUtil.subtract(value, '1');
+        if (MathUtil.lessThan(this.storage[role], '0')) {
             throw new LedgerBadRequestError(`Roles amount must be granter than zero`);
         }
     }

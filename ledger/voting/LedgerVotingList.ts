@@ -2,8 +2,10 @@ import * as _ from 'lodash';
 import { IsEnum, IsDefined } from 'class-validator';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
+import { MathUtil, TransformUtil } from '@ts-core/common';
+import { LedgerVotingState } from './LedgerVotingState';
 
-export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue>  {
+export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> implements LedgerVotingState {
     // --------------------------------------------------------------------------
     //
     //  Properties
@@ -11,6 +13,9 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
     // --------------------------------------------------------------------------
 
     public storage: Object;
+
+    protected _votesFor: string;
+    protected _votesAgainst: string;
 
     // --------------------------------------------------------------------------
     //
@@ -50,6 +55,27 @@ export abstract class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteVal
         return Object.entries(this.storage).map(item => {
             return { uid: item[0], value: item[1] };
         })
+    }
+
+    public get state(): LedgerVotingState {
+        return TransformUtil.toClass(LedgerVotingState, { votesFor: this.votesFor, votesTotal: this.votesTotal, votesResult: this.votesResult, votesAgainst: this.votesAgainst });
+    }
+
+
+    public get votesResult(): string {
+        return MathUtil.subtract(this.votesFor, this.votesAgainst);
+    }
+
+    public get votesTotal(): string {
+        return MathUtil.add(this._votesAgainst, this.votesFor);
+    }
+
+    public get votesFor(): string {
+        return !_.isNil(this._votesFor) ? this._votesFor : '0';
+    }
+
+    public get votesAgainst(): string {
+        return !_.isNil(this._votesAgainst) ? this._votesAgainst : '0';
     }
 }
 export interface IVote {
