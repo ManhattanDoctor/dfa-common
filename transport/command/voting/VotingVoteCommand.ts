@@ -1,11 +1,11 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { IsOptional, ValidateNested, Matches } from 'class-validator';
+import { IsOptional, ValidateNested, IsInt, Matches } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { ILedgerVote, LedgerVote } from '../../../ledger/voting/LedgerVotingList';
 import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
 
-export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, void> {
+export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, IVoteDtoResponse> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -23,11 +23,24 @@ export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, 
     constructor(request: IVoteDto) {
         super(VotingVoteCommand.NAME, TransformUtil.toClass(VoteDto, request));
     }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Protected Methods
+    //
+    // --------------------------------------------------------------------------
+
+    protected checkResponse(item: IVoteDtoResponse): VoteDtoResponse {
+        return TransformUtil.toClass(VoteDtoResponse, item);
+    }
 }
 
 export interface IVoteDto extends ITraceable {
     uid: string;
     value: ILedgerVote;
+}
+export interface IVoteDtoResponse {
+    step: number;
 }
 
 class VoteDto implements IVoteDto {
@@ -37,4 +50,8 @@ class VoteDto implements IVoteDto {
     @IsOptional()
     @ValidateNested()
     value: LedgerVote;
+}
+class VoteDtoResponse implements IVoteDtoResponse {
+    @IsInt()
+    step: number;
 }

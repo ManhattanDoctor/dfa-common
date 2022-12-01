@@ -1,5 +1,5 @@
 import { LedgerEvent } from '../LedgerEvent';
-import { LedgerVotingEvent, ILedgerVotingEventDto } from '../LedgerVotingEvent';
+import { ILedgerVotingEventDto, LedgerVotingEvent } from '../LedgerVotingEvent';
 
 export class VotingVotedEvent extends LedgerVotingEvent {
     // --------------------------------------------------------------------------
@@ -16,11 +16,8 @@ export class VotingVotedEvent extends LedgerVotingEvent {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: IVotingVotedEventDto) {
+    constructor(data: ILedgerVotingEventDto) {
         super(VotingVotedEvent.NAME, data);
     }
 }
 
-export interface IVotingVotedEventDto extends ILedgerVotingEventDto {
-    step: number;
-}
