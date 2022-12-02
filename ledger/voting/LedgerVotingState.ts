@@ -1,6 +1,13 @@
 import { IsNumberString } from 'class-validator';
 
-export class LedgerVotingState {
+export interface ILedgerVotingState {
+    votesFor: string;
+    votesTotal: string;
+    votesResult: string;
+    votesAgainst: string;
+}
+
+export class LedgerVotingState implements ILedgerVotingState {
     @IsNumberString()
     votesFor: string;
 

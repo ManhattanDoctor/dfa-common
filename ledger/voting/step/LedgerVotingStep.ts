@@ -2,6 +2,7 @@ import { IsOptional, IsNumberString, IsDefined, IsEnum, IsDate } from 'class-val
 import { Type } from 'class-transformer';
 import { LedgerVotingStepType } from "../LedgerVotingStepType";
 import { LedgerVotingList } from '../LedgerVotingList';
+import { ILedgerVotingState } from '../LedgerVotingState';
 
 export abstract class LedgerVotingStep {
     // --------------------------------------------------------------------------
@@ -12,6 +13,16 @@ export abstract class LedgerVotingStep {
 
     @IsEnum(LedgerVotingStepType)
     public type: LedgerVotingStepType;
+
+    @IsOptional()
+    @Type(() => Date)
+    @IsDate()
+    public startedDate: Date;
+
+    @IsOptional()
+    @Type(() => Date)
+    @IsDate()
+    public finishedDate: Date;
 
     @IsOptional()
     @Type(() => Date)
@@ -35,4 +46,20 @@ export abstract class LedgerVotingStep {
         return this.expiredDate.getTime() < Date.now();
     }
 
+    public stateGet(): ILedgerVotingStepState {
+        return {
+            state: this.list.stateGet(),
+            startedDate: this.startedDate,
+            expiredDate: this.expiredDate,
+            finishedDate: this.finishedDate
+        }
+    }
+
+}
+
+export interface ILedgerVotingStepState {
+    state: ILedgerVotingState;
+    startedDate: Date;
+    expiredDate: Date;
+    finishedDate: Date;
 }

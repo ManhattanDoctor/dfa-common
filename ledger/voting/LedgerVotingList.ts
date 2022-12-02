@@ -2,10 +2,10 @@ import * as _ from 'lodash';
 import { IsEnum, IsDefined } from 'class-validator';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
-import { MathUtil, TransformUtil } from '@ts-core/common';
-import { LedgerVotingState } from './LedgerVotingState';
+import { MathUtil } from '@ts-core/common';
+import { ILedgerVotingState } from './LedgerVotingState';
 
-export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> implements LedgerVotingState {
+export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> implements ILedgerVotingState {
     // --------------------------------------------------------------------------
     //
     //  Properties
@@ -45,6 +45,10 @@ export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> imple
         return this.storage.hasOwnProperty(uid) ? this.storage[uid] : null;
     }
 
+    public stateGet(): ILedgerVotingState {
+        return { votesFor: this.votesFor, votesTotal: this.votesTotal, votesResult: this.votesResult, votesAgainst: this.votesAgainst };
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Public Properties
@@ -55,10 +59,6 @@ export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> imple
         return Object.entries(this.storage).map(item => {
             return { uid: item[0], value: item[1] };
         })
-    }
-
-    public get state(): LedgerVotingState {
-        return TransformUtil.toClass(LedgerVotingState, { votesFor: this.votesFor, votesTotal: this.votesTotal, votesResult: this.votesResult, votesAgainst: this.votesAgainst });
     }
 
 

@@ -3,9 +3,9 @@ import { CompanyCoinListCommand, CompanyGetCommand, CompanyListCommand, CompanyP
 import { GenesisGetCommand } from './GenesisGetCommand';
 import { ProjectGetCommand, ProjectUserListCommand } from './project';
 import { UserCompanyListCommand, UserGetCommand, UserListCommand, UserProjectListCommand } from './user';
-import { VotingGetCommand, VotingStateGetCommand, VotingListCommand } from './voting';
+import { VotingGetCommand, VotingStepStateGetCommand, VotingListCommand } from './voting';
 
-export const NON_SIGNED_COMMANDS = [
+export const NON_SIGNED_COMMANDS: Array<string> = [
     GenesisGetCommand.NAME,
 
     UserGetCommand.NAME,
@@ -31,5 +31,5 @@ export const NON_SIGNED_COMMANDS = [
 
     VotingGetCommand.NAME,
     VotingListCommand.NAME,
-    VotingStateGetCommand.NAME,
+    VotingStepStateGetCommand.NAME,
 ]
