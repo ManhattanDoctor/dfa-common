@@ -40,7 +40,7 @@ export interface IVoteDto extends ITraceable {
     value: ILedgerVote;
 }
 export interface IVoteDtoResponse {
-    step: number;
+    stepIndex: number;
 }
 
 class VoteDto implements IVoteDto {
@@ -53,5 +53,5 @@ class VoteDto implements IVoteDto {
 }
 class VoteDtoResponse implements IVoteDtoResponse {
     @IsInt()
-    step: number;
+    stepIndex: number;
 }
