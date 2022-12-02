@@ -1,5 +1,4 @@
-import { IsString } from 'class-validator';
-import { TransformUtil } from '@ts-core/common';
+
 import { TransportEvent } from '@ts-core/common';
 
 export enum LedgerEvent {
@@ -20,6 +19,7 @@ export enum LedgerEvent {
 
     VOTING_ADDED = 'DAO:VotingAdded',
     VOTING_VOTED = 'DAO:VotingVoted',
+    VOTING_EDITED = 'DAO:VotingEdited',
     VOTING_FINISHED = 'DAO:VotingFinished',
     VOTING_STEP_EDITED = 'DAO:VotingStepEdited',
 
