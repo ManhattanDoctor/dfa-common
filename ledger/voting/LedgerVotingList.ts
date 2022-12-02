@@ -67,7 +67,7 @@ export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> imple
     }
 
     public get votesTotal(): string {
-        return MathUtil.add(this._votesAgainst, this.votesFor);
+        return MathUtil.add(this.votesAgainst, this.votesFor);
     }
 
     public get votesFor(): string {
