@@ -23,6 +23,28 @@ export const ROOT_USER_CRYPTO_KEY_PRIVATE = 'e87501bc00a3db3ba436f7109198e0cb65c
 export const ROOT_COMPANY_DESCRIPTION = 'ROOT_COMPANY';
 export const ROOT_COMPANY_REGULATIONS = [
     {
+        type: LedgerCompanyRegulationType.COIN_EMIT,
+        steps: [
+            {
+                type: LedgerVotingStepType.COIN,
+                coinId: LedgerCoinIdPreset.VOTE,
+                percent: 10,
+                duration: DateUtil.MILLISECONDS_HOUR
+            }
+        ]
+    },
+    {
+        type: LedgerCompanyRegulationType.COIN_BURN,
+        steps: [
+            {
+                type: LedgerVotingStepType.COIN,
+                coinId: LedgerCoinIdPreset.VOTE,
+                percent: 10,
+                duration: DateUtil.MILLISECONDS_HOUR
+            }
+        ]
+    },
+    {
         type: LedgerCompanyRegulationType.PROJECT_ADD,
         steps: [
             {
@@ -33,18 +55,7 @@ export const ROOT_COMPANY_REGULATIONS = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 20,
-                duration: DateUtil.MILLISECONDS_HOUR
-            }
-        ]
-    },
-    {
-        type: LedgerCompanyRegulationType.COIN_EMIT,
-        steps: [
-            {
-                type: LedgerVotingStepType.COIN,
-                coinId: LedgerCoinIdPreset.VOTE,
-                percent: 1,
+                percent: 5,
                 duration: DateUtil.MILLISECONDS_HOUR
             }
         ]
@@ -55,7 +66,7 @@ export const ROOT_COMPANY_REGULATIONS = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 1,
+                percent: 5,
                 duration: DateUtil.MILLISECONDS_MINUTE
             }
         ]
@@ -66,11 +77,33 @@ export const ROOT_COMPANY_REGULATIONS = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 1,
-                duration: DateUtil.MILLISECONDS_HOUR
+                percent: 5,
+                duration: DateUtil.MILLISECONDS_HOUR,
             }
         ]
-    }
+    },
+    {
+        type: LedgerCompanyRegulationType.PROTECTOR_ADD,
+        steps: [
+            {
+                type: LedgerVotingStepType.COIN,
+                coinId: LedgerCoinIdPreset.VOTE,
+                percent: 5,
+                duration: DateUtil.MILLISECONDS_MINUTE
+            }
+        ]
+    },
+    {
+        type: LedgerCompanyRegulationType.PROTECTOR_REMOVE,
+        steps: [
+            {
+                type: LedgerVotingStepType.COIN,
+                coinId: LedgerCoinIdPreset.VOTE,
+                percent: 5,
+                duration: DateUtil.MILLISECONDS_MINUTE
+            }
+        ]
+    },
 ];
 
 export const ROOT_COIN_VOTE_AMOUNT = '1000';
@@ -78,7 +111,6 @@ export const ROOT_COIN_VOTE_DECIMALS = 0;
 
 export const ROOT_COIN_RUB_AMOUNT = '100000';
 export const ROOT_COIN_RUB_DECIMALS = 2;
-
 
 // --------------------------------------------------------------------------
 //

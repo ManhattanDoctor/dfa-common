@@ -6,23 +6,16 @@ import { LedgerVotingStepTemplate } from '../voting/template/LedgerVotingStepTem
 import { LedgerVotingFactory } from '../voting/LedgerVotingFactory';
 
 export enum LedgerCompanyRegulationType {
-    // COIN_ADD = 'COIN_ADD',
     COIN_EMIT = 'COMPANY_COIN_EMIT',
     COIN_BURN = 'COMPANY_COIN_BURN',
 
     PROJECT_ADD = 'COMPANY_PROJECT_ADD',
-    // PROJECT_EDIT = 'PROJECT_EDIT',
-    // PROJECT_REMOVE = 'PROJECT_REMOVE',
 
     EXPERT_ADD = 'COMPANY_EXPERT_ADD',
     EXPERT_REMOVE = 'COMPANY_EXPERT_REMOVE',
 
     PROTECTOR_ADD = 'COMPANY_PROTECTOR_ADD',
-    PROTECTOR_REMOVE = 'COMPANY_PROTECTOR_REMOVE',
-
-    // REGULATION_ADD = 'REGULATION_ADD',
-    // REGULATION_CHANGE = 'REGULATION_CHANGE',
-    // REGULATION_REMOVE = 'REGULATION_REMOVE',
+    PROTECTOR_REMOVE = 'COMPANY_PROTECTOR_REMOVE'
 }
 
 export interface ILedgerCompanyRegulation extends ILedgerVotingTemplate<LedgerCompanyRegulationType> { }

@@ -32,8 +32,4 @@ export class LedgerCoinBalance extends LedgerCoinAccount {
         super.burn(amount);
         this.burned = MathUtil.add(this.burned, amount);
     }
-
-    public getAvailable(): string {
-        return MathUtil.subtract(this.emitted, this.burned);
-    }
 }

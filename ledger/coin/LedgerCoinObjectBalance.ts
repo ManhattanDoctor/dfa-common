@@ -1,7 +1,5 @@
-import { Min, Matches, IsInt, IsNumberString } from 'class-validator';
+import { Min, IsInt, IsNumberString } from 'class-validator';
 import * as _ from 'lodash';
-import { LedgerCoin } from './LedgerCoin';
-import { LedgerCoinId } from './LedgerCoinId';
 
 export class LedgerCoinObjectBalance {
     // --------------------------------------------------------------------------
@@ -18,12 +16,6 @@ export class LedgerCoinObjectBalance {
 
     @IsNumberString()
     public total: string;
-
-    @IsNumberString()
-    public share: string;
-
-    @Matches(LedgerCoin.COIN_ID_REG_EXP)
-    public coinId: LedgerCoinId;
 
     @IsInt()
     @Min(0)
