@@ -9,6 +9,12 @@ export class Coin {
     companyId: number;
     ledgerUid: string;
 
+    held: string;
+    inUse: string;
+    total: string;
+    burned: string;
+    emitted: string;
+
     balance?: CoinBalance;
 
     @Type(() => Date)

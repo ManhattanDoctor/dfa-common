@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { IsEnum, IsString } from 'class-validator';
 import { LedgerVoteType } from "../../ledger/voting";
 
-export class Vote {
+export class VotingVote {
     id: number;
     userId: number;
     stepId: number;
@@ -10,12 +10,9 @@ export class Vote {
     @IsEnum(LedgerVoteType)
     type: LedgerVoteType;
 
-    @IsEnum(LedgerVoteType)
-    proposal: LedgerVoteType;
+    @Type(() => Date)
+    date: Date;
 
     @IsString()
     value: string;
-
-    @Type(() => Date)
-    createdDate: Date;
 }

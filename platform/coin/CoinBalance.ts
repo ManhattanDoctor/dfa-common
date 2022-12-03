@@ -1,14 +1,14 @@
 import { Type } from 'class-transformer';
+import { Coin } from './Coin';
 
 export class CoinBalance {
     id: number;
-    coinId: number;
-    ownerId: number;
-
     held: string;
     inUse: string;
-    burned: string;
-    emitted: string;
+    total: string;
+    ledgerUid: string;
+
+    coin?: Coin;
 
     @Type(() => Date)
     createdDate: Date;
