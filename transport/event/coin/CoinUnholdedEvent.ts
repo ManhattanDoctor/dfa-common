@@ -16,7 +16,11 @@ export class CoinUnholdedEvent extends LedgerVotingEvent {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ILedgerVotingEventDto) {
+    constructor(data: ICoinUnholdedDto) {
         super(CoinUnholdedEvent.NAME, data);
     }
+}
+
+export interface ICoinUnholdedDto extends ILedgerVotingEventDto {
+    coinUid: string;
 }
