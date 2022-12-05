@@ -5,12 +5,14 @@ import { ITraceable, TraceUtil } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { User, UserCompany, UserProject } from '../user';
+import { Coin } from '../coin';
 import { IUserGetDtoResponse, IUserEditDto, IUserEditDtoResponse } from '../api/user';
 import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
 import { ICompanyGetDtoResponse } from './company';
+import { ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -69,6 +71,23 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async companyGet(id: number): Promise<ICompanyGetDtoResponse> {
         let item = await this.call<UserCompany>(`${COMPANY_URL}/${id}`);
         return TransformUtil.toClass(UserCompany, item);
+    }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Coin Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public async coinGet(id: number): Promise<ICoinGetDtoResponse> {
+        let item = await this.call<Coin>(`${COIN_URL}/${id}`);
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    public async coinList(data?: ICoinListDto): Promise<ICoinListDtoResponse> {
+        let item = await this.call<ICoinListDtoResponse, ICoinListDto>(COIN_URL, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(Coin, item.items);
+        return item;
     }
 
     // --------------------------------------------------------------------------
@@ -136,6 +155,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
 const PREFIX = 'api/';
 
 export const USER_URL = PREFIX + 'user';
+export const COIN_URL = PREFIX + 'coin';
 export const COMPANY_URL = PREFIX + 'company';
 export const PROJECT_URL = PREFIX + 'project';
 
