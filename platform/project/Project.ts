@@ -2,8 +2,9 @@ import { Type } from 'class-transformer';
 import { ProjectStatus } from './ProjectStatus';
 import { ProjectPreferences } from './ProjectPreferences';
 import { CoinBalance } from '../coin/CoinBalance';
+import { ILedgreable } from '../ILedgerable';
 
-export class Project {
+export class Project implements ILedgreable {
     id: number;
     status: ProjectStatus;
     userId: number;

@@ -1,9 +1,9 @@
 
 import { Type } from 'class-transformer';
 import { LedgerCoinId } from '../../ledger/coin/LedgerCoinId';
-import { CoinBalance } from './CoinBalance';
+import { ILedgreable } from '../ILedgerable';
 
-export class Coin {
+export class Coin implements ILedgreable {
     id: number;
     coinId: LedgerCoinId;
     decimals: number;
@@ -15,8 +15,6 @@ export class Coin {
     total: string;
     burned: string;
     emitted: string;
-
-    balances?: Array<CoinBalance>;
 
     @Type(() => Date)
     createdDate: Date;

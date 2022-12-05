@@ -2,9 +2,10 @@ import { Type } from 'class-transformer';
 import { LedgerCompanyRegulationType } from '../../ledger/company/LedgerCompanyRegulation';
 import { LedgerCompanyVotingProposal } from '../../ledger/company/voting/LedgerCompanyVotingProposal';
 import { LedgerVotingStatus } from '../../ledger/voting/LedgerVoting';
+import { ILedgreable } from '../ILedgerable';
 import { VotingStep } from '../voting/VotingStep';
 
-export class CompanyVoting {
+export class CompanyVoting implements ILedgreable {
     id: number;
     type: LedgerCompanyRegulationType;
     status: LedgerVotingStatus;

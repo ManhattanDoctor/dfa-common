@@ -1,18 +1,12 @@
-import { Type } from 'class-transformer';
-import { Coin } from './Coin';
+import { LedgerCoinId } from "../../ledger/coin";
 
 export class CoinBalance {
-    id: number;
+    coinId: LedgerCoinId;
+    decimals: number;
+    companyId: number;
+    ledgerUid: string;
+
     held: string;
     inUse: string;
     total: string;
-    ledgerUid: string;
-
-    coin?: Coin;
-
-    @Type(() => Date)
-    createdDate: Date;
-
-    @Type(() => Date)
-    updatedDate: Date;
 }

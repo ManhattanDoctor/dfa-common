@@ -3,8 +3,9 @@ import { UserType } from './UserType';
 import { UserPreferences } from './UserPreferences';
 import { UserStatus } from './UserStatus';
 import { CoinBalance } from '../coin/CoinBalance';
+import { ILedgreable } from '../ILedgerable';
 
-export class User {
+export class User implements ILedgreable {
     id: number;
     uid: string;
     type: UserType;

@@ -5,14 +5,14 @@ import { ITraceable, TraceUtil } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { User, UserCompany, UserProject } from '../user';
-import { Coin } from '../coin';
+import { Coin, CoinBalance } from '../coin';
 import { IUserGetDtoResponse, IUserEditDto, IUserEditDtoResponse } from '../api/user';
 import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
 import { ICompanyGetDtoResponse } from './company';
-import { ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { ICoinBalanceListDto, ICoinBalanceListDtoResponse,ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -90,6 +90,12 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
+    public async coinBalanceList(data?: ICoinBalanceListDto): Promise<ICoinBalanceListDtoResponse> {
+        let item = await this.call<ICoinBalanceListDtoResponse, ICoinBalanceListDto>(COIN_BALANCE_URL, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(CoinBalance, item.items);
+        return item;
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Project Methods
@@ -156,6 +162,7 @@ const PREFIX = 'api/';
 
 export const USER_URL = PREFIX + 'user';
 export const COIN_URL = PREFIX + 'coin';
+export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
 export const COMPANY_URL = PREFIX + 'company';
 export const PROJECT_URL = PREFIX + 'project';
 

@@ -2,8 +2,9 @@ import { Type } from 'class-transformer';
 import { CompanyStatus } from './CompanyStatus';
 import { CompanyPreferences } from './CompanyPreferences';
 import { CoinBalance } from '../coin/CoinBalance';
+import { ILedgreable } from '../ILedgerable';
 
-export class Company {
+export class Company implements ILedgreable {
     id: number;
     status: CompanyStatus;
     ledgerUid: string;
