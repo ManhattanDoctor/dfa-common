@@ -1,10 +1,12 @@
 import { LedgerCoinId } from "../../ledger/coin";
 
 export class CoinBalance {
+    coinUid: string;
+    objectUid: string;
+
     coinId: LedgerCoinId;
     decimals: number;
     companyId: number;
-    ledgerUid: string;
 
     held: string;
     inUse: string;
