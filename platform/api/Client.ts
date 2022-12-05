@@ -10,7 +10,8 @@ import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
-import { ICompanyGetDtoResponse } from './company';
+import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
+import { CompanyUser } from '../company';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -41,7 +42,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     }
 
     public async logout(traceId?: string): Promise<void> {
-        return this.call<void, ITraceable>(LOGOUT_URL, { data: TraceUtil.addIfNeed({ traceId }), method: 'post' });
+        // return this.call<void, ITraceable>(LOGOUT_URL, { data: TraceUtil.addIfNeed({ traceId }), method: 'post' });
     }
 
     // --------------------------------------------------------------------------
@@ -69,6 +70,12 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async companyGet(id: number): Promise<ICompanyGetDtoResponse> {
         let item = await this.call<UserCompany>(`${COMPANY_URL}/${id}`);
         return TransformUtil.toClass(UserCompany, item);
+    }
+
+    public async companyUserList(data?: ICompanyUserListDto, id?: number): Promise<ICompanyUserListDtoResponse> {
+        let item = await this.call<ICompanyUserListDtoResponse, ICompanyUserListDto>(`${COMPANY_URL}/${id}/user`, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(CompanyUser, item.items);
+        return item;
     }
 
     // --------------------------------------------------------------------------
