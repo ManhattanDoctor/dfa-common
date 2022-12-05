@@ -4,7 +4,7 @@ import { Matches, IsNumber, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerCoin } from '../../../ledger/coin';
-import { LedgerVoting } from '@project/common/ledger/voting';
+import { LedgerVoting } from '../../../ledger/voting';
 
 export class CoinAddCommand extends ChaincodeTransportCommandAsync<ICoinAddDto, LedgerCoin> {
     // --------------------------------------------------------------------------

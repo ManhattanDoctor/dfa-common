@@ -1,6 +1,7 @@
-import { CoinBalance } from '@project/common/platform/coin/CoinBalance';
+
 import { Type } from 'class-transformer';
 import { LedgerCoinId } from '../../ledger/coin/LedgerCoinId';
+import { CoinBalance } from './CoinBalance';
 
 export class Coin {
     id: number;
@@ -15,7 +16,7 @@ export class Coin {
     burned: string;
     emitted: string;
 
-    balance?: CoinBalance;
+    balances?: Array<CoinBalance>;
 
     @Type(() => Date)
     createdDate: Date;
