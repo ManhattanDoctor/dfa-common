@@ -1,7 +1,7 @@
-import { TransportHttp, ITransportHttpSettings, UID, getUid } from '@ts-core/common';
+import { TransportHttp, ITransportHttpSettings, UID, getUid, ITraceable } from '@ts-core/common';
 import { ILogger } from '@ts-core/common';
 import * as _ from 'lodash';
-import { ITraceable, TraceUtil } from '@ts-core/common';
+import { TraceUtil } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { User, UserCompany, UserProject } from '../user';
@@ -11,7 +11,7 @@ import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
-import { ICoinBalanceListDto, ICoinBalanceListDtoResponse,ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
 import { CompanyUser } from '../company';
 
@@ -97,6 +97,14 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
+    public async coinExchange(data?: ICoinExchangeDto): Promise<void> {
+        await this.call<void, ICoinExchangeDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
+    }
+
+    public async coinExchangeGet(data?: ITraceable): Promise<ICoinExchangeGetDtoResponse> {
+        return this.call<ICoinExchangeGetDtoResponse, ITraceable>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
+    }
+
     public async coinBalanceList(data?: ICoinBalanceListDto): Promise<ICoinBalanceListDtoResponse> {
         let item = await this.call<ICoinBalanceListDtoResponse, ICoinBalanceListDto>(COIN_BALANCE_URL, { data: TraceUtil.addIfNeed(data) });
         item.items = TransformUtil.toClassMany(CoinBalance, item.items);
@@ -168,9 +176,12 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
 const PREFIX = 'api/';
 
 export const USER_URL = PREFIX + 'user';
+export const COMPANY_URL = PREFIX + 'company';
+
 export const COIN_URL = PREFIX + 'coin';
 export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
-export const COMPANY_URL = PREFIX + 'company';
+export const COIN_EXCHANGE_URL = PREFIX + 'coinExchange';
+
 export const PROJECT_URL = PREFIX + 'project';
 
 export const INIT_URL = PREFIX + 'init';
