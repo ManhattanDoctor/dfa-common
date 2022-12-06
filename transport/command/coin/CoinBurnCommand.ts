@@ -1,13 +1,8 @@
 import { TransformUtil } from '@ts-core/common';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
-import { ITraceable } from '@ts-core/common';
-import { Type } from 'class-transformer';
-import { IsString, Matches, IsNumberString, IsDefined, ValidateNested } from 'class-validator';
-import { LedgerCoin } from '../../../ledger/coin';
-import { LedgerVoting } from '../../../ledger/voting';
+import { ICoinEmitDto, CoinEmitDto } from './CoinEmitCommand';
 
-export class CoinBurnCommand extends ChaincodeTransportCommandAsync<ICoinBurnDto, void> {
+export class CoinBurnCommand extends ChaincodeTransportCommandAsync<ICoinEmitDto, void> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -22,28 +17,7 @@ export class CoinBurnCommand extends ChaincodeTransportCommandAsync<ICoinBurnDto
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: ICoinBurnDto) {
-        super(CoinBurnCommand.NAME, TransformUtil.toClass(CoinBurnDto, request));
+    constructor(request: ICoinEmitDto) {
+        super(CoinBurnCommand.NAME, TransformUtil.toClass(CoinEmitDto, request));
     }
-}
-
-export interface ICoinBurnDto extends ITraceable {
-    amount: string;
-    coinUid: string;
-    objectUid: string;
-    votingUid: string;
-}
-
-export class CoinBurnDto implements ICoinBurnDto {
-    @IsString()
-    objectUid: string;
-
-    @IsNumberString()
-    amount: string;
-
-    @Matches(LedgerCoin.UID_REG_EXP)
-    coinUid: string;
-
-    @Matches(LedgerVoting.UID_REG_EXP)
-    votingUid: string;
 }

@@ -1,9 +1,7 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { Type } from 'class-transformer';
-import { Matches, IsString, IsNumberString, IsOptional, IsDefined, ValidateNested } from 'class-validator';
+import { Matches, IsString, IsNumberString, IsOptional } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
 import { LedgerCoin } from '../../../ledger/coin';
 import { LedgerVoting } from '../../../ledger/voting';
 
@@ -37,10 +35,10 @@ export interface ICoinEmitDto extends ITraceable {
     amount: string;
     coinUid: string;
     objectUid: string;
-    votingUid: string;
+    votingUid?: string;
 }
 
-class CoinEmitDto implements ICoinEmitDto {
+export class CoinEmitDto implements ICoinEmitDto {
     @IsString()
     objectUid: string;
 
@@ -51,5 +49,6 @@ class CoinEmitDto implements ICoinEmitDto {
     coinUid: string;
 
     @Matches(LedgerVoting.UID_REG_EXP)
-    votingUid: string;
+    @IsOptional()
+    votingUid?: string;
 }

@@ -39,7 +39,6 @@ export class CoinAddCommand extends ChaincodeTransportCommandAsync<ICoinAddDto, 
 export interface ICoinAddDto extends ITraceable {
     coinId: string;
     decimals: number;
-    votingUid: string;
     companyUid: string;
     emit?: {
         to: string;

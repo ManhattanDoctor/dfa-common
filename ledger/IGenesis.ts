@@ -12,9 +12,6 @@ import * as _ from 'lodash';
 //
 // --------------------------------------------------------------------------
 
-export const ROOT_VOTING_UID = LedgerVoting.createUid(new Date(2000, 0), _.padStart('0', 64, '0'));
-export const ROOT_REQUEST_ID = _.padStart('0', 64, '0');
-
 export const ROOT_USER_DESCRIPTION = 'ROOT_USER';
 export const ROOT_USER_CRYPTO_ALGORITHM = TransportCryptoManagerEd25519.ALGORITHM;
 export const ROOT_USER_CRYPTO_KEY_PUBLIC = 'e365007e85508c6b44d5101a1d59d0061a48fd1bcd393186ccb5e7ae938a59a8';
