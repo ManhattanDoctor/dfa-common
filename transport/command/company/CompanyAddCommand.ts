@@ -39,6 +39,7 @@ export class CompanyAddCommand extends ChaincodeTransportCommandAsync<ICompanyAd
 
 export interface ICompanyAddDto extends ITraceable {
     ownerUid: string;
+    votingUid: string;
     description: string;
     regulations: Array<ILedgerCompanyRegulation>;
 }
@@ -46,6 +47,9 @@ export interface ICompanyAddDto extends ITraceable {
 export class CompanyAddDto implements ICompanyAddDto {
     @Matches(LedgerUser.UID_REG_EXP)
     ownerUid: string;
+
+    @Matches(LedgerVoting.UID_REG_EXP)
+    votingUid: string;
 
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;
