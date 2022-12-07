@@ -19,6 +19,9 @@ export class CompanyUtil {
     public static isCanUserRoleSet(item: UserCompany): boolean {
         return PermissionUtil.isHasRole(item.roles, COMPANY_USER_ROLE_SET_ROLE);
     }
+    public static isCanCoinList(item: UserCompany): boolean {
+        return PermissionUtil.isHasRole(item.roles, COMPANY_COIN_LIST_ROLE);
+    }
 }
 
 export let COMPANY_ADD_TYPE = [UserType.COMPANY_MANAGER];
@@ -26,7 +29,7 @@ export let COMPANY_ADD_TYPE = [UserType.COMPANY_MANAGER];
 export let COMPANY_PROJECT_ADD_ROLE = [LedgerCompanyRole.PROJECT_MANAGER];
 export let COMPANY_PROJECT_ADD_STATUS = [CompanyStatus.ACTIVE];
 
-export let COMPANY_USER_LIST_ROLE = [LedgerCompanyRole.COMPANY_MANAGER, LedgerCompanyRole.USER_MANAGER, LedgerCompanyRole.COIN_MANAGER, LedgerCompanyRole.PROJECT_MANAGER];
+export let COMPANY_COIN_LIST_ROLE = [LedgerCompanyRole.USER_MANAGER, LedgerCompanyRole.COIN_MANAGER];
 
 export let COMPANY_USER_ROLE_GET_ROLE = [LedgerCompanyRole.USER_MANAGER, LedgerCompanyRole.COMPANY_MANAGER];
 export let COMPANY_USER_ROLE_SET_ROLE = [LedgerCompanyRole.USER_MANAGER, LedgerCompanyRole.COMPANY_MANAGER];

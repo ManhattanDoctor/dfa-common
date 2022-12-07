@@ -5,7 +5,7 @@ import { LedgerCompanyRole } from "./role/LedgerCompanyRole";
 import { LedgerCoinIdPreset } from "./coin/LedgerCoinId";
 import { LedgerVoting } from './voting/LedgerVoting';
 import * as _ from 'lodash';
-import { LedgerCompanyVotingProposalType } from "@project/common/ledger/company/voting";
+import { LedgerCompanyVotingProposalType } from "./company/voting/LedgerCompanyVotingProposal";
 
 // --------------------------------------------------------------------------
 //

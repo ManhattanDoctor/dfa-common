@@ -102,7 +102,10 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     }
 
     public async coinExchangeGet(data?: ITraceable): Promise<ICoinExchangeGetDtoResponse> {
-        return this.call<ICoinExchangeGetDtoResponse, ITraceable>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
+        let item = await this.call<ICoinExchangeGetDtoResponse, ITraceable>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
+        item.to = TransformUtil.toClass(CoinBalance, item.to);
+        item.from = TransformUtil.toClass(CoinBalance, item.from);
+        return item;
     }
 
     public async coinBalanceList(data?: ICoinBalanceListDto): Promise<ICoinBalanceListDtoResponse> {

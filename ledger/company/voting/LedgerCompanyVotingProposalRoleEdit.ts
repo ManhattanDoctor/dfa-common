@@ -1,7 +1,7 @@
 import { Matches, ArrayNotEmpty, IsEnum } from 'class-validator';
 import { LedgerCompanyRole } from '../../role/LedgerCompanyRole';
 import { LedgerUser } from '../../user/LedgerUser';
-import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
+import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
 
 export enum LedgerCompanyVotingProposalRoleAction {
     ADD = 'ADD',
@@ -24,4 +24,15 @@ export class LedgerCompanyVotingProposalRoleEdit extends LedgerCompanyVotingProp
     @ArrayNotEmpty()
     @IsEnum(LedgerCompanyRole, { each: true })
     public roles: Array<LedgerCompanyRole>;
+
+    // --------------------------------------------------------------------------
+    //
+    //  Constructor
+    //
+    // --------------------------------------------------------------------------
+
+    constructor() {
+        super();
+        this.type = LedgerCompanyVotingProposalType.ROLE_EDIT;
+    }
 }
