@@ -48,6 +48,7 @@ export class LedgerVotingFactory {
         }
         return TransformUtil.toClass(classType, item);
     }
+    
 
     public static createStep(item: LedgerVotingStepTemplate): LedgerVotingStep {
         if (item instanceof LedgerVotingStepCoinTemplate) {

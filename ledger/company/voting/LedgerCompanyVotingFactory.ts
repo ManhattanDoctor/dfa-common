@@ -1,8 +1,8 @@
-import { ClassType, DateUtil, UnreachableStatementError } from "@ts-core/common";
+import { ClassType, DateUtil, TransformUtil, UnreachableStatementError } from "@ts-core/common";
 import { LedgerCompanyVotingProposalCoinEdit } from "./LedgerCompanyVotingProposalCoinEdit";
 import { LedgerCompanyVotingProposalRoleEdit } from "./LedgerCompanyVotingProposalRoleEdit";
 import { LedgerCompanyRegulation, LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
-import { LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
+import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
 import * as _ from 'lodash';
 import { LedgerBadRequestError } from "../../error/LedgerError";
 import { LedgerVotingStep } from "../../voting/step/LedgerVotingStep";
@@ -33,6 +33,7 @@ export class LedgerCompanyVotingFactory {
         return DateUtil.getDate(Date.now() + item.duration);
     }
 
+    /*
     public static getProposalClass(type: LedgerCompanyRegulationType): ClassType<LedgerCompanyVotingProposal> {
         switch (type) {
             case LedgerCompanyRegulationType.PROJECT_ADD:
@@ -51,6 +52,25 @@ export class LedgerCompanyVotingFactory {
             default:
                 throw new UnreachableStatementError(type);
         }
+    }
+    */
+
+    public static transformProposal(item: LedgerCompanyVotingProposal): LedgerCompanyVotingProposal {
+        let classType: ClassType<LedgerCompanyVotingProposal> = null;
+        switch (item.type) {
+            case LedgerCompanyVotingProposalType.COIN_EDIT:
+                classType = LedgerCompanyVotingProposalCoinEdit;
+                break;
+            case LedgerCompanyVotingProposalType.ROLE_EDIT:
+                classType = LedgerCompanyVotingProposalRoleEdit;
+                break;
+            case LedgerCompanyVotingProposalType.PROJECT_ADD:
+                classType = LedgerCompanyVotingProposalProjectAdd;
+                break;
+            default:
+                throw new UnreachableStatementError(item.type);
+        }
+        return TransformUtil.toClass(classType, item);
     }
 }
 

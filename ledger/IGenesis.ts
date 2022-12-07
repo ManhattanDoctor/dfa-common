@@ -1,10 +1,11 @@
 import { DateUtil, TransportCryptoManagerEd25519 } from "@ts-core/common";
-import { LedgerCompanyRegulationType } from "./company/LedgerCompanyRegulation";
+import { ILedgerCompanyRegulation, LedgerCompanyRegulationType } from "./company/LedgerCompanyRegulation";
 import { LedgerVotingStepType } from "./voting/LedgerVotingStepType";
 import { LedgerCompanyRole } from "./role/LedgerCompanyRole";
 import { LedgerCoinIdPreset } from "./coin/LedgerCoinId";
 import { LedgerVoting } from './voting/LedgerVoting';
 import * as _ from 'lodash';
+import { LedgerCompanyVotingProposalType } from "@project/common/ledger/company/voting";
 
 // --------------------------------------------------------------------------
 //
@@ -21,9 +22,10 @@ export const ROOT_USER_CRYPTO_KEY_PUBLIC = 'e365007e85508c6b44d5101a1d59d0061a48
 export const ROOT_USER_CRYPTO_KEY_PRIVATE = 'e87501bc00a3db3ba436f7109198e0cb65c5f929eabcedbbb5a9874abc2c73a3e365007e85508c6b44d5101a1d59d0061a48fd1bcd393186ccb5e7ae938a59a8';
 
 export const ROOT_COMPANY_DESCRIPTION = 'ROOT_COMPANY';
-export const ROOT_COMPANY_REGULATIONS = [
+export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     {
         type: LedgerCompanyRegulationType.COIN_EMIT,
+        proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
@@ -35,72 +37,78 @@ export const ROOT_COMPANY_REGULATIONS = [
     },
     {
         type: LedgerCompanyRegulationType.COIN_BURN,
+        proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 10,
-                duration: DateUtil.MILLISECONDS_HOUR
+                duration: 5 * DateUtil.MILLISECONDS_HOUR
             }
         ]
     },
     {
         type: LedgerCompanyRegulationType.PROJECT_ADD,
+        proposal: LedgerCompanyVotingProposalType.PROJECT_ADD,
         steps: [
             {
                 type: LedgerVotingStepType.ROLE,
                 roles: [LedgerCompanyRole.EXPERT, LedgerCompanyRole.PROTECTOR],
-                duration: DateUtil.MILLISECONDS_HOUR
+                duration: 3 * DateUtil.MILLISECONDS_HOUR
             },
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: DateUtil.MILLISECONDS_HOUR
+                duration: 12 * DateUtil.MILLISECONDS_HOUR
             }
         ]
     },
     {
         type: LedgerCompanyRegulationType.EXPERT_ADD,
+        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: DateUtil.MILLISECONDS_MINUTE
+                duration: 20 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
     {
         type: LedgerCompanyRegulationType.EXPERT_REMOVE,
+        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: DateUtil.MILLISECONDS_HOUR,
+                duration: 7 * DateUtil.MILLISECONDS_HOUR,
             }
         ]
     },
     {
         type: LedgerCompanyRegulationType.PROTECTOR_ADD,
+        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: DateUtil.MILLISECONDS_MINUTE
+                duration: 12 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
     {
         type: LedgerCompanyRegulationType.PROTECTOR_REMOVE,
+        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: DateUtil.MILLISECONDS_MINUTE
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },

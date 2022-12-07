@@ -1,10 +1,11 @@
 import { LedgerVoting } from "../../voting/LedgerVoting";
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 import { LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
 import { ValidateNested, IsEnum, Matches, IsDefined } from 'class-validator';
-import { ILedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
+import { ILedgerCompanyVotingProposal, LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 import { LedgerCompany } from "../LedgerCompany";
 import { LedgerCompanyVotingFactory } from "./LedgerCompanyVotingFactory";
+import { LedgerVotingFactory } from "../../voting";
 
 export class LedgerCompanyVoting<V = ILedgerCompanyVotingProposal> extends LedgerVoting<LedgerCompanyRegulationType, V> {
     // --------------------------------------------------------------------------
@@ -32,7 +33,9 @@ export class LedgerCompanyVoting<V = ILedgerCompanyVotingProposal> extends Ledge
     @IsEnum(LedgerCompanyRegulationType)
     public type: LedgerCompanyRegulationType;
 
-    @Type(item => LedgerCompanyVotingFactory.getProposalClass(item.object.type))
+    // @Type(item => LedgerCompanyVotingFactory.getProposalClass(item.object.type))
+    @Type(item => LedgerCompanyVotingProposal)
+    @Transform(item => LedgerCompanyVotingFactory.transformProposal(item.value), { toClassOnly: true })
     @IsDefined()
     @ValidateNested()
     public proposal: V;
