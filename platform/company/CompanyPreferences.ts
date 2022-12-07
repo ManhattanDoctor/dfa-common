@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 
 export class CompanyPreferences {
-    logo: string;
     title: string;
+    picture: string;
     description: string;
 }
 

@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 
 export class ProjectPreferences {
-    logo: string;
     title: string;
+    picture: string;
     description: string;
 }
 

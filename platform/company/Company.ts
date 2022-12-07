@@ -3,6 +3,7 @@ import { CompanyStatus } from './CompanyStatus';
 import { CompanyPreferences } from './CompanyPreferences';
 import { CoinBalance } from '../coin/CoinBalance';
 import { ILedgreable } from '../ILedgerable';
+import { LedgerCompanyRegulation } from '../../ledger/company/LedgerCompanyRegulation';
 
 export class Company implements ILedgreable {
     id: number;
@@ -17,6 +18,9 @@ export class Company implements ILedgreable {
 
     @Type(() => CompanyPreferences)
     preferences: CompanyPreferences;
+
+    @Type(() => LedgerCompanyRegulation)
+    regulations: Array<LedgerCompanyRegulation>;
 
     balances?: Array<CoinBalance>;
 }
