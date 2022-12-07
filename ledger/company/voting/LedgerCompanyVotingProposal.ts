@@ -1,5 +1,6 @@
 export interface ILedgerCompanyVotingProposal {
     type: LedgerCompanyVotingProposalType;
+    [key: string]: any;
 }
 
 export class LedgerCompanyVotingProposal implements ILedgerCompanyVotingProposal {
