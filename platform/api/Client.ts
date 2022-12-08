@@ -12,8 +12,9 @@ import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProj
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
 import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
-import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse, ICompanyVotingAddDto, ICompanyVotingAddDtoResponse, ICompanyVotingListDto, ICompanyVotingListDtoResponse } from './company';
-import { CompanyUser } from '../company';
+import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse, ICompanyVotingAddDto, ICompanyVotingAddDtoResponse } from './company';
+import { CompanyUser, CompanyVoting } from '../company';
+import { IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse } from './voting';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -79,11 +80,6 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
-    public async companyVotingList(data: ICompanyVotingListDto, id?: number): Promise<ICompanyVotingListDtoResponse> {
-        let item = await this.call<ICompanyVotingListDtoResponse>(`${COMPANY_URL}/${id}/voting`, { data: TraceUtil.addIfNeed(data) });
-        return item;
-    }
-
     public async companyUserList(data?: ICompanyUserListDto, id?: number): Promise<ICompanyUserListDtoResponse> {
         let item = await this.call<ICompanyUserListDtoResponse, ICompanyUserListDto>(`${COMPANY_URL}/${id}/user`, { data: TraceUtil.addIfNeed(data) });
         item.items = TransformUtil.toClassMany(CompanyUser, item.items);
@@ -121,6 +117,23 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async coinBalanceList(data?: ICoinBalanceListDto): Promise<ICoinBalanceListDtoResponse> {
         let item = await this.call<ICoinBalanceListDtoResponse, ICoinBalanceListDto>(COIN_BALANCE_URL, { data: TraceUtil.addIfNeed(data) });
         item.items = TransformUtil.toClassMany(CoinBalance, item.items);
+        return item;
+    }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Voting Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public async votingGet(id: number): Promise<IVotingGetDtoResponse> {
+        let item = await this.call<CompanyVoting>(`${VOTING_URL}/${id}`);
+        return TransformUtil.toClass(CompanyVoting, item);
+    }
+
+    public async votingList(data?: IVotingListDto): Promise<IVotingListDtoResponse> {
+        let item = await this.call<IVotingListDtoResponse, IVotingListDto>(VOTING_URL, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(CompanyVoting, item.items);
         return item;
     }
 
@@ -190,6 +203,8 @@ const PREFIX = 'api/';
 
 export const USER_URL = PREFIX + 'user';
 export const COMPANY_URL = PREFIX + 'company';
+
+export const VOTING_URL = PREFIX + 'voting';
 
 export const COIN_URL = PREFIX + 'coin';
 export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
