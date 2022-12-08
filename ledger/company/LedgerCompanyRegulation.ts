@@ -4,7 +4,7 @@ import { IsEnum, IsDefined, ValidateNested } from 'class-validator';
 import { ILedgerVotingTemplate } from '../voting/template/ILedgerVotingTemplate';
 import { LedgerVotingStepTemplate } from '../voting/template/LedgerVotingStepTemplate';
 import { LedgerVotingFactory } from '../voting/LedgerVotingFactory';
-import { LedgerCompanyVotingProposalType } from '../company/voting';
+import { LedgerCompanyVotingProposalType } from '../company/voting/LedgerCompanyVotingProposal';
 
 export enum LedgerCompanyRegulationType {
     COIN_EMIT = 'COMPANY_COIN_EMIT',
