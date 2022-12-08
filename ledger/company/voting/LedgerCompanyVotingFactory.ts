@@ -51,10 +51,3 @@ export class LedgerCompanyVotingFactory {
         return TransformUtil.toClass(classType, item);
     }
 }
-
-export interface ILedgerCompanyVotingAddDto {
-    date: Date;
-    type: LedgerCompanyRegulationType;
-    proposal: LedgerCompanyVotingProposal;
-    transactionHash: string;
-}
