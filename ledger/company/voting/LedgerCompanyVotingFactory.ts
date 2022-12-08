@@ -33,28 +33,6 @@ export class LedgerCompanyVotingFactory {
         return DateUtil.getDate(Date.now() + item.duration);
     }
 
-    /*
-    public static getProposalClass(type: LedgerCompanyRegulationType): ClassType<LedgerCompanyVotingProposal> {
-        switch (type) {
-            case LedgerCompanyRegulationType.PROJECT_ADD:
-                return LedgerCompanyVotingProposalProjectAdd;
-
-            case LedgerCompanyRegulationType.COIN_EMIT:
-            case LedgerCompanyRegulationType.COIN_BURN:
-                return LedgerCompanyVotingProposalCoinEdit;
-
-            case LedgerCompanyRegulationType.EXPERT_ADD:
-            case LedgerCompanyRegulationType.PROTECTOR_ADD:
-            case LedgerCompanyRegulationType.EXPERT_REMOVE:
-            case LedgerCompanyRegulationType.PROTECTOR_REMOVE:
-                return LedgerCompanyVotingProposalRoleEdit;
-
-            default:
-                throw new UnreachableStatementError(type);
-        }
-    }
-    */
-
     public static transformProposal(item: LedgerCompanyVotingProposal): LedgerCompanyVotingProposal {
         let classType: ClassType<LedgerCompanyVotingProposal> = null;
         switch (item.type) {
@@ -72,11 +50,4 @@ export class LedgerCompanyVotingFactory {
         }
         return TransformUtil.toClass(classType, item);
     }
-}
-
-export interface ILedgerCompanyVotingAddDto {
-    date: Date;
-    type: LedgerCompanyRegulationType;
-    proposal: LedgerCompanyVotingProposal;
-    transactionHash: string;
 }

@@ -12,7 +12,7 @@ import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProj
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
 import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
-import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
+import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse, ICompanyVotingAddDto, ICompanyVotingAddDtoResponse } from './company';
 import { CompanyUser } from '../company';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
@@ -74,6 +74,11 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return TransformUtil.toClass(UserCompany, item);
     }
 
+    public async companyVotingAdd(data: ICompanyVotingAddDto, id?: number): Promise<ICompanyVotingAddDtoResponse> {
+        let item = await this.call<ICompanyVotingAddDtoResponse>(`${COMPANY_URL}/${id}/voting`, { data: TraceUtil.addIfNeed(data) });
+        return item;
+    }
+
     public async companyUserList(data?: ICompanyUserListDto, id?: number): Promise<ICompanyUserListDtoResponse> {
         let item = await this.call<ICompanyUserListDtoResponse, ICompanyUserListDto>(`${COMPANY_URL}/${id}/user`, { data: TraceUtil.addIfNeed(data) });
         item.items = TransformUtil.toClassMany(CompanyUser, item.items);
@@ -102,7 +107,10 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     }
 
     public async coinExchangeGet(data?: ITraceable): Promise<ICoinExchangeGetDtoResponse> {
-        return this.call<ICoinExchangeGetDtoResponse, ITraceable>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
+        let item = await this.call<ICoinExchangeGetDtoResponse, ITraceable>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
+        item.to = TransformUtil.toClass(CoinBalance, item.to);
+        item.from = TransformUtil.toClass(CoinBalance, item.from);
+        return item;
     }
 
     public async coinBalanceList(data?: ICoinBalanceListDto): Promise<ICoinBalanceListDtoResponse> {
@@ -177,6 +185,7 @@ const PREFIX = 'api/';
 
 export const USER_URL = PREFIX + 'user';
 export const COMPANY_URL = PREFIX + 'company';
+export const COMPANY_VOTING_URL = PREFIX + 'companyVoting';
 
 export const COIN_URL = PREFIX + 'coin';
 export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
