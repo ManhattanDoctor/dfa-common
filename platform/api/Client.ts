@@ -12,9 +12,10 @@ import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProj
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
 import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
-import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse, ICompanyVotingAddDto, ICompanyVotingAddDtoResponse } from './company';
+import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
 import { CompanyUser, CompanyVoting } from '../company';
-import { IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse } from './voting';
+import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse } from './voting';
+import { IVotingAddDtoResponse } from './voting';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -75,11 +76,6 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return TransformUtil.toClass(UserCompany, item);
     }
 
-    public async companyVotingAdd(data: ICompanyVotingAddDto, id?: number): Promise<ICompanyVotingAddDtoResponse> {
-        let item = await this.call<ICompanyVotingAddDtoResponse>(`${COMPANY_URL}/${id}/voting`, { data: TraceUtil.addIfNeed(data) });
-        return item;
-    }
-
     public async companyUserList(data?: ICompanyUserListDto, id?: number): Promise<ICompanyUserListDtoResponse> {
         let item = await this.call<ICompanyUserListDtoResponse, ICompanyUserListDto>(`${COMPANY_URL}/${id}/user`, { data: TraceUtil.addIfNeed(data) });
         item.items = TransformUtil.toClassMany(CompanyUser, item.items);
@@ -129,6 +125,11 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async votingGet(id: number): Promise<IVotingGetDtoResponse> {
         let item = await this.call<CompanyVoting>(`${VOTING_URL}/${id}`);
         return TransformUtil.toClass(CompanyVoting, item);
+    }
+
+    public async votingAdd(data: IVotingAddDto): Promise<IVotingAddDtoResponse> {
+        let item = await this.call<IVotingAddDtoResponse>(VOTING_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
+        return item;
     }
 
     public async votingList(data?: IVotingListDto): Promise<IVotingListDtoResponse> {
