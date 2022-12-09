@@ -1,4 +1,4 @@
-import { IsString, IsEnum, IsNumberString } from 'class-validator';
+import { IsString, IsEnum, IsInt, IsNumberString } from 'class-validator';
 import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
 
 export enum LedgerCompanyVotingProposalCoinAction {
@@ -18,6 +18,9 @@ export class LedgerCompanyVotingProposalCoinEdit extends LedgerCompanyVotingProp
 
     @IsString()
     public coinId: string;
+
+    @IsInt()
+    public decimals: number;
 
     @IsNumberString()
     public amount: string;

@@ -10,6 +10,8 @@ export class VotingStep implements ILedgerVotingState {
     index: number;
     votingId: number;
 
+    total: string;
+    
     votesFor: string;
     votesTotal: string;
     votesResult: string;
@@ -25,7 +27,7 @@ export class VotingStep implements ILedgerVotingState {
     finishedDate: Date;
 
     roles?: Array<LedgerRoles>;
-    total?: string;
     coinId?: string;
     percent?: number;
+    decimals?: number;
 }

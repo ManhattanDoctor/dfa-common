@@ -1,4 +1,4 @@
-import { IsString, Matches, IsNumberString } from 'class-validator';
+import { IsString, Matches, IsNumberString, IsInt } from 'class-validator';
 import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
 import { LedgerUser } from '../../user/LedgerUser';
 import { RegExpUtil } from '../../../util/RegExpUtil';
@@ -21,6 +21,9 @@ export class LedgerCompanyVotingProposalProjectAdd extends LedgerCompanyVotingPr
 
     @IsNumberString()
     public amount: string;
+
+    @IsInt()
+    public decimals: number;
 
     // --------------------------------------------------------------------------
     //
