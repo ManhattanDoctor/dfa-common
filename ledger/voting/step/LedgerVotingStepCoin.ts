@@ -28,6 +28,9 @@ export class LedgerVotingStepCoin extends LedgerVotingStep {
     @IsString()
     public coinId: string;
 
+    @IsInt()
+    public decimals: number;
+
     @Min(0)
     @Max(100)
     @IsInt()
