@@ -16,6 +16,8 @@ import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoRespons
 import { CompanyUser, CompanyVoting } from '../company';
 import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse } from './voting';
 import { IVotingAddDtoResponse } from './voting';
+import { LedgerCoinId, LedgerCoinObjectBalance } from '../../ledger/coin';
+import { ICoinObjectBalanceGetDto } from '../../transport/command/coin';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -100,7 +102,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     }
 
     public async coinExchange(data?: ICoinExchangeDto): Promise<void> {
-        await this.call<void, ICoinExchangeDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
+        return this.call<void, ICoinExchangeDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
     public async coinExchangeGet(data?: ITraceable): Promise<ICoinExchangeGetDtoResponse> {
@@ -114,6 +116,11 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         let item = await this.call<ICoinBalanceListDtoResponse, ICoinBalanceListDto>(COIN_BALANCE_URL, { data: TraceUtil.addIfNeed(data) });
         item.items = TransformUtil.toClassMany(CoinBalance, item.items);
         return item;
+    }
+
+    public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string): Promise<LedgerCoinObjectBalance> {
+        let item = await this.call<LedgerCoinObjectBalance>(`${COIN_BALANCE_URL}/${coinId}/${objectUid}`);
+        return TransformUtil.toClass(LedgerCoinObjectBalance, item);
     }
 
     // --------------------------------------------------------------------------

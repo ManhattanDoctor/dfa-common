@@ -78,9 +78,9 @@ export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> imple
         return !_.isNil(this._votesAgainst) ? this._votesAgainst : '0';
     }
 }
-export interface IVote {
+export interface IVote<T extends LedgerVoteValue = LedgerVoteValue> {
     uid: string;
-    value: ILedgerVote;
+    value: ILedgerVote<T>;
 }
 
 export enum LedgerVoteType {
