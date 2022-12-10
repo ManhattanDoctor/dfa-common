@@ -135,7 +135,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     }
 
     public async votingVote(data: IVotingVoteDto): Promise<void> {
-        return this.call<void>(VOTING_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
+        return this.call<void>(VOTING_VOTE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
     public async votingAdd(data: IVotingAddDto): Promise<IVotingAddDtoResponse> {
@@ -217,6 +217,7 @@ export const USER_URL = PREFIX + 'user';
 export const COMPANY_URL = PREFIX + 'company';
 
 export const VOTING_URL = PREFIX + 'voting';
+export const VOTING_VOTE_URL = PREFIX + 'votingVote';
 
 export const COIN_URL = PREFIX + 'coin';
 export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
