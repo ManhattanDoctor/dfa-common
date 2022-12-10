@@ -14,7 +14,7 @@ import { ProjectUser } from '../project';
 import { ICoinBalanceGetDto, ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
 import { CompanyUser, CompanyVoting } from '../company';
-import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse } from './voting';
+import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse, IVotingVoteDto } from './voting';
 import { IVotingAddDtoResponse } from './voting';
 import { LedgerCoinId, LedgerCoinObjectBalance } from '../../ledger/coin';
 import { ICoinObjectBalanceGetDto } from '../../transport/command/coin';
@@ -132,6 +132,10 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async votingGet(id: number): Promise<IVotingGetDtoResponse> {
         let item = await this.call<CompanyVoting>(`${VOTING_URL}/${id}`);
         return TransformUtil.toClass(CompanyVoting, item);
+    }
+
+    public async votingVote(data: IVotingVoteDto): Promise<void> {
+        return this.call<void>(VOTING_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
     public async votingAdd(data: IVotingAddDto): Promise<IVotingAddDtoResponse> {
