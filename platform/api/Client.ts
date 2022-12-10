@@ -118,9 +118,9 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
-    public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string): Promise<LedgerCoinObjectBalance> {
+    public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string): Promise<CoinBalance> {
         let item = await this.call<LedgerCoinObjectBalance>(`${COIN_BALANCE_URL}/${coinId}/${objectUid}`);
-        return TransformUtil.toClass(LedgerCoinObjectBalance, item);
+        return TransformUtil.toClass(CoinBalance, item);
     }
 
     // --------------------------------------------------------------------------
