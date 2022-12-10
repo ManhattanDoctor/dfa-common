@@ -11,7 +11,7 @@ import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
-import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { ICoinBalanceGetDto, ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
 import { CompanyUser, CompanyVoting } from '../company';
 import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse } from './voting';
@@ -119,7 +119,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     }
 
     public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string): Promise<CoinBalance> {
-        let item = await this.call<LedgerCoinObjectBalance>(`${COIN_BALANCE_URL}/${coinId}/${objectUid}`);
+        let item = await this.call<CoinBalance, ICoinBalanceGetDto>(`${COIN_BALANCE_URL}/${coinId}`, { data: TraceUtil.addIfNeed({ objectUid }) });
         return TransformUtil.toClass(CoinBalance, item);
     }
 
