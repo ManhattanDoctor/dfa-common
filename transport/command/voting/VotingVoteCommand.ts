@@ -5,7 +5,7 @@ import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand'
 import { ILedgerVote, LedgerVote } from '../../../ledger/voting/LedgerVotingList';
 import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
 
-export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, IVoteDtoResponse> {
+export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVotingVoteDto, IVotingVoteDtoResponse> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -20,8 +20,8 @@ export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, 
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: IVoteDto) {
-        super(VotingVoteCommand.NAME, TransformUtil.toClass(VoteDto, request));
+    constructor(request: IVotingVoteDto) {
+        super(VotingVoteCommand.NAME, TransformUtil.toClass(VotingVoteDto, request));
     }
 
     // --------------------------------------------------------------------------
@@ -30,20 +30,20 @@ export class VotingVoteCommand extends ChaincodeTransportCommandAsync<IVoteDto, 
     //
     // --------------------------------------------------------------------------
 
-    protected checkResponse(item: IVoteDtoResponse): VoteDtoResponse {
-        return TransformUtil.toClass(VoteDtoResponse, item);
+    protected checkResponse(item: IVotingVoteDtoResponse): VotingVoteDtoResponse {
+        return TransformUtil.toClass(VotingVoteDtoResponse, item);
     }
 }
 
-export interface IVoteDto extends ITraceable {
+export interface IVotingVoteDto extends ITraceable {
     uid: string;
     value: ILedgerVote;
 }
-export interface IVoteDtoResponse {
+export interface IVotingVoteDtoResponse {
     stepIndex: number;
 }
 
-class VoteDto implements IVoteDto {
+class VotingVoteDto implements IVotingVoteDto {
     @Matches(LedgerVoting.UID_REG_EXP)
     uid: string;
 
@@ -51,7 +51,7 @@ class VoteDto implements IVoteDto {
     @ValidateNested()
     value: LedgerVote;
 }
-class VoteDtoResponse implements IVoteDtoResponse {
+class VotingVoteDtoResponse implements IVotingVoteDtoResponse {
     @IsInt()
     stepIndex: number;
 }
