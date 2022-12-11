@@ -1,11 +1,8 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
-import { Type } from 'class-transformer';
-import { IsDefined, ValidateNested } from 'class-validator';
+import { Matches, IsString, IsNumberString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { ICoinObject, CoinObject } from './ICoinObject';
-import { ICoinAmount, CoinAmount } from './ICoinAmount';
-import { ILedgerPaymentDetails, LedgerPaymentDetails } from '../../../ledger/payment';
+import { LedgerCoin } from '../../../ledger/coin';
 
 export class CoinTransferCommand extends ChaincodeTransportCommandAsync<ICoinTransferDto, void> {
     // --------------------------------------------------------------------------
@@ -28,30 +25,22 @@ export class CoinTransferCommand extends ChaincodeTransportCommandAsync<ICoinTra
 }
 
 export interface ICoinTransferDto extends ITraceable {
-    to: ICoinObject;
-    from: ICoinObject;
-    amount: ICoinAmount;
-    details: ILedgerPaymentDetails;
+    to: string;
+    from: string;
+    amount: string;
+    coinUid: string;
 }
 
 class CoinTransferDto implements ICoinTransferDto {
-    @Type(() => CoinObject)
-    @IsDefined()
-    @ValidateNested()
-    to: CoinObject;
+    @IsString()
+    to: string;
 
-    @Type(() => CoinObject)
-    @IsDefined()
-    @ValidateNested()
-    from: CoinObject;
+    @IsString()
+    from: string;
 
-    @Type(() => CoinAmount)
-    @IsDefined()
-    @ValidateNested()
-    amount: CoinAmount;
+    @IsNumberString()
+    amount: string;
 
-    @Type(() => LedgerPaymentDetails)
-    @IsDefined()
-    @ValidateNested()
-    details: LedgerPaymentDetails;
+    @Matches(LedgerCoin.COIN_ID_PATTERN)
+    coinUid: string;
 }
