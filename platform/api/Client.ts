@@ -11,11 +11,13 @@ import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
-import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { ICoinBalanceGetDto, ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
 import { CompanyUser, CompanyVoting } from '../company';
-import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse } from './voting';
+import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse, IVotingVoteDto } from './voting';
 import { IVotingAddDtoResponse } from './voting';
+import { LedgerCoinId, LedgerCoinObjectBalance } from '../../ledger/coin';
+import { ICoinObjectBalanceGetDto } from '../../transport/command/coin';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -100,7 +102,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     }
 
     public async coinExchange(data?: ICoinExchangeDto): Promise<void> {
-        await this.call<void, ICoinExchangeDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
+        return this.call<void, ICoinExchangeDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
     public async coinExchangeGet(data?: ITraceable): Promise<ICoinExchangeGetDtoResponse> {
@@ -116,6 +118,11 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
+    public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string): Promise<CoinBalance> {
+        let item = await this.call<CoinBalance, ICoinBalanceGetDto>(`${COIN_BALANCE_URL}/${coinId}`, { data: TraceUtil.addIfNeed({ objectUid }) });
+        return TransformUtil.toClass(CoinBalance, item);
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Voting Methods
@@ -125,6 +132,10 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async votingGet(id: number): Promise<IVotingGetDtoResponse> {
         let item = await this.call<CompanyVoting>(`${VOTING_URL}/${id}`);
         return TransformUtil.toClass(CompanyVoting, item);
+    }
+
+    public async votingVote(data: IVotingVoteDto): Promise<void> {
+        return this.call<void>(VOTING_VOTE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
     public async votingAdd(data: IVotingAddDto): Promise<IVotingAddDtoResponse> {
@@ -206,6 +217,7 @@ export const USER_URL = PREFIX + 'user';
 export const COMPANY_URL = PREFIX + 'company';
 
 export const VOTING_URL = PREFIX + 'voting';
+export const VOTING_VOTE_URL = PREFIX + 'votingVote';
 
 export const COIN_URL = PREFIX + 'coin';
 export const COIN_BALANCE_URL = PREFIX + 'coinBalance';

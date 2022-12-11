@@ -46,3 +46,4 @@ export class LedgerCoinUtil {
         MathUtil.config = _.isNil(item) ? { toExpNeg: -100, toExpPos: 100, precision: 100 } : item;
     }
 }
+
