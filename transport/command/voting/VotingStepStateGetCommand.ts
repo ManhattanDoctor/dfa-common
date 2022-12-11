@@ -1,7 +1,7 @@
 import { ITraceable } from '@ts-core/common';
 import { Type } from 'class-transformer';
 import { TransformUtil } from '@ts-core/common';
-import { Matches, IsDate, IsOptional, IsInt, IsDefined, ValidateNested } from 'class-validator';
+import { Matches, IsDate, IsOptional, IsInt, IsNumberString, IsDefined, ValidateNested } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerVotingState } from '../../../ledger/voting/LedgerVotingState';
 import { LedgerVoting } from '../../../ledger/voting/LedgerVoting';
@@ -56,6 +56,10 @@ class VotingStepStateGetDtoResponse implements ILedgerVotingStepState {
     @IsDefined()
     @ValidateNested()
     state: LedgerVotingState;
+
+    @IsOptional()
+    @IsNumberString()
+    total: string;
 
     @IsOptional()
     @Type(() => Date)

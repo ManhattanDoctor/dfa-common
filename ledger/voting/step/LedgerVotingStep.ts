@@ -49,6 +49,7 @@ export abstract class LedgerVotingStep {
     public stateGet(): ILedgerVotingStepState {
         return {
             state: this.list.stateGet(),
+            total: this.total,
             startedDate: this.startedDate,
             expiredDate: this.expiredDate,
             finishedDate: this.finishedDate
@@ -59,6 +60,7 @@ export abstract class LedgerVotingStep {
 
 export interface ILedgerVotingStepState {
     state: ILedgerVotingState;
+    total: string;
     startedDate: Date;
     expiredDate: Date;
     finishedDate: Date;
