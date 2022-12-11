@@ -31,7 +31,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 10,
-                duration: DateUtil.MILLISECONDS_HOUR
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
@@ -43,7 +43,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 10,
-                duration: 5 * DateUtil.MILLISECONDS_HOUR
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
@@ -54,13 +54,13 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.ROLE,
                 roles: [LedgerCompanyRole.EXPERT, LedgerCompanyRole.PROTECTOR],
-                duration: 3 * DateUtil.MILLISECONDS_HOUR
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE
             },
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: 12 * DateUtil.MILLISECONDS_HOUR
+                duration: 5 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
@@ -72,7 +72,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: 20 * DateUtil.MILLISECONDS_MINUTE
+                duration: 5 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
@@ -84,7 +84,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 percent: 5,
-                duration: 7 * DateUtil.MILLISECONDS_HOUR,
+                duration: 5 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
