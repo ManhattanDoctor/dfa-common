@@ -7,6 +7,7 @@ import { LedgerVotingStatus } from '../../ledger/voting/LedgerVoting';
 import { LedgerVotingStep } from '../../ledger/voting/step/LedgerVotingStep';
 import { ILedgreable } from '../ILedgerable';
 import { VotingStep } from '../voting/VotingStep';
+import * as _ from 'lodash';
 
 export class CompanyVoting implements ILedgreable {
     id: number;
@@ -34,5 +35,7 @@ export class CompanyVoting implements ILedgreable {
 
     @Type(() => Date)
     completedDate: Date;
+
 }
+
 

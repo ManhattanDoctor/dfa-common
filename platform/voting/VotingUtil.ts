@@ -1,5 +1,7 @@
 
 import * as _ from 'lodash';
+import { LedgerVotingStatus } from '../../ledger/voting';
+import { CompanyVoting } from '../company';
 
 export class VotingUtil {
 
@@ -9,7 +11,7 @@ export class VotingUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static isCanVote(item: any): boolean {
-        return true;
+    public static isCanVote(item: CompanyVoting): boolean {
+        return item.status === LedgerVotingStatus.IN_PROGRESS;
     }
 }
