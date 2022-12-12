@@ -32,7 +32,6 @@ export enum CoinExchangeType {
 export interface ICoinExchangeDto extends ICoinRateGetDto {
     rate: string;
     amount: string;
-    objectUid: string;
 }
 
 class CoinExchangeDto extends CoinRateGetDto implements ICoinExchangeDto {

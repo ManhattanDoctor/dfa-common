@@ -19,8 +19,3 @@ export class CoinExchangedEvent extends LedgerEventDefault {
         super(CoinExchangedEvent.NAME);
     }
 }
-
-export interface ICoinExchangedDto {
-    to: string;
-    from: string;
-}
