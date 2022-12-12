@@ -40,7 +40,4 @@ class CoinExchangeDto extends CoinRateGetDto implements ICoinExchangeDto {
 
     @IsNumberString()
     amount: string;
-
-    @IsString()
-    objectUid: string;
 }
