@@ -49,13 +49,21 @@ export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> imple
         return { votesFor: this.votesFor, votesTotal: this.votesTotal, votesResult: this.votesResult, votesAgainst: this.votesAgainst };
     }
 
+    public voteGetByValue(value: T): IVote<T> {
+        return _.find(this.voters, item => item.value.value == value);
+    }
+
+    public votesGetByValue(value: T): Array<IVote<T>> {
+        return _.filter(this.voters, item => item.value.value == value);
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Public Properties
     //
     // --------------------------------------------------------------------------
 
-    public get voters(): Array<IVote> {
+    public get voters(): Array<IVote<T>> {
         return Object.entries(this.storage).map(item => {
             return { uid: item[0], value: item[1] };
         })

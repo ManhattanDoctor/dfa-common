@@ -34,4 +34,6 @@ export class LedgerVotingListRole extends LedgerVotingList<LedgerVotingRole> {
                 throw new UnreachableStatementError(value.type);
         }
     }
+
+
 }
