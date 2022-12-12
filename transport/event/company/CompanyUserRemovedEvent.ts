@@ -8,7 +8,7 @@ export class CompanyUserRemovedEvent extends LedgerVotingEvent {
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerEvent.USER_REMOVED;
+    public static readonly NAME = LedgerEvent.COMPANY_USER_REMOVED;
 
     // --------------------------------------------------------------------------
     //

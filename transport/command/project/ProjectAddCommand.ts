@@ -6,6 +6,8 @@ import { TransformUtil } from '@ts-core/common';
 import { RegExpUtil } from '../../../util';
 import { LedgerCompany } from '../../../ledger/company';
 import { LedgerUser } from '../../../ledger/user';
+import { LedgerVoting } from '../../../ledger/voting';
+
 
 export class ProjectAddCommand extends ChaincodeTransportCommandAsync<IProjectAddDto, LedgerProject> {
     // --------------------------------------------------------------------------
@@ -39,6 +41,7 @@ export class ProjectAddCommand extends ChaincodeTransportCommandAsync<IProjectAd
 
 export interface IProjectAddDto extends ITraceable {
     ownerUid: string;
+    votingUid: string;
     companyUid: string;
     description: string;
 }
@@ -49,6 +52,9 @@ export class ProjectAddDto implements IProjectAddDto {
 
     @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
+
+    @Matches(LedgerVoting.UID_REG_EXP)
+    votingUid: string;;
 
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
     description: string;

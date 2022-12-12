@@ -1,4 +1,4 @@
-import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
+import { LedgerEvent, LedgerEventDefault } from '../LedgerEvent';
 
 export class CoinExchangedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------

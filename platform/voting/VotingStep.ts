@@ -9,14 +9,14 @@ export class VotingStep implements ILedgerVotingState {
     type: LedgerVotingStepType;
     index: number;
     votingId: number;
-
-    total: string;
     
     votesFor: string;
     votesTotal: string;
     votesResult: string;
     votesAgainst: string;
 
+    total: string;
+    
     @Type(() => Date)
     startedDate: Date;
 

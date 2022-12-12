@@ -1,6 +1,7 @@
-import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
+import { ILedgerVotingEventDto } from '@project/common/transport/event/LedgerVotingEvent';
+import { LedgerEvent, LedgerEventDefault } from '../LedgerEvent';
 
-export class ProjectAddedEvent extends LedgerEventDefault{
+export class ProjectAddedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -15,7 +16,11 @@ export class ProjectAddedEvent extends LedgerEventDefault{
     //
     // --------------------------------------------------------------------------
 
-    constructor() {
-        super(ProjectAddedEvent.NAME);
+    constructor(data: IProjectAddedDto) {
+        super(ProjectAddedEvent.NAME, data);
     }
+}
+
+export interface IProjectAddedDto extends ILedgerVotingEventDto {
+    uid: string;
 }

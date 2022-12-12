@@ -1,7 +1,6 @@
 import { TransformUtil } from '@ts-core/common';
 import { IsNumberString, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { LedgerCoin } from '../../../ledger/coin';
 import { CoinRateGetDto, ICoinRateGetDto } from './CoinRateGetCommand';
 
 export class CoinExchangeCommand extends ChaincodeTransportCommandAsync<ICoinExchangeDto, void> {
