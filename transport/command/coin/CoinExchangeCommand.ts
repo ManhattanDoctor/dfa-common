@@ -1,7 +1,6 @@
 import { TransformUtil } from '@ts-core/common';
 import { IsNumberString, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { LedgerCoin } from '../../../ledger/coin';
 import { CoinRateGetDto, ICoinRateGetDto } from './CoinRateGetCommand';
 
 export class CoinExchangeCommand extends ChaincodeTransportCommandAsync<ICoinExchangeDto, void> {
@@ -33,6 +32,7 @@ export enum CoinExchangeType {
 export interface ICoinExchangeDto extends ICoinRateGetDto {
     rate: string;
     amount: string;
+    objectUid: string;
 }
 
 class CoinExchangeDto extends CoinRateGetDto implements ICoinExchangeDto {
@@ -41,4 +41,7 @@ class CoinExchangeDto extends CoinRateGetDto implements ICoinExchangeDto {
 
     @IsNumberString()
     amount: string;
+
+    @IsString()
+    objectUid: string;
 }

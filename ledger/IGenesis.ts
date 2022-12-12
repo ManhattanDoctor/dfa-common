@@ -114,7 +114,6 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     },
 ];
 
-export const ROOT_COIN_VOTE_AMOUNT = '1000';
 export const ROOT_COIN_VOTE_DECIMALS = 0;
 
 export const ROOT_COIN_RUB_AMOUNT = '100000';

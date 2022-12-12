@@ -1,4 +1,4 @@
-import { LedgerEvent, ILedgerEventDto, LedgerEventDefault } from '../LedgerEvent';
+import { LedgerEvent, LedgerEventDefault } from '../LedgerEvent';
 
 export class CoinExchangedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------
@@ -18,4 +18,9 @@ export class CoinExchangedEvent extends LedgerEventDefault {
     constructor() {
         super(CoinExchangedEvent.NAME);
     }
+}
+
+export interface ICoinExchangedDto {
+    to: string;
+    from: string;
 }
