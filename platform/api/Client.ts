@@ -16,8 +16,9 @@ import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoRespons
 import { CompanyUser, CompanyVoting } from '../company';
 import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse, IVotingVoteDto } from './voting';
 import { IVotingAddDtoResponse } from './voting';
-import { LedgerCoinId, LedgerCoinObjectBalance } from '../../ledger/coin';
-import { ICoinObjectBalanceGetDto } from '../../transport/command/coin';
+import { LedgerCoinId } from '../../ledger/coin';
+import { IVotingVoteListDto, IVotingVoteListDtoResponse } from './voting';
+import { VotingVote } from '../voting';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -146,6 +147,12 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async votingList(data?: IVotingListDto): Promise<IVotingListDtoResponse> {
         let item = await this.call<IVotingListDtoResponse, IVotingListDto>(VOTING_URL, { data: TraceUtil.addIfNeed(data) });
         item.items = TransformUtil.toClassMany(CompanyVoting, item.items);
+        return item;
+    }
+
+    public async votingVoteList(data?: IVotingVoteListDto, stepId?: number): Promise<IVotingVoteListDtoResponse> {
+        let item = await this.call<IVotingVoteListDtoResponse, IVotingVoteListDto>(`${VOTING_URL}/${stepId}/vote`, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(VotingVote, item.items);
         return item;
     }
 
