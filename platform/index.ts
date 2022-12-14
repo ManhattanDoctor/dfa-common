@@ -1,2 +1,2 @@
 export * from './ILedgerable';
-export * from './ILedgerAction';
+export * from './LedgerAction';

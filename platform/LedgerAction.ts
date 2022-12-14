@@ -1,10 +1,14 @@
 import * as _ from 'lodash';
 import { LedgerCoinId } from '../ledger/coin/LedgerCoinId';
+import { Type } from 'class-transformer';
 
-export class ILedgerAction {
+export class LedgerAction {
     id: number;
-    date: Date;
     type: LedgerActionType;
+
+    @Type(() => Date)
+    date: Date;
+
     requestId: string;
     objectUid: string;
     initiatorUid: string;
@@ -33,7 +37,7 @@ export enum LedgerActionType {
     COIN_ADDED = 'COIN_ADDED',
     COIN_HOLDED = 'COIN_HOLDED',
     COIN_UNHOLDED = 'COIN_UNHOLDED',
-    
+
     COIN_BURNED = 'COIN_BURNED',
 
     // Based on COIN_EXCHANGED

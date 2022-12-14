@@ -1,4 +1,4 @@
-import { TransportHttp, ITransportHttpSettings, UID, getUid, ITraceable } from '@ts-core/common';
+import { TransportHttp, ITransportHttpSettings, ITraceable } from '@ts-core/common';
 import { ILogger } from '@ts-core/common';
 import * as _ from 'lodash';
 import { TraceUtil } from '@ts-core/common';
@@ -7,7 +7,6 @@ import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './logi
 import { User, UserCompany, UserProject } from '../user';
 import { Coin, CoinBalance } from '../coin';
 import { IUserGetDtoResponse, IUserEditDto, IUserEditDtoResponse } from '../api/user';
-import { IObjectDetails } from './IObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
@@ -19,6 +18,9 @@ import { IVotingAddDtoResponse } from './voting';
 import { LedgerCoinId } from '../../ledger/coin';
 import { IVotingVoteListDto, IVotingVoteListDtoResponse } from './voting';
 import { VotingVote } from '../voting';
+import { ILedgerActionListDto, ILedgerActionListDtoResponse } from './ledger';
+import { LedgerAction } from '../LedgerAction';
+import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -194,15 +196,20 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
-
     //--------------------------------------------------------------------------
     //
-    // 	Ledger Object
+    // 	Ledger Methods
     //
     //--------------------------------------------------------------------------
 
-    public async objectDetailsGet(uid: UID): Promise<IObjectDetails> {
-        return this.call<IObjectDetails>(OBJECT_DETAILS_URL, { data: { uid: getUid(uid) } });
+    public async ledgerActionList(data?: ILedgerActionListDto): Promise<ILedgerActionListDtoResponse> {
+        let item = await this.call<ILedgerActionListDtoResponse, ILedgerActionListDto>(LEDGER_ACTION_URL, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(LedgerAction, item.items);
+        return item;
+    }
+
+    public async ledgerObjectDetailsGet(ledgerUid: string): Promise<ILedgerObjectDetails> {
+        return this.call<ILedgerObjectDetails>(`${LEDGER_OBJECT_DETAILS_URL}/${ledgerUid}`, { data: TraceUtil.addIfNeed({}) });
     }
 
     //--------------------------------------------------------------------------
@@ -236,4 +243,5 @@ export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
 export const LOGOUT_URL = PREFIX + 'logout';
 
-export const OBJECT_DETAILS_URL = PREFIX + 'objectDetails';
+export const LEDGER_ACTION_URL = PREFIX + 'ledgerAction';
+export const LEDGER_OBJECT_DETAILS_URL = PREFIX + 'ledgerObjectDetails';
