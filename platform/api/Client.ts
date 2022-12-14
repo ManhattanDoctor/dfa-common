@@ -7,7 +7,7 @@ import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './logi
 import { User, UserCompany, UserProject } from '../user';
 import { Coin, CoinBalance } from '../coin';
 import { IUserGetDtoResponse, IUserEditDto, IUserEditDtoResponse } from '../api/user';
-import { ILedgerObjectDetails } from './ILedgerObjectDetails';
+import { IObjectDetails } from './IObjectDetails';
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
@@ -201,8 +201,8 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     //
     //--------------------------------------------------------------------------
 
-    public async ledgerObjectDetails(uid: UID): Promise<ILedgerObjectDetails> {
-        return this.call<ILedgerObjectDetails>(LEDGER_OBJECT_DETAILS_URL, { data: { uid: getUid(uid) } });
+    public async objectDetailsGet(uid: UID): Promise<IObjectDetails> {
+        return this.call<IObjectDetails>(OBJECT_DETAILS_URL, { data: { uid: getUid(uid) } });
     }
 
     //--------------------------------------------------------------------------
@@ -236,4 +236,4 @@ export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
 export const LOGOUT_URL = PREFIX + 'logout';
 
-export const LEDGER_OBJECT_DETAILS_URL = PREFIX + 'ledgerObjectDetails';
+export const OBJECT_DETAILS_URL = PREFIX + 'objectDetails';
