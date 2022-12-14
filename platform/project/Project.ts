@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { ProjectStatus } from './ProjectStatus';
 import { ProjectPreferences } from './ProjectPreferences';
 import { ILedgreable } from '../ILedgerable';
-import { LedgerProjectStatus } from '@project/common/ledger/project';
+import { LedgerProjectStatus } from '../../ledger/project';
 
 export class Project implements ILedgreable {
     id: number;

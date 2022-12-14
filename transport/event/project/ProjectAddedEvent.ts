@@ -1,5 +1,6 @@
-import { ILedgerVotingEventDto } from '@project/common/transport/event/LedgerVotingEvent';
+
 import { LedgerEvent, LedgerEventDefault } from '../LedgerEvent';
+import { ILedgerVotingEventDto } from '../LedgerVotingEvent';
 
 export class ProjectAddedEvent extends LedgerEventDefault {
     // --------------------------------------------------------------------------
