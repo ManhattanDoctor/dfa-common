@@ -18,7 +18,7 @@ import { IVotingAddDtoResponse } from './voting';
 import { LedgerCoinId } from '../../ledger/coin';
 import { IVotingVoteListDto, IVotingVoteListDtoResponse } from './voting';
 import { VotingVote } from '../voting';
-import { ILedgerActionListDto, ILedgerActionListDtoResponse } from './ledger';
+import { ILedgerActionListDto, ILedgerActionListDtoResponse, ILedgerObjectDetailsGetDto, ILedgerObjectDetailsGetDtoResponse } from './ledger';
 import { LedgerAction } from '../LedgerAction';
 import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 
@@ -208,8 +208,8 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
-    public async ledgerObjectDetailsGet(ledgerUid: string): Promise<ILedgerObjectDetails> {
-        return this.call<ILedgerObjectDetails>(`${LEDGER_OBJECT_DETAILS_URL}/${ledgerUid}`, { data: TraceUtil.addIfNeed({}) });
+    public async ledgerObjectDetailsGet(ledgerUid: string): Promise<ILedgerObjectDetailsGetDtoResponse> {
+        return this.call<ILedgerObjectDetailsGetDtoResponse, ILedgerObjectDetailsGetDto>(`${LEDGER_OBJECT_DETAILS_URL}`, { data: TraceUtil.addIfNeed({ ledgerUid }) });
     }
 
     //--------------------------------------------------------------------------
