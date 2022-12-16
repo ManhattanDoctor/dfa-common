@@ -1,12 +1,14 @@
 import * as _ from 'lodash';
 import { Type, Transform } from 'class-transformer';
-import { IsEnum, IsDefined, ValidateNested } from 'class-validator';
+import { IsEnum, IsString, IsDefined, ValidateNested } from 'class-validator';
 import { ILedgerVotingTemplate } from '../voting/template/ILedgerVotingTemplate';
 import { LedgerVotingStepTemplate } from '../voting/template/LedgerVotingStepTemplate';
 import { LedgerVotingFactory } from '../voting/LedgerVotingFactory';
 import { LedgerCompanyVotingProposalType } from '../company/voting/LedgerCompanyVotingProposal';
 
-export enum LedgerCompanyRegulationType {
+export type LedgerCompanyRegulationType = LedgerCompanyRegulationTypePreset | string;
+
+export enum LedgerCompanyRegulationTypePreset {
     COIN_EMIT = 'COMPANY_COIN_EMIT',
     COIN_BURN = 'COMPANY_COIN_BURN',
 
@@ -24,7 +26,7 @@ export interface ILedgerCompanyRegulation extends ILedgerVotingTemplate<LedgerCo
 }
 
 export class LedgerCompanyRegulation implements ILedgerCompanyRegulation {
-    @IsEnum(LedgerCompanyRegulationType)
+    @IsString()
     public type: LedgerCompanyRegulationType;
 
     @IsEnum(LedgerCompanyVotingProposalType)

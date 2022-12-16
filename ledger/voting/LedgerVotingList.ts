@@ -4,6 +4,7 @@ import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
 import { MathUtil } from '@ts-core/common';
 import { ILedgerVotingState } from './LedgerVotingState';
+import { LedgerCoinUtil } from '../coin';
 
 export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> implements ILedgerVotingState {
     // --------------------------------------------------------------------------
@@ -45,8 +46,20 @@ export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> imple
         return this.storage.hasOwnProperty(uid) ? this.storage[uid] : null;
     }
 
-    public stateGet(): ILedgerVotingState {
-        return { votesFor: this.votesFor, votesTotal: this.votesTotal, votesResult: this.votesResult, votesAgainst: this.votesAgainst };
+    public stateGet(total: string): ILedgerVotingState {
+        let item: ILedgerVotingState = {
+            votesFor: this.votesFor,
+            votesTotal: this.votesTotal,
+            votesResult: this.votesResult,
+            votesAgainst: this.votesAgainst,
+        };
+        if (!_.isNil(total)) {
+            item.votesForPercent = LedgerCoinUtil.toPercent(this.votesFor, total);
+            item.votesTotalPercent = LedgerCoinUtil.toPercent(this.votesTotal, total);
+            item.votesResultPercent = LedgerCoinUtil.toPercent(this.votesResult, total);
+            item.votesAgainstPercent = LedgerCoinUtil.toPercent(this.votesAgainst, total);
+        }
+        return item;
     }
 
     public voteGetByValue(value: T): IVote<T> {

@@ -7,9 +7,6 @@ import { LedgerVotingStepCoinTemplate } from "./template/LedgerVotingStepCoinTem
 import { LedgerVotingStepRoleTemplate } from "./template/LedgerVotingStepRoleTemplate";
 import { LedgerVotingStepTemplate } from "./template/LedgerVotingStepTemplate";
 import { LedgerBadRequestError } from "../error/LedgerError";
-import { LedgerVotingList } from "./LedgerVotingList";
-import { LedgerVotingListCoin } from "./step";
-import { LedgerVotingListRole } from "./step/LedgerVotingListRole";
 
 export class LedgerVotingFactory {
 

@@ -8,6 +8,10 @@ export class LedgerCoinUtil {
     //
     // --------------------------------------------------------------------------
 
+    public static toPercent(amount: string, total: string): number {
+        return MathUtil.toNumber(MathUtil.multiply('100', MathUtil.divide(amount, total)));
+    }
+
     public static toCent(amount: string, decimals: number): string {
         if (_.isNil(amount) || _.isNil(decimals)) {
             return null;

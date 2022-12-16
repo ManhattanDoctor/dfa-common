@@ -1,11 +1,11 @@
 import { DateUtil, TransportCryptoManagerEd25519 } from "@ts-core/common";
-import { ILedgerCompanyRegulation, LedgerCompanyRegulationType } from "./company/LedgerCompanyRegulation";
+import { ILedgerCompanyRegulation, LedgerCompanyRegulationTypePreset } from "./company/LedgerCompanyRegulation";
+import { LedgerCompanyVotingProposalType } from "./company/voting";
 import { LedgerVotingStepType } from "./voting/LedgerVotingStepType";
 import { LedgerCompanyRole } from "./role/LedgerCompanyRole";
 import { LedgerCoinIdPreset } from "./coin/LedgerCoinId";
 import { LedgerVoting } from './voting/LedgerVoting';
 import * as _ from 'lodash';
-import { LedgerCompanyVotingProposalType } from "./company/voting/LedgerCompanyVotingProposal";
 
 // --------------------------------------------------------------------------
 //
@@ -24,90 +24,93 @@ export const ROOT_USER_CRYPTO_KEY_PRIVATE = 'e87501bc00a3db3ba436f7109198e0cb65c
 export const ROOT_COMPANY_DESCRIPTION = 'ROOT_COMPANY';
 export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     {
-        type: LedgerCompanyRegulationType.COIN_EMIT,
+        type: LedgerCompanyRegulationTypePreset.COIN_EMIT,
         proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 10,
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE
-            }
-        ]
-    },
-    {
-        type: LedgerCompanyRegulationType.COIN_BURN,
-        proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
-        steps: [
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                percentForMin: 5,
+                percentTotalMin: 2,
+                percentAgainstMax: 10,
+            },
             {
-                type: LedgerVotingStepType.COIN,
-                coinId: LedgerCoinIdPreset.VOTE,
-                percent: 10,
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE
-            }
+                type: LedgerVotingStepType.ROLE,
+                roles: [LedgerCompanyRole.EXPERT, LedgerCompanyRole.PROTECTOR],
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                percentForMin: 10,
+                percentTotalMin: 20,
+                percentAgainstMax: 30,
+            },
         ]
     },
     {
-        type: LedgerCompanyRegulationType.PROJECT_ADD,
+        type: LedgerCompanyRegulationTypePreset.PROJECT_ADD,
         proposal: LedgerCompanyVotingProposalType.PROJECT_ADD,
         steps: [
             {
                 type: LedgerVotingStepType.ROLE,
                 roles: [LedgerCompanyRole.EXPERT, LedgerCompanyRole.PROTECTOR],
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                percentForMin: 50,
+                percentTotalMin: 100,
+                percentAgainstMax: 50,
             },
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 5,
-                duration: 5 * DateUtil.MILLISECONDS_MINUTE
+                duration: 5 * DateUtil.MILLISECONDS_MINUTE,
+                percentForMin: 50,
+                percentTotalMin: 2,
+                percentAgainstMax: 50,
             }
         ]
     },
     {
-        type: LedgerCompanyRegulationType.EXPERT_ADD,
+        type: LedgerCompanyRegulationTypePreset.EXPERT_ADD,
         proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 5,
+                percent: 15,
                 duration: 5 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
     {
-        type: LedgerCompanyRegulationType.EXPERT_REMOVE,
+        type: LedgerCompanyRegulationTypePreset.EXPERT_REMOVE,
         proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 5,
+                percent: 25,
                 duration: 5 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
     {
-        type: LedgerCompanyRegulationType.PROTECTOR_ADD,
+        type: LedgerCompanyRegulationTypePreset.PROTECTOR_ADD,
         proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 5,
+                percent: 30,
                 duration: 12 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
     },
     {
-        type: LedgerCompanyRegulationType.PROTECTOR_REMOVE,
+        type: LedgerCompanyRegulationTypePreset.PROTECTOR_REMOVE,
         proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 5,
+                percent: 30,
                 duration: 3 * DateUtil.MILLISECONDS_MINUTE
             }
         ]

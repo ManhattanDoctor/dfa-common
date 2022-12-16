@@ -27,7 +27,7 @@ export class ProjectEditCommand extends ChaincodeTransportCommandAsync<IProjectE
 
 export interface IProjectEditDto extends ITraceable {
     uid: string;
-    description?: string;
+    name?: string;
 }
 
 class ProjectEditDto implements IProjectEditDto {
@@ -36,5 +36,5 @@ class ProjectEditDto implements IProjectEditDto {
 
     @IsOptional()
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
-    description?: string;
+    name?: string;
 }

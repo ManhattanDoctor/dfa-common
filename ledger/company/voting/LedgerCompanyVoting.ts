@@ -1,7 +1,7 @@
 import { LedgerVoting } from "../../voting/LedgerVoting";
 import { Type, Transform } from 'class-transformer';
 import { LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
-import { ValidateNested, IsEnum, Matches, IsDefined } from 'class-validator';
+import { ValidateNested, IsString, Matches, IsDefined } from 'class-validator';
 import { ILedgerCompanyVotingProposal, LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
 import { LedgerCompany } from "../LedgerCompany";
 import { LedgerCompanyVotingFactory } from "./LedgerCompanyVotingFactory";
@@ -29,7 +29,7 @@ export class LedgerCompanyVoting<V = ILedgerCompanyVotingProposal> extends Ledge
     @Matches(LedgerCompany.UID_REG_EXP)
     public companyUid: string;
 
-    @IsEnum(LedgerCompanyRegulationType)
+    @IsString()
     public type: LedgerCompanyRegulationType;
 
     @Type(() => LedgerCompanyVotingProposal)

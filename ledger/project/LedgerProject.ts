@@ -56,8 +56,8 @@ export class LedgerProject implements ILedgerObject {
     public status: LedgerProjectStatus;
 
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
-    public description: string;
-
+    public name: string;
+    
     @Type(() => Date)
     @IsDate()
     public createdDate: Date;

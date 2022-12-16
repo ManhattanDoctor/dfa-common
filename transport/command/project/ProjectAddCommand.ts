@@ -40,13 +40,16 @@ export class ProjectAddCommand extends ChaincodeTransportCommandAsync<IProjectAd
 }
 
 export interface IProjectAddDto extends ITraceable {
+    name: string;
     ownerUid: string;
     votingUid: string;
     companyUid: string;
-    description: string;
 }
 
 export class ProjectAddDto implements IProjectAddDto {
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
+    name: string;
+    
     @Matches(LedgerUser.UID_REG_EXP)
     ownerUid: string;
 
@@ -55,7 +58,4 @@ export class ProjectAddDto implements IProjectAddDto {
 
     @Matches(LedgerVoting.UID_REG_EXP)
     votingUid: string;;
-
-    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
-    description: string;
 }

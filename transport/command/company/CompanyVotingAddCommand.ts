@@ -1,5 +1,5 @@
 import { TransformUtil } from '@ts-core/common';
-import { Matches, IsDefined, ValidateNested, IsEnum } from 'class-validator';
+import { Matches, IsDefined, ValidateNested, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany, LedgerCompanyRegulationType } from '../../../ledger/company';
 import { ILedgerCompanyVotingProposal, LedgerCompanyVoting, LedgerCompanyVotingProposal } from '../../../ledger/company/voting';
@@ -44,7 +44,7 @@ export class CompanyVotingAddDto implements ICompanyVotingAddDto {
     @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
 
-    @IsEnum(LedgerCompanyRegulationType)
+    @IsString()
     type: LedgerCompanyRegulationType;
 
     @IsDefined()

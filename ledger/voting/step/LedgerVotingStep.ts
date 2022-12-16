@@ -1,8 +1,9 @@
-import { IsOptional, IsNumberString, IsDefined, IsEnum, IsDate } from 'class-validator';
+import { IsOptional, IsNumberString, IsDefined, IsEnum, IsDate, Min, Max, IsInt } from 'class-validator';
 import { Type } from 'class-transformer';
 import { LedgerVotingStepType } from "../LedgerVotingStepType";
 import { LedgerVotingList } from '../LedgerVotingList';
 import { ILedgerVotingState } from '../LedgerVotingState';
+import { LedgerCoinUtil } from '@project/common/ledger/coin';
 
 export abstract class LedgerVotingStep {
     // --------------------------------------------------------------------------
@@ -33,6 +34,24 @@ export abstract class LedgerVotingStep {
     public list: LedgerVotingList;
 
     @IsOptional()
+    @Min(0)
+    @Max(100)
+    @IsInt()
+    public percentForMin: number;
+
+    @IsOptional()
+    @Min(0)
+    @Max(100)
+    @IsInt()
+    public percentTotalMin: number;
+
+    @IsOptional()
+    @Min(0)
+    @Max(100)
+    @IsInt()
+    public percentAgainstMax: number;
+
+    @IsOptional()
     @IsNumberString()
     public total: string;
 
@@ -48,7 +67,7 @@ export abstract class LedgerVotingStep {
 
     public stateGet(): ILedgerVotingStepState {
         return {
-            state: this.list.stateGet(),
+            state: this.list.stateGet(this.total),
             total: this.total,
             startedDate: this.startedDate,
             expiredDate: this.expiredDate,

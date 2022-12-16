@@ -2,11 +2,10 @@ import { Type } from 'class-transformer';
 import { ProjectStatus } from './ProjectStatus';
 import { ProjectPreferences } from './ProjectPreferences';
 import { ILedgreable } from '../ILedgerable';
-import { LedgerProjectStatus } from '../../ledger/project';
 
 export class Project implements ILedgreable {
     id: number;
-    status: LedgerProjectStatus;
+    status: ProjectStatus;
     userId: number;
     companyId: number;
     ledgerUid: string;

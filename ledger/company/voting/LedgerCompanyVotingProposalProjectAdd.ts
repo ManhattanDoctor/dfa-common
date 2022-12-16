@@ -14,7 +14,7 @@ export class LedgerCompanyVotingProposalProjectAdd extends LedgerCompanyVotingPr
     public ownerUid: string;
 
     @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
-    public description: string;
+    public name: string;
 
     @IsString()
     public coinId: string;

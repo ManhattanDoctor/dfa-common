@@ -16,7 +16,7 @@ export class LedgerVotingStepRole extends LedgerVotingStep {
     public static create(template: LedgerVotingStepRoleTemplate): LedgerVotingStepRole {
         let item = new LedgerVotingStepRole();
         item.list = LedgerVotingListRole.create();
-        ObjectUtil.copyPartial(template, item, ['roles', 'type']);
+        ObjectUtil.copyPartial(template, item, ['roles', 'type', 'percentForMin', 'percentTotalMin', 'percentAgainstMax']);
         return item;
     }
 
@@ -32,6 +32,4 @@ export class LedgerVotingStepRole extends LedgerVotingStep {
 
     @Type(() => LedgerVotingListRole)
     public declare list: LedgerVotingListRole;
-
-
 }
