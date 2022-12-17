@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import { LedgerCoinId } from '../ledger/coin/LedgerCoinId';
 import { Type } from 'class-transformer';
 
 export class LedgerAction {
@@ -15,14 +14,14 @@ export class LedgerAction {
 
     isSucceed: boolean;
 
+    amount?: string;
+    decimals?: number;
+    
     userUid?: string;
     coinUid?: string;
     votingUid?: string;
     projectUid?: string;
     companyUid?: string;
-
-    amount?: string;
-    coinId?: LedgerCoinId;
 }
 
 export enum LedgerActionType {
