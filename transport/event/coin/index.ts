@@ -4,5 +4,4 @@ export * from './CoinBurnedEvent';
 export * from './CoinEmittedEvent';
 export * from './CoinRemovedEvent';
 export * from './CoinUnholdedEvent';
-export * from './CoinExchangedEvent';
 export * from './CoinTransferredEvent';
