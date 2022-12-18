@@ -3,9 +3,9 @@ import { Type } from 'class-transformer';
 import { LedgerVotingStepType } from "../LedgerVotingStepType";
 import { LedgerVotingList } from '../LedgerVotingList';
 import { ILedgerVotingState } from '../LedgerVotingState';
-import { LedgerCoinUtil } from '@project/common/ledger/coin';
+import { LedgerVotingRestriction } from '../LedgerVotingRestriction';
 
-export abstract class LedgerVotingStep {
+export abstract class LedgerVotingStep extends LedgerVotingRestriction {
     // --------------------------------------------------------------------------
     //
     //  Properties
@@ -32,24 +32,6 @@ export abstract class LedgerVotingStep {
 
     @IsDefined()
     public list: LedgerVotingList;
-
-    @IsOptional()
-    @Min(0)
-    @Max(100)
-    @IsInt()
-    public percentForMin: number;
-
-    @IsOptional()
-    @Min(0)
-    @Max(100)
-    @IsInt()
-    public percentTotalMin: number;
-
-    @IsOptional()
-    @Min(0)
-    @Max(100)
-    @IsInt()
-    public percentAgainstMax: number;
 
     @IsOptional()
     @IsNumberString()

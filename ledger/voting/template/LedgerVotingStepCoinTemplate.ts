@@ -12,24 +12,6 @@ export class LedgerVotingStepCoinTemplate extends LedgerVotingStepTemplate {
     @IsString()
     public coinId: string;
 
-    @IsOptional()
-    @Min(0)
-    @Max(100)
-    @IsInt()
-    public percentForMin?: number;
-    
-    @IsOptional()
-    @Min(0)
-    @Max(100)
-    @IsInt()
-    public percentTotalMin?: number;
-
-    @IsOptional()
-    @Min(0)
-    @Max(100)
-    @IsInt()
-    public percentAgainstMax?: number;
-
     // --------------------------------------------------------------------------
     //
     //  Constructor

@@ -4,3 +4,4 @@ export * from './LedgerVotingState';
 export * from './LedgerVotingFactory';
 export * from './LedgerVotingStepType';
 export * from './LedgerVotingTransform';
+export * from './LedgerVotingRestriction';
