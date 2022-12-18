@@ -1,9 +1,9 @@
 import { IsOptional, IsInt, Min, Max } from 'class-validator';
 
 export interface ILedgerVotingRestriction {
-    percentForMin?: number;
-    percentTotalMin?: number;
-    percentAgainstMax?: number;
+    votesForMinPercent?: number;
+    votesTotalMinPercent?: number;
+    votesAgainstMaxPercent?: number;
 }
 
 export class LedgerVotingRestriction implements ILedgerVotingRestriction {
@@ -11,17 +11,17 @@ export class LedgerVotingRestriction implements ILedgerVotingRestriction {
     @Min(0)
     @Max(100)
     @IsInt()
-    public percentForMin?: number;
+    public votesForMinPercent?: number;
 
     @IsOptional()
     @Min(0)
     @Max(100)
     @IsInt()
-    public percentTotalMin?: number;
+    public votesTotalMinPercent?: number;
 
     @IsOptional()
     @Min(0)
     @Max(100)
     @IsInt()
-    public percentAgainstMax?: number;
+    public votesAgainstMaxPercent?: number;
 }
