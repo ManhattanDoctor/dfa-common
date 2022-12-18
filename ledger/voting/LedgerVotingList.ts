@@ -59,6 +59,9 @@ export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> imple
             item.votesResultPercent = LedgerCoinUtil.toPercent(this.votesResult, total);
             item.votesAgainstPercent = LedgerCoinUtil.toPercent(this.votesAgainst, total);
         }
+        else {
+            item.votesForPercent = item.votesTotalPercent = item.votesResultPercent = item.votesAgainstPercent = 0;
+        }
         return item;
     }
 
