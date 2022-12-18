@@ -4,7 +4,7 @@ import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
 import { MathUtil } from '@ts-core/common';
 import { ILedgerVotingState } from './LedgerVotingState';
-import { LedgerCoinUtil } from '../coin';
+import { LedgerCoinUtil } from '../coin/LedgerCoinUtil';
 
 export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> implements ILedgerVotingState {
     // --------------------------------------------------------------------------
