@@ -40,7 +40,7 @@ export class LedgerCoin implements IUIDable {
 
     public static getCoinId(coin: UID): LedgerCoinId {
         let uid = getUid(coin);
-        return !_.isNil(uid) ? uid.split('/')[2] : null;
+        return !_.isNil(uid) ? _.last(uid.split('/')) : null;
     }
 
     // --------------------------------------------------------------------------
