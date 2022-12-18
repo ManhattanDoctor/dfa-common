@@ -28,20 +28,20 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
         proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
         steps: [
             {
-                type: LedgerVotingStepType.COIN,
-                coinId: LedgerCoinIdPreset.VOTE,
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
-                percentForMin: 5,
-                percentTotalMin: 2,
-                percentAgainstMax: 10,
-            },
-            {
                 type: LedgerVotingStepType.ROLE,
                 roles: [LedgerCompanyRole.EXPERT, LedgerCompanyRole.PROTECTOR],
                 duration: 3 * DateUtil.MILLISECONDS_MINUTE,
                 percentForMin: 10,
                 percentTotalMin: 20,
                 percentAgainstMax: 30,
+            },
+            {
+                type: LedgerVotingStepType.COIN,
+                coinId: LedgerCoinIdPreset.VOTE,
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                percentForMin: 5,
+                percentTotalMin: 2,
+                percentAgainstMax: 10,
             },
         ]
     },
@@ -53,15 +53,15 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
                 type: LedgerVotingStepType.ROLE,
                 roles: [LedgerCompanyRole.EXPERT, LedgerCompanyRole.PROTECTOR],
                 duration: 3 * DateUtil.MILLISECONDS_MINUTE,
-                percentForMin: 50,
-                percentTotalMin: 100,
+                percentForMin: 15,
+                percentTotalMin: 30,
                 percentAgainstMax: 50,
             },
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
                 duration: 5 * DateUtil.MILLISECONDS_MINUTE,
-                percentForMin: 50,
+                percentForMin: 40,
                 percentTotalMin: 2,
                 percentAgainstMax: 50,
             }
@@ -74,7 +74,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 15,
+                percentTotalMin: 2,
                 duration: 5 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
@@ -86,7 +86,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 25,
+                percentTotalMin: 2,
                 duration: 5 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
@@ -98,7 +98,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 30,
+                percentTotalMin: 2,
                 duration: 12 * DateUtil.MILLISECONDS_MINUTE
             }
         ]
@@ -110,7 +110,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                percent: 30,
+                percentTotalMin: 2,
                 duration: 3 * DateUtil.MILLISECONDS_MINUTE
             }
         ]

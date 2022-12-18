@@ -9,16 +9,10 @@ export interface ILedgerRegulation<T> {
 };
 
 export interface ILedgerRegulationCondition {
-    percent: number;
     duration: number;
 }
 
 export class LedgerRegulationCondition implements ILedgerRegulationCondition {
-    @Min(1)
-    @Max(100)
-    @IsNumber()
-    percent: number;
-
     @Min(0)
     @Max(100 * DateUtil.MILLISECONDS_YEAR)
     @IsNumber()

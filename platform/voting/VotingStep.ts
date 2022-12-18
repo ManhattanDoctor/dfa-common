@@ -28,6 +28,5 @@ export class VotingStep implements ILedgerVotingState {
 
     roles?: Array<LedgerRoles>;
     coinId?: string;
-    percent?: number;
     decimals?: number;
 }
