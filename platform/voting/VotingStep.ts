@@ -9,14 +9,18 @@ export class VotingStep implements ILedgerVotingState {
     type: LedgerVotingStepType;
     index: number;
     votingId: number;
-    
+
     votesFor: string;
+    votesForPercent: number;
     votesTotal: string;
+    votesTotalPercent: number;
     votesResult: string;
+    votesResultPercent: number;
     votesAgainst: string;
+    votesAgainstPercent: number;
 
     total: string;
-    
+
     @Type(() => Date)
     startedDate: Date;
 
@@ -28,6 +32,5 @@ export class VotingStep implements ILedgerVotingState {
 
     roles?: Array<LedgerRoles>;
     coinId?: string;
-    percent?: number;
     decimals?: number;
 }

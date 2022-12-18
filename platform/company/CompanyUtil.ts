@@ -24,7 +24,7 @@ export class CompanyUtil {
     }
 }
 
-export let COMPANY_ADD_TYPE = [UserType.COMPANY_MANAGER];
+export let COMPANY_ADD_TYPE = [];
 
 export let COMPANY_PROJECT_ADD_ROLE = [LedgerCompanyRole.PROJECT_MANAGER];
 export let COMPANY_PROJECT_ADD_STATUS = [CompanyStatus.ACTIVE];
