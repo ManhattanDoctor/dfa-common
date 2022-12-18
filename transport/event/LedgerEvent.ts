@@ -27,7 +27,6 @@ export enum LedgerEvent {
     COIN_BURNED = 'DAO:CoinBurned',
     COIN_EMITTED = 'DAO:CoinEmitted',
     COIN_UNHOLDED = 'DAO:CoinUnholded',
-    COIN_EXCHANGED = 'DAO:CoinExchanged',
     COIN_TRANSFERRED = 'DAO:CoinTransferred',
 
     PROJECT_ADDED = 'DAO:ProjectAdded',
