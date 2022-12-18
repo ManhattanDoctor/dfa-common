@@ -9,6 +9,5 @@ export const LOCALE_PREFIXES = [
     'Ledger.json',
     'Voting.json',
     'Project.json',
-    'Profile.json',
     'Company.json',
 ]

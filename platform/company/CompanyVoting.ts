@@ -23,8 +23,8 @@ export class CompanyVoting implements ILedgreable {
     ledgerUid: string;
     stepIndex: number;
 
-    @Type(() => LedgerVotingStep)
-    @Transform(item => item.value.map(LedgerVotingFactory.transformStep), { toClassOnly: true })
+    @Type(() => VotingStep)
+    // @Transform(item => item.value.map(LedgerVotingFactory.transformStep), { toClassOnly: true })
     steps: Array<VotingStep>;
 
     @Type(() => Date)
