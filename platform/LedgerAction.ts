@@ -12,7 +12,7 @@ export class LedgerAction {
     objectUid: string;
     initiatorUid: string;
 
-    isSucceed: boolean;
+    isExecuted: boolean;
 
     amount?: string;
     decimals?: number;

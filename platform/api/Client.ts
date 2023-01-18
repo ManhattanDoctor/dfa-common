@@ -228,6 +228,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
 const PREFIX = 'api/';
 
 export const USER_URL = PREFIX + 'user';
+export const USER_SEARCH_URL = PREFIX + 'userSearch';
 export const COMPANY_URL = PREFIX + 'company';
 
 export const VOTING_URL = PREFIX + 'voting';
