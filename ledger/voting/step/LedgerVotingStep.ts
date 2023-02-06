@@ -43,8 +43,8 @@ export abstract class LedgerVotingStep extends LedgerVotingRestriction {
     //
     // --------------------------------------------------------------------------
 
-    public isExpired(): boolean {
-        return this.expiredDate.getTime() < Date.now();
+    public isExpired(date: Date): boolean {
+        return this.expiredDate.getTime() < date.getTime();
     }
 
     public stateGet(): ILedgerVotingStepState {

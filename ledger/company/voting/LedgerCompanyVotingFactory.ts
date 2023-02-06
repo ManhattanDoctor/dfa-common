@@ -28,9 +28,9 @@ export class LedgerCompanyVotingFactory {
         return item;
     }
 
-    public static getStepExpiredDate(regulation: LedgerCompanyRegulation, type: LedgerVotingStep | LedgerVotingStepType): Date {
+    public static getStepExpiredDate(date: Date, regulation: LedgerCompanyRegulation, type: LedgerVotingStep | LedgerVotingStepType): Date {
         let item = LedgerCompanyVotingFactory.getStepTemplate(regulation, type);
-        return DateUtil.getDate(Date.now() + item.duration);
+        return DateUtil.getDate(date.getTime() + item.duration);
     }
 
     public static transformProposal(item: LedgerCompanyVotingProposal): LedgerCompanyVotingProposal {
