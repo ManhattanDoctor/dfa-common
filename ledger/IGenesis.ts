@@ -24,28 +24,6 @@ export const ROOT_USER_CRYPTO_KEY_PRIVATE = 'e87501bc00a3db3ba436f7109198e0cb65c
 export const ROOT_COMPANY_DESCRIPTION = 'ROOT_COMPANY';
 export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     {
-        type: LedgerCompanyRegulationTypePreset.COIN_EMIT,
-        proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
-        steps: [
-            {
-                type: LedgerVotingStepType.ROLE,
-                roles: [LedgerCompanyRole.EXPERT, LedgerCompanyRole.PROTECTOR],
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
-                votesForMinPercent: 10,
-                votesTotalMinPercent: 20,
-                votesAgainstMaxPercent: 30,
-            },
-            {
-                type: LedgerVotingStepType.COIN,
-                coinId: LedgerCoinIdPreset.VOTE,
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
-                votesForMinPercent: 5,
-                votesTotalMinPercent: 2,
-                votesAgainstMaxPercent: 10,
-            },
-        ]
-    },
-    {
         type: LedgerCompanyRegulationTypePreset.PROJECT_ADD,
         proposal: LedgerCompanyVotingProposalType.PROJECT_ADD,
         steps: [
@@ -60,10 +38,20 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                duration: 5 * DateUtil.MILLISECONDS_MINUTE,
-                votesForMinPercent: 40,
-                votesTotalMinPercent: 2,
-                votesAgainstMaxPercent: 50,
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                votesForMinPercent: 15
+            }
+        ]
+    },
+    {
+        type: LedgerCompanyRegulationTypePreset.COIN_EMIT,
+        proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
+        steps: [
+            {
+                type: LedgerVotingStepType.COIN,
+                coinId: LedgerCoinIdPreset.VOTE,
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                votesForMinPercent: 5
             }
         ]
     },
@@ -74,9 +62,8 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                votesTotalMinPercent: 2,
-                votesAgainstMaxPercent: 10,
-                duration: 5 * DateUtil.MILLISECONDS_MINUTE
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                votesForMinPercent: 10
             }
         ]
     },
@@ -87,9 +74,8 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                votesTotalMinPercent: 2,
-                votesAgainstMaxPercent: 10,
-                duration: 5 * DateUtil.MILLISECONDS_MINUTE
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                votesForMinPercent: 10
             }
         ]
     },
@@ -100,9 +86,8 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                votesTotalMinPercent: 2,
-                votesForMinPercent: 12,
-                duration: 12 * DateUtil.MILLISECONDS_MINUTE
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                votesForMinPercent: 15
             }
         ]
     },
@@ -113,9 +98,9 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                votesTotalMinPercent: 2,
-                votesForMinPercent: 12,
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                votesAgainstMaxPercent: 2,
+                votesForMinPercent: 15
             }
         ]
     },

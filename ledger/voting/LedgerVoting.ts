@@ -8,7 +8,6 @@ import { LedgerVotingStep } from './step/LedgerVotingStep';
 import { LedgerVotingFactory } from './LedgerVotingFactory';
 
 export enum LedgerVotingStatus {
-    CREATED = 'CREATED',
     IN_PROGRESS = 'IN_PROGRESS',
     APPROVED = 'APPROVED',
     REJECTED = 'REJECTED',
