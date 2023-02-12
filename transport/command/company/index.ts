@@ -8,7 +8,5 @@ export * from './CompanyProjectListCommand';
 export * from './CompanyUserSetCommand';
 export * from './CompanyUserListCommand';
 export * from './CompanyUserRoleListCommand';
-export * from './CompanyVotingAddCommand';
-export * from './CompanyVotingListCommand';
 
 

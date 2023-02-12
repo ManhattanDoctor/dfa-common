@@ -4,14 +4,14 @@ import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand'
 import { LedgerCompany, LedgerCompanyRegulationType } from '../../../ledger/company';
 import { ILedgerCompanyVotingProposal, LedgerCompanyVoting, LedgerCompanyVotingProposal } from '../../../ledger/company/voting';
 
-export class CompanyVotingAddCommand extends ChaincodeTransportCommandAsync<ICompanyVotingAddDto, LedgerCompanyVoting> {
+export class VotingCompanyAddCommand extends ChaincodeTransportCommandAsync<IVotingCompanyAddDto, LedgerCompanyVoting> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerCommand.COMPANY_VOTING_ADD;
+    public static readonly NAME = LedgerCommand.VOTING_COMPANY_ADD;
 
     // --------------------------------------------------------------------------
     //
@@ -19,8 +19,8 @@ export class CompanyVotingAddCommand extends ChaincodeTransportCommandAsync<ICom
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: ICompanyVotingAddDto) {
-        super(CompanyVotingAddCommand.NAME, TransformUtil.toClass(CompanyVotingAddDto, request));
+    constructor(request: IVotingCompanyAddDto) {
+        super(VotingCompanyAddCommand.NAME, TransformUtil.toClass(VotingCompanyAddDto, request));
     }
 
     // --------------------------------------------------------------------------
@@ -34,13 +34,13 @@ export class CompanyVotingAddCommand extends ChaincodeTransportCommandAsync<ICom
     }
 }
 
-export interface ICompanyVotingAddDto {
+export interface IVotingCompanyAddDto {
     companyUid: string;
     type: LedgerCompanyRegulationType;
     proposal: ILedgerCompanyVotingProposal;
 }
 
-export class CompanyVotingAddDto implements ICompanyVotingAddDto {
+export class VotingCompanyAddDto implements IVotingCompanyAddDto {
     @Matches(LedgerCompany.UID_REG_EXP)
     companyUid: string;
 

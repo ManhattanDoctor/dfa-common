@@ -16,7 +16,6 @@ export enum LedgerCommand {
     COMPANY_LIST = 'DAO:CompanyList',
     COMPANY_EDIT = 'DAO:CompanyEdit',
     COMPANY_REMOVE = 'DAO:CompanyRemove',
-    COMPANY_VOTING_LIST = 'DAO:CompanyVotingList',
     COMPANY_PROJECT_LIST = 'DAO:CompanyProjectList',
     COMPANY_USER_SET = 'DAO:CompanyUserSet',
     COMPANY_USER_LIST = 'DAO:CompanyUserList',
@@ -24,12 +23,12 @@ export enum LedgerCommand {
     COMPANY_USER_EDIT = 'DAO:CompanyUserEdit',
     COMPANY_USER_ROLE_LIST = 'DAO:CompanyUserRoleList',
 
-    COMPANY_VOTING_ADD = 'DAO:CompanyVotingAdd',
-
     VOTING_GET = 'DAO:VotingGet',
     VOTING_LIST = 'DAO:VotingList',
     VOTING_VOTE = 'DAO:VotingVote',
     VOTING_CHECK = 'DAO:VotingCheck',
+    VOTING_COMPANY_ADD = 'DAO:VotingAddCompany',
+    VOTING_COMPANY_LIST = 'DAO:VotingCompanyList',
     VOTING_STEP_STATE_GET = 'DAO:VotingStepStateGet',
 
     COIN_GET = 'DAO:CoinGet',

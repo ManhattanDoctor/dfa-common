@@ -3,14 +3,14 @@ import { ledgerVotingTransform } from '../../../ledger/voting/LedgerVotingTransf
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { IVotingListDto, IVotingListDtoResponse } from '../voting/VotingListCommand';
 
-export class CompanyVotingListCommand extends ChaincodeTransportCommandAsync<ICompanyVotingListDto, IVotingListDtoResponse> {
+export class VotingCompanyListCommand extends ChaincodeTransportCommandAsync<IVotingCompanyListDto, IVotingListDtoResponse> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerCommand.COMPANY_VOTING_LIST;
+    public static readonly NAME = LedgerCommand.VOTING_COMPANY_LIST;
 
     // --------------------------------------------------------------------------
     //
@@ -18,8 +18,8 @@ export class CompanyVotingListCommand extends ChaincodeTransportCommandAsync<ICo
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: ICompanyVotingListDto) {
-        super(CompanyVotingListCommand.NAME, request, null, true);
+    constructor(request: IVotingCompanyListDto) {
+        super(VotingCompanyListCommand.NAME, request, null, true);
     }
 
     // --------------------------------------------------------------------------
@@ -34,6 +34,6 @@ export class CompanyVotingListCommand extends ChaincodeTransportCommandAsync<ICo
     }
 }
 
-export interface ICompanyVotingListDto extends IVotingListDto<LedgerCompanyVoting> {
+export interface IVotingCompanyListDto extends IVotingListDto<LedgerCompanyVoting> {
     companyUid: string;
 }

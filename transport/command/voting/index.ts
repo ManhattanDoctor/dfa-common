@@ -3,3 +3,5 @@ export * from './VotingVoteCommand';
 export * from './VotingListCommand';
 export * from './VotingCheckCommand';
 export * from './VotingStepStateGetCommand';
+export * from './VotingCompanyAddCommand';
+export * from './VotingCompanyListCommand';
