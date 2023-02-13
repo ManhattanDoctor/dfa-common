@@ -70,6 +70,11 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return TransformUtil.toClass(User, item);
     }
 
+    public async userSearch(value: string): Promise<Array<User>> {
+        let items = await this.call<Array<User>>(`${USER_SEARCH_URL}/${!_.isNil(value) ? value : ''}`);
+        return TransformUtil.toClassMany(User, items);
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Company Methods
