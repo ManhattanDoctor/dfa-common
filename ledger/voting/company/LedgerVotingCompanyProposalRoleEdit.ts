@@ -1,14 +1,14 @@
 import { Matches, ArrayNotEmpty, IsEnum } from 'class-validator';
 import { LedgerCompanyRole } from '../../role/LedgerCompanyRole';
 import { LedgerUser } from '../../user/LedgerUser';
-import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
+import { LedgerVotingCompanyProposal, LedgerVotingCompanyProposalType } from "./LedgerVotingCompanyProposal";
 
-export enum LedgerCompanyVotingProposalRoleAction {
+export enum LedgerVotingCompanyProposalRoleAction {
     ADD = 'ADD',
     REMOVE = 'REMOVE'
 }
 
-export class LedgerCompanyVotingProposalRoleEdit extends LedgerCompanyVotingProposal {
+export class LedgerVotingCompanyProposalRoleEdit extends LedgerVotingCompanyProposal {
     // --------------------------------------------------------------------------
     //
     //  Properties
@@ -18,8 +18,8 @@ export class LedgerCompanyVotingProposalRoleEdit extends LedgerCompanyVotingProp
     @Matches(LedgerUser.UID_REG_EXP)
     public to: string;
 
-    @IsEnum(LedgerCompanyVotingProposalRoleAction)
-    public action: LedgerCompanyVotingProposalRoleAction;
+    @IsEnum(LedgerVotingCompanyProposalRoleAction)
+    public action: LedgerVotingCompanyProposalRoleAction;
 
     @ArrayNotEmpty()
     @IsEnum(LedgerCompanyRole, { each: true })
@@ -33,6 +33,6 @@ export class LedgerCompanyVotingProposalRoleEdit extends LedgerCompanyVotingProp
 
     constructor() {
         super();
-        this.type = LedgerCompanyVotingProposalType.ROLE_EDIT;
+        this.type = LedgerVotingCompanyProposalType.ROLE_EDIT;
     }
 }

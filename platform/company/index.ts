@@ -3,4 +3,3 @@ export * from './CompanyUtil';
 export * from './CompanyUser';
 export * from './CompanyStatus';
 export * from './CompanyPreferences';
-export * from './CompanyVoting';

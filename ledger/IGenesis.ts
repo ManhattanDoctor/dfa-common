@@ -1,6 +1,6 @@
 import { DateUtil, TransportCryptoManagerEd25519 } from "@ts-core/common";
 import { ILedgerCompanyRegulation, LedgerCompanyRegulationTypePreset } from "./company/LedgerCompanyRegulation";
-import { LedgerCompanyVotingProposalType } from "./company/voting";
+import { LedgerVotingCompanyProposalType } from "./voting/company/LedgerVotingCompanyProposal";
 import { LedgerVotingStepType } from "./voting/LedgerVotingStepType";
 import { LedgerCompanyRole } from "./role/LedgerCompanyRole";
 import { LedgerCoinIdPreset } from "./coin/LedgerCoinId";
@@ -25,7 +25,7 @@ export const ROOT_COMPANY_DESCRIPTION = 'ROOT_COMPANY';
 export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     {
         type: LedgerCompanyRegulationTypePreset.PROJECT_ADD,
-        proposal: LedgerCompanyVotingProposalType.PROJECT_ADD,
+        proposal: LedgerVotingCompanyProposalType.PROJECT_ADD,
         steps: [
             {
                 type: LedgerVotingStepType.ROLE,
@@ -45,7 +45,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     },
     {
         type: LedgerCompanyRegulationTypePreset.COIN_EMIT,
-        proposal: LedgerCompanyVotingProposalType.COIN_EDIT,
+        proposal: LedgerVotingCompanyProposalType.COIN_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
@@ -57,7 +57,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     },
     {
         type: LedgerCompanyRegulationTypePreset.EXPERT_ADD,
-        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
+        proposal: LedgerVotingCompanyProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
@@ -69,7 +69,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     },
     {
         type: LedgerCompanyRegulationTypePreset.EXPERT_REMOVE,
-        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
+        proposal: LedgerVotingCompanyProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
@@ -81,7 +81,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     },
     {
         type: LedgerCompanyRegulationTypePreset.PROTECTOR_ADD,
-        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
+        proposal: LedgerVotingCompanyProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
@@ -93,7 +93,7 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
     },
     {
         type: LedgerCompanyRegulationTypePreset.PROTECTOR_REMOVE,
-        proposal: LedgerCompanyVotingProposalType.ROLE_EDIT,
+        proposal: LedgerVotingCompanyProposalType.ROLE_EDIT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,

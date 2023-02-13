@@ -1,4 +1,4 @@
-import { LedgerCompanyVoting } from '../../../ledger/company/voting/LedgerCompanyVoting';
+import { LedgerVotingCompany } from '../../../ledger/voting/company/LedgerVotingCompany';
 import { ledgerVotingTransform } from '../../../ledger/voting/LedgerVotingTransform';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { IVotingListDto, IVotingListDtoResponse } from '../voting/VotingListCommand';
@@ -34,6 +34,6 @@ export class VotingCompanyListCommand extends ChaincodeTransportCommandAsync<IVo
     }
 }
 
-export interface IVotingCompanyListDto extends IVotingListDto<LedgerCompanyVoting> {
+export interface IVotingCompanyListDto extends IVotingListDto<LedgerVotingCompany> {
     companyUid: string;
 }

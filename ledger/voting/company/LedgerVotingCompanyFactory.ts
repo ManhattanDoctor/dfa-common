@@ -1,16 +1,16 @@
 import { ClassType, DateUtil, TransformUtil, UnreachableStatementError } from "@ts-core/common";
-import { LedgerCompanyVotingProposalCoinEdit } from "./LedgerCompanyVotingProposalCoinEdit";
-import { LedgerCompanyVotingProposalRoleEdit } from "./LedgerCompanyVotingProposalRoleEdit";
-import { LedgerCompanyRegulation, LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
-import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
+import { LedgerVotingCompanyProposalCoinEdit } from "./LedgerVotingCompanyProposalCoinEdit";
+import { LedgerVotingCompanyProposalRoleEdit } from "./LedgerVotingCompanyProposalRoleEdit";
+import { LedgerCompanyRegulation } from "../../company/LedgerCompanyRegulation";
+import { LedgerVotingCompanyProposal, LedgerVotingCompanyProposalType } from "./LedgerVotingCompanyProposal";
 import * as _ from 'lodash';
 import { LedgerBadRequestError } from "../../error/LedgerError";
 import { LedgerVotingStep } from "../../voting/step/LedgerVotingStep";
 import { LedgerVotingStepType } from "../../voting/LedgerVotingStepType";
 import { LedgerVotingStepTemplate } from "../../voting/template/LedgerVotingStepTemplate";
-import { LedgerCompanyVotingProposalProjectAdd } from "./LedgerCompanyVotingProposalProjectAdd";
+import { LedgerVotingCompanyProposalProjectAdd } from "./LedgerVotingCompanyProposalProjectAdd";
 
-export class LedgerCompanyVotingFactory {
+export class LedgerVotingCompanyFactory {
     // --------------------------------------------------------------------------
     //
     //  Public Methods
@@ -29,21 +29,21 @@ export class LedgerCompanyVotingFactory {
     }
 
     public static getStepExpiredDate(date: Date, regulation: LedgerCompanyRegulation, type: LedgerVotingStep | LedgerVotingStepType): Date {
-        let item = LedgerCompanyVotingFactory.getStepTemplate(regulation, type);
+        let item = LedgerVotingCompanyFactory.getStepTemplate(regulation, type);
         return DateUtil.getDate(date.getTime() + item.duration);
     }
 
-    public static transformProposal(item: LedgerCompanyVotingProposal): LedgerCompanyVotingProposal {
-        let classType: ClassType<LedgerCompanyVotingProposal> = null;
+    public static transformProposal(item: LedgerVotingCompanyProposal): LedgerVotingCompanyProposal {
+        let classType: ClassType<LedgerVotingCompanyProposal> = null;
         switch (item.type) {
-            case LedgerCompanyVotingProposalType.COIN_EDIT:
-                classType = LedgerCompanyVotingProposalCoinEdit;
+            case LedgerVotingCompanyProposalType.COIN_EDIT:
+                classType = LedgerVotingCompanyProposalCoinEdit;
                 break;
-            case LedgerCompanyVotingProposalType.ROLE_EDIT:
-                classType = LedgerCompanyVotingProposalRoleEdit;
+            case LedgerVotingCompanyProposalType.ROLE_EDIT:
+                classType = LedgerVotingCompanyProposalRoleEdit;
                 break;
-            case LedgerCompanyVotingProposalType.PROJECT_ADD:
-                classType = LedgerCompanyVotingProposalProjectAdd;
+            case LedgerVotingCompanyProposalType.PROJECT_ADD:
+                classType = LedgerVotingCompanyProposalProjectAdd;
                 break;
             default:
                 throw new UnreachableStatementError(item.type);

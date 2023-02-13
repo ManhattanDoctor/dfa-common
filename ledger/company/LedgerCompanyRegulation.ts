@@ -4,7 +4,7 @@ import { IsEnum, IsString, IsDefined, ValidateNested } from 'class-validator';
 import { ILedgerVotingTemplate } from '../voting/template/ILedgerVotingTemplate';
 import { LedgerVotingStepTemplate } from '../voting/template/LedgerVotingStepTemplate';
 import { LedgerVotingFactory } from '../voting/LedgerVotingFactory';
-import { LedgerCompanyVotingProposalType } from '../company/voting/LedgerCompanyVotingProposal';
+import { LedgerVotingCompanyProposalType } from '../voting/company/LedgerVotingCompanyProposal';
 
 export type LedgerCompanyRegulationType = LedgerCompanyRegulationTypePreset | string;
 
@@ -22,15 +22,15 @@ export enum LedgerCompanyRegulationTypePreset {
 }
 
 export interface ILedgerCompanyRegulation extends ILedgerVotingTemplate<LedgerCompanyRegulationType> {
-    proposal: LedgerCompanyVotingProposalType;
+    proposal: LedgerVotingCompanyProposalType;
 }
 
 export class LedgerCompanyRegulation implements ILedgerCompanyRegulation {
     @IsString()
     public type: LedgerCompanyRegulationType;
 
-    @IsEnum(LedgerCompanyVotingProposalType)
-    public proposal: LedgerCompanyVotingProposalType;
+    @IsEnum(LedgerVotingCompanyProposalType)
+    public proposal: LedgerVotingCompanyProposalType;
 
     @Type(() => LedgerVotingStepTemplate)
     @Transform(item => item.value.map(LedgerVotingFactory.transformStepTemplate), { toClassOnly: true })

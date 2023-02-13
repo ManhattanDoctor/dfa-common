@@ -1,3 +1,3 @@
-import { CompanyVoting } from '../../company';
+import { VotingCompany } from '../../voting/company';
 
-export declare type IVotingGetDtoResponse = CompanyVoting;
+export declare type IVotingGetDtoResponse = VotingCompany;

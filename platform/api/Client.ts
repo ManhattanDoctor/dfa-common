@@ -12,7 +12,8 @@ import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
 import { ICoinBalanceGetDto, ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
-import { CompanyUser, CompanyVoting } from '../company';
+import { CompanyUser } from '../company';
+import { VotingCompany } from '../voting/company';
 import { IVotingAddDto, IVotingGetDtoResponse, IVotingListDto, IVotingListDtoResponse, IVotingVoteDto } from './voting';
 import { IVotingAddDtoResponse } from './voting';
 import { LedgerCoinId } from '../../ledger/coin';
@@ -20,7 +21,6 @@ import { IVotingVoteListDto, IVotingVoteListDtoResponse } from './voting';
 import { VotingVote } from '../voting';
 import { ILedgerActionListDto, ILedgerActionListDtoResponse, ILedgerObjectDetailsGetDto, ILedgerObjectDetailsGetDtoResponse } from './ledger';
 import { LedgerAction } from '../LedgerAction';
-import { ILedgerObjectDetails } from './ILedgerObjectDetails';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
@@ -138,8 +138,8 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     // --------------------------------------------------------------------------
 
     public async votingGet(id: number): Promise<IVotingGetDtoResponse> {
-        let item = await this.call<CompanyVoting>(`${VOTING_URL}/${id}`);
-        return TransformUtil.toClass(CompanyVoting, item);
+        let item = await this.call<VotingCompany>(`${VOTING_URL}/${id}`);
+        return TransformUtil.toClass(VotingCompany, item);
     }
 
     public async votingVote(data: IVotingVoteDto): Promise<void> {
@@ -153,7 +153,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
 
     public async votingList(data?: IVotingListDto): Promise<IVotingListDtoResponse> {
         let item = await this.call<IVotingListDtoResponse, IVotingListDto>(VOTING_URL, { data: TraceUtil.addIfNeed(data) });
-        item.items = TransformUtil.toClassMany(CompanyVoting, item.items);
+        item.items = TransformUtil.toClassMany(VotingCompany, item.items);
         return item;
     }
 

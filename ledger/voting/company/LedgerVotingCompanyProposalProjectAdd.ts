@@ -1,9 +1,9 @@
 import { IsString, Matches, IsNumberString, IsInt } from 'class-validator';
-import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
+import { LedgerVotingCompanyProposal, LedgerVotingCompanyProposalType } from "./LedgerVotingCompanyProposal";
 import { LedgerUser } from '../../user/LedgerUser';
 import { RegExpUtil } from '../../../util/RegExpUtil';
 
-export class LedgerCompanyVotingProposalProjectAdd extends LedgerCompanyVotingProposal {
+export class LedgerVotingCompanyProposalProjectAdd extends LedgerVotingCompanyProposal {
     // --------------------------------------------------------------------------
     //
     //  Properties
@@ -33,6 +33,6 @@ export class LedgerCompanyVotingProposalProjectAdd extends LedgerCompanyVotingPr
 
     constructor() {
         super();
-        this.type = LedgerCompanyVotingProposalType.PROJECT_ADD;
+        this.type = LedgerVotingCompanyProposalType.PROJECT_ADD;
     }
 }

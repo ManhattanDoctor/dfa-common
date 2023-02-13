@@ -1,20 +1,20 @@
 import { LedgerVoting } from "../../voting/LedgerVoting";
 import { Type, Transform } from 'class-transformer';
-import { LedgerCompanyRegulationType } from "../LedgerCompanyRegulation";
+import { LedgerCompanyRegulationType } from "../../company/LedgerCompanyRegulation";
 import { ValidateNested, IsString, Matches, IsDefined } from 'class-validator';
-import { ILedgerCompanyVotingProposal, LedgerCompanyVotingProposal } from "./LedgerCompanyVotingProposal";
-import { LedgerCompany } from "../LedgerCompany";
-import { LedgerCompanyVotingFactory } from "./LedgerCompanyVotingFactory";
+import { ILedgerVotingCompanyProposal, LedgerVotingCompanyProposal } from "./LedgerVotingCompanyProposal";
+import { LedgerVotingCompanyFactory } from "./LedgerVotingCompanyFactory";
+import { LedgerCompany } from "../../company/LedgerCompany";
 
-export class LedgerCompanyVoting<V = ILedgerCompanyVotingProposal> extends LedgerVoting<LedgerCompanyRegulationType, V> {
+export class LedgerVotingCompany<V = ILedgerVotingCompanyProposal> extends LedgerVoting<LedgerCompanyRegulationType, V> {
     // --------------------------------------------------------------------------
     //
     //  Static Methods
     //
     // --------------------------------------------------------------------------
 
-    public static create(createdDate: Date, transactionHash: string): LedgerCompanyVoting {
-        let item = new LedgerCompanyVoting();
+    public static create(createdDate: Date, transactionHash: string): LedgerVotingCompany {
+        let item = new LedgerVotingCompany();
         item.uid = LedgerVoting.createUid(createdDate, transactionHash);
         item.createdDate = createdDate;
         return item;
@@ -32,8 +32,8 @@ export class LedgerCompanyVoting<V = ILedgerCompanyVotingProposal> extends Ledge
     @IsString()
     public type: LedgerCompanyRegulationType;
 
-    @Type(() => LedgerCompanyVotingProposal)
-    @Transform(item => LedgerCompanyVotingFactory.transformProposal(item.value), { toClassOnly: true })
+    @Type(() => LedgerVotingCompanyProposal)
+    @Transform(item => LedgerVotingCompanyFactory.transformProposal(item.value), { toClassOnly: true })
     @IsDefined()
     @ValidateNested()
     public proposal: V;

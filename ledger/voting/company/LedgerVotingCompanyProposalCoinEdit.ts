@@ -1,12 +1,12 @@
 import { IsString, IsEnum, IsInt, IsNumberString } from 'class-validator';
-import { LedgerCompanyVotingProposal, LedgerCompanyVotingProposalType } from "./LedgerCompanyVotingProposal";
+import { LedgerVotingCompanyProposal, LedgerVotingCompanyProposalType } from "./LedgerVotingCompanyProposal";
 
-export enum LedgerCompanyVotingProposalCoinAction {
+export enum LedgerVotingCompanyProposalCoinAction {
     EMIT = 'EMIT',
     BURN = 'BURN'
 }
 
-export class LedgerCompanyVotingProposalCoinEdit extends LedgerCompanyVotingProposal {
+export class LedgerVotingCompanyProposalCoinEdit extends LedgerVotingCompanyProposal {
     // --------------------------------------------------------------------------
     //
     //  Properties
@@ -25,8 +25,8 @@ export class LedgerCompanyVotingProposalCoinEdit extends LedgerCompanyVotingProp
     @IsNumberString()
     public amount: string;
 
-    @IsEnum(LedgerCompanyVotingProposalCoinAction)
-    public action: LedgerCompanyVotingProposalCoinAction;
+    @IsEnum(LedgerVotingCompanyProposalCoinAction)
+    public action: LedgerVotingCompanyProposalCoinAction;
 
     // --------------------------------------------------------------------------
     //
@@ -36,7 +36,7 @@ export class LedgerCompanyVotingProposalCoinEdit extends LedgerCompanyVotingProp
 
     constructor() {
         super();
-        this.type = LedgerCompanyVotingProposalType.COIN_EDIT;
+        this.type = LedgerVotingCompanyProposalType.COIN_EDIT;
     }
 }
 

@@ -1,11 +1,11 @@
 
 import { ITraceable } from '@ts-core/common';
-import { LedgerCompanyRegulationType } from '../../../ledger/company';
-import { ILedgerCompanyVotingProposal } from '../../../ledger/company/voting';
+import { LedgerCompanyRegulationType } from '../../../ledger/company/LedgerCompanyRegulation';
+import { ILedgerVotingCompanyProposal } from '../../../ledger/voting/company/LedgerVotingCompanyProposal';
 
 export interface IVotingAddDto extends ITraceable {
     type: LedgerCompanyRegulationType;
-    proposal: ILedgerCompanyVotingProposal;
+    proposal: ILedgerVotingCompanyProposal;
 }
 
 export interface IVotingAddDtoResponse { }

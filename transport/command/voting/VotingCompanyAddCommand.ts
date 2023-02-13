@@ -2,9 +2,9 @@ import { TransformUtil } from '@ts-core/common';
 import { Matches, IsDefined, ValidateNested, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany, LedgerCompanyRegulationType } from '../../../ledger/company';
-import { ILedgerCompanyVotingProposal, LedgerCompanyVoting, LedgerCompanyVotingProposal } from '../../../ledger/company/voting';
+import { ILedgerVotingCompanyProposal, LedgerVotingCompany, LedgerVotingCompanyProposal } from '../../../ledger/voting/company';
 
-export class VotingCompanyAddCommand extends ChaincodeTransportCommandAsync<IVotingCompanyAddDto, LedgerCompanyVoting> {
+export class VotingCompanyAddCommand extends ChaincodeTransportCommandAsync<IVotingCompanyAddDto, LedgerVotingCompany> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
@@ -29,15 +29,15 @@ export class VotingCompanyAddCommand extends ChaincodeTransportCommandAsync<IVot
     //
     // --------------------------------------------------------------------------
 
-    protected checkResponse(item: LedgerCompanyVoting): LedgerCompanyVoting {
-        return TransformUtil.toClass(LedgerCompanyVoting, item);
+    protected checkResponse(item: LedgerVotingCompany): LedgerVotingCompany {
+        return TransformUtil.toClass(LedgerVotingCompany, item);
     }
 }
 
 export interface IVotingCompanyAddDto {
     companyUid: string;
     type: LedgerCompanyRegulationType;
-    proposal: ILedgerCompanyVotingProposal;
+    proposal: ILedgerVotingCompanyProposal;
 }
 
 export class VotingCompanyAddDto implements IVotingCompanyAddDto {
@@ -49,5 +49,5 @@ export class VotingCompanyAddDto implements IVotingCompanyAddDto {
 
     @IsDefined()
     @ValidateNested()
-    proposal: LedgerCompanyVotingProposal;
+    proposal: LedgerVotingCompanyProposal;
 }
