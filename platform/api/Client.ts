@@ -1,4 +1,4 @@
-import { TransportHttp, ITransportHttpSettings, ITraceable } from '@ts-core/common';
+import { TransportHttp, ITransportHttpSettings, ITraceable, TransportHttpCommandAsync } from '@ts-core/common';
 import { ILogger } from '@ts-core/common';
 import * as _ from 'lodash';
 import { TraceUtil } from '@ts-core/common';
@@ -126,8 +126,8 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return item;
     }
 
-    public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string): Promise<CoinBalance> {
-        let item = await this.call<CoinBalance, ICoinBalanceGetDto>(`${COIN_BALANCE_URL}/${coinId}`, { data: TraceUtil.addIfNeed({ objectUid }) });
+    public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string, isHandleError: boolean = true): Promise<CoinBalance> {
+        let item = await this.sendListen(new TransportHttpCommandAsync(`${COIN_BALANCE_URL}/${coinId}`, { data: TraceUtil.addIfNeed({ objectUid }), isHandleError }));
         return TransformUtil.toClass(CoinBalance, item);
     }
 
