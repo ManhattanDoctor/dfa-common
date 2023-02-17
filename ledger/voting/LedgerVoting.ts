@@ -50,12 +50,12 @@ export abstract class LedgerVoting<U = string, V = object> implements ILedgerObj
 
     @Type(() => Date)
     @IsDate()
-    public createdDate: Date;
+    public startedDate: Date;
 
     @IsOptional()
     @Type(() => Date)
     @IsDate()
-    public completedDate: Date;
+    public finishedDate: Date;
 
     @Min(0)
     @IsInt()

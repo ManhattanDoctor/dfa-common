@@ -16,7 +16,7 @@ export class LedgerVotingCompany<V = ILedgerVotingCompanyProposal> extends Ledge
     public static create(createdDate: Date, transactionHash: string): LedgerVotingCompany {
         let item = new LedgerVotingCompany();
         item.uid = LedgerVoting.createUid(createdDate, transactionHash);
-        item.createdDate = createdDate;
+        item.startedDate = createdDate;
         return item;
     }
 

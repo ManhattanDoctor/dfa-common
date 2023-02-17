@@ -1,4 +1,4 @@
-import { ICoinTransferDto } from '../../command/coin';
+import { ITraceable } from '@ts-core/common';
 import { LedgerEvent, LedgerEventDefault } from '../LedgerEvent';
 
 export class CoinTransferredEvent extends LedgerEventDefault {
@@ -16,7 +16,15 @@ export class CoinTransferredEvent extends LedgerEventDefault {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: ICoinTransferDto) {
+    constructor(data: ICoinTransferEventDto) {
         super(CoinTransferredEvent.NAME, data);
     }
+}
+export interface ICoinTransferEventDto extends ITraceable {
+    to: string;
+    from: string;
+    amount: string;
+    coinUid: string;
+    decimals: number;
+    votingUid?: string;
 }
