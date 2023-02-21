@@ -1,4 +1,4 @@
-import { IsString, IsBoolean } from "class-validator";
+import { IsString, IsOptional, IsBoolean } from "class-validator";
 import { LedgerVotingStepType } from "../LedgerVotingStepType";
 import { LedgerVotingStepTemplate } from "./LedgerVotingStepTemplate";
 
@@ -12,8 +12,13 @@ export class LedgerVotingStepCoinTemplate extends LedgerVotingStepTemplate {
     @IsString()
     public coinId: string;
 
+    @IsOptional()
     @IsBoolean()
-    public isHold: boolean;
+    public isHoldAfterVote?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    public isUnholdAfterFinish?: boolean;
 
     // --------------------------------------------------------------------------
     //

@@ -1,6 +1,6 @@
 import { ObjectUtil } from "@ts-core/common";
 import { Type } from "class-transformer";
-import { IsInt, IsBoolean, IsString } from "class-validator";
+import { IsInt, IsOptional, IsBoolean, IsString } from "class-validator";
 import { LedgerVotingStepCoinTemplate } from "../template/LedgerVotingStepCoinTemplate";
 import { LedgerVotingListCoin } from "./LedgerVotingListCoin";
 import { LedgerVotingStep } from "./LedgerVotingStep";
@@ -15,7 +15,7 @@ export class LedgerVotingStepCoin extends LedgerVotingStep {
     public static create(template: LedgerVotingStepCoinTemplate): LedgerVotingStepCoin {
         let item = new LedgerVotingStepCoin();
         item.list = LedgerVotingListCoin.create();
-        ObjectUtil.copyPartial(template, item, ['coinId', 'isHold', 'type', 'votesVoteTypes', 'votesForMinPercent', 'votesTotalMinPercent', 'votesAgainstMaxPercent']);
+        ObjectUtil.copyPartial(template, item, ['coinId', 'isHoldAfterVote', 'isUnholdAfterFinish', 'type', 'votesVoteTypes', 'votesForMinPercent', 'votesTotalMinPercent', 'votesAgainstMaxPercent']);
         return item;
     }
 
@@ -25,8 +25,13 @@ export class LedgerVotingStepCoin extends LedgerVotingStep {
     //
     // --------------------------------------------------------------------------
 
+    @IsOptional()
     @IsBoolean()
-    public isHold: boolean;
+    public isHoldAfterVote?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    public isUnholdAfterFinish?: boolean;
 
     @IsString()
     public coinId: string;
