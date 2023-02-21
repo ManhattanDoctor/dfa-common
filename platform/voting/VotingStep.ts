@@ -1,7 +1,8 @@
 
 import { Type } from 'class-transformer';
 import { LedgerRoles } from '../../ledger/role';
-import { ILedgerVotingRestriction } from '../../ledger/voting';
+import { LedgerVoteType } from '../../ledger/voting/LedgerVotingList';
+import { ILedgerVotingRestriction } from '../../ledger/voting/LedgerVotingRestriction';
 import { ILedgerVotingState } from '../../ledger/voting/LedgerVotingState';
 import { LedgerVotingStepType } from '../../ledger/voting/LedgerVotingStepType';
 
@@ -20,22 +21,25 @@ export class VotingStep implements ILedgerVotingState, ILedgerVotingRestriction 
     votesAgainst: string;
     votesAgainstPercent: number;
 
+    votesVoteTypes?: Array<LedgerVoteType>;
     votesForMinPercent?: number;
     votesTotalMinPercent?: number;
     votesAgainstMaxPercent?: number;
 
-    total: string;
+    total?: string;
+    
+    @Type(() => Date)
+    startedDate?: Date;
 
     @Type(() => Date)
-    startedDate: Date;
+    expiredDate?: Date;
 
     @Type(() => Date)
-    expiredDate: Date;
-
-    @Type(() => Date)
-    finishedDate: Date;
+    finishedDate?: Date;
 
     roles?: Array<LedgerRoles>;
     coinId?: string;
     decimals?: number;
+    isHoldAfterVote?: boolean;
+    isUnholdAfterFinish?: boolean;
 }

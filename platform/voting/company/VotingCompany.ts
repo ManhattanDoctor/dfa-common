@@ -32,7 +32,7 @@ export class VotingCompany implements ILedgreable {
     updatedDate: Date;
 
     @Type(() => Date)
-    completedDate: Date;
+    finishedDate: Date;
 
 }
 
