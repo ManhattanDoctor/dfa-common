@@ -36,9 +36,8 @@ export class LedgerVotingStepCoin extends LedgerVotingStep {
     @IsString()
     public coinId: string;
 
-    @IsOptional()
     @IsInt()
-    public decimals?: number;
+    public decimals: number;
 
     @Type(() => LedgerVotingListCoin)
     public declare list: LedgerVotingListCoin;
