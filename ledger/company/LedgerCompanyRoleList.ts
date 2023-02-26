@@ -12,7 +12,7 @@ export class LedgerCompanyRoleList {
 
     public static create(): LedgerCompanyRoleList {
         let item = new LedgerCompanyRoleList();
-        item.storage = new Object();
+        item.storage = new Object() as any;
         return item;
     }
 
@@ -22,7 +22,7 @@ export class LedgerCompanyRoleList {
     //
     // --------------------------------------------------------------------------
 
-    private storage: Object;
+    private storage: LedgerCompanyRoleStorage;
 
     // --------------------------------------------------------------------------
     //
@@ -53,4 +53,10 @@ export class LedgerCompanyRoleList {
             throw new LedgerBadRequestError(`Roles amount must be granter than zero`);
         }
     }
+
+    public toObject(): LedgerCompanyRoleStorage {
+        return _.cloneDeep(this.storage);
+    }
 }
+
+export type LedgerCompanyRoleStorage = { [key: string]: string };

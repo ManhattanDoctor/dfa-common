@@ -21,6 +21,7 @@ export enum LedgerCommand {
     COMPANY_USER_LIST = 'DAO:CompanyUserList',
     COMPANY_COIN_LIST = 'DAO:CompanyCoinList',
     COMPANY_USER_EDIT = 'DAO:CompanyUserEdit',
+    COMPANY_ROLE_GET = 'DAO:CompanyRoleGetCommand',
     COMPANY_USER_ROLE_LIST = 'DAO:CompanyUserRoleList',
 
     VOTING_GET = 'DAO:VotingGet',

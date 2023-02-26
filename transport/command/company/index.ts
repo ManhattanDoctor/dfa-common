@@ -7,6 +7,5 @@ export * from './CompanyCoinListCommand';
 export * from './CompanyProjectListCommand';
 export * from './CompanyUserSetCommand';
 export * from './CompanyUserListCommand';
+export * from './CompanyRoleGetCommand';
 export * from './CompanyUserRoleListCommand';
-
-
