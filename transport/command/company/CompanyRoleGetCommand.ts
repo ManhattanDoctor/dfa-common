@@ -1,6 +1,6 @@
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { ITraceable } from '@ts-core/common';
-import { LedgerCompanyRoleStorage } from '../../../ledger/company/LedgerCompanyRoleList';
+import { LedgerRoleStorage } from '../../../ledger/LedgerRoleStorage';
 
 export class CompanyRoleGetCommand extends ChaincodeTransportCommandAsync<ICompanyRoleGetDto, ICompanyRoleGetDtoResponse> {
     // --------------------------------------------------------------------------
@@ -36,4 +36,4 @@ export interface ICompanyRoleGetDto extends ITraceable {
     uid: string;
 }
 
-export type ICompanyRoleGetDtoResponse = LedgerCompanyRoleStorage;
+export type ICompanyRoleGetDtoResponse = LedgerRoleStorage;

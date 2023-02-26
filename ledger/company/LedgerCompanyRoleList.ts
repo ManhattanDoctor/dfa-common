@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
 import { MathUtil } from '@ts-core/common';
+import { LedgerRoleStorage } from '../LedgerRoleStorage';
 
 export class LedgerCompanyRoleList {
     // --------------------------------------------------------------------------
@@ -22,7 +23,7 @@ export class LedgerCompanyRoleList {
     //
     // --------------------------------------------------------------------------
 
-    private storage: LedgerCompanyRoleStorage;
+    private storage: LedgerRoleStorage;
 
     // --------------------------------------------------------------------------
     //
@@ -54,9 +55,7 @@ export class LedgerCompanyRoleList {
         }
     }
 
-    public toObject(): LedgerCompanyRoleStorage {
+    public toObject(): LedgerRoleStorage {
         return _.cloneDeep(this.storage);
     }
 }
-
-export type LedgerCompanyRoleStorage = { [key: string]: string };
