@@ -1,4 +1,5 @@
 import { CoinAccountListCommand, CoinGetCommand, CoinListCommand, CoinObjectBalanceGetCommand, CoinRateGetCommand } from './coin';
+import { CoinBridgeGetCommand } from './coinBridge/CoinBridgeGetCommand';
 import { CompanyCoinListCommand, CompanyGetCommand, CompanyRoleGetCommand, CompanyListCommand, CompanyProjectListCommand, CompanyUserListCommand, CompanyUserRoleListCommand } from './company';
 import { GenesisGetCommand } from './GenesisGetCommand';
 import { ProjectGetCommand, ProjectUserListCommand, ProjectUserRoleListCommand } from './project';
@@ -18,6 +19,8 @@ export const NON_SIGNED_COMMANDS: Array<string> = [
     CoinRateGetCommand.NAME,
     CoinAccountListCommand.NAME,
     CoinObjectBalanceGetCommand.NAME,
+
+    CoinBridgeGetCommand.NAME,
 
     CompanyGetCommand.NAME,
     CompanyListCommand.NAME,

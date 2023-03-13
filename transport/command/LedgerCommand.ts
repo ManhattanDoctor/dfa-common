@@ -46,6 +46,9 @@ export enum LedgerCommand {
     COIN_ACCOUNT_LIST = 'DAO:CoinAccountList',
     COIN_OBJECT_BALANCE_GET = 'DAO:CoinObjectBalanceGet',
 
+    COIN_BRIDGE_GET = 'DAO:CoinBridgeGet',
+    COIN_BRIDGE_CHECK = 'DAO:CoinBridgeCheck',
+
     PROJECT_GET = 'DAO:ProjectGet',
     PROJECT_ADD = 'DAO:ProjectAdd',
     PROJECT_LIST = 'DAO:ProjectList',
