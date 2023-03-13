@@ -23,7 +23,6 @@ export class CoinEmitCommand extends ChaincodeTransportCommandAsync<ICoinEmitDto
     constructor(request: ICoinEmitDto) {
         super(CoinEmitCommand.NAME, TransformUtil.toClass(CoinEmitDto, request));
     }
-
 }
 
 export enum CoinEmitType {
