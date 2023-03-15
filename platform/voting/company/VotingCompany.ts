@@ -22,7 +22,6 @@ export class VotingCompany implements ILedgreable {
     stepIndex: number;
 
     @Type(() => VotingStep)
-    // @Transform(item => item.value.map(LedgerVotingFactory.transformStep), { toClassOnly: true })
     steps: Array<VotingStep>;
 
     @Type(() => Date)
@@ -33,7 +32,6 @@ export class VotingCompany implements ILedgreable {
 
     @Type(() => Date)
     finishedDate: Date;
-
 }
 
 
