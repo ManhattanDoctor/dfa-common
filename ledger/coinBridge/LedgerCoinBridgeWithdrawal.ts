@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { LedgerCoin } from '../coin/LedgerCoin';
 import { LedgerUser } from '../user';
 
-export class LedgerCoinBridgeDeposit {
+export class LedgerCoinBridgeWithdrawal {
     // --------------------------------------------------------------------------
     //
     //  Properties
