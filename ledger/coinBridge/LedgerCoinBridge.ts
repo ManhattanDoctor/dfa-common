@@ -10,7 +10,7 @@ export class LedgerCoinBridge implements IUIDable {
     // --------------------------------------------------------------------------
 
     public static PREFIX = 'coinBridge';
-    public static NAME_PATTERN = `[A-Z]{1,35}`;
+    public static NAME_PATTERN = `[a-zA-Z0-9_-]{1,35}`;
 
     public static UID_REG_EXP = new RegExp(`^${LedgerCoinBridge.PREFIX}/${LedgerCoinBridge.NAME_PATTERN}$`);
     public static NAME_REG_EXP = new RegExp(`^${LedgerCoinBridge.NAME_PATTERN}$`);
