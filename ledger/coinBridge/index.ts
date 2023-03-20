@@ -2,13 +2,37 @@ export * from './LedgerCoinBridge';
 export * from './LedgerCoinBridgeDeposit';
 export * from './LedgerCoinBridgeWithdrawal';
 
+export let ETH_WITHDREW_EVENT = 'Withdrew';
+export let ETH_DEPOSITED_EVENT = 'Deposited';
+
 export let ETHS = {
     "ETH": {
         "endpoint": 'http://127.0.0.1:7545',
-        "contractAddress": '0x79C90675143217266a0Af796B1619237f52dA111',
+        "contractAddress": '0x0e9925fB36f82B98E04D844E92c01386E0c2B605',
         "contractAbi": [
             {
-                "inputs": [],
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_decimals",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_depositMin",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_withdrawalMin",
+                        "type": "uint256"
+                    }
+                ],
                 "stateMutability": "nonpayable",
                 "type": "constructor"
             },
@@ -26,6 +50,16 @@ export let ETHS = {
                                 "internalType": "string",
                                 "name": "coinUid",
                                 "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "name",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "decimals",
+                                "type": "uint256"
                             },
                             {
                                 "internalType": "uint256",
@@ -88,6 +122,16 @@ export let ETHS = {
                             },
                             {
                                 "internalType": "uint256",
+                                "name": "name",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "decimals",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "uint256",
                                 "name": "amount",
                                 "type": "uint256"
                             },
@@ -110,6 +154,20 @@ export let ETHS = {
                 ],
                 "name": "Withdrew",
                 "type": "event"
+            },
+            {
+                "inputs": [],
+                "name": "decimals",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function",
+                "constant": true
             },
             {
                 "inputs": [],
@@ -151,6 +209,16 @@ export let ETHS = {
                         "type": "string"
                     },
                     {
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "decimals",
+                        "type": "uint256"
+                    },
+                    {
                         "internalType": "uint256",
                         "name": "amount",
                         "type": "uint256"
@@ -164,6 +232,20 @@ export let ETHS = {
                         "internalType": "uint256",
                         "name": "date",
                         "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function",
+                "constant": true
+            },
+            {
+                "inputs": [],
+                "name": "name",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "",
+                        "type": "string"
                     }
                 ],
                 "stateMutability": "view",
@@ -242,6 +324,16 @@ export let ETHS = {
                         "internalType": "string",
                         "name": "coinUid",
                         "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "name",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "decimals",
+                        "type": "uint256"
                     },
                     {
                         "internalType": "uint256",
@@ -352,6 +444,16 @@ export let ETHS = {
                                 "type": "string"
                             },
                             {
+                                "internalType": "string",
+                                "name": "name",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "decimals",
+                                "type": "uint256"
+                            },
+                            {
                                 "internalType": "uint256",
                                 "name": "amount",
                                 "type": "uint256"
@@ -397,6 +499,16 @@ export let ETHS = {
                                 "internalType": "string",
                                 "name": "coinUid",
                                 "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "name",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "decimals",
+                                "type": "uint256"
                             },
                             {
                                 "internalType": "uint256",
