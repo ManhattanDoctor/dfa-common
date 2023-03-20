@@ -35,6 +35,7 @@ export interface ICoinEmitDto extends ITraceable {
     coinUid: string;
     objectUid: string;
     votingUid?: string;
+    transactionHash?: string;
 }
 
 export class CoinEmitDto implements ICoinEmitDto {
@@ -50,4 +51,8 @@ export class CoinEmitDto implements ICoinEmitDto {
     @Matches(LedgerVoting.UID_REG_EXP)
     @IsOptional()
     votingUid?: string;
+
+    @IsString()
+    @IsOptional()
+    transactionHash?: string;
 }
