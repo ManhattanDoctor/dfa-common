@@ -4,11 +4,23 @@ export * from './LedgerCoinBridgeWithdrawal';
 
 export let ETH_WITHDREW_EVENT = 'Withdrew';
 export let ETH_DEPOSITED_EVENT = 'Deposited';
+export let ETH_EVENTS = [ETH_WITHDREW_EVENT, ETH_DEPOSITED_EVENT];
 
-export let ETHS = {
-    "ETH": {
-        "endpoint": 'http://127.0.0.1:7545',
-        "contractAddress": '0x0e9925fB36f82B98E04D844E92c01386E0c2B605',
+/*
+"endpoint": 'http://127.0.0.1:7545'
+"contractAddress": '0x0e9925fB36f82B98E04D844E92c01386E0c2B605'
+
+"endpoint": 'https://goerli.infura.io/v3/6198cde58cf540e5b1d08802ca7372cc',
+"contractAddress": '0x79C90675143217266a0Af796B1619237f52dA111',
+*/
+
+export let ETHS = [
+    {
+        "id": "ETH_GOERLI",
+        "isDisabled": false,
+        "blockFrequency": 30000,
+        "endpoint": 'https://goerli.infura.io/v3/6198cde58cf540e5b1d08802ca7372cc',
+        "contractAddress": '0x79C90675143217266a0Af796B1619237f52dA111',
         "contractAbi": [
             {
                 "inputs": [
@@ -537,4 +549,4 @@ export let ETHS = {
             }
         ]
     }
-}
+]
