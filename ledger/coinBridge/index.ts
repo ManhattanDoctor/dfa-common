@@ -1,10 +1,12 @@
 export * from './LedgerCoinBridge';
-export * from './LedgerCoinBridgeDeposit';
-export * from './LedgerCoinBridgeWithdrawal';
+export * from './LedgerCoinBridgeAction';
 
-export let ETH_WITHDREW_EVENT = 'Withdrew';
-export let ETH_DEPOSITED_EVENT = 'Deposited';
-export let ETH_EVENTS = [ETH_WITHDREW_EVENT, ETH_DEPOSITED_EVENT];
+export let ETH_EVENT = 'Operation';
+
+export enum EthEventType {
+    WITHDREW = 'Withdrew',
+    DEPOSITED = 'Deposited',
+}
 
 export let ETHS = [
     {
@@ -34,9 +36,9 @@ export let ETH_ABI = [
                 "type": "string"
             },
             {
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "_decimals",
-                "type": "uint256"
+                "type": "uint8"
             },
             {
                 "internalType": "uint256",
@@ -59,7 +61,7 @@ export let ETH_ABI = [
                 "components": [
                     {
                         "internalType": "string",
-                        "name": "objectUid",
+                        "name": "name",
                         "type": "string"
                     },
                     {
@@ -69,37 +71,27 @@ export let ETH_ABI = [
                     },
                     {
                         "internalType": "string",
-                        "name": "name",
+                        "name": "objectUid",
                         "type": "string"
                     },
                     {
-                        "internalType": "uint256",
-                        "name": "decimals",
-                        "type": "uint256"
+                        "internalType": "address",
+                        "name": "target",
+                        "type": "address"
                     },
                     {
                         "internalType": "uint256",
                         "name": "amount",
                         "type": "uint256"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "from",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "date",
-                        "type": "uint256"
                     }
                 ],
                 "indexed": false,
-                "internalType": "struct HlfBridge.Deposit",
+                "internalType": "struct CoinBridge.OperationDto",
                 "name": "data",
                 "type": "tuple"
             }
         ],
-        "name": "Deposited",
+        "name": "Operation",
         "type": "event"
     },
     {
@@ -127,48 +119,48 @@ export let ETH_ABI = [
             {
                 "components": [
                     {
-                        "internalType": "string",
-                        "name": "objectUid",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "coinUid",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "name",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "decimals",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    },
-                    {
                         "internalType": "address",
-                        "name": "to",
+                        "name": "validator",
                         "type": "address"
                     },
                     {
                         "internalType": "uint256",
-                        "name": "date",
+                        "name": "total",
                         "type": "uint256"
                     }
                 ],
                 "indexed": false,
-                "internalType": "struct HlfBridge.Withdrawal",
+                "internalType": "struct CoinBridge.ValidatorDto",
                 "name": "data",
                 "type": "tuple"
             }
         ],
-        "name": "Withdrew",
+        "name": "ValidatorAdded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "validator",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "total",
+                        "type": "uint256"
+                    }
+                ],
+                "indexed": false,
+                "internalType": "struct CoinBridge.ValidatorDto",
+                "name": "data",
+                "type": "tuple"
+            }
+        ],
+        "name": "ValidatorRemoved",
         "type": "event"
     },
     {
@@ -176,9 +168,9 @@ export let ETH_ABI = [
         "name": "decimals",
         "outputs": [
             {
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "",
-                "type": "uint256"
+                "type": "uint8"
             }
         ],
         "stateMutability": "view",
@@ -192,61 +184,6 @@ export let ETH_ABI = [
             {
                 "internalType": "uint256",
                 "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "deposits",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "objectUid",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "coinUid",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "decimals",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "from",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "date",
                 "type": "uint256"
             }
         ],
@@ -303,6 +240,40 @@ export let ETH_ABI = [
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "validators",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+    },
+    {
+        "inputs": [],
+        "name": "validatorsTotal",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+    },
+    {
         "inputs": [],
         "name": "withdrawalMin",
         "outputs": [
@@ -319,19 +290,6 @@ export let ETH_ABI = [
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "withdrawals",
-        "outputs": [
-            {
                 "internalType": "string",
                 "name": "objectUid",
                 "type": "string"
@@ -342,32 +300,25 @@ export let ETH_ABI = [
                 "type": "string"
             },
             {
-                "internalType": "uint256",
-                "name": "name",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "decimals",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            },
-            {
                 "internalType": "address",
                 "name": "to",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "date",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
-        "stateMutability": "view",
+        "name": "message",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "pure",
         "type": "function",
         "constant": true
     },
@@ -389,6 +340,85 @@ export let ETH_ABI = [
         "stateMutability": "payable",
         "type": "function",
         "payable": true
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "objectUid",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "coinUid",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bytes[]",
+                "name": "signatures",
+                "type": "bytes[]"
+            }
+        ],
+        "name": "withdraw",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "validator",
+                "type": "address"
+            }
+        ],
+        "name": "validatorHas",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "validator",
+                "type": "address"
+            }
+        ],
+        "name": "validatorAdd",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "validator",
+                "type": "address"
+            }
+        ],
+        "name": "validatorRemove",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "inputs": [
@@ -418,14 +448,7 @@ export let ETH_ABI = [
     },
     {
         "inputs": [],
-        "name": "refund",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "balanceGet",
+        "name": "balance",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -436,119 +459,5 @@ export let ETH_ABI = [
         "stateMutability": "view",
         "type": "function",
         "constant": true
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "from",
-                "type": "address"
-            }
-        ],
-        "name": "depositsGet",
-        "outputs": [
-            {
-                "components": [
-                    {
-                        "internalType": "string",
-                        "name": "objectUid",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "coinUid",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "name",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "decimals",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "from",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "date",
-                        "type": "uint256"
-                    }
-                ],
-                "internalType": "struct HlfBridge.Deposit[]",
-                "name": "",
-                "type": "tuple[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-            }
-        ],
-        "name": "withdrawalsGet",
-        "outputs": [
-            {
-                "components": [
-                    {
-                        "internalType": "string",
-                        "name": "objectUid",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "coinUid",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "name",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "decimals",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "to",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "date",
-                        "type": "uint256"
-                    }
-                ],
-                "internalType": "struct HlfBridge.Withdrawal[]",
-                "name": "",
-                "type": "tuple[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function",
-        "constant": true
     }
-];
+]
