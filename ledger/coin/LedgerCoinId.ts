@@ -6,4 +6,5 @@ export enum LedgerCoinIdPreset {
     RUB = 'RUB',
     USD = 'USD',
     EUR = 'EUR',
+    ETH = 'ETH',
 }

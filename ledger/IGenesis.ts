@@ -151,6 +151,8 @@ export const ROOT_COIN_VOTE_DECIMALS = 0;
 export const ROOT_COIN_RUB_AMOUNT = '100000';
 export const ROOT_COIN_RUB_DECIMALS = 2;
 
+export const ROOT_COIN_ETH_DECIMALS = 18;
+
 // --------------------------------------------------------------------------
 //
 //  Interface

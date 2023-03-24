@@ -18,11 +18,11 @@ export let ETHS = [
         "contractAbi": []
     },
     {
-        "id": "ETH_LOCAL",
+        "id": "ETH",
         "isDisabled": false,
         "blockFrequency": 3000,
         "endpoint": 'http://127.0.0.1:7545',
-        "contractAddress": '0x0e9925fB36f82B98E04D844E92c01386E0c2B605',
+        "contractAddress": '0xe356847C20Efd0e2686B7a4186b3a49F45CE3b95',
         "contractAbi": []
     }
 ]
