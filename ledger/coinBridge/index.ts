@@ -11,6 +11,7 @@ export enum EthEventType {
 export let ETHS = [
     {
         "id": "ETH_GOERLI",
+        "decimals": 18,
         "isDisabled": true,
         "blockFrequency": 30000,
         "endpoint": 'https://goerli.infura.io/v3/6198cde58cf540e5b1d08802ca7372cc',
@@ -19,6 +20,7 @@ export let ETHS = [
     },
     {
         "id": "ETH",
+        "decimals": 18,
         "isDisabled": false,
         "blockFrequency": 3000,
         "endpoint": 'http://127.0.0.1:7545',
