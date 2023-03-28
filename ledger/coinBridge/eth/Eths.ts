@@ -9,18 +9,18 @@ export enum EthEventType {
 
 let ETHS = [
     {
-        "id": "ETH_GOERLI",
+        "id": "ETH",
         "decimals": 18,
-        "isDisabled": true,
-        "blockFrequency": 30000,
+        "isDisabled": false,
+        "blockFrequency": 10000,
         "endpoint": 'https://goerli.infura.io/v3/6198cde58cf540e5b1d08802ca7372cc',
-        "contractAddress": '0x79C90675143217266a0Af796B1619237f52dA111',
+        "contractAddress": '0xD4a57032aff20334e947DB070b699Ab6fc9C2a2d',
         "contractAbi": []
     },
     {
         "id": "ETH",
         "decimals": 18,
-        "isDisabled": false,
+        "isDisabled": true,
         "blockFrequency": 3000,
         "endpoint": 'http://127.0.0.1:7545',
         "contractAddress": '0xe356847C20Efd0e2686B7a4186b3a49F45CE3b95',
