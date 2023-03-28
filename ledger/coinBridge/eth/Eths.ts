@@ -466,6 +466,9 @@ let ETH_ABI = [
 export function getEths(): typeof ETHS {
     let items = new Array();
     for (let item of ETHS) {
+        if (item.isDisabled) {
+            continue;
+        }
         if (_.isEmpty(item.contractAbi)) {
             item.contractAbi = ETH_ABI;
         }
