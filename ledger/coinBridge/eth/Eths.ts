@@ -13,8 +13,8 @@ let ETHS = [
         "chainId": 5,
         "decimals": 18,
         "isDisabled": false,
-        "blockFrequency": 10000,
         "explorer": "https://goerli.etherscan.io",
+        "blockFrequency": 15000,
         "endpoint": 'https://goerli.infura.io/v3/6198cde58cf540e5b1d08802ca7372cc',
         "contractAddress": '0xD4a57032aff20334e947DB070b699Ab6fc9C2a2d',
         "contractAbi": []

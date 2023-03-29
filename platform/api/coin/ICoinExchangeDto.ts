@@ -1,17 +1,21 @@
 
 import { CoinBalance } from '../../coin/CoinBalance';
 import { ITraceable } from '@ts-core/common';
-import { LedgerCoinId } from '../../../ledger/coin/LedgerCoinId';
 
-export interface ICoinExchangeGetDtoResponse extends ITraceable {
+export interface ICoinExchangeGetDto extends ITraceable {
+    to: string;
+    from: string;
+}
+
+export interface ICoinExchangeGetDtoResponse {
     to: CoinBalance;
     from: CoinBalance;
     rate: string;
 }
 
 export interface ICoinExchangeDto extends ITraceable {
-    to: LedgerCoinId;
-    from: LedgerCoinId;
+    to: string;
+    from: string;
     rate: string;
     amount: string;
 }
