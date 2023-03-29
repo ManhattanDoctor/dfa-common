@@ -10,7 +10,7 @@ import { IUserGetDtoResponse, IUserEditDto, IUserEditDtoResponse } from '../api/
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
-import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
 import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
 import { CompanyUser } from '../company';
 import { VotingCompany } from '../voting/company';
@@ -113,8 +113,8 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return this.call<void, ICoinExchangeDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
-    public async coinExchangeGet(data?: ITraceable): Promise<ICoinExchangeGetDtoResponse> {
-        let item = await this.call<ICoinExchangeGetDtoResponse, ITraceable>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
+    public async coinExchangeGet(data?: ICoinExchangeGetDto): Promise<ICoinExchangeGetDtoResponse> {
+        let item = await this.call<ICoinExchangeGetDtoResponse, ICoinExchangeGetDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
         item.to = TransformUtil.toClass(CoinBalance, item.to);
         item.from = TransformUtil.toClass(CoinBalance, item.from);
         return item;
