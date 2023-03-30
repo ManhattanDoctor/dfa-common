@@ -113,7 +113,7 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
         return this.call<void, ICoinExchangeDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
-    public async coinExchangeGet(data?: ICoinExchangeGetDto): Promise<ICoinExchangeGetDtoResponse> {
+    public async coinExchangeGet(data: ICoinExchangeGetDto): Promise<ICoinExchangeGetDtoResponse> {
         let item = await this.call<ICoinExchangeGetDtoResponse, ICoinExchangeGetDto>(COIN_EXCHANGE_URL, { data: TraceUtil.addIfNeed(data) });
         item.to = TransformUtil.toClass(CoinBalance, item.to);
         item.from = TransformUtil.toClass(CoinBalance, item.from);
