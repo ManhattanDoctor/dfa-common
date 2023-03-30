@@ -40,8 +40,12 @@ export class EthClient extends EthApiClient<IEthClientSettings> {
         return !_.isEmpty(await this.getEvents(from, to));
     }
 
-    public deposit(userUid: string, coinUid: string): string {
-        return this.contract.methods.deposit(userUid, coinUid).encodeABI();
+    public deposit(objectUid: string, coinUid: string): string {
+        return this.contract.methods.deposit(objectUid, coinUid).encodeABI();
+    }
+
+    public withdraw(objectUid: string, coinUid: string, to: string, amount: string, signatures: Array<string>, from: string): string {
+        return this.contract.methods.withdraw(objectUid, coinUid, to, amount, signatures, { from })
     }
 
     // --------------------------------------------------------------------------

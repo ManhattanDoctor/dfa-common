@@ -241,6 +241,7 @@ export const VOTING_VOTE_URL = PREFIX + 'votingVote';
 
 export const COIN_URL = PREFIX + 'coin';
 export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
+export const COIN_WITHDRAW_URL = PREFIX + 'coinWithdraw';
 export const COIN_EXCHANGE_URL = PREFIX + 'coinExchange';
 
 export const PROJECT_URL = PREFIX + 'project';
