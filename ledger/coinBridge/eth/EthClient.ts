@@ -1,6 +1,7 @@
 import { EthApiClient, IEthApiClientSettings } from '@ts-core/eth';
 import { ETH_EVENT } from './Eths';
-import { EventData } from 'web3-eth-contract';
+import { Unit } from 'web3-utils';
+import { EventData, } from 'web3-eth-contract';
 import * as _ from 'lodash';
 
 export class EthClient extends EthApiClient<IEthClientSettings> {
@@ -10,12 +11,16 @@ export class EthClient extends EthApiClient<IEthClientSettings> {
     //
     // --------------------------------------------------------------------------
 
-    public toWei(value: string | number): string {
-        return this.client.utils.toWei(value.toString(), 'ether');
+    public toHex(value: string | number): string {
+        return this.client.utils.toHex(value);
     }
 
-    public fromWei(value: string | number): string {
-        return this.client.utils.fromWei(value.toString(), 'ether');
+    public toWei(value: string | number, unit: Unit = 'ether'): string {
+        return this.client.utils.toWei(value.toString(), unit);
+    }
+
+    public fromWei(value: string | number, unit: Unit = 'ether'): string {
+        return this.client.utils.fromWei(value.toString(), unit);
     }
 
     public async getBalance(value: string): Promise<string> {

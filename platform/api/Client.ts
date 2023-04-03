@@ -10,7 +10,7 @@ import { IUserGetDtoResponse, IUserEditDto, IUserEditDtoResponse } from '../api/
 import { IProjectEditDto, IProjectEditDtoResponse, IProjectGetDtoResponse, IProjectListDto, IProjectListDtoResponse, IProjectUserListDto, IProjectUserListDtoResponse, IProjectUserRoleGetDtoResponse, IProjectUserRoleSetDto, IProjectUserRoleSetDtoResponse } from './project';
 import { LedgerProjectRole } from '../../ledger/role';
 import { ProjectUser } from '../project';
-import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinExchangeDto, ICoinExchangeGetDto, ICoinExchangeGetDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse, ICoinWithdrawDto, ICoinWithdrawDtoResponse } from './coin';
 import { ICompanyGetDtoResponse, ICompanyUserListDto, ICompanyUserListDtoResponse } from './company';
 import { CompanyUser } from '../company';
 import { VotingCompany } from '../voting/company';
@@ -129,6 +129,10 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     public async coinBalanceGet(coinId: LedgerCoinId, objectUid: string, isHandleError: boolean = true): Promise<CoinBalance> {
         let item = await this.sendListen(new TransportHttpCommandAsync(`${COIN_BALANCE_URL}/${coinId}`, { data: TraceUtil.addIfNeed({ objectUid }), isHandleError }));
         return TransformUtil.toClass(CoinBalance, item);
+    }
+
+    public async coinWithdraw(data: ICoinWithdrawDto): Promise<ICoinWithdrawDtoResponse> {
+        return this.call<ICoinWithdrawDtoResponse, ICoinWithdrawDto>(COIN_WITHDRAW_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
     }
 
     // --------------------------------------------------------------------------

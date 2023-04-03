@@ -480,3 +480,8 @@ export function getEths(): typeof ETHS {
     }
     return items;
 }
+
+export function getEthExplorerTransaction(id: string, transactionHash: string): string {
+    let item = _.find(getEths(), { id });
+    return !_.isNil(item) ? `${item.explorer}/tx/${transactionHash}` : null;
+}
