@@ -3,6 +3,7 @@ import { ETH_EVENT } from './Eths';
 import { Unit } from 'web3-utils';
 import { EventData, } from 'web3-eth-contract';
 import * as _ from 'lodash';
+import { MathUtil } from '@ts-core/common';
 
 export class EthClient extends EthApiClient<IEthClientSettings> {
     // --------------------------------------------------------------------------
@@ -27,6 +28,11 @@ export class EthClient extends EthApiClient<IEthClientSettings> {
         return this.client.eth.getBalance(value);
     }
 
+    public async getGasPrice(multiplier: string = '1.1'): Promise<string> {
+        let item = await this.client.eth.getGasPrice();
+        return MathUtil.ceil(MathUtil.multiply(item.toString(), multiplier));
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Public Methods
@@ -49,9 +55,6 @@ export class EthClient extends EthApiClient<IEthClientSettings> {
         return this.contract.methods.deposit(objectUid, coinUid).encodeABI();
     }
 
-    public withdraw(objectUid: string, coinUid: string, to: string, amount: string, signatures: Array<string>, from: string): string {
-        return this.contract.methods.withdraw(objectUid, coinUid, to, amount, signatures, { from })
-    }
 
     // --------------------------------------------------------------------------
     //
