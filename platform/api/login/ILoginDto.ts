@@ -7,6 +7,7 @@ export interface IOAuthDto {
 }
 
 export interface IEthSignatureDto {
+    address: string;
     signature: string;
 }
 
