@@ -1,4 +1,4 @@
-import { TransportHttp, ITransportHttpSettings, ITraceable, TransportHttpCommandAsync } from '@ts-core/common';
+import { TransportHttp, ITransportHttpSettings, ITraceable, TransportHttpCommandAsync, DateUtil } from '@ts-core/common';
 import { ILogger } from '@ts-core/common';
 import * as _ from 'lodash';
 import { TraceUtil } from '@ts-core/common';
@@ -23,6 +23,17 @@ import { ILedgerActionListDto, ILedgerActionListDtoResponse, ILedgerObjectDetail
 import { LedgerAction } from '../LedgerAction';
 
 export class Client extends TransportHttp<ITransportHttpSettings> {
+    // --------------------------------------------------------------------------
+    //
+    //  Static Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public static totp(): Promise<number> {
+        let window = 5 * DateUtil.MILLISECONDS_MINUTE;
+        return Promise.resolve(Date.now() % window);
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Constructor
