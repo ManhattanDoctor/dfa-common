@@ -29,8 +29,8 @@ export class User implements ILedgreable {
 
 export enum UserResource {
     VK = 'VK',
-    ETH = 'ETH',
     MAIL = 'MAIL',
     YANDEX = 'YANDEX',
     GOOGLE = 'GOOGLE',
+    ETHEREUM = 'ETHEREUM',
 }
