@@ -29,9 +29,9 @@ export class Client extends TransportHttp<ITransportHttpSettings> {
     //
     // --------------------------------------------------------------------------
 
-    public static totp(): Promise<number> {
+    public static totp(): Promise<string> {
         let window = 5 * DateUtil.MILLISECONDS_MINUTE;
-        return Promise.resolve(Date.now() % window);
+        return Promise.resolve(`Login data is "${Math.floor(Date.now() / window)}"`);
     }
 
     // --------------------------------------------------------------------------
