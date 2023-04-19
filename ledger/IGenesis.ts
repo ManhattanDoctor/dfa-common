@@ -143,6 +143,18 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
             }
         ]
     },
+    {
+        type: 'METRO_MIPT_DESIGN',
+        proposal: LedgerVotingCompanyProposalType.SELECT,
+        steps: [
+            {
+                type: LedgerVotingStepType.COIN,
+                coinId: LedgerCoinIdPreset.VOTE,
+                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
+                votesVoteTypes: [LedgerVoteType.FOR]
+            }
+        ]
+    },
 ];
 
 export const ROOT_COIN_VOTE_AMOUNT = '1000';

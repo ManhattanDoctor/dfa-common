@@ -9,6 +9,7 @@ import { LedgerVotingStep } from "../../voting/step/LedgerVotingStep";
 import { LedgerVotingStepType } from "../../voting/LedgerVotingStepType";
 import { LedgerVotingStepTemplate } from "../../voting/template/LedgerVotingStepTemplate";
 import { LedgerVotingCompanyProposalProjectAdd } from "./LedgerVotingCompanyProposalProjectAdd";
+import { LedgerVotingCompanyProposalSelect } from "./LedgerVotingCompanyProposalSelect";
 
 export class LedgerVotingCompanyFactory {
     // --------------------------------------------------------------------------
@@ -36,6 +37,9 @@ export class LedgerVotingCompanyFactory {
     public static transformProposal(item: LedgerVotingCompanyProposal): LedgerVotingCompanyProposal {
         let classType: ClassType<LedgerVotingCompanyProposal> = null;
         switch (item.type) {
+            case LedgerVotingCompanyProposalType.SELECT:
+                classType = LedgerVotingCompanyProposalSelect;
+                break;
             case LedgerVotingCompanyProposalType.COIN_EDIT:
                 classType = LedgerVotingCompanyProposalCoinEdit;
                 break;

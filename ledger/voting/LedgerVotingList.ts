@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { IsEnum, IsDefined } from 'class-validator';
+import { IsEnum, IsString, IsOptional, IsDefined } from 'class-validator';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
 import { MathUtil } from '@ts-core/common';
@@ -115,16 +115,22 @@ export enum LedgerVoteType {
 export type LedgerVotingRole = LedgerCompanyRole;
 
 export type LedgerVoteValue = string | LedgerVotingRole;
+export type LedgerVoteData = Array<string>;
 
-export interface ILedgerVote<T extends LedgerVoteValue = LedgerVoteValue> {
+export interface ILedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V extends LedgerVoteData = LedgerVoteData> {
     type: LedgerVoteType;
-    value: T;
+    value: U;
+    data?: V;
 }
 
-export class LedgerVote<T extends LedgerVoteValue = LedgerVoteValue> {
+export class LedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V extends LedgerVoteData = LedgerVoteData> {
     @IsEnum(LedgerVoteType)
     type: LedgerVoteType;
 
     @IsDefined()
-    value: T;
+    value: U;
+
+    @IsOptional()
+    @IsString({ each: true })
+    data?: V;
 }
