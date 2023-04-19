@@ -6,6 +6,11 @@ export interface IOAuthDto {
     redirectUri: string;
 }
 
+export interface IEthSignatureDto {
+    address: string;
+    signature: string;
+}
+
 export interface ILoginDto extends ITraceable {
     data: LoginData;
     resource: LoginResource;
@@ -15,4 +20,4 @@ export interface ILoginDtoResponse {
     sid: string;
 }
 
-export type LoginData = IOAuthDto;
+export type LoginData = IOAuthDto | IEthSignatureDto;

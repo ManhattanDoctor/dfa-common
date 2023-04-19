@@ -32,4 +32,5 @@ export enum UserResource {
     MAIL = 'MAIL',
     YANDEX = 'YANDEX',
     GOOGLE = 'GOOGLE',
+    ETHEREUM = 'ETHEREUM',
 }
