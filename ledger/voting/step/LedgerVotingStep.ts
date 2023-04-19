@@ -56,7 +56,6 @@ export abstract class LedgerVotingStep extends LedgerVotingRestriction {
             finishedDate: this.finishedDate
         }
     }
-
 }
 
 export interface ILedgerVotingStepState {
