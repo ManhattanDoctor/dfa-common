@@ -1,10 +1,11 @@
 import * as _ from 'lodash';
-import { IsEnum, IsString, IsOptional, IsDefined } from 'class-validator';
+import { IsEnum, IsString, Length, ArrayMaxSize, ArrayNotEmpty, IsOptional, IsDefined } from 'class-validator';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
 import { MathUtil } from '@ts-core/common';
 import { ILedgerVotingState } from './LedgerVotingState';
 import { LedgerCoinUtil } from '../coin/LedgerCoinUtil';
+import { LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEMS, LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEM_LENGTH, LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MIN_ITEM_LENGTH } from './company';
 
 export class LedgerVotingList<T extends LedgerVoteValue = LedgerVoteValue> implements ILedgerVotingState {
     // --------------------------------------------------------------------------
@@ -132,5 +133,8 @@ export class LedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V extends L
 
     @IsOptional()
     @IsString({ each: true })
+    @Length(LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MIN_ITEM_LENGTH, LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEM_LENGTH, { each: true })
+    @ArrayMaxSize(LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEMS)
+    @ArrayNotEmpty()
     data?: V;
 }

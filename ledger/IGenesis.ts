@@ -144,14 +144,15 @@ export const ROOT_COMPANY_REGULATIONS: Array<ILedgerCompanyRegulation> = [
         ]
     },
     {
-        type: 'METRO_MIPT_DESIGN',
+        type: LedgerCompanyRegulationTypePreset.SELECT,
         proposal: LedgerVotingCompanyProposalType.SELECT,
         steps: [
             {
                 type: LedgerVotingStepType.COIN,
                 coinId: LedgerCoinIdPreset.VOTE,
-                duration: 3 * DateUtil.MILLISECONDS_MINUTE,
-                votesVoteTypes: [LedgerVoteType.FOR]
+                duration: 60 * DateUtil.MILLISECONDS_MINUTE,
+                votesVoteTypes: [LedgerVoteType.FOR],
+                isHoldAfterVote: true
             }
         ]
     },

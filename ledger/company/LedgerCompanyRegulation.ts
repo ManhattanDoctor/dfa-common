@@ -12,6 +12,7 @@ export enum LedgerCompanyRegulationTypePreset {
     COIN_EMIT = 'COMPANY_COIN_EMIT',
     COIN_BURN = 'COMPANY_COIN_BURN',
 
+    SELECT = 'COMPANY_SELECT',
     PROJECT_ADD = 'COMPANY_PROJECT_ADD',
 
     EXPERT_ADD = 'COMPANY_EXPERT_ADD',
