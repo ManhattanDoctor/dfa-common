@@ -52,8 +52,8 @@ class VotingStepStateGetDto implements IVotingStepStateGetDto {
 }
 
 class VotingStepStateGetDtoResponse implements ILedgerVotingStepState {
-    @Type(() => LedgerVotingState)
     @IsDefined()
+    @Type(() => LedgerVotingState)
     @ValidateNested()
     state: LedgerVotingState;
 

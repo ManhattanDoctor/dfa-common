@@ -61,9 +61,9 @@ export abstract class LedgerVoting<U = string, V = object> implements ILedgerObj
     @IsInt()
     public stepIndex: number;
 
-    @Type(() => LedgerVotingStep)
     @Transform(item => item.value.map(LedgerVotingFactory.transformStep), { toClassOnly: true })
     @IsDefined()
+    @Type(() => LedgerVotingStep)
     @ValidateNested()
     public steps: Array<LedgerVotingStep>;
 

@@ -1,5 +1,6 @@
 import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
+import { Type } from 'class-transformer';
 import { IsOptional, ValidateNested, IsInt, Matches } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { ILedgerVote, LedgerVote } from '../../../ledger/voting/LedgerVotingList';
@@ -48,6 +49,7 @@ class VotingVoteDto implements IVotingVoteDto {
     uid: string;
 
     @IsOptional()
+    @Type(() => LedgerVote)
     @ValidateNested()
     value: LedgerVote;
 }

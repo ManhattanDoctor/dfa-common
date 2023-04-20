@@ -33,9 +33,9 @@ export class LedgerCompanyRegulation implements ILedgerCompanyRegulation {
     @IsEnum(LedgerVotingCompanyProposalType)
     public proposal: LedgerVotingCompanyProposalType;
 
-    @Type(() => LedgerVotingStepTemplate)
     @Transform(item => item.value.map(LedgerVotingFactory.transformStepTemplate), { toClassOnly: true })
     @IsDefined()
+    @Type(() => LedgerVotingStepTemplate)
     @ValidateNested()
     public steps: Array<LedgerVotingStepTemplate>;
 }

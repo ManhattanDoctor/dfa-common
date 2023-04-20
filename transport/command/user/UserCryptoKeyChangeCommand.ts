@@ -35,8 +35,8 @@ class UserCryptoKeyChangeDto implements IUserCryptoKeyChangeDto {
     @Matches(LedgerUser.UID_REG_EXP)
     uid: string;
 
-    @Type(() => UserCryptoKey)
     @IsDefined()
+    @Type(() => UserCryptoKey)
     @ValidateNested()
     cryptoKey: UserCryptoKey;
 }

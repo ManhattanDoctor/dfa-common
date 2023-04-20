@@ -13,5 +13,5 @@ export class VotingVote {
     date: Date;
 
     user?: User;
-    data?: Array<string>;
+    data?: Array<number>;
 }

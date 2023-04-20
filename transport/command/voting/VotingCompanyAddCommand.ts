@@ -1,4 +1,5 @@
 import { TransformUtil } from '@ts-core/common';
+import { Type, Transform } from 'class-transformer';
 import { Matches, IsDefined, ValidateNested, IsString } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
 import { LedgerCompany, LedgerCompanyRegulationType } from '../../../ledger/company';
@@ -48,6 +49,7 @@ export class VotingCompanyAddDto implements IVotingCompanyAddDto {
     type: LedgerCompanyRegulationType;
 
     @IsDefined()
+    @Type(() => LedgerVotingCompanyProposal)
     @ValidateNested()
     proposal: LedgerVotingCompanyProposal;
 }

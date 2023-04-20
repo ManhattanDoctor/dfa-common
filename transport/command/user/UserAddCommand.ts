@@ -57,8 +57,8 @@ export class UserCryptoKey implements IUserCryptoKey {
 }
 
 export class UserAddDto implements IUserAddDto {
-    @Type(() => UserCryptoKey)
     @IsDefined()
+    @Type(() => UserCryptoKey)
     @ValidateNested()
     cryptoKey: UserCryptoKey;
 

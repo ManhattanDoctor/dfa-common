@@ -21,8 +21,8 @@ export class Signer implements ISigner {
     @IsString()
     algorithm: string;
 
-    @Type(() => KeyAsymmetric)
     @IsDefined()
+    @Type(() => KeyAsymmetric)
     @ValidateNested()
     key: KeyAsymmetric;
 }

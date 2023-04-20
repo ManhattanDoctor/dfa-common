@@ -32,9 +32,9 @@ export class LedgerVotingCompany<V = ILedgerVotingCompanyProposal> extends Ledge
     @IsString()
     public type: LedgerCompanyRegulationType;
 
-    @Type(() => LedgerVotingCompanyProposal)
     @Transform(item => LedgerVotingCompanyFactory.transformProposal(item.value), { toClassOnly: true })
     @IsDefined()
+    @Type(() => LedgerVotingCompanyProposal)
     @ValidateNested()
     public proposal: V;
 }
