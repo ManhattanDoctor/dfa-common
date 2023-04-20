@@ -1,3 +1,4 @@
+/*
 import * as io from 'socket.io-client';
 import { ExtendedError, ObservableData, TransformUtil } from '@ts-core/common';
 import { UrlUtil } from '@ts-core/common';
@@ -79,6 +80,9 @@ export interface ISocketSettings extends ISocketClientBaseSettings {
     url: string;
     ledgerNameDefault?: string;
 }
+*/
+
+import { VotingCompany } from "../../platform/voting/company";
 
 export const NAMESPACE = 'dao';
 export const ROOM_SIGN = 'sign';
@@ -89,3 +93,6 @@ export enum SocketClientEvent {
 }
 
 export type SocketClientEventData = VotingCompany;
+
+
+
