@@ -1,10 +1,8 @@
-import { IsString, ArrayMaxSize, ArrayNotEmpty, Length, IsBoolean } from 'class-validator';
+import { IsString, Matches, ArrayMaxSize, ArrayNotEmpty, Length, IsBoolean } from 'class-validator';
 import { LedgerVotingCompanyProposal, LedgerVotingCompanyProposalType } from "./LedgerVotingCompanyProposal";
 import * as _ from 'lodash';
-
-export const LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEMS = 16;
-export const LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MIN_ITEM_LENGTH = 1;
-export const LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEM_LENGTH = 256;
+import { RegExpUtil } from '../../../util/RegExpUtil';
+import { LEDGER_VOTING_LIST_DATA_MAX_ITEM_LENGTH, LEDGER_VOTING_LIST_DATA_MAX_LENGTH, LEDGER_VOTING_LIST_DATA_MIN_ITEM_LENGTH } from '../LedgerVotingList';
 
 export class LedgerVotingCompanyProposalSelect extends LedgerVotingCompanyProposal {
     // --------------------------------------------------------------------------
@@ -13,10 +11,12 @@ export class LedgerVotingCompanyProposalSelect extends LedgerVotingCompanyPropos
     //
     // --------------------------------------------------------------------------
 
+    @Matches(RegExpUtil.DESCRIPTION_REG_EXP)
+    public name: string;
 
     @IsString({ each: true })
-    @Length(LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MIN_ITEM_LENGTH, LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEM_LENGTH, { each: true })
-    @ArrayMaxSize(LEDGER_VOTING_COMPANY_PROPOSAL_SELECT_MAX_ITEMS)
+    @Length(LEDGER_VOTING_LIST_DATA_MIN_ITEM_LENGTH, LEDGER_VOTING_LIST_DATA_MAX_ITEM_LENGTH, { each: true })
+    @ArrayMaxSize(LEDGER_VOTING_LIST_DATA_MAX_LENGTH)
     @ArrayNotEmpty()
     public items: Array<string>;
 

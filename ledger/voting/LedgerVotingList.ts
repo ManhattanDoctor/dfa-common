@@ -123,6 +123,10 @@ export interface ILedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V exte
     data?: V;
 }
 
+export const LEDGER_VOTING_LIST_DATA_MAX_LENGTH = 16;
+export const LEDGER_VOTING_LIST_DATA_MIN_ITEM_LENGTH = 1;
+export const LEDGER_VOTING_LIST_DATA_MAX_ITEM_LENGTH = 256;
+
 export class LedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V extends LedgerVoteData = LedgerVoteData> {
     @IsEnum(LedgerVoteType)
     type: LedgerVoteType;
@@ -131,5 +135,9 @@ export class LedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V extends L
     value: U;
 
     @IsOptional()
+    @IsString({ each: true })
+    @Length(LEDGER_VOTING_LIST_DATA_MIN_ITEM_LENGTH, LEDGER_VOTING_LIST_DATA_MAX_ITEM_LENGTH, { each: true })
+    @ArrayMaxSize(LEDGER_VOTING_LIST_DATA_MAX_LENGTH)
+    @ArrayNotEmpty()
     data?: V;
 }
