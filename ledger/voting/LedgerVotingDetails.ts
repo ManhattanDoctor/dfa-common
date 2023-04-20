@@ -1,3 +1,3 @@
 export type LedgerVotingDetails = LedgerVotingDetailsSelect;
 
-export type LedgerVotingDetailsSelect = { [key: number]: string };
+export type LedgerVotingDetailsSelect = { [key: string]: string };

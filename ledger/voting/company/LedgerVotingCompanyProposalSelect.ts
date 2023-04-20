@@ -33,4 +33,14 @@ export class LedgerVotingCompanyProposalSelect extends LedgerVotingCompanyPropos
         super();
         this.type = LedgerVotingCompanyProposalType.SELECT;
     }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Public Method
+    //
+    // --------------------------------------------------------------------------
+
+    public getItemByIndex(index: string | number): string {
+        return this.items[parseInt(index.toString())];
+    }
 }

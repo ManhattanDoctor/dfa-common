@@ -2,7 +2,7 @@ import { ITraceable } from '@ts-core/common';
 import { TransformUtil } from '@ts-core/common';
 import { Matches } from 'class-validator';
 import { LedgerCommand, ChaincodeTransportCommandAsync } from '../LedgerCommand';
-import { LedgerVoting, LedgerVotingDetails, ledgerVotingTransform } from '../../../ledger/voting';
+import { LedgerVoting, LedgerVotingDetails } from '../../../ledger/voting';
 import * as _ from 'lodash';
 
 export class VotingDetailsCommand extends ChaincodeTransportCommandAsync<IVotingDetailsDto, IVotingDetailsDtoResponse> {
@@ -31,7 +31,7 @@ export class VotingDetailsCommand extends ChaincodeTransportCommandAsync<IVoting
     // --------------------------------------------------------------------------
 
     protected checkResponse(item: IVotingDetailsDtoResponse): IVotingDetailsDtoResponse {
-        return { voting: ledgerVotingTransform(item.voting), details: item.details }
+        return { details: item.details }
     }
 }
 
@@ -39,10 +39,7 @@ export interface IVotingDetailsDto extends ITraceable {
     uid: string;
 }
 
-export interface IVotingDetailsDtoResponse {
-    voting: LedgerVoting;
-    details: LedgerVotingDetails;
-}
+export type IVotingDetailsDtoResponse = LedgerVotingDetails;
 
 class VotingDetailsDto implements IVotingDetailsDto {
     @Matches(LedgerVoting.UID_REG_EXP)
