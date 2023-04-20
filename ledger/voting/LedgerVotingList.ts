@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { IsEnum, IsString, Length, ArrayMaxSize, ArrayNotEmpty, IsOptional, IsDefined } from 'class-validator';
+import { IsEnum, IsInt, Length, ArrayMaxSize, ArrayNotEmpty, IsOptional, IsDefined } from 'class-validator';
 import { LedgerCompanyRole } from '../role/LedgerCompanyRole';
 import { LedgerBadRequestError } from '../error/LedgerError';
 import { MathUtil } from '@ts-core/common';
@@ -115,7 +115,7 @@ export enum LedgerVoteType {
 export type LedgerVotingRole = LedgerCompanyRole;
 
 export type LedgerVoteValue = string | LedgerVotingRole;
-export type LedgerVoteData = Array<string>;
+export type LedgerVoteData = Array<number>;
 
 export interface ILedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V extends LedgerVoteData = LedgerVoteData> {
     type: LedgerVoteType;
@@ -135,8 +135,7 @@ export class LedgerVote<U extends LedgerVoteValue = LedgerVoteValue, V extends L
     value: U;
 
     @IsOptional()
-    @IsString({ each: true })
-    @Length(LEDGER_VOTING_LIST_DATA_MIN_ITEM_LENGTH, LEDGER_VOTING_LIST_DATA_MAX_ITEM_LENGTH, { each: true })
+    @IsInt({ each: true })
     @ArrayMaxSize(LEDGER_VOTING_LIST_DATA_MAX_LENGTH)
     @ArrayNotEmpty()
     data?: V;
