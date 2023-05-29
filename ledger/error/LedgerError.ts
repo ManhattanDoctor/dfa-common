@@ -7,8 +7,8 @@ export class LedgerError<T = any> extends ExtendedError<T> {
     //
     // --------------------------------------------------------------------------
 
-    constructor(code: LedgerErrorCode, message: string = '', details?: T, isFatal?: boolean) {
-        super(message, code, details, isFatal);
+    constructor(code: LedgerErrorCode, message: string = '', details?: T) {
+        super(message, code, details);
     }
 }
 

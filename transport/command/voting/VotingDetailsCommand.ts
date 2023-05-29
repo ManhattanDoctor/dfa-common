@@ -23,16 +23,6 @@ export class VotingDetailsCommand extends ChaincodeTransportCommandAsync<IVoting
     constructor(request: IVotingDetailsDto) {
         super(VotingDetailsCommand.NAME, TransformUtil.toClass(VotingDetailsDto, request), null, true);
     }
-
-    // --------------------------------------------------------------------------
-    //
-    //  Protected Methods
-    //
-    // --------------------------------------------------------------------------
-
-    protected checkResponse(item: IVotingDetailsDtoResponse): IVotingDetailsDtoResponse {
-        return { details: item.details }
-    }
 }
 
 export interface IVotingDetailsDto extends ITraceable {
