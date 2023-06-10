@@ -9,6 +9,14 @@ export class CoinUtil {
     //
     // --------------------------------------------------------------------------
 
+    public static getCoinRoom(id: number): string {
+        return `coin${id}`;
+    }
+
+    public static getCoinBalanceRoom(id: number): string {
+        return `coinBalance${id}`;
+    }
+
     public static isHasHlfBridge(coinUid: string): boolean {
         return !_.isNil(_.find(getEths(), { id: LedgerCoin.getCoinId(coinUid) }));
     }
