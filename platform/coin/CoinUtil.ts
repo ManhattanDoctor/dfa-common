@@ -13,8 +13,8 @@ export class CoinUtil {
         return `coin${id}`;
     }
 
-    public static getCoinBalanceRoom(id: number): string {
-        return `coinBalance${id}`;
+    public static getCoinBalanceRoom(objectUid: string): string {
+        return `coinBalance${objectUid}`;
     }
 
     public static isHasHlfBridge(coinUid: string): boolean {
