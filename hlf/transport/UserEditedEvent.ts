@@ -1,23 +1,23 @@
-import { IsString } from 'class-validator';
 
-export class LedgerCryptoKey {
+import { Event } from './Event';
+import { IUserEventDto, UserEvent } from './UserEvent';
+
+export class UserEditedEvent extends UserEvent {
     // --------------------------------------------------------------------------
     //
-    //  Static Properties
-    //
-    // --------------------------------------------------------------------------
-
-    public static PREFIX = 'cryptoKey';
-
-    // --------------------------------------------------------------------------
-    //
-    //  Properties
+    //  Public Static Properties
     //
     // --------------------------------------------------------------------------
 
-    @IsString()
-    value: string;
+    public static readonly NAME = Event.USER_EDITED;
 
-    @IsString()
-    algorithm: string;
+    // --------------------------------------------------------------------------
+    //
+    //  Constructor
+    //
+    // --------------------------------------------------------------------------
+
+    constructor(data: IUserEventDto) {
+        super(UserEditedEvent.NAME, data);
+    }
 }

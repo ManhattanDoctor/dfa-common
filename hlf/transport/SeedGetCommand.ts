@@ -1,14 +1,17 @@
-import { LedgerCommand, ChaincodeTransportCommandAsync } from './LedgerCommand';
-import { TransformUtil } from '@ts-core/common';
 
-export class GenesisGetCommand extends ChaincodeTransportCommandAsync<void, IGenesis> {
+import { TransformUtil } from '@ts-core/common';
+import { HlfTransportCommandAsync } from '@hlf-core/common';
+import { ISeed, Seed } from '../Seed';
+import { CommandName } from './Command';
+
+export class SeedGetCommand extends HlfTransportCommandAsync<void, ISeed> {
     // --------------------------------------------------------------------------
     //
     //  Static Properties
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = LedgerCommand.GENESIS_GET;
+    public static readonly NAME = CommandName.GENESIS_GET;
 
     // --------------------------------------------------------------------------
     //
@@ -17,7 +20,7 @@ export class GenesisGetCommand extends ChaincodeTransportCommandAsync<void, IGen
     // --------------------------------------------------------------------------
 
     constructor() {
-        super(GenesisGetCommand.NAME, null, null, true);
+        super(SeedGetCommand.NAME, null, null, true);
     }
 
     // --------------------------------------------------------------------------
@@ -26,7 +29,7 @@ export class GenesisGetCommand extends ChaincodeTransportCommandAsync<void, IGen
     //
     // --------------------------------------------------------------------------
 
-    protected checkResponse(item: IGenesis): IGenesis {
-        return TransformUtil.toClass(Genesis, item);
+    protected checkResponse(item: ISeed): ISeed {
+        return TransformUtil.toClass(Seed, item);
     }
 }
