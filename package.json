@@ -1,7 +1,7 @@
 {
-    "name": "@dao/common",
+    "name": "@dfa/common",
     "version": "1.0.0",
-    "description": "Common classes for DAO",
+    "description": "Common classes for DFA",
     "author": "Renat Gubaev",
     "license": "ISC",
     "scripts": {
@@ -10,7 +10,7 @@
         "format:fix": "prettier --write \"{src}/**/*.{ts,js,json}\" --loglevel warn"
     },
     "dependencies": {
-        "@ts-core/common": "~3.0.11",
-        "@ts-core/eth": "~3.0.4"
+        "@ts-core/common": "~3.0.56",
+        "@hlf-core/coin": "~3.2.2"
     }
 }

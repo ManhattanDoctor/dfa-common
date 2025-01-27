@@ -1,9 +1,9 @@
 import { Sha512 } from "@ts-core/common";
-import { LedgerObjectType } from "../../ledger";
+import { ObjectType } from "../../hlf";
 
 export interface ILedgerObjectDetails {
     id: number;
-    type: LedgerObjectType;
+    type: ObjectType;
     name: string;
     picture: string;
     description: string;

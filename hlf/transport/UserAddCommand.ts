@@ -1,8 +1,9 @@
 import { TransformUtil } from '@ts-core/common';
-import { IsEnum, IsOptional } from 'class-validator';
-import { HlfTransportCommandAsync } from '@hlf-core/common';
+import { Type } from 'class-transformer';
+import { IsEnum, ValidateNested, IsDefined, IsOptional } from 'class-validator';
+import { HlfTransportCommandAsync, ICryptoKey, CryptoKey } from '@hlf-core/common';
 import { CommandName } from './Command';
-import { User, UserRole } from '../User';
+import { User, UserRole } from '../user';
 
 export class UserAddCommand extends HlfTransportCommandAsync<IUserAddDto, User> {
     // --------------------------------------------------------------------------
@@ -36,10 +37,16 @@ export class UserAddCommand extends HlfTransportCommandAsync<IUserAddDto, User> 
 
 export interface IUserAddDto {
     roles?: Array<UserRole>;
+    cryptoKey: ICryptoKey;
 }
 
 export class UserAddDto implements IUserAddDto {
     @IsOptional()
     @IsEnum(UserRole, { each: true })
     roles?: Array<UserRole>;
+
+    @IsDefined()
+    @Type(() => CryptoKey)
+    @ValidateNested()
+    cryptoKey: CryptoKey;
 }

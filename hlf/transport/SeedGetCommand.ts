@@ -11,7 +11,7 @@ export class SeedGetCommand extends HlfTransportCommandAsync<void, ISeed> {
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = CommandName.GENESIS_GET;
+    public static readonly NAME = CommandName.SEED_GET;
 
     // --------------------------------------------------------------------------
     //

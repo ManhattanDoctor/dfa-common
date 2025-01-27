@@ -2,8 +2,9 @@ import { Type } from 'class-transformer';
 import { UserType } from './UserType';
 import { UserPreferences } from './UserPreferences';
 import { UserStatus } from './UserStatus';
-import { CoinBalance } from '../coin/CoinBalance';
+import { CoinBalance } from '../coin';
 import { ILedgreable } from '../ILedgerable';
+import { UserRole } from '../../hlf/user';
 
 export class User implements ILedgreable {
     id: number;
@@ -12,14 +13,15 @@ export class User implements ILedgreable {
     login: string;
     status: UserStatus;
     resource: UserResource;
-    companyId: number;
     ledgerUid: string;
 
-    @Type(() => Date)
-    createdDate: Date;
+    roles?: Array<UserRole>;
 
     @Type(() => Date)
-    updatedDate: Date;
+    created: Date;
+
+    @Type(() => Date)
+    updated: Date;
 
     @Type(() => UserPreferences)
     preferences: UserPreferences;

@@ -1,6 +1,4 @@
-import { LedgerProjectRole } from "../ledger/role";
 import * as _ from 'lodash';
-import { UserRoleName } from "../platform/user";
 
 export class PermissionUtil {
     // --------------------------------------------------------------------------
@@ -9,7 +7,7 @@ export class PermissionUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static isHasRole(item: UserRoleName | Array<UserRoleName>, items: UserRoleName | Array<UserRoleName>): boolean {
+    public static isHasRole(item: string | Array<string>, items: string | Array<string>): boolean {
         if (!_.isArray(item)) {
             item = [item];
         }
@@ -25,24 +23,5 @@ export class PermissionUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static isCanProjectEdit(roles: Array<LedgerProjectRole>): boolean {
-        if (_.isEmpty(roles)) {
-            return false;
-        }
-        return !_.isEmpty(_.intersection(roles, [LedgerProjectRole.PROJECT_MANAGER]));
-    }
 
-    public static isCanProjectUserEdit(roles: Array<LedgerProjectRole>): boolean {
-        if (_.isEmpty(roles)) {
-            return false;
-        }
-        return !_.isEmpty(_.intersection(roles, [LedgerProjectRole.USER_MANAGER, LedgerProjectRole.PROJECT_MANAGER]));
-    }
-
-    public static isCanProjectFileRemove(roles: Array<UserRoleName>): boolean {
-        if (_.isEmpty(roles)) {
-            return false;
-        }
-        return !_.isEmpty(_.intersection(roles, [LedgerProjectRole.PROJECT_MANAGER, LedgerProjectRole.COIN_MANAGER, LedgerProjectRole.COIN_MANAGER]));
-    }
 }

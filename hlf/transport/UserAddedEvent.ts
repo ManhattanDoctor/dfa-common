@@ -1,6 +1,6 @@
 import { TransformUtil, TransportEvent } from '@ts-core/common';
 import { Event } from './Event';
-import { User } from '../User';
+import { User } from '../user';
 
 export class UserAddedEvent extends TransportEvent<User> {
     // --------------------------------------------------------------------------

@@ -2,7 +2,7 @@ import { TransformUtil } from '@ts-core/common';
 import { IsOptional, Matches, IsArray } from 'class-validator';
 import { HlfTransportCommandAsync, UserUtil } from '@hlf-core/common';
 import { CommandName } from './Command';
-import { User } from '../User';
+import { User } from '../user';
 
 export class UserGetCommand extends HlfTransportCommandAsync<IUserGetDto, User> {
     // --------------------------------------------------------------------------

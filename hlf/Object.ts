@@ -1,30 +1,21 @@
 
-import { IUIDable, UID, getUid } from '@ts-core/common';
-import { UserUtil, CoinUtil } from '@hlf-core/common';
-
-export interface IObject extends IUIDable { }
+import { UID } from '@ts-core/common';
+import { UserUtil } from '@hlf-core/common';
+import { CoinUtil } from '@hlf-core/coin';
 
 export enum ObjectType {
     USER = 'USER',
-    COIN = 'COIN'
+    COIN = 'COIN',
+    CROWDFUNDING = 'CROWDFUNDING',
 }
 
 export function IsUser(uid: UID): boolean {
-    return UserUtil.IsUser(uid);
+    return UserUtil.isUser(uid);
+}
+export function IsCoin(uid: UID): boolean {
+    return CoinUtil.isCoin(uid);
 }
 
-export function IsCoin(uid: UID): boolean {
-    // return CoinUtil.I.test(getUid(uid));
-    return null;
-}
-/*
-export function IsAuction(uid: UID): boolean {
-    return RegExpUtil.AUCTION_UID_REG_EXP.test(getUid(uid));
-}
-export function IsNickname(uid: UID): boolean {
-    return RegExpUtil.NICKNAME_UID_REG_EXP.test(getUid(uid));
-}
-*/
 export function getType(uid: UID): ObjectType {
     if (IsUser(uid)) {
         return ObjectType.USER;

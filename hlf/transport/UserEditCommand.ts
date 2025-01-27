@@ -1,9 +1,8 @@
 import { TransformUtil } from '@ts-core/common';
-import { IsEnum, Matches, IsOptional, IsDefined } from 'class-validator';
-import { HlfTransportCommandAsync } from '@hlf-core/common';
+import { IsEnum, Matches, IsOptional } from 'class-validator';
+import { HlfTransportCommandAsync, UserUtil } from '@hlf-core/common';
 import { CommandName } from './Command';
-import { User, UserRole, UserStatus } from '../User';
-import { RegExpUtil } from '../../../util';
+import { User, UserRole, UserStatus } from '../user';
 
 export class UserEditCommand extends HlfTransportCommandAsync<IUserEditDto, User> {
     // --------------------------------------------------------------------------
@@ -43,7 +42,7 @@ export interface IUserEditDto {
 }
 
 export class UserEditDto implements IUserEditDto {
-    @Matches(RegExpUtil.USER_UID_REG_EXP)
+    @Matches(UserUtil.UID_REG_EXP)
     uid: string;
 
     @IsOptional()
@@ -53,8 +52,4 @@ export class UserEditDto implements IUserEditDto {
     @IsOptional()
     @IsEnum(UserStatus)
     status?: UserStatus;
-
-    @IsOptional()
-    @Matches(RegExpUtil.ETH_ADDRESS_REG_EXP)
-    wallet?: string;
 }

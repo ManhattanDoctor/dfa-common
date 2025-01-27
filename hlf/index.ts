@@ -1,4 +1,3 @@
-export * from './User';
 export * from './Seed';
 export * from './Error';
 export * from './Object';
