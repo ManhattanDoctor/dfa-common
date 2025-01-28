@@ -1,7 +1,8 @@
 export * from './Event';
 export * from './Command';
-export * from './SeedGetCommand';
 //
+export * from './TestCommand';
+export * from './SeedGetCommand';
 //
 export * from './UserAddCommand';
 export * from './UserGetCommand';

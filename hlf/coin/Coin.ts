@@ -28,7 +28,7 @@ export class Coin<D extends ICoinData = ICoinData, P extends ICoinPermission = I
     declare public balance: ICoinBalance;
 
     @IsOptional()
-    @Transform(item => item.value.map(CoinFactory.transformPermission), { toClassOnly: true })
+    @Transform(item => item.value?.map(CoinFactory.transformPermission), { toClassOnly: true })
     @ValidateNested()
     public permissions?: Array<P>;
 }
