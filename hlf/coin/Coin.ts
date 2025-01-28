@@ -1,11 +1,34 @@
-import { Coin as CoinBase, ICoin as ICoinBase } from "@hlf-core/coin";
-import { ICoinDetails } from "./CoinDetails";
+import { Coin as CoinBase, ICoinBalance, ICoin as ICoinBase } from "@hlf-core/coin";
+import { IsDefined, IsOptional, ValidateNested } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { CoinFactory } from "./CoinFactory";
+import { ICoinData } from "./data";
+import { ICoinPermission } from "./permission";
 import * as _ from 'lodash';
 
-export interface ICoin<T extends ICoinDetails = ICoinDetails> extends ICoinBase {
-    details?: T;
+export enum CoinType {
+    FT = 'FT',
+    NFT = 'NFT',
 }
 
-export class Coin<T extends ICoinDetails = ICoinDetails> extends CoinBase implements ICoin<T> {
-    public details?: T;
+export interface ICoin<D extends ICoinData = ICoinData, P extends ICoinPermission = ICoinPermission> extends ICoinBase {
+    data?: D;
+    permissions?: Array<P>;
+}
+
+export class Coin<D extends ICoinData = ICoinData, P extends ICoinPermission = ICoinPermission> extends CoinBase implements ICoin<D, P> {
+    @IsOptional()
+    @Transform(item => CoinFactory.transformData(item.value), { toClassOnly: true })
+    @ValidateNested()
+    public data?: D;
+
+    @IsDefined()
+    @Transform(item => CoinFactory.transformBalance(item.value), { toClassOnly: true })
+    @ValidateNested()
+    declare public balance: ICoinBalance;
+
+    @IsOptional()
+    @Transform(item => item.value.map(CoinFactory.transformPermission), { toClassOnly: true })
+    @ValidateNested()
+    public permissions?: Array<P>;
 }

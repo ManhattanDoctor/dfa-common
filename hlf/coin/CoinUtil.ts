@@ -1,12 +1,20 @@
 
-import { CoinUtil as CoinUtilBase, ICoinUidDecomposition } from '@hlf-core/coin';
-import { ClassType, UID } from '@ts-core/common';
-import { ICoin } from './Coin';
+import { CoinUtil as CoinUtilBase, ICoinUidDecomposition as ICoinUidDecompositionBase } from '@hlf-core/coin';
+import { UID } from '@ts-core/common';
+import { CoinType } from './Coin';
 import { ICoinSeries } from './CoinSeries';
-import { ICoinDetails } from './CoinDetails';
 import * as _ from 'lodash';
 
 export class CoinUtil {
+
+    // --------------------------------------------------------------------------
+    //
+    //  Static Properties
+    //
+    // --------------------------------------------------------------------------
+
+    private static _typeToPostfix: Map<CoinType, string>;
+    private static _postfixToType: Map<string, CoinType>;
 
     // --------------------------------------------------------------------------
     //
@@ -14,27 +22,30 @@ export class CoinUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static create<T extends ICoin>(classType: ClassType<T>, coinId: string, decimals: number, owner: UID, details?: ICoinDetails): T {
-        let item = CoinUtilBase.create(classType, coinId, decimals, owner);
-        item.details = details;
-        return item;
+    public static createUid(coinId: string, decimals: number, owner: UID): string {
+        return CoinUtilBase.createUid(coinId, decimals, owner);
     }
 
-    public static createCoinId(ticker: string, data?: ICoinIdIdCreationDto): string {
-        let item = ticker;
-        if (!_.isNil(data?.series)) {
-            item += `.${data.series.uid}.${data.series.index}`;
+    public static createCoinId(item: ICoinId): string {
+        let { ticker, type, series } = item;
+        let value = ticker;
+        if (CoinUtil.typeToPostfix.has(type)) {
+            value += `.${CoinUtil.typeToPostfix.get(type)}`;
         }
-        return item;;
+        if (!_.isNil(series)) {
+            value += `.${series.uid}.${series.index}`;
+        }
+        return value;
     }
 
-    public static decomposeUid(coin: UID): ICoinIdDecomposition {
+    public static decomposeUid(coin: UID): ICoinUidDecomposition {
         let { coinId, decimals, ownerUid } = CoinUtilBase.decomposeUid(coin);
 
         let array = coinId.split('.');
         let length = array.length;
 
-        let item = { ticker: array[0], decimals, ownerUid, coinId } as any;
+        let type = this.postfixToType.has(array[1]) ? this.postfixToType.get(array[1]) : CoinType.FT;
+        let item = { ticker: array[0], decimals, ownerUid, coinId, type } as any
         if (length > 2) {
             item.series = { uid: array[length - 2], index: Number(array[length - 1]) };
         }
@@ -46,36 +57,28 @@ export class CoinUtil {
     //  Private Properties
     //
     // --------------------------------------------------------------------------
-    /*
-    if (CoinUtil.typeToPostfix.has(data?.type)) {
-        item += `.${CoinUtil.typeToPostfix.get(data.type)}`;
-    }
-    let type = this.postfixToType.has(array[1]) ? this.postfixToType.get(array[1]) : 'FUNGIBLE';      
-    private static _typeToPostfix: Map<string, string>;
-    private static _postfixToType: Map<string, string>;
-    private static get typeToPostfix(): Map<string, string> {
+
+    private static get typeToPostfix(): Map<CoinType, string> {
         if (_.isNil(this._typeToPostfix)) {
             let item = this._typeToPostfix = new Map();
-            item.set('NON_FUNGIBLE', 'NF');
+            item.set(CoinType.NFT, 'NF');
         }
         return this._typeToPostfix;
     }
-    private static get postfixToType(): Map<string, string> {
+
+    private static get postfixToType(): Map<string, CoinType> {
         if (_.isNil(this._postfixToType)) {
             let item = this._postfixToType = new Map();
             for (let [key, value] of this.typeToPostfix.entries()) item.set(value, key);
         }
         return this._postfixToType;
     }
-    */
 }
 
-
-export interface ICoinIdIdCreationDto {
-    series?: ICoinSeries;
-}
-export interface ICoinIdDecomposition extends ICoinUidDecomposition {
+export interface ICoinId {
+    type: CoinType;
     ticker: string;
     series?: ICoinSeries;
 }
 
+export interface ICoinUidDecomposition extends ICoinId, ICoinUidDecompositionBase { }
