@@ -12,19 +12,22 @@ export class CoinFactory {
     //
     // --------------------------------------------------------------------------
 
-    public static transform<T extends ICoin>(data: any): T {
+    public static transform<T extends ICoin>(item: any): T {
         let classType: ClassType<ICoin> = Coin;
-        return TransformUtil.toClass(classType, data) as T;
+        return TransformUtil.toClass(classType, item) as T;
     }
 
-    public static transformBalance<T extends ICoinBalance>(data: ICoinBalance): T {
+    public static transformBalance<T extends ICoinBalance>(item: ICoinBalance): T {
         let classType: ClassType<ICoinBalance> = CoinBalance;
-        return TransformUtil.toClass(classType, data) as T;
+        return TransformUtil.toClass(classType, item) as T;
     }
 
-    public static transformData<T extends ICoinData>(data: ICoinData): T {
+    public static transformData<T extends ICoinData>(item: ICoinData): T {
+        if (_.isEmpty(item)) {
+            return undefined;
+        }
         let classType: ClassType<ICoinData> = CoinData;
-        return TransformUtil.toClass(classType, data) as T;
+        return TransformUtil.toClass(classType, item) as T;
     }
 
     public static transformPermission<T extends ICoinPermission>(item: ICoinPermission): T {

@@ -4,7 +4,9 @@ export enum CommandName {
     //
     USER_GET = 'UserGet',
     USER_ADD = 'UserAdd',
-    USER_EDIT = 'UserEdit'
+    USER_EDIT = 'UserEdit',
+    //
+    COIN_ADD = 'CoinAdd',
 }
 
 

@@ -1,4 +1,6 @@
 export enum Event {
-    USER_ADDED = 'ACL:UserAdded',
-    USER_EDITED = 'ACL:UserEdited'
+    USER_ADDED = 'UserAdded',
+    USER_EDITED = 'UserEdited',
+    //
+    COIN_ADDED = 'CoinAdded',
 }
