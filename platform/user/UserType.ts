@@ -1,6 +1,0 @@
-export enum UserType {
-    UNDEFINED = 'UNDEFINED',
-    ADMINISTRATOR = 'ADMINISTRATOR',
-    EXPERT = 'EXPERT',
-    PROTECTED = 'PROTECTED'
-}

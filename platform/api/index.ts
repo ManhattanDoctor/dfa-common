@@ -1,3 +1,3 @@
 export * from './Error';
-export * from './Client';
-export * from './ILedgerObjectDetails';
+
+export const SOCKET_NAMESPACE = 'dfa';
