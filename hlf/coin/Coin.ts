@@ -11,6 +11,18 @@ export enum CoinType {
     NFT = 'NFT',
 }
 
+export enum CoinAction {
+    ADD = 'ADD',
+    EMIT = 'EMIT',
+    BURN = 'BURN',
+    HOLD = 'HOLD',
+    UNHOLD = 'UNHOLD',
+    TRANSFER = 'TRANSFER',
+    EMIT_HELD = 'EMIT_HELD',
+    BURN_HELD = 'BURN_HELD',
+}
+
+
 export interface ICoin<D extends ICoinData = ICoinData, P extends ICoinPermission = ICoinPermission> extends ICoinBase {
     data?: D;
     permissions?: Array<P>;

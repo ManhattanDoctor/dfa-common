@@ -1,4 +1,3 @@
-import { ObjectUtil } from '@ts-core/common';
 import { IsOptional, IsNumberString, IsEnum } from 'class-validator';
 import { CoinPermissionType, ICoinPermission } from './CoinPermission';
 

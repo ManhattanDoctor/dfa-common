@@ -9,7 +9,7 @@ export class CoinAddedEvent extends TransportEvent<Coin> {
     //
     // --------------------------------------------------------------------------
 
-    public static readonly NAME = Event.USER_ADDED;
+    public static readonly NAME = Event.COIN_ADDED;
 
     // --------------------------------------------------------------------------
     //

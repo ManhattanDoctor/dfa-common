@@ -1,7 +1,7 @@
 import { ClassType, TransformUtil, UnreachableStatementError } from "@ts-core/common";
 import { ICoin, Coin } from "./Coin";
 import { CoinData, ICoinData } from "./data";
-import { ICoinPermission, CoinPermissionAmount, CoinPermissionType, CoinPermissionBlacklist, CoinPermissionWhitelist } from "./permission";
+import { ICoinPermission, CoinPermissionAmount, CoinPermissionType, CoinPermissionBlacklist, CoinPermissionWhitelist, CoinPermissionEmission } from "./permission";
 import { CoinBalance, ICoinBalance } from "@hlf-core/coin";
 import * as _ from 'lodash';
 
@@ -35,6 +35,9 @@ export class CoinFactory {
         switch (item.type) {
             case CoinPermissionType.AMOUNT:
                 classType = CoinPermissionAmount;
+                break;
+            case CoinPermissionType.EMISSION:
+                classType = CoinPermissionEmission;
                 break;
             case CoinPermissionType.WHITELIST:
                 classType = CoinPermissionWhitelist;

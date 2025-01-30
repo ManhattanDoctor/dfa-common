@@ -1,7 +1,7 @@
 
 
 import { TransformUtil } from '@ts-core/common';
-import { IsEnum, IsInt, IsOptional, Matches, IsNumberString } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, Matches, IsNumberString, IsPositive } from 'class-validator';
 import { HlfTransportCommandAsync } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { ICoinPermission } from '../coin/permission';

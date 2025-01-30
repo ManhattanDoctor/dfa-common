@@ -1,5 +1,6 @@
 import { getUid, UID, ExtendedError } from '@ts-core/common';
 import * as _ from 'lodash';
+import { CoinType } from './coin';
 
 class Error<C, D = any> extends ExtendedError<D, C | ErrorCode> {
     constructor(code: C | ErrorCode, message: string = '', details?: D) {
@@ -59,6 +60,31 @@ export class CoinBlacklistForbiddenError extends Error<void> {
         super(ErrorCode.COIN_BLACKLIST_FORBIDDEN, `"${getUid(item)}" is in the blacklist`);
     }
 }
+export class CoinDecimalsInvalidError extends Error<void> {
+    constructor(decimals: number) {
+        super(ErrorCode.COIN_DECIMALS_INVALID, `Coin decimals must be "${decimals}"`);
+    }
+}
+export class CoinAmountMinimumInvalidError extends Error<void> {
+    constructor(minimum: string) {
+        super(ErrorCode.COIN_AMOUNT_MINIMUM_INVALID, `Coin amount must be granter or equal "${minimum}"`);
+    }
+}
+export class CoinAmountMaximumInvalidError extends Error<void> {
+    constructor(maximum: string) {
+        super(ErrorCode.COIN_AMOUNT_MAXIMUM_INVALID, `Coin amount must be less or equal "${maximum}"`);
+    }
+}
+export class CoinAmountDiscreteInvalidError extends Error<void> {
+    constructor(discrete: string) {
+        super(ErrorCode.COIN_AMOUNT_DISCRETE_INVALID, `Coin amount must be discrete of "${discrete}"`);
+    }
+}
+export class CoinEmissionMaximumInvalidError extends Error<void> {
+    constructor(maximum: string) {
+        super(ErrorCode.COIN_EMISSION_MAXIMUM_INVALID, `Coin emission must be less or equal "${maximum}"`);
+    }
+}
 
 export interface IUserStatusForbiddenErrorDetails {
     has: string;
@@ -75,7 +101,12 @@ export enum ErrorCode {
     // Coin
     COIN_NOT_FOUND = 'COIN_NOT_FOUND',
     COIN_ALREADY_EXISTS = 'COIN_ALREADY_EXISTS',
+    COIN_DECIMALS_INVALID = 'COIN_DECIMALS_INVALID',
     COIN_OBJECT_NOT_FOUND = 'COIN_OBJECT_NOT_FOUND',
     COIN_WHITELIST_FORBIDDEN = 'COIN_WHITELIST_FORBIDDEN',
     COIN_BLACKLIST_FORBIDDEN = 'COIN_WHITELIST_FORBIDDEN',
+    COIN_AMOUNT_MINIMUM_INVALID = 'COIN_AMOUNT_MINIMUM_INVALID',
+    COIN_AMOUNT_MAXIMUM_INVALID = 'COIN_AMOUNT_MAXIMUM_INVALID',
+    COIN_AMOUNT_DISCRETE_INVALID = 'COIN_AMOUNT_DISCRETE_INVALID',
+    COIN_EMISSION_MAXIMUM_INVALID = 'COIN_EMISSION_MAXIMUM_INVALID',
 }
