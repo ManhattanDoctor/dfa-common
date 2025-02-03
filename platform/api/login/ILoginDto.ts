@@ -12,10 +12,14 @@ export interface ILoginDto extends ITraceable {
 }
 
 export interface ILoginDtoResponse {
-    accessToken: string;
-    accessTokenExpiresIn: number;
-    refreshToken: string;
-    refreshTokenExpiresIn: number;
+    access: {
+        token: string;
+        expiresIn: number;
+    },
+    refresh: {
+        token: string;
+        expiresIn: number;
+    }
 }
 
 export type LoginData = IOAuthDto;
