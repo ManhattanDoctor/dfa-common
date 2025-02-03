@@ -1,5 +1,11 @@
 import { Type } from 'class-transformer';
 
+export class UserAttributes {
+    public locale: string;
+    public status: UserStatus;
+    public created: Date;
+}
+
 export class User {
     public id: number;
     public uid: string;
@@ -7,12 +13,6 @@ export class User {
 
     @Type(() => UserAttributes)
     public attributes: UserAttributes;
-}
-
-export class UserAttributes {
-    public locale: string;
-    public status: UserStatus;
-    public created: Date;
 }
 
 export enum UserStatus {
