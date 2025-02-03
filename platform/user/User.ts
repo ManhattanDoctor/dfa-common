@@ -10,6 +10,7 @@ export class User {
 }
 
 export class UserAttributes {
+    public locale: string;
     public status: UserStatus;
     public created: Date;
 }
