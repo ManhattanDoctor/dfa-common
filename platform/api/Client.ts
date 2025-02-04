@@ -1,9 +1,8 @@
 
 import { TransportHttp, TransformUtil, ILogger, LoggerLevel, TraceUtil } from '@ts-core/common';
-import { IOAuthPopUpDto } from '@ts-core/oauth';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
-import * as _ from 'lodash';
 import { User } from '../user';
+import * as _ from 'lodash';
 
 export class Client extends TransportHttp {
 
@@ -50,10 +49,6 @@ export class Client extends TransportHttp {
     //  Other Methods
     //
     // --------------------------------------------------------------------------
-
-    public async oauth(state: string): Promise<IOAuthPopUpDto> {
-        return this.call<IOAuthPopUpDto>(`${OAUTH_URL}/${state}`, { data: TraceUtil.addIfNeed({}) });
-    }
 
     public async locale(project: string, locale: string, version?: string): Promise<any> {
         return this.call<any>(`${LOCALE_URL}/${project}/${locale}`, { data: { version } });

@@ -1,17 +1,24 @@
 import { Type } from 'class-transformer';
-
-export class UserAttributes {
-    public status: UserStatus;
-    public created: Date;
-}
+import { UserAccount } from './UserAccount';
+import { UserStatistics } from './UserStatistics';
+import { UserPreferences } from './UserPreferences';
 
 export class User {
-    public id: number;
-    public uid: string;
+    public id: string;
     public login: string;
+    public status: UserStatus;
 
-    @Type(() => UserAttributes)
-    public attributes: UserAttributes;
+    @Type(() => Date)
+    public created: Date;
+
+    @Type(() => UserAccount)
+    public account: UserAccount;
+
+    @Type(() => UserPreferences)
+    public preferences: UserPreferences;
+
+    @Type(() => UserStatistics)
+    public statistics?: UserStatistics;
 }
 
 export enum UserStatus {
