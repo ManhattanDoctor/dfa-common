@@ -38,11 +38,6 @@ export class Client extends TransportHttp {
         item.user = TransformUtil.toClass(User, item.user);
         return item;
     }
-
-    public async logout(traceId?: string): Promise<void> {
-        // return this.call<void, ITraceable>(LOGOUT_URL, { data: TraceUtil.addIfNeed({ traceId }), method: 'post' });
-    }
-
    
     // --------------------------------------------------------------------------
     //
@@ -50,8 +45,8 @@ export class Client extends TransportHttp {
     //
     // --------------------------------------------------------------------------
 
-    public async locale(project: string, locale: string, version?: string): Promise<any> {
-        return this.call<any>(`${LOCALE_URL}/${project}/${locale}`, { data: { version } });
+    public async language(project: string, locale: string, version?: string): Promise<any> {
+        return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
     }
 
     //--------------------------------------------------------------------------
@@ -80,7 +75,7 @@ export class Client extends TransportHttp {
 const PREFIX = 'api/';
 
 export const OAUTH_URL = PREFIX + 'oauth';
-export const LOCALE_URL = PREFIX + 'locale';
+export const LANGUAGE_URL = PREFIX + 'language';
 
 export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
