@@ -1,19 +1,23 @@
 import { ILanguageProjectSettings } from '@ts-core/language';
 
+let common = [
+    '.json',
+    'Error.json',
+    'Format.json',
+    'Common.json',
+
+    'User.json',
+    'Login.json'
+]
 export let LanguageProjects: Array<ILanguageProjectSettings> = [
     {
         name: 'platform',
-        locales: ['ru', 'en'],
+        locales: ['ru'],
         prefixes: [
-            '.json',
-            'Custom.json',
+            ...common,
 
-            'Coin.json',
             'About.json',
-            'Login.json',
-
-            'Platform.json',
-            'Server.json'
+            'Platform.json'
         ]
     }
 ]
