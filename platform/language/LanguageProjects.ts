@@ -16,7 +16,6 @@ export let LanguageProjects: Array<ILanguageProjectSettings> = [
         prefixes: [
             ...common,
 
-            'About.json',
             'Platform.json'
         ]
     }
