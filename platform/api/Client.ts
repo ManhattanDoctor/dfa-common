@@ -1,11 +1,20 @@
 
-import { TransportHttp, TransformUtil, ILogger, LoggerLevel, TraceUtil } from '@ts-core/common';
+import { TransportHttp, TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportCommand, ITransportCommandOptions, ITransportHttpRequest } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
+import { KeycloakTokenManager } from '@core/service/KeycloakTokenManager';
 import * as _ from 'lodash';
 
 export class Client extends TransportHttp {
+    // --------------------------------------------------------------------------
+    //
+    //  Properties
+    //
+    // --------------------------------------------------------------------------
+
+    public manager: KeycloakTokenManager;
+    private _sid: string;
 
     // --------------------------------------------------------------------------
     //
@@ -21,6 +30,24 @@ export class Client extends TransportHttp {
         }
         if (!_.isNil(level)) {
             this.level = level;
+        }
+    }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Protected Methods
+    //
+    // --------------------------------------------------------------------------
+
+
+    protected prepareCommand<U>(command: ITransportCommand<U>, options: ITransportCommandOptions): void {
+        super.prepareCommand(command, options);
+
+        let request = command.request as ITransportHttpRequest;
+        if (!_.isNil(this._sid)) {
+            request.headers = {
+                Authorization: `Bearer ${this._sid}`
+            }
         }
     }
 
@@ -60,20 +87,9 @@ export class Client extends TransportHttp {
     //
     //--------------------------------------------------------------------------
 
-    public get sid(): string {
-        return !_.isNil(this.authorization) ? this.authorization.substring(7) : null;
-    }
-
     public set sid(value: string) {
-        this.headers.Authorization = `Bearer ${value}`;
-    }
-
-    public get authorization(): string {
-        return !_.isNil(this.headers.Authorization) ? this.headers.Authorization : null;
-    }
-
-    public get oauthRedirectUrl(): string {
-        return `${this.url}${OAUTH_URL}`;
+        // this.headers.Authorization = `Bearer ${value}`;
+        this._sid = value;
     }
 }
 
