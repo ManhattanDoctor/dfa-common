@@ -1,5 +1,5 @@
 
-import { TransportHttp, TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportCommand, ITransportCommandOptions, ITransportHttpRequest } from '@ts-core/common';
+import { TransportHttp, TransformUtil, ILogger, LoggerLevel, TraceUtil, TransportHttpCommandAsync, ITransportHttpRequest, ITransportCommandOptions } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
@@ -49,6 +49,14 @@ export class Client extends TransportHttp {
                 Authorization: `Bearer ${this._sid}`
             }
         }
+    }
+
+    public call<V = any, U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): Promise<V> {
+        return this.sendListen(new TransportHttpCommandAsync(path, request), options);
+    }
+
+    public async openIdGetTokenByRefreshToken(token: string): Promise<any> {
+        return this.sendListen(new TransportHttpCommandAsync(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { data: { method: 'post' } }));
     }
 
     // --------------------------------------------------------------------------
@@ -102,3 +110,5 @@ export const LANGUAGE_URL = PREFIX + 'language';
 export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
 export const LOGOUT_URL = PREFIX + 'logout';
+
+export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = PREFIX + 'openId/getTokenByRefreshToken';
