@@ -5,7 +5,6 @@ import { UserPreferences } from './UserPreferences';
 
 export class User {
     public id: string;
-    public sub: string;
     public login: string;
     public status: UserStatus;
 
