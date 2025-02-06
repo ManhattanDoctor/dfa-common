@@ -1,21 +1,12 @@
 
-import { TransportHttp, TransformUtil, ILogger, LoggerLevel, TraceUtil, TransportHttpCommandAsync, ITransportHttpRequest, ITransportCommandOptions } from '@ts-core/common';
+import { TransformUtil, ILogger, LoggerLevel, TraceUtil, TransportHttpCommandAsync, ITransportHttpRequest, ITransportCommandOptions, ITransportCommand, ITransportHttpSettings } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
-import { KeycloakTokenManager } from '@core/service/KeycloakTokenManager';
+import { IOpenIdToken, KeycloakHttpTransport } from '@ts-core/openid-common';
 import * as _ from 'lodash';
 
-export class Client extends TransportHttp {
-    // --------------------------------------------------------------------------
-    //
-    //  Properties
-    //
-    // --------------------------------------------------------------------------
-
-    public manager: KeycloakTokenManager;
-    private _sid: string;
-
+export class Client extends KeycloakHttpTransport {
     // --------------------------------------------------------------------------
     //
     //  Constructor
@@ -24,13 +15,8 @@ export class Client extends TransportHttp {
 
     constructor(logger: ILogger, url?: string, level?: LoggerLevel) {
         super(logger, { method: 'get', isHandleError: true, isHandleLoading: true, headers: {} });
-
-        if (!_.isNil(url)) {
-            this.url = url;
-        }
-        if (!_.isNil(level)) {
-            this.level = level;
-        }
+        this.url = url;
+        this.level = level;
     }
 
     // --------------------------------------------------------------------------
@@ -39,24 +25,19 @@ export class Client extends TransportHttp {
     //
     // --------------------------------------------------------------------------
 
+    protected getTokenByRefreshToken(token: string): Promise<IOpenIdToken> {
+        return this.sendListen(new TransportHttpCommandAsync(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' }));
+    }
 
-    protected prepareCommand<U>(command: ITransportCommand<U>, options: ITransportCommandOptions): void {
-        super.prepareCommand(command, options);
-
-        let request = command.request as ITransportHttpRequest;
-        if (!_.isNil(this._sid)) {
-            request.headers = {
-                Authorization: `Bearer ${this._sid}`
-            }
+    protected isSkipRefreshToken<U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): boolean {
+        switch (path) {
+            case LOGIN_URL:
+            case CONFIG_URL:
+            case LANGUAGE_URL:
+                return true;
+            default:
+                return false;
         }
-    }
-
-    public call<V = any, U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): Promise<V> {
-        return this.sendListen(new TransportHttpCommandAsync(path, request), options);
-    }
-
-    public async openIdGetTokenByRefreshToken(token: string): Promise<any> {
-        return this.sendListen(new TransportHttpCommandAsync(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { data: { method: 'post' } }));
     }
 
     // --------------------------------------------------------------------------
@@ -88,18 +69,8 @@ export class Client extends TransportHttp {
     public async language(project: string, locale: string, version?: string): Promise<any> {
         return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
     }
-
-    //--------------------------------------------------------------------------
-    //
-    // 	Public Properties
-    //
-    //--------------------------------------------------------------------------
-
-    public set sid(value: string) {
-        // this.headers.Authorization = `Bearer ${value}`;
-        this._sid = value;
-    }
 }
+
 
 const PREFIX = 'api/';
 
@@ -111,4 +82,4 @@ export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
 export const LOGOUT_URL = PREFIX + 'logout';
 
-export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = PREFIX + 'openId/getTokenByRefreshToken';
+export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';

@@ -10,7 +10,7 @@
         "format:fix": "prettier --write \"{src}/**/*.{ts,js,json}\" --loglevel warn"
     },
     "dependencies": {
-        "@ts-core/openid-common": "~1.0.1",
+        "@ts-core/openid-common": "~1.0.6",
         "@ts-core/language": "~3.0.34",
         "@hlf-core/coin": "~3.2.2"
     }
