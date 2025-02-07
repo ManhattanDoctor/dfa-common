@@ -1,9 +1,11 @@
 
-import { TransformUtil, ILogger, LoggerLevel, TraceUtil, TransportHttpCommandAsync, ITransportHttpRequest, ITransportCommandOptions, ITransportCommand, ITransportHttpSettings } from '@ts-core/common';
+import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, ITransportCommandOptions, ITransportCommand, ITransportHttpSettings } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
 import { IOpenIdToken, KeycloakHttpTransport } from '@ts-core/openid-common';
+import { ITaxCompanyGetDtoResponse } from './tax';
+import { CompanyTaxDetails } from '../company';
 import * as _ from 'lodash';
 
 export class Client extends KeycloakHttpTransport {
@@ -69,8 +71,9 @@ export class Client extends KeycloakHttpTransport {
     //
     // --------------------------------------------------------------------------
 
-    public async language(project: string, locale: string, version?: string): Promise<any> {
-        return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
+    public async taxCompanyGet(value: string | number): Promise<ITaxCompanyGetDtoResponse> {
+        let item = await this.call<ITaxCompanyGetDtoResponse>(`${TAX_COMPANY_URL}/${value}`);
+        return TransformUtil.toClass(CompanyTaxDetails, item);
     }
 }
 
@@ -84,6 +87,7 @@ export const LANGUAGE_URL = PREFIX + 'language';
 export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
 export const LOGOUT_URL = PREFIX + 'logout';
+export const TAX_COMPANY_URL = PREFIX + 'tax/company';
 
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
