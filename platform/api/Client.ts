@@ -7,6 +7,7 @@ import { IOpenIdToken, KeycloakHttpTransport } from '@ts-core/openid-common';
 import * as _ from 'lodash';
 
 export class Client extends KeycloakHttpTransport {
+
     // --------------------------------------------------------------------------
     //
     //  Constructor
@@ -30,16 +31,12 @@ export class Client extends KeycloakHttpTransport {
     }
 
     protected isSkipRefreshToken<U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): boolean {
-        switch (path) {
-            case LOGIN_URL:
-            case CONFIG_URL:
-            case LANGUAGE_URL:
-            case OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL:
-            case OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL:
+        for (let item of SKIP_REFRESH_TOKEN_URLS) {
+            if (_.includes(path, item)) {
                 return true;
-            default:
-                return false;
+            }
         }
+        return false;
     }
 
     // --------------------------------------------------------------------------
@@ -90,3 +87,5 @@ export const LOGOUT_URL = PREFIX + 'logout';
 
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
+
+const SKIP_REFRESH_TOKEN_URLS = [LOGIN_URL, CONFIG_URL, LANGUAGE_URL, OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL, OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL];
