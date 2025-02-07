@@ -26,7 +26,7 @@ export class Client extends KeycloakHttpTransport {
     // --------------------------------------------------------------------------
 
     protected getTokenByRefreshToken(token: string): Promise<IOpenIdToken> {
-        return this.sendListen(new TransportHttpCommandAsync(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' }));
+        return this.call<IOpenIdToken>(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' });
     }
 
     protected isSkipRefreshToken<U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): boolean {
@@ -34,6 +34,8 @@ export class Client extends KeycloakHttpTransport {
             case LOGIN_URL:
             case CONFIG_URL:
             case LANGUAGE_URL:
+            case OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL:
+            case OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL:
                 return true;
             default:
                 return false;
@@ -60,6 +62,10 @@ export class Client extends KeycloakHttpTransport {
         return this.call<IConfigDtoResponse, void>(CONFIG_URL);
     }
 
+    public async logout(token: string): Promise<void> {
+        return this.call<void>(`${OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' });
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Other Methods
@@ -82,4 +88,5 @@ export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
 export const LOGOUT_URL = PREFIX + 'logout';
 
+export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
