@@ -71,6 +71,10 @@ export class Client extends KeycloakHttpTransport {
     //
     // --------------------------------------------------------------------------
 
+    public async language(project: string, locale: string, version?: string): Promise<any> {
+        return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
+    }
+    
     public async taxCompanyGet(value: string | number): Promise<ITaxCompanyGetDtoResponse> {
         let item = await this.call<ITaxCompanyGetDtoResponse>(`${TAX_COMPANY_URL}/${value}`);
         return TransformUtil.toClass(CompanyTaxDetails, item);
