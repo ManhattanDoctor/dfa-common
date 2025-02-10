@@ -41,9 +41,9 @@ export interface IUserGetDto {
 
 class UserGetDto implements IUserGetDto {
     @Matches(UserUtil.UID_REG_EXP)
-    uid: string;
+    public uid: string;
 
     @IsArray()
     @IsOptional()
-    details?: Array<keyof User>;
+    public details?: Array<keyof User>;
 }
