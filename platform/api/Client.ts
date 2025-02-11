@@ -1,11 +1,12 @@
 
-import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, ITransportCommandOptions, ITransportCommand, ITransportHttpSettings } from '@ts-core/common';
+import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, ITransportCommandOptions, ITransportCommand, ITransportHttpSettings, ISignature } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
 import { IOpenIdToken, KeycloakHttpTransport } from '@ts-core/openid-common';
 import { ITaxCompanyGetDtoResponse } from './tax';
 import { CompanyTaxDetails } from '../company';
+import { ICryptoKey } from '@hlf-core/common';
 import * as _ from 'lodash';
 
 export class Client extends KeycloakHttpTransport {
@@ -67,6 +68,20 @@ export class Client extends KeycloakHttpTransport {
 
     // --------------------------------------------------------------------------
     //
+    //  Custody Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public async custodyKeyGet(): Promise<ICryptoKey> {
+        return this.call<ICryptoKey, void>(CUSTODY_URL);
+    }
+
+    public async custodyKeySign(message: string): Promise<string> {
+        return this.call<string, any>(`${CUSTODY_URL}/sign`, { data: { message }, method: 'post' });
+    }
+
+    // --------------------------------------------------------------------------
+    //
     //  Other Methods
     //
     // --------------------------------------------------------------------------
@@ -74,7 +89,7 @@ export class Client extends KeycloakHttpTransport {
     public async language(project: string, locale: string, version?: string): Promise<any> {
         return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
     }
-    
+
     public async taxCompanyGet(value: string | number): Promise<ITaxCompanyGetDtoResponse> {
         let item = await this.call<ITaxCompanyGetDtoResponse>(`${TAX_COMPANY_URL}/${value}`);
         return TransformUtil.toClass(CompanyTaxDetails, item);
@@ -96,4 +111,12 @@ export const TAX_COMPANY_URL = PREFIX + 'tax/company';
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
 
-const SKIP_REFRESH_TOKEN_URLS = [LOGIN_URL, CONFIG_URL, LANGUAGE_URL, OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL, OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL];
+export const CUSTODY_URL = PREFIX + 'custody';
+
+const SKIP_REFRESH_TOKEN_URLS = [
+    LOGIN_URL,
+    CONFIG_URL,
+    LANGUAGE_URL,
+    OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL,
+    OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL
+];

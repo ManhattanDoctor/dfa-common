@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 export class CompanyPreferences {
-    public title: string;
+    public name: string;
     public phone?: string;
     public email?: string;
     public picture?: string;
@@ -10,11 +10,8 @@ export class CompanyPreferences {
     public description?: string;
 }
 
-export const COMPANY_PREFERENCES_INN_MIN_LENGTH = 10;
-export const COMPANY_PREFERENCES_INN_MAX_LENGTH = 12;
-
-export const COMPANY_PREFERENCES_TITLE_MIN_LENGTH = 5;
-export const COMPANY_PREFERENCES_TITLE_MAX_LENGTH = 100;
+export const COMPANY_PREFERENCES_NAME_MIN_LENGTH = 4;
+export const COMPANY_PREFERENCES_NAME_MAX_LENGTH = 128;
 
 export const COMPANY_PREFERENCES_EMAIL_MAX_LENGTH = 128;
 export const COMPANY_PREFERENCES_PICTURE_MAX_LENGTH = 256;

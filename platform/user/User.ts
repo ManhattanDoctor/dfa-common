@@ -8,11 +8,10 @@ export class User {
     public login: string;
     public status: UserStatus;
 
+    public companyId?: number;
+
     @Type(() => Date)
     public created: Date;
-
-    @Type(() => UserAccount)
-    public account: UserAccount;
 
     @Type(() => UserPreferences)
     public preferences: UserPreferences;
