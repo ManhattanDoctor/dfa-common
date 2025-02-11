@@ -1,6 +1,4 @@
 import { Type } from 'class-transformer';
-import { UserAccount } from './UserAccount';
-import { UserStatistics } from './UserStatistics';
 import { UserPreferences } from './UserPreferences';
 
 export class User {
@@ -15,9 +13,6 @@ export class User {
 
     @Type(() => UserPreferences)
     public preferences: UserPreferences;
-
-    @Type(() => UserStatistics)
-    public statistics?: UserStatistics;
 }
 
 export enum UserStatus {
