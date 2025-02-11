@@ -8,6 +8,7 @@ import { ITaxCompanyGetDtoResponse } from './tax';
 import { CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
 import * as _ from 'lodash';
+import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse } from './user';
 
 export class Client extends KeycloakHttpTransport {
 
@@ -68,6 +69,22 @@ export class Client extends KeycloakHttpTransport {
 
     // --------------------------------------------------------------------------
     //
+    //  User Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public async userGet(id: string): Promise<IUserGetDtoResponse> {
+        let item = await this.call<IUserGetDtoResponse>(`${USER_URL}/${id}`);
+        return TransformUtil.toClass(User, item);
+    }
+
+    public async userEdit(id: string, data: IUserEditDto): Promise<IUserEditDtoResponse> {
+        let item = await this.call<IUserEditDtoResponse, IUserEditDto>(`${USER_URL}/${id}`, { method: 'put', data: TraceUtil.addIfNeed(data) });
+        return TransformUtil.toClass(User, item);
+    }
+
+    // --------------------------------------------------------------------------
+    //
     //  Custody Methods
     //
     // --------------------------------------------------------------------------
@@ -107,6 +124,8 @@ export const INIT_URL = PREFIX + 'init';
 export const LOGIN_URL = PREFIX + 'login';
 export const LOGOUT_URL = PREFIX + 'logout';
 export const TAX_COMPANY_URL = PREFIX + 'tax/company';
+
+export const USER_URL = PREFIX + 'user';
 
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
