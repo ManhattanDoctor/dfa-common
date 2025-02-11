@@ -19,8 +19,13 @@ export class UserAlreadyExistsError extends Error<void> {
         super(ErrorCode.USER_ALREADY_EXISTS, `User "${getUid(item)}" already exists`)
     }
 }
-export class UserStatusForbiddenError extends Error<IUserStatusForbiddenErrorDetails> {
-    constructor(item: UID, details: IUserStatusForbiddenErrorDetails) {
+export class UserForbiddenError extends Error<void> {
+    constructor() {
+        super(ErrorCode.USER_FORBIDDEN, `User forbidden`)
+    }
+}
+export class UserStatusForbiddenError extends Error<IUserStatusForbiddenDetails> {
+    constructor(item: UID, details: IUserStatusForbiddenDetails) {
         super(ErrorCode.USER_STATUS_FORBIDDEN, `User "${getUid(item)}" status forbidden`, details)
     }
 }
@@ -86,7 +91,7 @@ export class CoinEmissionMaximumInvalidError extends Error<void> {
     }
 }
 
-export interface IUserStatusForbiddenErrorDetails {
+export interface IUserStatusForbiddenDetails {
     has: string;
     required: string;
 }
@@ -94,6 +99,7 @@ export interface IUserStatusForbiddenErrorDetails {
 export enum ErrorCode {
     // User
     USER_NOT_FOUND = 'HLF_USER_NOT_FOUND',
+    USER_FORBIDDEN = 'HLF_USER_FORBIDDEN',
     USER_ALREADY_EXISTS = 'HLF_USER_ALREADY_EXISTS',
     USER_STATUS_FORBIDDEN = 'HLF_USER_STATUS_FORBIDDEN',
     USER_CRYPTO_KEY_INVALID = 'HLF_USER_CRYPTO_KEY_INVALID',

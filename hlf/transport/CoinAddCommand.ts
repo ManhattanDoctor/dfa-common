@@ -61,28 +61,28 @@ export interface ICoinAddDto {
 
 export class CoinAddDto implements ICoinAddDto {
     @IsEnum(CoinType)
-    type: CoinType;
+    public type: CoinType;
 
     @Matches(CoinUtil.TICKER_REG_EXP)
-    ticker: CoinType;
+    public ticker: CoinType;
 
     @IsInt()
-    decimals: number;
+    public decimals: number;
 
     @IsOptional()
-    data?: ICoinData;
+    public data?: ICoinData;
 
     @IsOptional()
-    series?: ICoinSeries;
+    public series?: ICoinSeries;
 
     @IsOptional()
     @Matches(CoinUtilBase.OWNER_UID_REG_EXP)
-    ownerUid?: string;
+    public ownerUid?: string;
 
     @IsOptional()
-    permissions?: Array<ICoinPermission>;
+    public permissions?: Array<ICoinPermission>;
 
     @IsOptional()
     @IsNumberString()
-    emit?: string;
+    public emit?: string;
 }

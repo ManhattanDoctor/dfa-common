@@ -1,8 +1,9 @@
 import { TransformUtil } from '@ts-core/common';
-import { IsEnum, Matches, IsOptional } from 'class-validator';
-import { HlfTransportCommandAsync, UserUtil } from '@hlf-core/common';
+import { IsEnum, Matches, IsOptional, ValidateNested } from 'class-validator';
+import { HlfTransportCommandAsync, CryptoKey, ICryptoKey, UserUtil } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { User, UserRole, UserStatus } from '../user';
+import { Type } from 'class-transformer';
 
 export class UserEditCommand extends HlfTransportCommandAsync<IUserEditDto, User> {
     // --------------------------------------------------------------------------
@@ -38,18 +39,23 @@ export interface IUserEditDto {
     uid: string;
     roles?: Array<UserRole>;
     status?: UserStatus;
-    wallet?: string;
+    cryptoKey?: ICryptoKey;
 }
 
 export class UserEditDto implements IUserEditDto {
     @Matches(UserUtil.UID_REG_EXP)
-    uid: string;
+    public uid: string;
 
     @IsOptional()
     @IsEnum(UserRole, { each: true })
-    roles?: Array<UserRole>;
+    public roles?: Array<UserRole>;
 
     @IsOptional()
     @IsEnum(UserStatus)
-    status?: UserStatus;
+    public status?: UserStatus;
+
+    @IsOptional()
+    @Type(() => CryptoKey)
+    @ValidateNested()
+    public cryptoKey?: CryptoKey;
 }

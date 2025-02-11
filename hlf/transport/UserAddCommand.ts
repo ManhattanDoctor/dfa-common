@@ -1,6 +1,6 @@
 import { TransformUtil } from '@ts-core/common';
 import { Type } from 'class-transformer';
-import { IsEnum, ValidateNested, IsDefined, IsOptional } from 'class-validator';
+import { ValidateNested, IsDefined, IsOptional, IsEnum } from 'class-validator';
 import { HlfTransportCommandAsync, ICryptoKey, CryptoKey } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { User, UserRole } from '../user';
@@ -41,12 +41,12 @@ export interface IUserAddDto {
 }
 
 export class UserAddDto implements IUserAddDto {
-    @IsOptional()
-    @IsEnum(UserRole, { each: true })
-    roles?: Array<UserRole>;
-
     @IsDefined()
     @Type(() => CryptoKey)
     @ValidateNested()
-    cryptoKey: CryptoKey;
+    public cryptoKey: CryptoKey;
+
+    @IsOptional()
+    @IsEnum(UserRole, { each: true })
+    public roles?: Array<UserRole>;
 }

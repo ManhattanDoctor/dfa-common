@@ -41,7 +41,7 @@ export class User implements IUser<UserStatus, UserRole> {
     @IsOptional()
     @IsEnum(UserRole, { each: true })
     public roles?: Array<UserRole>;
-
+   
     @IsOptional()
     @Type(() => CryptoKey)
     public cryptoKey?: ICryptoKey;
