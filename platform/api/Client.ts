@@ -5,10 +5,11 @@ import { IConfigDtoResponse } from './config';
 import { User } from '../user';
 import { IOpenIdToken, KeycloakHttpTransport } from '@ts-core/openid-common';
 import { ITaxCompanyGetDtoResponse } from './tax';
-import { CompanyTaxDetails } from '../company';
+import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
-import * as _ from 'lodash';
 import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse } from './user';
+import { ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse } from './company';
+import * as _ from 'lodash';
 
 export class Client extends KeycloakHttpTransport {
 
@@ -52,6 +53,7 @@ export class Client extends KeycloakHttpTransport {
     public async init(data?: IInitDto): Promise<IInitDtoResponse> {
         let item = await this.call<IInitDtoResponse, IInitDto>(INIT_URL, { data: TraceUtil.addIfNeed(data) });
         item.user = TransformUtil.toClass(User, item.user);
+        item.company = TransformUtil.toClass(Company, item.company);
         return item;
     }
 
@@ -81,6 +83,22 @@ export class Client extends KeycloakHttpTransport {
     public async userEdit(id: string, data: IUserEditDto): Promise<IUserEditDtoResponse> {
         let item = await this.call<IUserEditDtoResponse, IUserEditDto>(`${USER_URL}/${id}`, { method: 'put', data: TraceUtil.addIfNeed(data) });
         return TransformUtil.toClass(User, item);
+    }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Company Methods
+    //
+    // --------------------------------------------------------------------------
+
+    public async companyGet(id: number): Promise<ICompanyGetDtoResponse> {
+        let item = await this.call<ICompanyGetDtoResponse>(`${COMPANY_URL}/${id}`);
+        return TransformUtil.toClass(Company, item);
+    }
+
+    public async companyEdit(id: string, data: ICompanyEditDto): Promise<ICompanyEditDtoResponse> {
+        let item = await this.call<ICompanyEditDtoResponse, ICompanyEditDto>(`${COMPANY_URL}/${id}`, { method: 'put', data: TraceUtil.addIfNeed(data) });
+        return TransformUtil.toClass(Company, item);
     }
 
     // --------------------------------------------------------------------------
@@ -126,6 +144,7 @@ export const LOGOUT_URL = PREFIX + 'logout';
 export const TAX_COMPANY_URL = PREFIX + 'tax/company';
 
 export const USER_URL = PREFIX + 'user';
+export const COMPANY_URL = PREFIX + 'company';
 
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
