@@ -7,7 +7,8 @@ let common = [
     'Common.json',
 
     'User.json',
-    'Login.json'
+    'Login.json',
+    'Company.json',
 ]
 export let LanguageProjects: Array<ILanguageProjectSettings> = [
     {

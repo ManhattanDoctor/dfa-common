@@ -3,7 +3,7 @@ import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, 
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
-import { IOpenIdToken, KeycloakHttpTransport } from '@ts-core/openid-common';
+import { IOpenIdToken, KeycloakHttpTransport, KeycloakTokenManager } from '@ts-core/openid-common';
 import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
@@ -19,9 +19,10 @@ export class Client extends KeycloakHttpTransport {
     //
     // --------------------------------------------------------------------------
 
-    constructor(logger: ILogger, url?: string, level?: LoggerLevel) {
+    constructor(logger: ILogger, token: KeycloakTokenManager, url?: string, level?: LoggerLevel) {
         super(logger, { method: 'get', isHandleError: true, isHandleLoading: true, headers: {} });
         this.url = url;
+        this.token = token;
         this.level = level;
     }
 
