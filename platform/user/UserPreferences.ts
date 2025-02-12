@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 
 export class UserPreferences {
+    name: string;
     email: string;
-    name?: string;
     theme?: UserPreferencesTheme;
     phone?: string;
     picture?: string;
