@@ -97,7 +97,7 @@ export class Client extends KeycloakHttpTransport {
         return TransformUtil.toClass(Company, item);
     }
 
-    public async companyEdit(id: string, data: ICompanyEditDto): Promise<ICompanyEditDtoResponse> {
+    public async companyEdit(id: number, data: ICompanyEditDto): Promise<ICompanyEditDtoResponse> {
         let item = await this.call<ICompanyEditDtoResponse, ICompanyEditDto>(`${COMPANY_URL}/${id}`, { method: 'put', data: TraceUtil.addIfNeed(data) });
         return TransformUtil.toClass(Company, item);
     }
