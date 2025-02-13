@@ -19,7 +19,7 @@ export const ResourcePermission = {
     COMPANY_EDIT: `${Resource.COMPANY}:${ResourceScope.EDIT}`,
 }
 
-type Permission = typeof ResourcePermission[keyof typeof ResourcePermission];
+export type Permission = typeof ResourcePermission[keyof typeof ResourcePermission];
 export function getResourceValidationOptions(item: Permission): OpenIdResourceValidationOptions {
     let index = item.split(':');
     return { name: index[0], scope: index.slice(1) }
