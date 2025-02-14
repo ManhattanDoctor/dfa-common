@@ -1,4 +1,4 @@
-import { OpenIdResourceValidationOptions } from "@ts-core/openid-common";
+import { IOpenIdResourceValidationOptions, OpenIdResourceValidationOptions } from "@ts-core/openid-common";
 
 export enum Resource {
     USER = 'user',
@@ -20,7 +20,7 @@ export const ResourcePermission = {
 }
 
 export type Permission = typeof ResourcePermission[keyof typeof ResourcePermission];
-export function getResourceValidationOptions(item: Permission): OpenIdResourceValidationOptions {
+export function getResourceValidationOptions(item: Permission): IOpenIdResourceValidationOptions {
     let index = item.split(':');
     return { name: index[0], scope: index.slice(1) }
 }

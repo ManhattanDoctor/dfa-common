@@ -3,7 +3,7 @@ import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, 
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
-import { IOpenIdToken, KeycloakHttpTransport, KeycloakTokenManager } from '@ts-core/openid-common';
+import { IOpenIdRefreshable, KeycloakHttpTransport, KeycloakTokenManager } from '@ts-core/openid-common';
 import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
@@ -32,8 +32,8 @@ export class Client extends KeycloakHttpTransport {
     //
     // --------------------------------------------------------------------------
 
-    protected getTokenByRefreshToken(token: string): Promise<IOpenIdToken> {
-        return this.call<IOpenIdToken>(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' });
+    protected getTokenByRefreshToken(token: string): Promise<IOpenIdRefreshable> {
+        return this.call<IOpenIdRefreshable>(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' });
     }
 
     protected isSkipRefreshToken<U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): boolean {
