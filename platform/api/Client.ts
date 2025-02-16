@@ -3,7 +3,7 @@ import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, 
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
-import { IOpenIdRefreshable, KeycloakHttpTransport, KeycloakTokenManager } from '@ts-core/openid-common';
+import { IOpenIdTokenRefreshableManager, IOpenIdTokenRefreshable, OpenIdTokenRefreshableTransport } from '@ts-core/openid-common';
 import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
@@ -11,7 +11,7 @@ import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse } from './user'
 import { ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse } from './company';
 import * as _ from 'lodash';
 
-export class Client extends KeycloakHttpTransport {
+export class Client extends OpenIdTokenRefreshableTransport {
 
     // --------------------------------------------------------------------------
     //
@@ -19,7 +19,7 @@ export class Client extends KeycloakHttpTransport {
     //
     // --------------------------------------------------------------------------
 
-    constructor(logger: ILogger, token: KeycloakTokenManager, url?: string, level?: LoggerLevel) {
+    constructor(logger: ILogger, token: IOpenIdTokenRefreshableManager, url?: string, level?: LoggerLevel) {
         super(logger, { method: 'get', isHandleError: true, isHandleLoading: true, headers: {} });
         this.url = url;
         this.token = token;
@@ -28,15 +28,15 @@ export class Client extends KeycloakHttpTransport {
 
     // --------------------------------------------------------------------------
     //
-    //  Protected Methods
+    //  Keycloak Methods
     //
     // --------------------------------------------------------------------------
 
-    protected getTokenByRefreshToken(token: string): Promise<IOpenIdRefreshable> {
-        return this.call<IOpenIdRefreshable>(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' });
+    protected getRefreshable(): Promise<IOpenIdTokenRefreshable> {
+        return this.call<IOpenIdTokenRefreshable>(`${OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL}/${this.token.refresh.value}`, { method: 'post' });
     }
 
-    protected isSkipRefreshToken<U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): boolean {
+    protected isSkipCheckRefreshable<U = any>(path: string, request?: ITransportHttpRequest<U>, options?: ITransportCommandOptions): boolean {
         for (let item of SKIP_REFRESH_TOKEN_URLS) {
             if (_.includes(path, item)) {
                 return true;
