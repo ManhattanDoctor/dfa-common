@@ -1,9 +1,9 @@
 
 import { ITraceable } from '@ts-core/common';
-import { CompanyPreferences } from '../../company';
+import { Company, CompanyPreferences, CompanyTaxDetails } from '../../company';
 
 export interface ICompanyAddDto extends ITraceable {
-    preferences: Partial<CompanyPreferences>;
-    paymentAggregator?: Partial<PaymentAggregator>;
+    details: CompanyTaxDetails;
+    preferences: CompanyPreferences;
 }
-export declare type ICompanyAddDtoResponse = UserCompany;
+export declare type ICompanyAddDtoResponse = Company;

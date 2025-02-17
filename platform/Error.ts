@@ -14,9 +14,9 @@ export class HlfUidUndefinedError extends Error<void> {
     }
 }
 // User
-export class UserNotFoundError extends Error<void> {
-    constructor() {
-        super(ErrorCode.USER_NOT_FOUND, `Unable to find user`);
+export class UserNotFoundError extends Error<string> {
+    constructor(id: string) {
+        super(ErrorCode.USER_NOT_FOUND, `Unable to find "${id}" user`);
     }
 }
 export class UserStatusForbiddenError extends Error<void> {

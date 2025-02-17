@@ -12,9 +12,11 @@ export enum ResourceScope {
 }
 
 export const ResourcePermission = {
+    USER_ADD: `${Resource.USER}:${ResourceScope.ADD}`,
     USER_READ: `${Resource.USER}:${ResourceScope.READ}`,
     USER_EDIT: `${Resource.USER}:${ResourceScope.EDIT}`,
     //
+    COMPANY_ADD: `${Resource.COMPANY}:${ResourceScope.ADD}`,
     COMPANY_READ: `${Resource.COMPANY}:${ResourceScope.READ}`,
     COMPANY_EDIT: `${Resource.COMPANY}:${ResourceScope.EDIT}`,
 }
