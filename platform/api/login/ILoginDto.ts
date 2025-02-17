@@ -1,6 +1,6 @@
 import { ITraceable } from '@ts-core/common';
 import { LoginResource } from './LoginResource';
-import { IOpenIdRefreshable } from '@ts-core/openid-common';
+import { IOpenIdTokenRefreshable } from '@ts-core/openid-common';
 
 export interface IOAuthDto {
     codeOrToken: string;
@@ -12,6 +12,6 @@ export interface ILoginDto extends ITraceable {
     resource: LoginResource;
 }
 
-export type ILoginDtoResponse = IOpenIdRefreshable;
+export type ILoginDtoResponse = IOpenIdTokenRefreshable;
 
 export type LoginData = IOAuthDto;
