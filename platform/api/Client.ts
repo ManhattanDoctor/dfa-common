@@ -1,5 +1,5 @@
 
-import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, ITransportCommandOptions, ITransportCommand, ITransportHttpSettings, ISignature } from '@ts-core/common';
+import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, ITransportCommandOptions } from '@ts-core/common';
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
