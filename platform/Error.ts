@@ -10,7 +10,7 @@ class Error<C, D = any> extends ExtendedError<D, C | ErrorCode> {
 // Hlf
 export class HlfUidUndefinedError extends Error<void> {
     constructor() {
-        super(ErrorCode.COMPANY_NOT_FOUND, `Hlf uid is undefined`);
+        super(ErrorCode.HLF_UID_UNDEFINED, `Hlf uid is undefined`);
     }
 }
 // User
@@ -35,6 +35,11 @@ export class CompanyStatusForbiddenError extends Error<void> {
         super(ErrorCode.COMPANY_STATUS_FORBIDDEN, `Company "${getUid(item)}" status forbidden`);
     }
 }
+export class CompanyTaxDetailsNotFoundError extends Error<string> {
+    constructor(query: string) {
+        super(ErrorCode.COMPANY_TAX_DETAILS_NOT_FOUND, `Unable to find "${query}" company tax details`);
+    }
+}
 
 
 export enum ErrorCode {
@@ -46,4 +51,5 @@ export enum ErrorCode {
     // Company
     COMPANY_NOT_FOUND = 'PLATFORM_COMPANY_NOT_FOUND',
     COMPANY_STATUS_FORBIDDEN = 'PLATFORM_COMPANY_STATUS_FORBIDDEN',
+    COMPANY_TAX_DETAILS_NOT_FOUND = 'PLATFORM_COMPANY_TAX_DETAILS_NOT_FOUND',
 }
