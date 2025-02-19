@@ -1,7 +1,7 @@
 import { TransportEvent } from "@ts-core/common";
 import { User } from "../user";
 
-export class UserChangedEvent extends TransportEvent<User>{
+export class UserChangedEvent extends TransportEvent<Partial<User>> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -16,7 +16,7 @@ export class UserChangedEvent extends TransportEvent<User>{
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: User) {
+    constructor(data: Partial<User>) {
         super(UserChangedEvent.NAME, data);
     }
 }

@@ -8,7 +8,7 @@ import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
 import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse } from './user';
-import { ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse } from './company';
+import { ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse } from './company';
 import * as _ from 'lodash';
 
 export class Client extends OpenIdTokenRefreshableTransport {
@@ -91,6 +91,11 @@ export class Client extends OpenIdTokenRefreshableTransport {
     //  Company Methods
     //
     // --------------------------------------------------------------------------
+
+    public async companyAdd(data: ICompanyAddDto): Promise<ICompanyAddDtoResponse> {
+        let item = await this.call<ICompanyAddDtoResponse>(COMPANY_URL, { method: 'post', data: TraceUtil.addIfNeed(data) });
+        return TransformUtil.toClass(Company, item);
+    }
 
     public async companyGet(id: number): Promise<ICompanyGetDtoResponse> {
         let item = await this.call<ICompanyGetDtoResponse>(`${COMPANY_URL}/${id}`);
