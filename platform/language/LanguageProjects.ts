@@ -10,7 +10,7 @@ let common = [
     'Login.json',
     'Company.json',
 ]
-export let LanguageProjects: Array<ILanguageProjectSettings> = [
+export const LanguageProjects: Array<ILanguageProjectSettings> = [
     {
         name: 'platform',
         locales: ['ru'],

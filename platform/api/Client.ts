@@ -8,7 +8,7 @@ import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
 import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse } from './user';
-import { ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse } from './company';
+import { ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse, ICompanyToVerifyDtoResponse } from './company';
 import * as _ from 'lodash';
 
 export class Client extends OpenIdTokenRefreshableTransport {
@@ -99,6 +99,21 @@ export class Client extends OpenIdTokenRefreshableTransport {
 
     public async companyGet(id: number): Promise<ICompanyGetDtoResponse> {
         let item = await this.call<ICompanyGetDtoResponse>(`${COMPANY_URL}/${id}`);
+        return TransformUtil.toClass(Company, item);
+    }
+
+    public async companyVerify(id: number): Promise<ICompanyToVerifyDtoResponse> {
+        let item = await this.call<ICompanyToVerifyDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'put' });
+        return TransformUtil.toClass(Company, item);
+    }
+
+    public async companyReject(id: number): Promise<ICompanyToVerifyDtoResponse> {
+        let item = await this.call<ICompanyToVerifyDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'put' });
+        return TransformUtil.toClass(Company, item);
+    }
+
+    public async companyToVerify(): Promise<ICompanyToVerifyDtoResponse> {
+        let item = await this.call<ICompanyToVerifyDtoResponse>(`${COMPANY_URL}/toVerify`, { method: 'put' });
         return TransformUtil.toClass(Company, item);
     }
 
