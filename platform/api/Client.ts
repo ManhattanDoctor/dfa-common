@@ -8,7 +8,7 @@ import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
 import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse } from './user';
-import { ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse, ICompanyToVerifyDtoResponse } from './company';
+import { ICompanyActivateDtoResponse, ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse, ICompanyRejectDtoResponse, ICompanySubmitDtoResponse, ICompanyVerifyDtoResponse } from './company';
 import * as _ from 'lodash';
 
 export class Client extends OpenIdTokenRefreshableTransport {
@@ -65,7 +65,7 @@ export class Client extends OpenIdTokenRefreshableTransport {
     public async config(): Promise<IConfigDtoResponse> {
         return this.call<IConfigDtoResponse, void>(CONFIG_URL);
     }
-
+    
     public async logout(token: string): Promise<void> {
         return this.call<void>(`${OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' });
     }
@@ -102,18 +102,23 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(Company, item);
     }
 
-    public async companyVerify(id: number): Promise<ICompanyToVerifyDtoResponse> {
-        let item = await this.call<ICompanyToVerifyDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'put' });
+    public async companyVerify(id: number): Promise<ICompanyVerifyDtoResponse> {
+        let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'post' });
         return TransformUtil.toClass(Company, item);
     }
 
-    public async companyReject(id: number): Promise<ICompanyToVerifyDtoResponse> {
-        let item = await this.call<ICompanyToVerifyDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'put' });
+    public async companyReject(id: number): Promise<ICompanyRejectDtoResponse> {
+        let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'post' });
         return TransformUtil.toClass(Company, item);
     }
 
-    public async companyToVerify(): Promise<ICompanyToVerifyDtoResponse> {
-        let item = await this.call<ICompanyToVerifyDtoResponse>(`${COMPANY_URL}/toVerify`, { method: 'put' });
+    public async companyActivate(): Promise<ICompanyActivateDtoResponse> {
+        let item = await this.call<ICompanyActivateDtoResponse>(`${COMPANY_URL}/activate`, { method: 'post' });
+        return TransformUtil.toClass(Company, item);
+    }
+
+    public async companySubmit(): Promise<ICompanySubmitDtoResponse> {
+        let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/submit`, { method: 'post' });
         return TransformUtil.toClass(Company, item);
     }
 

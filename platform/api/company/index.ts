@@ -4,4 +4,5 @@ export * from './ICompanyListDto';
 export * from './ICompanyEditDto';
 export * from './ICompanyVerifyDto';
 export * from './ICompanyRejectDto';
-export * from './ICompanyToVerifyDto';
+export * from './ICompanySubmitDto';
+export * from './ICompanyActivateDto';

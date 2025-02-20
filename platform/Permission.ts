@@ -7,10 +7,13 @@ export enum ResourcePermission {
     USER_LIST = 'user:list',
     //
     COMPANY_ADD = 'company:add',
+    COMPANY_EDIT = 'company:edit',
     COMPANY_READ = 'company:read',
     COMPANY_LIST = 'company:list',
+    COMPANY_SUBMIT = 'company:submit',
     COMPANY_REJECT = 'company:reject',
     COMPANY_VERIFY = 'company:verify',
+    COMPANY_ACTIVATE = 'company:activate',
 }
 
 export interface IResourcePermissionValidationOptions {
