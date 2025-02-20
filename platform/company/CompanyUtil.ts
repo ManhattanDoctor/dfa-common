@@ -42,9 +42,6 @@ export class CompanyUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static isCanEdit(resources: OpenIdResources, isThrowError: boolean): boolean {
-        return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_EDIT, resources }, isThrowError);
-    }
     public static isCanRead(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_READ, resources }, isThrowError);
     }
@@ -53,6 +50,10 @@ export class CompanyUtil {
     }
     public static isCanAdd(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_ADD, resources }, isThrowError);
+    }
+    
+    public static isCanEdit(item: Company, resources: OpenIdResources, isThrowError: boolean): boolean {
+        return CompanyUtil.validate(item, COMPANY_EDIT_STATUS, { permission: ResourcePermission.COMPANY_EDIT, resources }, isThrowError);
     }
     public static isCanSubmit(item: Company, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CompanyUtil.validate(item, COMPANY_SUBMIT_STATUS, { permission: ResourcePermission.COMPANY_SUBMIT, resources }, isThrowError);
@@ -68,6 +69,7 @@ export class CompanyUtil {
     }
 }
 
+export const COMPANY_EDIT_STATUS = [CompanyStatus.DRAFT, CompanyStatus.REJECTED];
 export const COMPANY_SUBMIT_STATUS = [CompanyStatus.DRAFT, CompanyStatus.REJECTED];
 export const COMPANY_VERIFY_STATUS = [CompanyStatus.VERIFICATION_PROCESS];
 export const COMPANY_REJECT_STATUS = [CompanyStatus.VERIFICATION_PROCESS];

@@ -65,7 +65,7 @@ export class Client extends OpenIdTokenRefreshableTransport {
     public async config(): Promise<IConfigDtoResponse> {
         return this.call<IConfigDtoResponse, void>(CONFIG_URL);
     }
-    
+
     public async logout(token: string): Promise<void> {
         return this.call<void>(`${OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL}/${token}`, { method: 'post' });
     }
@@ -102,6 +102,11 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(Company, item);
     }
 
+    public async companyEdit(data: ICompanyEditDto): Promise<ICompanyEditDtoResponse> {
+        let item = await this.call<ICompanyEditDtoResponse, ICompanyEditDto>(COMPANY_URL, { method: 'put', data: TraceUtil.addIfNeed(data) });
+        return TransformUtil.toClass(Company, item);
+    }
+
     public async companyVerify(id: number): Promise<ICompanyVerifyDtoResponse> {
         let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'post' });
         return TransformUtil.toClass(Company, item);
@@ -119,11 +124,6 @@ export class Client extends OpenIdTokenRefreshableTransport {
 
     public async companySubmit(): Promise<ICompanySubmitDtoResponse> {
         let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/submit`, { method: 'post' });
-        return TransformUtil.toClass(Company, item);
-    }
-
-    public async companyEdit(id: number, data: ICompanyEditDto): Promise<ICompanyEditDtoResponse> {
-        let item = await this.call<ICompanyEditDtoResponse, ICompanyEditDto>(`${COMPANY_URL}/${id}`, { method: 'put', data: TraceUtil.addIfNeed(data) });
         return TransformUtil.toClass(Company, item);
     }
 
