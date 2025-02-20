@@ -1,4 +1,4 @@
-import { KeycloakResources } from "@ts-core/openid-common";
+import { OpenIdResources } from "@ts-core/openid-common";
 import { Company, CompanyStatus } from "../company";
 import { IResourcePermissionValidationOptions, ResourcePermission } from "../Permission";
 import { CompanyStatusInvalidError } from "../Error";
@@ -42,28 +42,28 @@ export class CompanyUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static isCanEdit(resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanEdit(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_EDIT, resources }, isThrowError);
     }
-    public static isCanRead(resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanRead(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_READ, resources }, isThrowError);
     }
-    public static isCanList(resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanList(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_LIST, resources }, isThrowError);
     }
-    public static isCanAdd(resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanAdd(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_ADD, resources }, isThrowError);
     }
-    public static isCanSubmit(item: Company, resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanSubmit(item: Company, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CompanyUtil.validate(item, COMPANY_SUBMIT_STATUS, { permission: ResourcePermission.COMPANY_SUBMIT, resources }, isThrowError);
     }
-    public static isCanVerify(item: Company, resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanVerify(item: Company, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CompanyUtil.validate(item, COMPANY_VERIFY_STATUS, { permission: ResourcePermission.COMPANY_VERIFY, resources }, isThrowError);
     }
-    public static isCanReject(item: Company, resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanReject(item: Company, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CompanyUtil.validate(item, COMPANY_REJECT_STATUS, { permission: ResourcePermission.COMPANY_REJECT, resources }, isThrowError);
     }
-    public static isCanActivate(item: Company, resources: KeycloakResources, isThrowError: boolean): boolean {
+    public static isCanActivate(item: Company, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CompanyUtil.validate(item, COMPANY_ACTIVATE_STATUS, { permission: ResourcePermission.COMPANY_ACTIVATE, resources }, isThrowError);
     }
 }

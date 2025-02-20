@@ -1,4 +1,4 @@
-import { IOpenIdResourceValidationOptions, KeycloakResources, KeycloakUtil } from "@ts-core/openid-common";
+import { IOpenIdResourceValidationOptions, OpenIdResources, KeycloakUtil } from "@ts-core/openid-common";
 
 export enum ResourcePermission {
     USER_ADD = 'user:add',
@@ -18,7 +18,7 @@ export enum ResourcePermission {
 
 export interface IResourcePermissionValidationOptions {
     permission: ResourcePermission;
-    resources: KeycloakResources;
+    resources: OpenIdResources;
 }
 
 export function getResourceValidationOptions(item: ResourcePermission): IOpenIdResourceValidationOptions {
@@ -26,7 +26,7 @@ export function getResourceValidationOptions(item: ResourcePermission): IOpenIdR
     return { name: index[0], scope: index.slice(1) }
 }
 
-export function hasResourceScope(resource: ResourcePermission, resources: KeycloakResources): boolean {
+export function hasResourceScope(resource: ResourcePermission, resources: OpenIdResources): boolean {
     try {
         KeycloakUtil.validateResourceScope(getResourceValidationOptions(resource), resources);
         return true;
