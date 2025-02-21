@@ -3,7 +3,7 @@ import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, 
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
-import { IOpenIdTokenRefreshableManager, IOpenIdTokenRefreshable, OpenIdTokenRefreshableTransport } from '@ts-core/openid-common';
+import { IOpenIdTokenRefreshableManager, IOpenIdTokenRefreshable, OpenIdTokenRefreshableTransport, OpenIdResources, OpenIdResourceValidationOptions } from '@ts-core/openid-common';
 import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
@@ -28,7 +28,7 @@ export class Client extends OpenIdTokenRefreshableTransport {
 
     // --------------------------------------------------------------------------
     //
-    //  Keycloak Methods
+    //  OpenId Methods
     //
     // --------------------------------------------------------------------------
 
@@ -60,10 +60,6 @@ export class Client extends OpenIdTokenRefreshableTransport {
 
     public async login(data: ILoginDto): Promise<ILoginDtoResponse> {
         return this.call<ILoginDtoResponse, ILoginDto>(LOGIN_URL, { data: TraceUtil.addIfNeed(data), method: 'post' });
-    }
-
-    public async config(): Promise<IConfigDtoResponse> {
-        return this.call<IConfigDtoResponse, void>(CONFIG_URL);
     }
 
     public async logout(token: string): Promise<void> {
@@ -147,8 +143,16 @@ export class Client extends OpenIdTokenRefreshableTransport {
     //
     // --------------------------------------------------------------------------
 
-    public async language(project: string, locale: string, version?: string): Promise<any> {
+    public async configGet(): Promise<IConfigDtoResponse> {
+        return this.call<IConfigDtoResponse, void>(CONFIG_URL);
+    }
+
+    public languageGet(project: string, locale: string, version?: string): Promise<any> {
         return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
+    }
+
+    public openIdResourcesGet(token: string, options?: OpenIdResourceValidationOptions): Promise<OpenIdResources> {
+        return this.call<OpenIdResources>(OPEN_ID_GET_RESOURCES_URL, { data: { token, options }, method: 'post' });
     }
 
     public async taxCompanyGet(value: string | number): Promise<ITaxCompanyGetDtoResponse> {
@@ -172,6 +176,7 @@ export const TAX_COMPANY_URL = PREFIX + 'tax/company';
 export const USER_URL = PREFIX + 'user';
 export const COMPANY_URL = PREFIX + 'company';
 
+export const OPEN_ID_GET_RESOURCES_URL = 'api/openId/getResources';
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
 
