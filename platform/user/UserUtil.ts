@@ -14,7 +14,7 @@ export class UserUtil {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.USER_EDIT, resources }, isThrowError);
     }
     public static isCanRead(resources: OpenIdResources, isThrowError: boolean): boolean {
-        return PermissionUtil.validatePermission({ permission: ResourcePermission.USER_EDIT, resources }, isThrowError);
+        return PermissionUtil.validatePermission({ permission: ResourcePermission.USER_READ, resources }, isThrowError);
     }
     public static isCanList(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.USER_LIST, resources }, isThrowError);

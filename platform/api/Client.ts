@@ -7,8 +7,8 @@ import { IOpenIdTokenRefreshableManager, IOpenIdTokenRefreshable, OpenIdTokenRef
 import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
-import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse } from './user';
-import { ICompanyActivateDtoResponse, ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse, ICompanyRejectDtoResponse, ICompanySubmitDtoResponse, ICompanyVerifyDtoResponse } from './company';
+import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse, IUserListDto, IUserListDtoResponse } from './user';
+import { ICompanyActivateDtoResponse, ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse, ICompanyListDto, ICompanyListDtoResponse, ICompanyRejectDtoResponse, ICompanySubmitDtoResponse, ICompanyVerifyDtoResponse } from './company';
 import * as _ from 'lodash';
 
 export class Client extends OpenIdTokenRefreshableTransport {
@@ -86,6 +86,12 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(User, item);
     }
 
+    public async userList(data: IUserListDto): Promise<IUserListDtoResponse> {
+        let item = await this.call<IUserListDtoResponse, IUserListDto>(USER_URL, { method: 'get', data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(User, item.items);
+        return item;
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Company Methods
@@ -100,6 +106,12 @@ export class Client extends OpenIdTokenRefreshableTransport {
     public async companyGet(id: number): Promise<ICompanyGetDtoResponse> {
         let item = await this.call<ICompanyGetDtoResponse>(`${COMPANY_URL}/${id}`);
         return TransformUtil.toClass(Company, item);
+    }
+
+    public async companyList(data: ICompanyListDto): Promise<ICompanyListDtoResponse> {
+        let item = await this.call<ICompanyListDtoResponse, ICompanyListDto>(COMPANY_URL, { method: 'get', data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(Company, item.items);
+        return item;
     }
 
     public async companyEdit(data: ICompanyEditDto): Promise<ICompanyEditDtoResponse> {
