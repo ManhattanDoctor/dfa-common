@@ -4,5 +4,5 @@ export class CoinBalance {
     public inUse: string;
     public total: string;
     public coinUid: string;
-    public ownerUid: string;
+    public objectUid: string;
 }
