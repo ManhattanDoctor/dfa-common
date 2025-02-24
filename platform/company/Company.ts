@@ -1,9 +1,11 @@
+import { IUIDable } from '@ts-core/common';
 import { Type } from 'class-transformer';
-import { CompanyPreferences } from './CompanyPreferences';
 import { CompanyTaxDetails } from './CompanyTaxDetails';
+import { CompanyPreferences } from './CompanyPreferences';
 
-export class Company {
+export class Company implements IUIDable {
     public id: number;
+    public uid: string;
     public status: CompanyStatus;
 
     public hlfUid?: string;

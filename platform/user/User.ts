@@ -1,8 +1,10 @@
-import { Type } from 'class-transformer';
 import { UserPreferences } from './UserPreferences';
+import { Type } from 'class-transformer';
+import { IUIDable } from '@ts-core/common';
 
-export class User {
+export class User implements IUIDable {
     public id: string;
+    public uid: string;
     public login: string;
     public status: UserStatus;
 

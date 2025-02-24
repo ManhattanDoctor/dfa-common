@@ -22,7 +22,6 @@ export enum CoinAction {
     BURN_HELD = 'BURN_HELD',
 }
 
-
 export interface ICoin<D extends ICoinData = ICoinData, P extends ICoinPermission = ICoinPermission> extends ICoinBase {
     data?: D;
     permissions?: Array<P>;
