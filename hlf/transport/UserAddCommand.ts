@@ -4,6 +4,7 @@ import { ValidateNested, IsDefined, IsOptional, IsEnum } from 'class-validator';
 import { HlfTransportCommandAsync, ICryptoKey, CryptoKey } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { User, UserRole } from '../user';
+import { IInitiatedDto, InitiatedDto } from './Initiated';
 
 export class UserAddCommand extends HlfTransportCommandAsync<IUserAddDto, User> {
     // --------------------------------------------------------------------------
@@ -35,12 +36,12 @@ export class UserAddCommand extends HlfTransportCommandAsync<IUserAddDto, User> 
     }
 }
 
-export interface IUserAddDto {
+export interface IUserAddDto extends IInitiatedDto {
     roles?: Array<UserRole>;
     cryptoKey: ICryptoKey;
 }
 
-export class UserAddDto implements IUserAddDto {
+export class UserAddDto extends InitiatedDto implements IUserAddDto {
     @IsDefined()
     @Type(() => CryptoKey)
     @ValidateNested()

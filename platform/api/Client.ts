@@ -10,6 +10,8 @@ import { ICryptoKey } from '@hlf-core/common';
 import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse, IUserListDto, IUserListDtoResponse } from './user';
 import { ICompanyActivateDtoResponse, ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse, ICompanyListDto, ICompanyListDtoResponse, ICompanyRejectDtoResponse, ICompanySubmitDtoResponse, ICompanyVerifyDtoResponse } from './company';
 import * as _ from 'lodash';
+import { IActionListDto, IActionListDtoResponse } from './action';
+import { Action } from '../Action';
 
 export class Client extends OpenIdTokenRefreshableTransport {
 
@@ -155,12 +157,18 @@ export class Client extends OpenIdTokenRefreshableTransport {
     //
     // --------------------------------------------------------------------------
 
+    public languageGet(project: string, locale: string, version?: string): Promise<any> {
+        return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
+    }
+
     public async configGet(): Promise<IConfigDtoResponse> {
         return this.call<IConfigDtoResponse, void>(CONFIG_URL);
     }
 
-    public languageGet(project: string, locale: string, version?: string): Promise<any> {
-        return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
+    public async actionList(data?: IActionListDto): Promise<IActionListDtoResponse> {
+        let item = await this.call<IActionListDtoResponse, IActionListDto>(ACTION_URL, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(Action, item.items);
+        return item;
     }
 
     public async openIdResourcesGet(token: string, options?: OpenIdResourceValidationOptions): Promise<OpenIdResources> {
@@ -201,6 +209,8 @@ export const TAX_COMPANY_URL = PREFIX + 'tax/company';
 
 export const USER_URL = PREFIX + 'user';
 export const COMPANY_URL = PREFIX + 'company';
+
+export const ACTION_URL = PREFIX + 'action';
 
 export const OPEN_ID_GET_RESOURCES_URL = 'api/openId/getResources';
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';

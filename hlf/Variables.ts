@@ -1,8 +1,8 @@
 import { UserUtil } from "@hlf-core/common";
 import { TransportCryptoManagerEd25519 } from "@ts-core/common";
 import { User } from "./user";
-import * as _ from 'lodash';
 import { CoinType, CoinUtil } from "./coin";
+import * as _ from 'lodash';
 
 let transaction = { date: new Date(+0), hash: _.padStart('0', 64, '0') };
 let user = UserUtil.seed(User, transaction.date, transaction.hash);

@@ -1,7 +1,7 @@
 
 
 import { TransformUtil } from '@ts-core/common';
-import { IsEnum, IsInt, IsOptional, Matches, IsNumberString, IsPositive } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, Matches, IsNumberString, IsPositive, IsString } from 'class-validator';
 import { HlfTransportCommandAsync } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { ICoinPermission } from '../coin/permission';
@@ -9,6 +9,7 @@ import { ICoinData } from '../coin/data';
 import { Coin, CoinFactory, CoinType, CoinUtil, ICoinSeries } from '../coin';
 import { CoinUtil as CoinUtilBase } from '@hlf-core/coin';
 import { ICoin } from '@hlf-core/coin';
+import { IInitiatedDto, InitiatedDto } from './Initiated';
 
 export class CoinAddCommand extends HlfTransportCommandAsync<ICoinAddDto, Coin> {
     // --------------------------------------------------------------------------
@@ -40,12 +41,7 @@ export class CoinAddCommand extends HlfTransportCommandAsync<ICoinAddDto, Coin> 
     }
 }
 
-/*
-@Validate(CustomTextLength, [3, 20], {
-    message: 'Wrong post title',
-})
-*/
-export interface ICoinAddDto {
+export interface ICoinAddDto extends IInitiatedDto {
     type: CoinType;
     ticker: string;
     decimals: number;
@@ -59,7 +55,7 @@ export interface ICoinAddDto {
     emit?: string;
 }
 
-export class CoinAddDto implements ICoinAddDto {
+export class CoinAddDto extends InitiatedDto implements ICoinAddDto {
     @IsEnum(CoinType)
     public type: CoinType;
 

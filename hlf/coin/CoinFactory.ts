@@ -18,6 +18,7 @@ export class CoinFactory {
     }
 
     public static transformBalance<T extends ICoinBalance>(item: ICoinBalance): T {
+        console.log(item);
         let classType: ClassType<ICoinBalance> = CoinBalance;
         return TransformUtil.toClass(classType, item) as T;
     }
