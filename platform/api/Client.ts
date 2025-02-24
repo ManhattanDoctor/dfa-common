@@ -3,7 +3,7 @@ import { TransformUtil, ILogger, LoggerLevel, TraceUtil, ITransportHttpRequest, 
 import { IInitDto, IInitDtoResponse, ILoginDto, ILoginDtoResponse } from './login';
 import { IConfigDtoResponse } from './config';
 import { User } from '../user';
-import { IOpenIdTokenRefreshableManager, IOpenIdTokenRefreshable, OpenIdTokenRefreshableTransport, OpenIdResources, OpenIdResourceValidationOptions } from '@ts-core/openid-common';
+import { IOpenIdTokenRefreshableManager, IOpenIdTokenRefreshable, OpenIdTokenRefreshableTransport, OpenIdResources, OpenIdResourceValidationOptions, IOpenIdResource } from '@ts-core/openid-common';
 import { ITaxCompanyGetDtoResponse } from './tax';
 import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
@@ -121,7 +121,7 @@ export class Client extends OpenIdTokenRefreshableTransport {
     }
 
     public async companyReject(id: number): Promise<ICompanyRejectDtoResponse> {
-        let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'post' });
+        let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/${id}/reject`, { method: 'post' });
         return TransformUtil.toClass(Company, item);
     }
 
@@ -163,13 +163,27 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
     }
 
-    public openIdResourcesGet(token: string, options?: OpenIdResourceValidationOptions): Promise<OpenIdResources> {
-        return this.call<OpenIdResources>(OPEN_ID_GET_RESOURCES_URL, { data: { token, options }, method: 'post' });
+    public async openIdResourcesGet(token: string, options?: OpenIdResourceValidationOptions): Promise<OpenIdResources> {
+        let items = await this.call<Array<IOpenIdResource>>(OPEN_ID_GET_RESOURCES_URL, { data: { token, options }, method: 'post', isHandleLoading: false });
+
+        let map = new Map();
+        items.forEach(item => map.set(item.name, item));
+        return map;
     }
 
     public async taxCompanyGet(value: string | number): Promise<ITaxCompanyGetDtoResponse> {
         let item = await this.call<ITaxCompanyGetDtoResponse>(`${TAX_COMPANY_URL}/${value}`);
         return TransformUtil.toClass(CompanyTaxDetails, item);
+    }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Public Properties
+    //
+    // --------------------------------------------------------------------------
+
+    public get isValid(): boolean {
+        return !_.isNil(this.url);
     }
 }
 
