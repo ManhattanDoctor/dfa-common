@@ -12,7 +12,7 @@ import { ICompanyActivateDtoResponse, ICompanyAddDto, ICompanyAddDtoResponse, IC
 import * as _ from 'lodash';
 import { IActionListDto, IActionListDtoResponse } from './action';
 import { Action } from '../Action';
-import { IHlfObjectGetDto, IHlfObjectGetDtoResponse } from './hlf';
+import { IHlfObjectGetDtoResponse } from './hlf';
 
 export class Client extends OpenIdTokenRefreshableTransport {
 
@@ -186,7 +186,7 @@ export class Client extends OpenIdTokenRefreshableTransport {
     }
 
     public async hlfObjectGet(uid: string): Promise<IHlfObjectGetDtoResponse> {
-        return this.call<IHlfObjectGetDtoResponse, IHlfObjectGetDto>(`${HLF_OBJECT_DETAILS_URL}`, { data: TraceUtil.addIfNeed({ uid }) });
+        return this.call<IHlfObjectGetDtoResponse>(`${HLF_OBJECT_URL}/${uid}`);
     }
 
     // --------------------------------------------------------------------------
@@ -222,7 +222,7 @@ export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshTo
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
 
 export const CUSTODY_URL = PREFIX + 'custody';
-export const HLF_OBJECT_DETAILS_URL = PREFIX + 'hlfObject';
+export const HLF_OBJECT_URL = PREFIX + 'hlfObject';
 
 const SKIP_REFRESH_TOKEN_URLS = [
     LOGIN_URL,

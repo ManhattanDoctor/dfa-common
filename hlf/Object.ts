@@ -6,7 +6,6 @@ import { CoinUtil } from '@hlf-core/coin';
 export enum ObjectType {
     USER = 'USER',
     COIN = 'COIN',
-    CROWDFUNDING = 'CROWDFUNDING',
 }
 
 export function IsUser(uid: UID): boolean {
