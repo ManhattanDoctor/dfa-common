@@ -12,7 +12,7 @@ import { ICompanyActivateDtoResponse, ICompanyAddDto, ICompanyAddDtoResponse, IC
 import * as _ from 'lodash';
 import { IActionListDto, IActionListDtoResponse } from './action';
 import { Action } from '../Action';
-import { IHlfObjectGetDtoResponse } from './hlf';
+import { IEntityObjectGetDtoResponse } from './entity';
 
 export class Client extends OpenIdTokenRefreshableTransport {
 
@@ -185,8 +185,8 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(CompanyTaxDetails, item);
     }
 
-    public async hlfObjectGet(uid: string): Promise<IHlfObjectGetDtoResponse> {
-        return this.call<IHlfObjectGetDtoResponse>(`${HLF_OBJECT_URL}/${uid}`);
+    public async entityObjectGet(uid: string): Promise<IEntityObjectGetDtoResponse> {
+        return this.call<IEntityObjectGetDtoResponse>(`${ENTITY_OBJECT_URL}/${uid}`);
     }
 
     // --------------------------------------------------------------------------
@@ -222,7 +222,7 @@ export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshTo
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
 
 export const CUSTODY_URL = PREFIX + 'custody';
-export const HLF_OBJECT_URL = PREFIX + 'hlfObject';
+export const ENTITY_OBJECT_URL = PREFIX + 'entityObject';
 
 const SKIP_REFRESH_TOKEN_URLS = [
     LOGIN_URL,

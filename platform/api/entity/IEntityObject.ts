@@ -2,7 +2,7 @@ import { Sha512 } from "@ts-core/common";
 import { ObjectType } from "../../../hlf";
 import * as _ from 'lodash';
 
-export interface IHlfObject {
+export interface IEntityObject {
     id: number;
     type: ObjectType;
     name: string;
@@ -10,7 +10,7 @@ export interface IHlfObject {
     description?: string;
 }
 
-export function hlfObjectPicture(uid: string, options: IHlfObjectPicture): string {
+export function entityObjectPicture(uid: string, options: IEntityObjectPicture): string {
     let { display, rating, size } = options;
     if (_.isNil(display)) {
         display = 'identicon';
@@ -24,7 +24,7 @@ export function hlfObjectPicture(uid: string, options: IHlfObjectPicture): strin
     return `https://www.gravatar.com/avatar/${Sha512.hex(uid)}?s=${size}&d=${display}&r=${rating}`;
 }
 
-export interface IHlfObjectPicture {
+export interface IEntityObjectPicture {
     size?: string;
     rating?: string;
     display?: string;
