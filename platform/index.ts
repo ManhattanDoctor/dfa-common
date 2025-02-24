@@ -11,6 +11,6 @@ export function getSocketCompanyRoom(id: number): string {
 export function getSocketCoinRoom(id: number): string {
     return `coin${id}`;
 }
-export function getSocketCoinBalanceRoom(objectUid: string): string {
-    return `coinBalance/${objectUid}`;
+export function getSocketCoinBalanceRoom(ownerUid: string): string {
+    return `coinBalance/${ownerUid}`;
 }

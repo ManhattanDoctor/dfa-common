@@ -3,3 +3,5 @@ export * from './UserChangedEvent';
 //
 export * from './CompanyAddedEvent';
 export * from './CompanyChangedEvent';
+//
+export * from './CoinBalanceChangedEvent';

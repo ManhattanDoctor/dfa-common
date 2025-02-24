@@ -13,6 +13,8 @@ import * as _ from 'lodash';
 import { IActionListDto, IActionListDtoResponse } from './action';
 import { Action } from '../Action';
 import { IEntityObjectGetDtoResponse } from './entity';
+import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { Coin, CoinBalance } from '../coin';
 
 export class Client extends OpenIdTokenRefreshableTransport {
 
@@ -138,6 +140,34 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(Company, item);
     }
 
+    //--------------------------------------------------------------------------
+    //
+    // 	Coin Methods
+    //
+    //--------------------------------------------------------------------------
+
+    public async coinGet(id: number): Promise<ICoinGetDtoResponse> {
+        let item = await this.call<Coin>(`${COIN_URL}/${id}`);
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    public async coinList(data?: ICoinListDto): Promise<ICoinListDtoResponse> {
+        let item = await this.call<ICoinListDtoResponse, ICoinListDto>(COIN_URL, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(Coin, item.items);
+        return item;
+    }
+
+    public async coinBalanceGet(id: number): Promise<ICoinGetDtoResponse> {
+        let item = await this.call<Coin>(`${COIN_BALANCE_URL}/${id}`);
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    public async coinBalanceList(data?: ICoinBalanceListDto): Promise<ICoinBalanceListDtoResponse> {
+        let item = await this.call<ICoinBalanceListDtoResponse, ICoinBalanceListDto>(COIN_BALANCE_URL, { data: TraceUtil.addIfNeed(data) });
+        item.items = TransformUtil.toClassMany(CoinBalance, item.items);
+        return item;
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Custody Methods
@@ -213,16 +243,18 @@ export const LOGOUT_URL = PREFIX + 'logout';
 export const TAX_COMPANY_URL = PREFIX + 'tax/company';
 
 export const USER_URL = PREFIX + 'user';
+export const COIN_URL = PREFIX + 'coin';
 export const COMPANY_URL = PREFIX + 'company';
+export const COIN_BALANCE_URL = PREFIX + 'coin';
 
 export const ACTION_URL = PREFIX + 'action';
+export const ENTITY_OBJECT_URL = PREFIX + 'entityObject';
 
+//
 export const OPEN_ID_GET_RESOURCES_URL = 'api/openId/getResources';
 export const OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL = 'api/openId/logoutByRefreshToken';
 export const OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL = 'api/openId/getTokenByRefreshToken';
-
-export const CUSTODY_URL = PREFIX + 'custody';
-export const ENTITY_OBJECT_URL = PREFIX + 'entityObject';
+//
 
 const SKIP_REFRESH_TOKEN_URLS = [
     LOGIN_URL,
@@ -231,3 +263,9 @@ const SKIP_REFRESH_TOKEN_URLS = [
     OPEN_ID_LOGOUT_BY_REFRESH_TOKEN_URL,
     OPEN_ID_GET_TOKEN_BY_REFRESH_TOKEN_URL
 ];
+//
+export const CUSTODY_URL = PREFIX + 'custody';
+
+
+
+
