@@ -245,7 +245,7 @@ export const TAX_COMPANY_URL = PREFIX + 'tax/company';
 export const USER_URL = PREFIX + 'user';
 export const COIN_URL = PREFIX + 'coin';
 export const COMPANY_URL = PREFIX + 'company';
-export const COIN_BALANCE_URL = PREFIX + 'coin';
+export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
 
 export const ACTION_URL = PREFIX + 'action';
 export const ENTITY_OBJECT_URL = PREFIX + 'entityObject';
