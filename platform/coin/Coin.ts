@@ -6,6 +6,7 @@ import { Type } from 'class-transformer';
 export class Coin {
     public id: number;
     public status: CoinStatus;
+    public companyId: number;
 
     public data?: ICoinData;
     public hlfUid?: string;

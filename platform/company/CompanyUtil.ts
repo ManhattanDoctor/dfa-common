@@ -13,11 +13,10 @@ export class CompanyUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static validate(item: Company, statuses: Array<CompanyStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
+    private static validate(item: Company, statuses: Array<CompanyStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
         return CompanyUtil.validateStatus(item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
     }
-
-    public static validateStatus(item: Company, status: CompanyStatus | Array<CompanyStatus>, isThrowError: boolean): boolean {
+    private static validateStatus(item: Company, status: CompanyStatus | Array<CompanyStatus>, isThrowError: boolean): boolean {
         if (_.isNil(status)) {
             return false;
         }

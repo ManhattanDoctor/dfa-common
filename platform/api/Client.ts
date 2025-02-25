@@ -82,8 +82,8 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(User, item);
     }
 
-    public async userEdit(id: string, data: IUserEditDto): Promise<IUserEditDtoResponse> {
-        let item = await this.call<IUserEditDtoResponse, IUserEditDto>(`${USER_URL}/${id}`, { method: 'put', data: TraceUtil.addIfNeed(data) });
+    public async userEdit(data: IUserEditDto): Promise<IUserEditDtoResponse> {
+        let item = await this.call<IUserEditDtoResponse, IUserEditDto>(USER_URL, { method: 'put', data: TraceUtil.addIfNeed(data) });
         return TransformUtil.toClass(User, item);
     }
 

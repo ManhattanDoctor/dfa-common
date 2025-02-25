@@ -74,6 +74,17 @@ export class CoinStatusInvalidError extends Error<IInvalidValue<CoinStatus>> {
         super(ErrorCode.COIN_STATUS_INVALID, details);
     }
 }
+// Coin Balance
+export class CoinBalanceUndefinedError extends Error {
+    constructor() {
+        super(ErrorCode.COIN_BALANCE_UNDEFINED);
+    }
+}
+export class CoinBalanceNotFoundError extends Error<number> {
+    constructor(id: number) {
+        super(ErrorCode.COIN_BALANCE_NOT_FOUND, id);
+    }
+}
 
 interface IInvalidValue<T = any> {
     name?: string;
@@ -98,4 +109,7 @@ export enum ErrorCode {
     COIN_UNDEFINED = 'PLATFORM_COIN_UNDEFINED',
     COIN_NOT_FOUND = 'PLATFORM_COIN_NOT_FOUND',
     COIN_STATUS_INVALID = 'PLATFORM_COIN_STATUS_INVALID',
+    // Coin
+    COIN_BALANCE_UNDEFINED = 'PLATFORM_COIN_BALANCE_UNDEFINED',
+    COIN_BALANCE_NOT_FOUND = 'PLATFORM_COIN_BALANCE_NOT_FOUND',
 }

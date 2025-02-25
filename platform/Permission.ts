@@ -14,6 +14,16 @@ export enum ResourcePermission {
     COMPANY_REJECT = 'company:reject',
     COMPANY_VERIFY = 'company:verify',
     COMPANY_ACTIVATE = 'company:activate',
+    //
+    COIN_ADD = 'coin:add',
+    COIN_READ = 'coin:read',
+    COIN_EDIT = 'coin:edit',
+    COIN_LIST = 'coin:list',
+    COIN_EMIT = 'coin:emit',
+    COIN_BURN = 'coin:burn',
+    //
+    COIN_BALANCE_READ = 'coin-balance:read',
+    COIN_BALANCE_LIST = 'coin-balance:list',
 }
 
 export interface IResourcePermissionValidationOptions {
