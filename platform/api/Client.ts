@@ -157,9 +157,9 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return item;
     }
 
-    public async coinBalanceGet(id: number): Promise<ICoinGetDtoResponse> {
-        let item = await this.call<Coin>(`${COIN_BALANCE_URL}/${id}`);
-        return TransformUtil.toClass(Coin, item);
+    public async coinBalanceGet(coinUid: string, objectUid: string): Promise<CoinBalance> {
+        let item = await this.call<CoinBalance>(`${COIN_BALANCE_URL}/${coinUid}/${objectUid}`);
+        return TransformUtil.toClass(CoinBalance, item);
     }
 
     public async coinBalanceList(data?: ICoinBalanceListDto): Promise<ICoinBalanceListDtoResponse> {
