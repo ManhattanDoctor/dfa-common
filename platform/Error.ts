@@ -2,6 +2,7 @@ import { ExtendedError } from '@ts-core/common';
 import { CompanyStatus } from './company';
 import { UserStatus } from './user';
 import * as _ from 'lodash';
+import { CoinStatus } from './coin';
 
 class Error<D = void> extends ExtendedError<D, ErrorCode> {
     constructor(code: ErrorCode, details?: D, public status?: number) {
@@ -57,6 +58,22 @@ export class CompanyTaxDetailsNotFoundError extends Error<string> {
         super(ErrorCode.COMPANY_TAX_DETAILS_NOT_FOUND, query);
     }
 }
+// Coin
+export class CoinUndefinedError extends Error {
+    constructor() {
+        super(ErrorCode.COIN_UNDEFINED);
+    }
+}
+export class CoinNotFoundError extends Error<number | string> {
+    constructor(id: number | string) {
+        super(ErrorCode.COIN_NOT_FOUND, id);
+    }
+}
+export class CoinStatusInvalidError extends Error<IInvalidValue<CoinStatus>> {
+    constructor(details: IInvalidValue<CoinStatus>) {
+        super(ErrorCode.COIN_STATUS_INVALID, details);
+    }
+}
 
 interface IInvalidValue<T = any> {
     name?: string;
@@ -77,4 +94,8 @@ export enum ErrorCode {
     COMPANY_NOT_FOUND = 'PLATFORM_COMPANY_NOT_FOUND',
     COMPANY_STATUS_INVALID = 'PLATFORM_COMPANY_STATUS_INVALID',
     COMPANY_TAX_DETAILS_NOT_FOUND = 'PLATFORM_COMPANY_TAX_DETAILS_NOT_FOUND',
+    // Coin
+    COIN_UNDEFINED = 'PLATFORM_COIN_UNDEFINED',
+    COIN_NOT_FOUND = 'PLATFORM_COIN_NOT_FOUND',
+    COIN_STATUS_INVALID = 'PLATFORM_COIN_STATUS_INVALID',
 }

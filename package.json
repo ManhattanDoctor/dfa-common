@@ -12,6 +12,6 @@
     "dependencies": {
         "@ts-core/openid-common": "~1.0.26",
         "@ts-core/language": "~3.0.34",
-        "@hlf-core/coin": "~3.2.2"
+        "@hlf-core/coin": "~3.2.12"
     }
 }
