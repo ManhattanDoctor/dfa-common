@@ -9,6 +9,8 @@ export * from './UserGetCommand';
 export * from './UserEditCommand';
 //
 export * from './CoinAddCommand';
+export * from './CoinGetCommand';
+export * from './CoinTransferCommand';
 //
 export * from './UserEvent';
 export * from './UserAddedEvent';
