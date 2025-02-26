@@ -13,10 +13,14 @@ export class UserUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static validate(item: User, statuses: Array<UserStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
-        return PermissionUtil.validateStatus(UserStatusInvalidError, item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
-
+    public static validate(item: User, statuses: UserStatus | Array<UserStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
+        return UserUtil.validateStatus(item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
     }
+
+    public static validateStatus(item: User, statuses: UserStatus | Array<UserStatus>, isThrowError?: boolean): boolean {
+        return PermissionUtil.validateStatus(UserStatusInvalidError, item, statuses, isThrowError);
+    }
+
     // --------------------------------------------------------------------------
     //
     //  Public Methods

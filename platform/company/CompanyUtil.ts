@@ -13,8 +13,12 @@ export class CompanyUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static validate(item: Company, statuses: Array<CompanyStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
-        return PermissionUtil.validateStatus(CompanyStatusInvalidError, item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
+    public static validate(item: Company, statuses: CompanyStatus | Array<CompanyStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
+        return CompanyUtil.validateStatus(item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
+    }
+
+    public static validateStatus(item: Company, statuses: CompanyStatus | Array<CompanyStatus>, isThrowError?: boolean): boolean {
+        return PermissionUtil.validateStatus(CompanyStatusInvalidError, item, statuses, isThrowError);
     }
 
     // --------------------------------------------------------------------------
