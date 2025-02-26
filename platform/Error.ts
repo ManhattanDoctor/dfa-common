@@ -43,8 +43,8 @@ export class CompanyUndefinedError extends Error {
         super(ErrorCode.COMPANY_UNDEFINED);
     }
 }
-export class CompanyNotFoundError extends Error<number> {
-    constructor(id: number) {
+export class CompanyNotFoundError extends Error<number | string> {
+    constructor(id: number | string) {
         super(ErrorCode.COMPANY_NOT_FOUND, id);
     }
 }
