@@ -86,7 +86,7 @@ export class CoinBalanceNotFoundError extends Error<number> {
     }
 }
 
-interface IInvalidValue<T = any> {
+export interface IInvalidValue<T = any> {
     name?: string;
     value: T | Array<T>;
     expected?: T | Array<T>;
