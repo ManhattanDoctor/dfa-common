@@ -13,26 +13,9 @@ export class UserUtil {
     //
     // --------------------------------------------------------------------------
 
-    private static validate(item: User, statuses: Array<UserStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
-        return UserUtil.validateStatus(item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
-    }
-    private static validateStatus(item: User, status: UserStatus | Array<UserStatus>, isThrowError: boolean): boolean {
-        if (_.isNil(status)) {
-            return false;
-        }
-        try {
-            status = !_.isArray(status) ? [status] : status;
-            if (!_.isEmpty(status) && !status.includes(item.status)) {
-                throw new UserStatusInvalidError({ value: item.status, expected: status })
-            }
-            return true;
-        }
-        catch (error) {
-            if (isThrowError) {
-                throw error;
-            }
-            return false;
-        }
+    public static validate(item: User, statuses: Array<UserStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
+        return PermissionUtil.validateStatus(UserStatusInvalidError, item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
+
     }
     // --------------------------------------------------------------------------
     //

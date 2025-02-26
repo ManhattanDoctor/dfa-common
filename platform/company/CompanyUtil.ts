@@ -13,26 +13,8 @@ export class CompanyUtil {
     //
     // --------------------------------------------------------------------------
 
-    private static validate(item: Company, statuses: Array<CompanyStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
-        return CompanyUtil.validateStatus(item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
-    }
-    private static validateStatus(item: Company, status: CompanyStatus | Array<CompanyStatus>, isThrowError: boolean): boolean {
-        if (_.isNil(status)) {
-            return false;
-        }
-        try {
-            status = !_.isArray(status) ? [status] : status;
-            if (!_.isEmpty(status) && !status.includes(item.status)) {
-                throw new CompanyStatusInvalidError({ value: item.status, expected: status })
-            }
-            return true;
-        }
-        catch (error) {
-            if (isThrowError) {
-                throw error;
-            }
-            return false;
-        }
+    public static validate(item: Company, statuses: Array<CompanyStatus>, permission: IResourcePermissionValidationOptions, isThrowError?: boolean): boolean {
+        return PermissionUtil.validateStatus(CompanyStatusInvalidError, item, statuses, isThrowError) && PermissionUtil.validatePermission(permission, isThrowError);
     }
 
     // --------------------------------------------------------------------------
@@ -50,7 +32,7 @@ export class CompanyUtil {
     public static isCanAdd(resources: OpenIdResources, isThrowError: boolean): boolean {
         return PermissionUtil.validatePermission({ permission: ResourcePermission.COMPANY_ADD, resources }, isThrowError);
     }
-    
+
     public static isCanEdit(item: Company, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CompanyUtil.validate(item, COMPANY_EDIT_STATUS, { permission: ResourcePermission.COMPANY_EDIT, resources }, isThrowError);
     }
