@@ -1,6 +1,6 @@
 import { TransformUtil } from '@ts-core/common';
 import { IsEnum, Matches, IsOptional, ValidateNested } from 'class-validator';
-import { HlfTransportCommandAsync, CryptoKey, ICryptoKey, UserUtil } from '@hlf-core/common';
+import { HlfTransportCommandAsync, CryptoKey, ICryptoKey, UserUtil, IInitiatedDto, InitiatedDto } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { User, UserRole, UserStatus } from '../user';
 import { Type } from 'class-transformer';
@@ -35,14 +35,14 @@ export class UserEditCommand extends HlfTransportCommandAsync<IUserEditDto, User
     }
 }
 
-export interface IUserEditDto {
+export interface IUserEditDto extends IInitiatedDto {
     uid: string;
     roles?: Array<UserRole>;
     status?: UserStatus;
     cryptoKey?: ICryptoKey;
 }
 
-export class UserEditDto implements IUserEditDto {
+export class UserEditDto extends InitiatedDto implements IUserEditDto {
     @Matches(UserUtil.UID_REG_EXP)
     public uid: string;
 

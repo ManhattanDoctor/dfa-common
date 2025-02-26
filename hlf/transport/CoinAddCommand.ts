@@ -1,15 +1,14 @@
 
 
 import { TransformUtil } from '@ts-core/common';
-import { IsEnum, IsInt, IsOptional, Matches, IsNumberString, IsPositive, IsString } from 'class-validator';
-import { HlfTransportCommandAsync } from '@hlf-core/common';
+import { IsEnum, IsInt, IsOptional, Matches, IsNumberString } from 'class-validator';
+import { HlfTransportCommandAsync, IInitiatedDto, InitiatedDto } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { ICoinPermission } from '../coin/permission';
 import { ICoinData } from '../coin/data';
 import { Coin, CoinFactory, CoinType, CoinUtil, ICoinSeries } from '../coin';
 import { CoinUtil as CoinUtilBase } from '@hlf-core/coin';
 import { ICoin } from '@hlf-core/coin';
-import { IInitiatedDto, InitiatedDto } from './Initiated';
 
 export class CoinAddCommand extends HlfTransportCommandAsync<ICoinAddDto, Coin> {
     // --------------------------------------------------------------------------

@@ -1,10 +1,9 @@
 import { TransformUtil } from '@ts-core/common';
 import { Type } from 'class-transformer';
 import { ValidateNested, IsDefined, IsOptional, IsEnum } from 'class-validator';
-import { HlfTransportCommandAsync, ICryptoKey, CryptoKey } from '@hlf-core/common';
+import { HlfTransportCommandAsync, ICryptoKey, CryptoKey, IInitiatedDto, InitiatedDto } from '@hlf-core/common';
 import { CommandName } from './Command';
 import { User, UserRole } from '../user';
-import { IInitiatedDto, InitiatedDto } from './Initiated';
 
 export class UserAddCommand extends HlfTransportCommandAsync<IUserAddDto, User> {
     // --------------------------------------------------------------------------

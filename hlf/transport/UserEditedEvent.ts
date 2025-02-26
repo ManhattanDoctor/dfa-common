@@ -1,6 +1,7 @@
 
+import { TransformUtil } from '@ts-core/common';
 import { Event } from './Event';
-import { IUserEventDto, UserEvent } from './UserEvent';
+import { IUserEventDto, UserEvent, UserEventDto } from './UserEvent';
 
 export class UserEditedEvent extends UserEvent {
     // --------------------------------------------------------------------------
@@ -18,6 +19,6 @@ export class UserEditedEvent extends UserEvent {
     // --------------------------------------------------------------------------
 
     constructor(data: IUserEventDto) {
-        super(UserEditedEvent.NAME, data);
+        super(UserEditedEvent.NAME, TransformUtil.toClass(UserEventDto, data));
     }
 }

@@ -1,8 +1,10 @@
+import { IsDefined, ValidateNested } from 'class-validator';
 import { TransformUtil, TransportEvent } from '@ts-core/common';
+import { IInitiatedDto, InitiatedDto } from '@hlf-core/common';
 import { Event } from './Event';
 import { Coin } from '../coin';
 
-export class CoinAddedEvent extends TransportEvent<Coin> {
+export class CoinAddedEvent extends TransportEvent<ICoinAddedEventDto> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -17,7 +19,17 @@ export class CoinAddedEvent extends TransportEvent<Coin> {
     //
     // --------------------------------------------------------------------------
 
-    constructor(data: Coin) {
-        super(CoinAddedEvent.NAME, TransformUtil.toClass(Coin, data));
+    constructor(data: ICoinAddedEventDto) {
+        super(CoinAddedEvent.NAME, TransformUtil.toClass(CoinAddedEventDto, data));
     }
+}
+
+export interface ICoinAddedEventDto extends IInitiatedDto {
+    coin: Coin;
+}
+
+export class CoinAddedEventDto extends InitiatedDto implements ICoinAddedEventDto {
+    @IsDefined()
+    @ValidateNested()
+    coin: Coin;
 }

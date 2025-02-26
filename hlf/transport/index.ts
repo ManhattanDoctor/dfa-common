@@ -1,7 +1,6 @@
 export * from './Event';
 export * from './Command';
 //
-export * from './Initiated';
 export * from './SeedGetCommand';
 //
 export * from './UserAddCommand';
@@ -10,7 +9,6 @@ export * from './UserEditCommand';
 //
 export * from './CoinAddCommand';
 export * from './CoinGetCommand';
-export * from './CoinTransferCommand';
 //
 export * from './UserEvent';
 export * from './UserAddedEvent';
