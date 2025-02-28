@@ -13,10 +13,10 @@ export class CoinUtil {
     //
     // --------------------------------------------------------------------------
 
-    public static TICKER_MIN = 1;
-    public static TICKER_MAX = 16;
+    public static TICKER_MIN_LENGTH = 1;
+    public static TICKER_MAX_LENGTH = 16;
 
-    public static TICKER_PATTERN = `[A-Z0-9]{${CoinUtil.TICKER_MIN},${CoinUtil.TICKER_MAX}}`;
+    public static TICKER_PATTERN = `[A-Z0-9]{${CoinUtil.TICKER_MIN_LENGTH},${CoinUtil.TICKER_MAX_LENGTH}}`;
     public static TICKER_REG_EXP = new RegExp(`^${CoinUtil.TICKER_PATTERN}$`);
 
     private static _typeToPostfix: Map<CoinType, string>;

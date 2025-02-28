@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 import { IActionListDto, IActionListDtoResponse } from './action';
 import { Action } from '../Action';
 import { IEntityObjectGetDtoResponse } from './entity';
-import { ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse } from './coin';
+import { ICoinActivateDtoResponse, ICoinAddDto, ICoinAddDtoResponse, ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinEditDto, ICoinEditDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse, ICoinRejectDtoResponse, ICoinSubmitDtoResponse, ICoinVerifyDtoResponse } from './coin';
 import { Coin, CoinBalance } from '../coin';
 
 export class Client extends OpenIdTokenRefreshableTransport {
@@ -121,12 +121,12 @@ export class Client extends OpenIdTokenRefreshableTransport {
     }
 
     public async companyVerify(id: number): Promise<ICompanyVerifyDtoResponse> {
-        let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'post' });
+        let item = await this.call<ICompanyVerifyDtoResponse>(`${COMPANY_URL}/${id}/verify`, { method: 'post' });
         return TransformUtil.toClass(Company, item);
     }
 
     public async companyReject(id: number): Promise<ICompanyRejectDtoResponse> {
-        let item = await this.call<ICompanySubmitDtoResponse>(`${COMPANY_URL}/${id}/reject`, { method: 'post' });
+        let item = await this.call<ICompanyRejectDtoResponse>(`${COMPANY_URL}/${id}/reject`, { method: 'post' });
         return TransformUtil.toClass(Company, item);
     }
 
@@ -146,8 +146,13 @@ export class Client extends OpenIdTokenRefreshableTransport {
     //
     //--------------------------------------------------------------------------
 
+    public async coinAdd(data: ICoinAddDto): Promise<ICoinAddDtoResponse> {
+        let item = await this.call<ICoinAddDtoResponse>(COIN_URL, { method: 'post', data: TraceUtil.addIfNeed(data) });
+        return TransformUtil.toClass(Coin, item);
+    }
+
     public async coinGet(id: number): Promise<ICoinGetDtoResponse> {
-        let item = await this.call<Coin>(`${COIN_URL}/${id}`);
+        let item = await this.call<ICoinGetDtoResponse>(`${COIN_URL}/${id}`);
         return TransformUtil.toClass(Coin, item);
     }
 
@@ -156,6 +161,37 @@ export class Client extends OpenIdTokenRefreshableTransport {
         item.items = TransformUtil.toClassMany(Coin, item.items);
         return item;
     }
+
+    public async coinEdit(data: ICoinEditDto): Promise<ICoinEditDtoResponse> {
+        let item = await this.call<ICompanyEditDtoResponse, ICompanyEditDto>(COIN_URL, { method: 'put', data: TraceUtil.addIfNeed(data) });
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    public async coinVerify(id: number): Promise<ICoinVerifyDtoResponse> {
+        let item = await this.call<ICoinVerifyDtoResponse>(`${COIN_URL}/${id}/verify`, { method: 'post' });
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    public async coinReject(id: number): Promise<ICoinRejectDtoResponse> {
+        let item = await this.call<ICoinRejectDtoResponse>(`${COIN_URL}/${id}/reject`, { method: 'post' });
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    public async coinActivate(id: number): Promise<ICoinActivateDtoResponse> {
+        let item = await this.call<ICoinActivateDtoResponse>(`${COIN_URL}/${id}/activate`, { method: 'post' });
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    public async coinSubmit(id: number): Promise<ICoinSubmitDtoResponse> {
+        let item = await this.call<ICoinSubmitDtoResponse>(`${COIN_URL}/${id}/submit`, { method: 'post' });
+        return TransformUtil.toClass(Coin, item);
+    }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Coin Balance
+    //
+    // --------------------------------------------------------------------------
 
     public async coinBalanceGet(coinUid: string, objectUid: string): Promise<CoinBalance> {
         let item = await this.call<CoinBalance>(`${COIN_BALANCE_URL}/${coinUid}/${objectUid}`);
