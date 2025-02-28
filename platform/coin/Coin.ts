@@ -6,24 +6,24 @@ import { CoinType, ICoinSeries } from '../../hlf/coin';
 
 export class Coin {
     public id: number;
+    public name: string;
     public status: CoinStatus;
-    public companyId: number;
-
-    public type: CoinType;
-    public ticker: string;
     public picture: string;
+    public companyId: number;
 
     public hlfUid?: string;
 
-    public data?: ICoinData;
+    public type?: CoinType;
+    public ticker?: string;
     public series?: ICoinSeries;
+
+    public data?: ICoinData;
     public balance?: ICoinBalance;
     public permissions?: Array<ICoinPermission>;
 
     @Type(() => Date)
     public created: Date;
 }
-
 
 export enum CoinStatus {
     DRAFT = 'DRAFT',
@@ -33,3 +33,8 @@ export enum CoinStatus {
     NON_ACTIVE = 'NON_ACTIVE',
     VERIFICATION_PROCESS = 'VERIFICATION_PROCESS'
 }
+
+export const COIN_NAME_MIN_LENGTH = 1;
+export const COIN_NAME_MAX_LENGTH = 50;
+
+export const COIN_PICTURE_MAX_LENGTH = 1024;
