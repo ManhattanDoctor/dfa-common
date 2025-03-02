@@ -224,12 +224,16 @@ export class Client extends OpenIdTokenRefreshableTransport {
     //
     // --------------------------------------------------------------------------
 
-    public languageGet(project: string, locale: string, version?: string): Promise<any> {
-        return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
+    public configGet(): Promise<IConfigDtoResponse> {
+        return this.call<IConfigDtoResponse, void>(CONFIG_URL);
     }
 
-    public async configGet(): Promise<IConfigDtoResponse> {
-        return this.call<IConfigDtoResponse, void>(CONFIG_URL);
+    public entityGet(uid: string): Promise<IEntityGetDtoResponse> {
+        return this.call<IEntityGetDtoResponse>(`${ENTITY_URL}/${uid}`);
+    }
+
+    public languageGet(project: string, locale: string, version?: string): Promise<any> {
+        return this.call<any>(`${LANGUAGE_URL}/${project}/${locale}`, { data: { version } });
     }
 
     public async actionList(data?: IActionListDto): Promise<IActionListDtoResponse> {
@@ -249,10 +253,6 @@ export class Client extends OpenIdTokenRefreshableTransport {
     public async taxCompanyGet(value: string | number): Promise<ITaxCompanyGetDtoResponse> {
         let item = await this.call<ITaxCompanyGetDtoResponse>(`${TAX_COMPANY_URL}/${value}`);
         return TransformUtil.toClass(CompanyTaxDetails, item);
-    }
-
-    public async entityObjectGet(uid: string): Promise<IEntityGetDtoResponse> {
-        return this.call<IEntityGetDtoResponse>(`${ENTITY_OBJECT_URL}/${uid}`);
     }
 
     // --------------------------------------------------------------------------
@@ -284,7 +284,7 @@ export const COMPANY_URL = PREFIX + 'company';
 export const COIN_BALANCE_URL = PREFIX + 'coinBalance';
 
 export const ACTION_URL = PREFIX + 'action';
-export const ENTITY_OBJECT_URL = PREFIX + 'entityObject';
+export const ENTITY_URL = PREFIX + 'entity';
 
 //
 export const OPEN_ID_GET_RESOURCES_URL = 'api/openId/getResources';

@@ -10,7 +10,7 @@ export interface IEntity {
     description?: string;
 }
 
-export function entityObjectPicture(uid: string, options: IEntityPicture): string {
+export function entityPicture(uid: string, options: IEntityPicture): string {
     let { display, rating, size } = options;
     if (_.isNil(display)) {
         display = 'identicon';
