@@ -5,9 +5,9 @@ import { ICoinData } from '../../../hlf/coin/data';
 import { ICoinPermission } from '../../../hlf/coin/permission';
 
 export interface ICoinEditDto extends ITraceable {
-    name: string;
-    type: CoinType;
-    ticker: string;
+    name?: string;
+    type?: CoinType;
+    ticker?: string;
 
     data?: ICoinData;
     series?: ICoinSeries;

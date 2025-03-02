@@ -7,17 +7,16 @@ import { CoinType, ICoinSeries } from '../../hlf/coin';
 export class Coin {
     public id: number;
     public name: string;
+    public type: CoinType;
+    public ticker: string;
     public status: CoinStatus;
     public picture: string;
     public companyId: number;
 
     public hlfUid?: string;
 
-    public type?: CoinType;
-    public ticker?: string;
-    public series?: ICoinSeries;
-
     public data?: ICoinData;
+    public series?: ICoinSeries;
     public balance?: ICoinBalance;
     public permissions?: Array<ICoinPermission>;
 

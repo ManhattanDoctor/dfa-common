@@ -48,6 +48,11 @@ export class CompanyNotFoundError extends Error<number | string> {
         super(ErrorCode.COMPANY_NOT_FOUND, id);
     }
 }
+export class CompanyForbiddenError extends Error<number | string> {
+    constructor(id: number | string) {
+        super(ErrorCode.COMPANY_FORBIDDEN, id);
+    }
+}
 export class CompanyStatusInvalidError extends Error<IInvalidValue<CompanyStatus>> {
     constructor(details: IInvalidValue<CompanyStatus>) {
         super(ErrorCode.COMPANY_STATUS_INVALID, details);
@@ -103,6 +108,7 @@ export enum ErrorCode {
     // Company
     COMPANY_UNDEFINED = 'PLATFORM_COMPANY_UNDEFINED',
     COMPANY_NOT_FOUND = 'PLATFORM_COMPANY_NOT_FOUND',
+    COMPANY_FORBIDDEN = 'PLATFORM_COMPANY_FORBIDDEN',
     COMPANY_STATUS_INVALID = 'PLATFORM_COMPANY_STATUS_INVALID',
     COMPANY_TAX_DETAILS_NOT_FOUND = 'PLATFORM_COMPANY_TAX_DETAILS_NOT_FOUND',
     // Coin
