@@ -19,10 +19,10 @@ export class CoinUtil {
     }
 
     private static validateCompany(company: CompanyToValidate, item: CoinToValidate, isThrowError: boolean): boolean {
-        if (company.id !== item.id && isThrowError) {
-            throw new CompanyForbiddenError(company.id);
+        if (company.id !== item.companyId && isThrowError) {
+            throw new CompanyForbiddenError(item.companyId);
         }
-        return company.id === item.id;
+        return company.id === item.companyId;
     }
 
     private static validateObject(item: CoinToValidate, isThrowError?: boolean): boolean {
@@ -65,7 +65,7 @@ export class CoinUtil {
     }
 }
 
-export type CoinToValidate = Pick<Coin, 'id' | 'status'>;
+export type CoinToValidate = Pick<Coin, 'id' | 'status' | 'companyId'>;
 
 export const COIN_EDIT_STATUS = [CoinStatus.DRAFT, CoinStatus.REJECTED];
 export const COIN_SUBMIT_STATUS = [CoinStatus.DRAFT, CoinStatus.REJECTED];
