@@ -9,12 +9,12 @@ import { Company, CompanyTaxDetails } from '../company';
 import { ICryptoKey } from '@hlf-core/common';
 import { IUserEditDto, IUserEditDtoResponse, IUserGetDtoResponse, IUserListDto, IUserListDtoResponse } from './user';
 import { ICompanyActivateDtoResponse, ICompanyAddDto, ICompanyAddDtoResponse, ICompanyEditDto, ICompanyEditDtoResponse, ICompanyGetDtoResponse, ICompanyListDto, ICompanyListDtoResponse, ICompanyRejectDtoResponse, ICompanySubmitDtoResponse, ICompanyVerifyDtoResponse } from './company';
-import * as _ from 'lodash';
 import { IActionListDto, IActionListDtoResponse } from './action';
 import { Action } from '../Action';
-import { IEntityObjectGetDtoResponse } from './entity';
+import { IEntityGetDtoResponse } from './entity';
 import { ICoinActivateDtoResponse, ICoinAddDto, ICoinAddDtoResponse, ICoinBalanceListDto, ICoinBalanceListDtoResponse, ICoinEditDto, ICoinEditDtoResponse, ICoinGetDtoResponse, ICoinListDto, ICoinListDtoResponse, ICoinRejectDtoResponse, ICoinSubmitDtoResponse, ICoinVerifyDtoResponse } from './coin';
 import { Coin, CoinBalance } from '../coin';
+import * as _ from 'lodash';
 
 export class Client extends OpenIdTokenRefreshableTransport {
 
@@ -251,8 +251,8 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(CompanyTaxDetails, item);
     }
 
-    public async entityObjectGet(uid: string): Promise<IEntityObjectGetDtoResponse> {
-        return this.call<IEntityObjectGetDtoResponse>(`${ENTITY_OBJECT_URL}/${uid}`);
+    public async entityObjectGet(uid: string): Promise<IEntityGetDtoResponse> {
+        return this.call<IEntityGetDtoResponse>(`${ENTITY_OBJECT_URL}/${uid}`);
     }
 
     // --------------------------------------------------------------------------

@@ -1,2 +1,2 @@
-export * from './IEntityObject';
-export * from './IEntityObjectGetDto';
+export * from './IEntity';
+export * from './IEntityGetDto';
