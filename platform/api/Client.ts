@@ -177,6 +177,10 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return TransformUtil.toClass(Coin, item);
     }
 
+    public async coinRemove(id: number): Promise<void> {
+        await this.call<void>(`${COIN_URL}/${id}`, { method: 'delete' });
+    }
+
     public async coinActivate(id: number): Promise<ICoinActivateDtoResponse> {
         let item = await this.call<ICoinActivateDtoResponse>(`${COIN_URL}/${id}/activate`, { method: 'post' });
         return TransformUtil.toClass(Coin, item);
