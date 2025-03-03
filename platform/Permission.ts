@@ -23,6 +23,7 @@ export enum ResourcePermission {
     COIN_LIST = 'coin:list',
     COIN_SUBMIT = 'coin:submit',
     COIN_REJECT = 'coin:reject',
+    COIN_REMOVE = 'coin:remove',
     COIN_VERIFY = 'coin:verify',
     COIN_ACTIVATE = 'coin:activate',
     //

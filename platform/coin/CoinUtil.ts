@@ -54,14 +54,17 @@ export class CoinUtil {
     public static isCanSubmit(company: CompanyToValidate, item: CoinToValidate, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CoinUtil.validateCompany(company, item, isThrowError) && CoinUtil.validate(item, COIN_SUBMIT_STATUS, { permission: ResourcePermission.COIN_SUBMIT, resources }, isThrowError);
     }
+    public static isCanRemove(company: CompanyToValidate, item: CoinToValidate, resources: OpenIdResources, isThrowError: boolean): boolean {
+        return CoinUtil.validateCompany(company, item, isThrowError) && CoinUtil.validate(item, COIN_REMOVE_STATUS, { permission: ResourcePermission.COIN_REMOVE, resources }, isThrowError);
+    }
+    public static isCanActivate(company: CompanyToValidate, item: CoinToValidate, resources: OpenIdResources, isThrowError: boolean): boolean {
+        return CoinUtil.validateCompany(company, item, isThrowError) && CoinUtil.validate(item, COIN_ACTIVATE_STATUS, { permission: ResourcePermission.COIN_ACTIVATE, resources }, isThrowError);
+    }
     public static isCanVerify(item: CoinToValidate, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CoinUtil.validate(item, COIN_VERIFY_STATUS, { permission: ResourcePermission.COIN_VERIFY, resources }, isThrowError);
     }
     public static isCanReject(item: CoinToValidate, resources: OpenIdResources, isThrowError: boolean): boolean {
         return CoinUtil.validate(item, COIN_REJECT_STATUS, { permission: ResourcePermission.COIN_REJECT, resources }, isThrowError);
-    }
-    public static isCanActivate(company: CompanyToValidate, item: CoinToValidate, resources: OpenIdResources, isThrowError: boolean): boolean {
-        return CoinUtil.validateCompany(company, item, isThrowError) && CoinUtil.validate(item, COIN_ACTIVATE_STATUS, { permission: ResourcePermission.COIN_ACTIVATE, resources }, isThrowError);
     }
 }
 
@@ -71,4 +74,6 @@ export const COIN_EDIT_STATUS = [CoinStatus.DRAFT, CoinStatus.REJECTED];
 export const COIN_SUBMIT_STATUS = [CoinStatus.DRAFT, CoinStatus.REJECTED];
 export const COIN_VERIFY_STATUS = [CoinStatus.VERIFICATION_PROCESS];
 export const COIN_REJECT_STATUS = [CoinStatus.VERIFICATION_PROCESS];
+export const COIN_REMOVE_STATUS = [CoinStatus.DRAFT, CoinStatus.REJECTED, CoinStatus.VERIFIED];
 export const COIN_ACTIVATE_STATUS = [CoinStatus.VERIFIED];
+
