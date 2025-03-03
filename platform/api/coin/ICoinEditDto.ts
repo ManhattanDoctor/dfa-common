@@ -7,10 +7,10 @@ import { ICoinPermission } from '../../../hlf/coin/permission';
 export interface ICoinEditDto extends ITraceable {
     name?: string;
     type?: CoinType;
-    ticker?: string;
-
     data?: ICoinData;
+    ticker?: string;
     series?: ICoinSeries;
+    decimals?: number;
     permissions?: Array<ICoinPermission>;
 }
 export declare type ICoinEditDtoResponse = Coin;

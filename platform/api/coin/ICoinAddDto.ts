@@ -9,6 +9,7 @@ export interface ICoinAddDto extends ITraceable {
     name: string;
     type: CoinType;
     ticker: string;
+    decimals: number;
     
     data?: ICoinData;
     series?: ICoinSeries;
