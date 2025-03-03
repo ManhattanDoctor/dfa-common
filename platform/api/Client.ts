@@ -162,8 +162,8 @@ export class Client extends OpenIdTokenRefreshableTransport {
         return item;
     }
 
-    public async coinEdit(data: ICoinEditDto): Promise<ICoinEditDtoResponse> {
-        let item = await this.call<ICompanyEditDtoResponse, ICompanyEditDto>(COIN_URL, { method: 'put', data: TraceUtil.addIfNeed(data) });
+    public async coinEdit(id: number, data: ICoinEditDto): Promise<ICoinEditDtoResponse> {
+        let item = await this.call<ICompanyEditDtoResponse, ICompanyEditDto>(`${COIN_URL}/${id}`, { method: 'put', data: TraceUtil.addIfNeed(data) });
         return TransformUtil.toClass(Coin, item);
     }
 

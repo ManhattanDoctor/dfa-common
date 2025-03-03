@@ -15,9 +15,13 @@ export class CoinUtil {
 
     public static TICKER_MIN_LENGTH = 1;
     public static TICKER_MAX_LENGTH = 16;
-
     public static TICKER_PATTERN = `[A-Z0-9]{${CoinUtil.TICKER_MIN_LENGTH},${CoinUtil.TICKER_MAX_LENGTH}}`;
     public static TICKER_REG_EXP = new RegExp(`^${CoinUtil.TICKER_PATTERN}$`);
+
+    public static SERIES_UID_MIN_LENGTH = 1;
+    public static SERIES_UID_MAX_LENGTH = 16;
+    public static SERIES_UID_PATTERN = `[A-Za-z0-9]{${CoinUtil.SERIES_UID_MIN_LENGTH},${CoinUtil.SERIES_UID_MAX_LENGTH}}`;
+    public static SERIES_UID_REG_EXP = new RegExp(`^${CoinUtil.SERIES_UID_PATTERN}$`);
 
     private static _typeToPostfix: Map<CoinType, string>;
     private static _postfixToType: Map<string, CoinType>;

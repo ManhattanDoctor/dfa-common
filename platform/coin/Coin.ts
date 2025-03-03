@@ -37,4 +37,7 @@ export enum CoinStatus {
 export const COIN_NAME_MIN_LENGTH = 1;
 export const COIN_NAME_MAX_LENGTH = 50;
 
+export const COIN_DECIMALS_MIN = 0;
+export const COIN_DECIMALS_MAX = 64;
+
 export const COIN_PICTURE_MAX_LENGTH = 1024;
