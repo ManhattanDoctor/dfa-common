@@ -31,5 +31,5 @@ export interface ICoinAddedEventDto extends IInitiatedDto {
 export class CoinAddedEventDto extends InitiatedDto implements ICoinAddedEventDto {
     @IsDefined()
     @ValidateNested()
-    coin: Coin;
+    public coin: Coin;
 }
