@@ -11,6 +11,7 @@ export class Coin {
     public ticker: string;
     public status: CoinStatus;
     public picture: string;
+    public decimals: number;
     public companyId: number;
 
     public hlfUid?: string;
